@@ -29,35 +29,6 @@ class OnBoardingPage extends StatelessWidget {
                       'We guarantee a safe, reliable, professional, affordable, and comfortable experience inside of our top-notch vehicles.',
                       style: GoogleFonts.inter(
                           fontSize: 15.sp, color: const Color(0xff9F9F9F))),
-                Padding(
-                      padding: EdgeInsets.only(bottom: 50, top: 56.h),
-                      child: Row(
-                        children: [
-                          Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: const Color(0xffFF9800),
-                              ),
-                              height: 4.h,
-                              width: 32.w),
-                          SizedBox(width: 8.w),
-                          Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: const Color(0xff9F9F9F),
-                              ),
-                              height: 4.h,
-                              width: 16.w),
-                          SizedBox(width: 199.w),
-                         Flexible(
-                           child: Container(height: 48.h, width: 48.w,
-                           decoration: const  BoxDecoration(image: DecorationImage(
-                            image: AssetImage('assets/icons/Group 63.png'))),
-                           ),)
-                         
-                        ]
-                      ),
-                    )
                 ]
               )
             )

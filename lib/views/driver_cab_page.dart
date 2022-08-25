@@ -4,8 +4,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:sizer/views/payment_method.dart';
 
 class DriverCabPage extends StatefulWidget {
   const DriverCabPage({Key? key}) : super(key: key);
@@ -98,7 +100,8 @@ class _DriverCabPageState extends State<DriverCabPage> {
           left: 36.w,
           right: 36.w,
           child: Divider(
-            color: const Color(0xff2424241F), thickness: 1,
+            color: const Color(0xff2424241F),
+            thickness: 1,
           )),
       Positioned(
           top: 541.h,
@@ -148,44 +151,107 @@ class _DriverCabPageState extends State<DriverCabPage> {
           top: 572.h,
           left: 36.w,
           right: 197.w,
-          child:Image(image: AssetImage('assets/images/sedan@2x.png') , height: 80.h, width: 142.w,)),
-          Positioned(
-            top: 674.h,left: 36.w,right: 36.w,
-            // ignore: use_full_hex_values_for_flutter_colors
-            child: Divider(color: Color(0xff2424241F), thickness: 1)) , 
-            Positioned(
-              top: 703.h, left: 101.w,right: 233.w,
-              child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-              Image(image: AssetImage('assets/images/cancel_ride.png') , height: 17.h, width: 17.w) , 
-              SizedBox(height: 19.h) , 
-              Text('Cancel' , style: GoogleFonts.inter(fontSize:12.sp , fontWeight: FontWeight.w500 , color: Color(0xff9F9F9F)),)
-            ],)) , 
-            Positioned(
-              top: 703.h, left: 190.w, right: 90.w, 
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                     Image(image: AssetImage('assets/images/call_driver.png') , height:17.h , width: 17.w ), 
-                  SizedBox(height: 18.h) , 
-                   Text('Call Driver' , style: GoogleFonts.inter(fontSize:12.sp , fontWeight: FontWeight.w500 , color: Color(0xff9F9F9F)),)
-                ],)),
-                Positioned(
-                  top: 330.h,left: 136.w,right: 136.w,
-                  child: Image(image:AssetImage('assets/images/Group 60.png') ,height: 51.h ,width: 103.w,)),
-                  Positioned(
-                    top: 265.h, left: 53.w,right: 276.w,
-                    child: Image(image: AssetImage('assets/images/PngItem_4082636.png') , height: 61.h,width: 46.w,)) ,
-                    Positioned(
-                      top: 145.h,left: 77.w,right: 82.w,
-                      child: Image(image: AssetImage('assets/images/Path 62.png'), height: 202.h,width: 218.w,)),
-                      Positioned(
-                        top: 270.h,left:205.w,right: 36.w,
-                        child: Image(image: AssetImage('assets/images/map_car.png'), height: 68.h,width: 68.w,)),
-                        Positioned(
-                          top: 48.h,left: 36.w,right: 297.w,
-                          child: Image(image: AssetImage('assets/images/humburger_icon.png') , height: 38.h,width: 42.w))
+          child: Image(
+            image: AssetImage('assets/images/sedan@2x.png'),
+            height: 80.h,
+            width: 142.w,
+          )),
+      Positioned(
+          top: 674.h,
+          left: 36.w,
+          right: 36.w,
+          // ignore: use_full_hex_values_for_flutter_colors
+          child: Divider(color: Color(0xff2424241F), thickness: 1)),
+      Positioned(
+          top: 703.h,
+          left: 101.w,
+          right: 233.w,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image(
+                  image: AssetImage('assets/images/cancel_ride.png'),
+                  height: 17.h,
+                  width: 17.w),
+              SizedBox(height: 19.h),
+              Text(
+                'Cancel',
+                style: GoogleFonts.inter(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                    color: Color(0xff9F9F9F)),
+              )
+            ],
+          )),
+      Positioned(
+          top: 703.h,
+          left: 190.w,
+          right: 90.w,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image(
+                  image: AssetImage('assets/images/call_driver.png'),
+                  height: 17.h,
+                  width: 17.w),
+              SizedBox(height: 18.h),
+              GestureDetector(
+                  onTap: () {
+                    Get.to(PaymentMethod());
+                  },
+                  child: Text(
+                    'Call Driver',
+                    style: GoogleFonts.inter(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xff9F9F9F)),
+                  ))
+            ],
+          )),
+      Positioned(
+          top: 330.h,
+          left: 136.w,
+          right: 136.w,
+          child: Image(
+            image: AssetImage('assets/images/Group 60.png'),
+            height: 51.h,
+            width: 103.w,
+          )),
+      Positioned(
+          top: 265.h,
+          left: 53.w,
+          right: 276.w,
+          child: Image(
+            image: AssetImage('assets/images/PngItem_4082636.png'),
+            height: 61.h,
+            width: 46.w,
+          )),
+      Positioned(
+          top: 145.h,
+          left: 77.w,
+          right: 82.w,
+          child: Image(
+            image: AssetImage('assets/images/Path 62.png'),
+            height: 202.h,
+            width: 218.w,
+          )),
+      Positioned(
+          top: 270.h,
+          left: 205.w,
+          right: 36.w,
+          child: Image(
+            image: AssetImage('assets/images/map_car.png'),
+            height: 68.h,
+            width: 68.w,
+          )),
+      Positioned(
+          top: 48.h,
+          left: 36.w,
+          right: 297.w,
+          child: Image(
+              image: AssetImage('assets/images/humburger_icon.png'),
+              height: 38.h,
+              width: 42.w))
     ])));
   }
 }

@@ -58,6 +58,10 @@ dio
 2.12
 file:///C:/Users/HP/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/dio-4.0.6/
 file:///C:/Users/HP/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/dio-4.0.6/lib/
+dots_indicator
+2.12
+file:///C:/Users/HP/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/dots_indicator-2.1.0/
+file:///C:/Users/HP/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/dots_indicator-2.1.0/lib/
 expand_widget
 2.12
 file:///C:/Users/HP/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/expand_widget-2.1.0/
@@ -74,6 +78,10 @@ file
 2.12
 file:///C:/Users/HP/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/file-6.1.2/
 file:///C:/Users/HP/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/file-6.1.2/lib/
+flinq
+2.12
+file:///C:/Users/HP/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/flinq-2.0.2/
+file:///C:/Users/HP/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/flinq-2.0.2/lib/
 flutter_blurhash
 2.15
 file:///C:/Users/HP/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/flutter_blurhash-0.7.0/
@@ -102,6 +110,14 @@ font_awesome_flutter
 2.12
 file:///C:/Users/HP/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/font_awesome_flutter-10.1.0/
 file:///C:/Users/HP/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/font_awesome_flutter-10.1.0/lib/
+get
+2.15
+file:///C:/Users/HP/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/get-4.6.5/
+file:///C:/Users/HP/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/get-4.6.5/lib/
+google_directions_api
+2.12
+file:///C:/Users/HP/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/google_directions_api-0.9.1/
+file:///C:/Users/HP/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/google_directions_api-0.9.1/lib/
 google_fonts
 2.12
 file:///C:/Users/HP/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/google_fonts-3.0.1/
@@ -114,6 +130,10 @@ google_maps_flutter_platform_interface
 2.12
 file:///C:/Users/HP/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/google_maps_flutter_platform_interface-2.2.1/
 file:///C:/Users/HP/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/google_maps_flutter_platform_interface-2.2.1/lib/
+google_polyline_algorithm
+2.12
+file:///C:/Users/HP/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/google_polyline_algorithm-3.1.0/
+file:///C:/Users/HP/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/google_polyline_algorithm-3.1.0/lib/
 http
 2.14
 file:///C:/Users/HP/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/http-0.13.5/
@@ -276,6 +296,6 @@ file:///F:/src/flutter/packages/flutter_test/
 file:///F:/src/flutter/packages/flutter_test/lib/
 sizer
 2.17
-file:///G:/sizer/firstproject/
-file:///G:/sizer/firstproject/lib/
+file:///G:/taxi-booking/
+file:///G:/taxi-booking/lib/
 2

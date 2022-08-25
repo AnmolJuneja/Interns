@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sizer/consts/button.dart';
+import 'package:sizer/consts/text_field.dart';
+import 'package:sizer/views/create_new_account_page.dart';
 
 class IncorrectPasswordPage extends StatelessWidget {
   const IncorrectPasswordPage({Key? key}) : super(key: key);
@@ -45,59 +50,30 @@ class IncorrectPasswordPage extends StatelessWidget {
             Padding(
                 padding: EdgeInsets.only(top: 32.h, left: 36.w, right: 36.w),
                 child: Column(children: [
-                  TextField(
-                      decoration: InputDecoration(
-                          hintText: 'Email address',
-                          hintStyle: GoogleFonts.inter(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: const Color(0xff9F9F9F)),
-                          contentPadding: EdgeInsets.only(
-                              top: 19.h,
-                              left: 20.w,
-                              bottom: 15.h,
-                              right: 170.w),
-                          fillColor: Colors.white,
-                          filled: true,
-                          enabledBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white)))),
+                 const TextField1(text: 'Email address', obsecure:false),
                   SizedBox(height: 8.h),
-                  TextField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                          hintText: 'Password',
-                          hintStyle: GoogleFonts.inter(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: const Color(0xff9F9F9F)),
-                          contentPadding: EdgeInsets.only(
-                              top: 19.h,
-                              left: 20.w,
-                              bottom: 15.h,
-                              right: 170.w),
-                          fillColor: Colors.white,
-                          filled: true,
-                          enabledBorder: const OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white)))),
+                 const TextField1(text: 'Password', obsecure: true),
                   SizedBox(height: 40.h),
-                  ElevatedButton(
+                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           primary: const Color(0xff242424)),
                       // ignore: sized_box_for_whitespace
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(const CreateNewAccount());
+                      },
                       child: Container(
                         height: 48.h,
-                        width: 303.w,
+                        width: 465.w,
                         padding: EdgeInsets.only(
                             top: 10.5.h,
-                            left: 120.w,
-                            bottom: 10.5.h,
-                            right: 95.w),
-                        child: Text('Log In',
-                            style: GoogleFonts.inter(
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.bold,
-                                color: const Color(0xffF5F5F5))),
+                            bottom: 10.5.h),
+                        child: Center(
+                          child: Text('Log In',
+                              style: GoogleFonts.inter(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color(0xffF5F5F5))),
+                        ),
                       )),
                  Container(
                     padding:

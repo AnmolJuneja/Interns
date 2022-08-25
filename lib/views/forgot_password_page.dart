@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sizer/consts/button.dart';
+import 'package:sizer/consts/text_field.dart';
+import 'package:sizer/views/home_page.dart';
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({Key? key}) : super(key: key);
@@ -39,37 +43,31 @@ class ForgotPassword extends StatelessWidget {
         ),
         Container(
             padding: EdgeInsets.only(top: 66.h, left: 36.w, right: 36.w),
-            child: TextField(
-                decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    filled: true,
-                    enabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white)),
-                    hintText: 'Email address',
-                    hintStyle: GoogleFonts.inter(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w500,
-                        color: const Color(0xff9F9F9F)),
-                    contentPadding: EdgeInsets.only(
-                        top: 19.h, left: 20.w, bottom: 15.h, right: 180.w)))),
+            child: const TextField1(text: 'Email address', obsecure: false)),
         Padding(
           padding: EdgeInsets.only(
               top: 96.h, left: 36.w, bottom: 316.h, right: 36.w),
-          child: ElevatedButton(
-              style: ElevatedButton.styleFrom(primary: const Color(0xff242424)),
-              // ignore: sized_box_for_whitespace
-              onPressed: () {},
-              child: Container(
-                height: 48.h,
-                width: 465.w,
-                padding: EdgeInsets.only(
-                    top: 10.5.h, left: 110.w, bottom: 10.5.h, right: 95.w),
-                child: Text('Submit',
-                    style: GoogleFonts.inter(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.bold,
-                        color: const Color(0xffF5F5F5))),
-              )),
+          child:  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: const Color(0xff242424)),
+                      // ignore: sized_box_for_whitespace
+                      onPressed: () {
+                        Get.to(const HomePage());
+                      },
+                      child: Container(
+                        height: 48.h,
+                        width: 465.w,
+                        padding: EdgeInsets.only(
+                            top: 10.5.h,
+                            bottom: 10.5.h),
+                        child: Center(
+                          child: Text('Submit',
+                              style: GoogleFonts.inter(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color(0xffF5F5F5))),
+                        ),
+                      )),
         )
       ]),
     )));

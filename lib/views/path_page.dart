@@ -3,8 +3,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:sizer/views/driver_cab_page.dart';
 
 class LocationPage extends StatefulWidget {
   const LocationPage({Key? key}) : super(key: key);
@@ -358,20 +360,20 @@ class _LocationPageState extends State<LocationPage> {
                     style: ElevatedButton.styleFrom(
                         primary: const Color(0xff242424)),
                     // ignore: sized_box_for_whitespace
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(DriverCabPage());
+                    },
                     child: Container(
                       height: 48.h,
                       width: 465.w,
-                      padding: EdgeInsets.only(
-                          top: 10.5.h,
-                          left: 110.w,
-                          bottom: 10.5.h,
-                          right: 80.w),
-                      child: Text('Continue',
-                          style: GoogleFonts.inter(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.bold,
-                              color: const Color(0xffF5F5F5))),
+                      padding: EdgeInsets.only(left: 110.w, right: 80.w),
+                      child: Center(
+                        child: Text('Continue',
+                            style: GoogleFonts.inter(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.bold,
+                                color: const Color(0xffF5F5F5))),
+                      ),
                     )),
               ),
             )
