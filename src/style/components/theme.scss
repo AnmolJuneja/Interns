@@ -1,0 +1,111 @@
+.first-work {
+  background-image: url(../../../public/images/banner.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  h1 {
+    color: #fff;
+    text-shadow: 2px 3px 4px red;
+  }
+  p {
+    color: #fff;
+    width: 400px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bolder;
+  }
+}
+
+.second {
+  background-image: url(../../../public/images/banner-4.jpg);
+}
+.third {
+  background-image: url(../../../public/images/banner-5.jpg);
+}
+.four {
+  background-image: url(../../../public/images/banner-6.jpg);
+}
+.five {
+  background-image: url(../../../public/images/banner-7.jpg);
+}
+
+.outer {
+  margin: 100px 0;
+  .outer-heading {
+    h1 {
+      font-size: 45px;
+      font-weight: bold;
+      text-align: left;
+      max-width: 100%;
+      color: #0a1a34;
+
+      span {
+        color: rgb(31, 173, 173);
+      }
+    }
+    p {
+      font-size: 20px;
+      font-weight: 400;
+      margin: 40px 0;
+    }
+
+    a {
+      text-decoration: none;
+
+      margin-right: 10px;
+      padding: 10px 15px;
+      border-radius: 5px;
+      box-shadow: 2px 3px 6px #0a1a34;
+      color: #0a1a34;
+      font-size: 18px;
+      font-weight: 500;
+    }
+    .first-btn {
+      background-color: #0a1a34;
+      color: #fff;
+      &:hover {
+        background-color: #21cdaa;
+      }
+    }
+    .second-btn {
+      &:hover {
+        background-color: #0a1a34;
+        color: #fff;
+      }
+    }
+  }
+  .outer-input-form {
+    background-color: #0a1a34;
+    padding: 25px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 7px #0a1a34;
+  }
+  .outer-input-form {
+    h2 {
+      font-size: 30px;
+      font-weight: bold;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  }
+  .btn {
+    width: 100%;
+    background-color: #21cdaa;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    outline: 0;
+    box-shadow: none;
+  }
+}
