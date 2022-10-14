@@ -1,0 +1,84 @@
+custom-button {
+  padding: 15px 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  outline: 0;
+  border: 0;
+  margin: 10px 0;
+  box-shadow: none;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+.theme-button {
+  background-color: #fff;
+  transition: all 0.9s ease-in-out;
+  @extend custom-button;
+  color: #000;
+  &:hover {
+    color: #fff;
+    background-color: rgb(24, 24, 23);
+  }
+}
+
+.all-heading {
+  width: 100%;
+  max-width: 500px;
+
+  p {
+    font-size: 20px;
+    color: #6f7474;
+
+    span {
+      color: #fff;
+      font-size: 13px;
+      word-spacing: 10px;
+      font-weight: bold;
+    }
+  }
+  h3 {
+    font-size: 50px;
+    color: #fff;
+  }
+}
+
+.function {
+  padding: 150px 0;
+
+  @media screen and (max-width: 992px) {
+    padding: 20px 0;
+  }
+  @extend .all-heading;
+  p {
+    color: rgb(117, 111, 111);
+
+    span {
+      color: rgb(59, 58, 58);
+    }
+  }
+  h3 {
+    color: #000;
+  }
+}
+
+.heading {
+  font-size: 50px;
+  color: #000;
+}
+
+.title {
+  font-size: 20px;
+  color: rgb(117, 111, 111);
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.images-setting {
+  padding-top: 50px;
+  img {
+    padding: 0 33px;
+  }
+}
