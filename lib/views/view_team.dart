@@ -17,11 +17,6 @@ class ViewTeam extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future<TeamViewModel> getTeam() async {
-      TeamViewModel teamDetails;
-      var resp = await TeamViewViewModel().getTeamDetails();
-      return TeamViewModel.fromJson(resp.data);
-    }
 
     final viewTeam = Get.put(TeamViewViewModel());
     return Scaffold(
@@ -36,7 +31,7 @@ class ViewTeam extends StatelessWidget {
                           secondIcon: Icons.more_vert,
                           ontap1: () {}),
          FutureBuilder<TeamViewModel>(
-          future: getTeam(),
+          future: viewTeam.getTeam(),
           builder: ((context, snapshot) {
             if (snapshot.hasData) {
               return

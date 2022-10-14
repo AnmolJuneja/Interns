@@ -10,10 +10,11 @@ import 'package:reelpro/views/view_team.dart';
 class TeamViewViewModel extends GetxController {
   Future<dio.Response> getTeamDetails() async {
     String authToken = await SharedPreferences1().getToken();
+    int id = await SharedPreferences2().getId();
     try {
       dio.Response response;
       response = await dio.Dio().get(
-          'https://reelpro.yatilabs.com/api/v1/team/view/122',
+          'https://reelpro.yatilabs.com/api/v1/team/view/$id',
           options: dio.Options(responseType: dio.ResponseType.json, headers: {
             'Accept': 'application/json',
             'Authorization': 'Bearer $authToken'
@@ -26,4 +27,8 @@ class TeamViewViewModel extends GetxController {
     }
     return Future.value();
   }
+    Future<TeamViewModel> getTeam() async {
+      var resp = await TeamViewViewModel().getTeamDetails();
+      return TeamViewModel.fromJson(resp.data);
+    }
 }

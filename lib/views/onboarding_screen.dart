@@ -9,9 +9,13 @@ import 'package:reelpro/consts/text_field.dart';
 import 'package:reelpro/consts/upper_design.dart';
 import 'package:reelpro/models/login.dart';
 import 'package:get/get.dart';
+import 'package:reelpro/models/shared_preferences.dart';
 import 'package:reelpro/view_models/otp_view_model.dart';
+import 'package:reelpro/view_models/validator.dart';
 import 'package:reelpro/views/otp_screen.dart';
-// import 'package:country_codes/country_codes.dart';
+import 'package:get/get.dart';
+import 'package:country_code_picker/country_code.dart';
+import 'package:country_code_picker/country_code.dart';
 import 'package:country_picker/country_picker.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -23,57 +27,63 @@ class OnBoardingScreen extends StatefulWidget {
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   TextEditingController textEditingController = TextEditingController();
+  final validatePhone = Get.put(PhoneValidator());
   final otp = Get.put(OtpViewModel());
+  var errorText = ''.obs;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF2F9FF),
-      body: Stack(
-        children: [
+        backgroundColor: const Color(0xffF2F9FF),
+        body: Stack(children: [
           Positioned(
               top: 736.h,
               child: const Image(
                   image: AssetImage('assets/images/bottom-wave.png'))),
-             Upper()
-          ,
+          Upper(),
           Positioned(
               left: 36.w,
               top: 160.h,
               child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    BigText(
-                        color: const Color(0xff2B67A3),
-                        text: 'Enter your digits'),
-                    SmallText(
-                        text: 'Please enter your phone number',
-                        color: const Color(0xff485058)), // SizedBox(height: 36.h),
-                  ])),
-          Positioned(
-              top: 316.h,
-              left: 41.w,
-              right: 31.w,
-              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                TextF(textEditingController: textEditingController,
-                 hintText: 'Phone number' , textInputType: TextInputType.number,
-                  prefix: Text('+91')),
-                  SizedBox(height: 358.h),
-                MyButton(onpressed: ()async{
-                         await otp
-                            .getOtp(textEditingController.text, '+91')
-                            .then((value) {
-                          // ignore: unused_local_variable
-                          var res = Login.fromJson(value.data);
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => OtpScreen(
-                                    confirmationToken:
-                                        res.data!.confirmationToken.toString(),
-                                    otp: res.data!.otp.toString(),
-                                  )));
-                          print(res.data!.confirmationToken);
-                        });
-                      }, buttonText: 'Continue') 
+                  BigText(
+                      color: const Color(0xff2B67A3),
+                      text: 'Enter your digits'),
+                  SmallText(
+                    text: 'Please enter your phone number',
+                    color: const Color(0xff485058),
+                  ),
+                  SizedBox(height: 76.h),
+                  TextF10(
+                    textEditingController: textEditingController,
+                    onchanged: (value) {
+                      if (value.length == 10) {
+                        errorText.value = '';
+                      }
+                    },
+                    hintText: 'Phone number',
+                    textInputType: TextInputType.number,
+                    keyValue: validatePhone.formKey,
+                    onSaved: (value) {
+                      errorText.value = value!;
+                    },
+                    validator: (value) {},
+                  ),
+                  SizedBox(height: 5.h),
+                  Obx(() => Text(
+                        errorText.value,
+                        style: TextStyle(color: Colors.red),
+                      )),
+                  SizedBox(height: 348.h),
+                  MyButton(
+                      onpressed: () {
+                        if (textEditingController.text.length <= 9) {
+                          errorText.value = 'Please enter a valid phone number';
+                        } else {
+                          login();
+                        }
+                      },
+                      buttonText: 'Continue')
                 ],
               )),
           Positioned(
@@ -85,8 +95,22 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 height: 67.h,
                 width: 67.w,
               )),
-        ],
-      ),
-    );
+        ]));
+  }
+
+  login() async {
+    await otp
+        .getOtp(textEditingController.text, otp.countryText.value)
+        .then((value) async {
+      var res = Login.fromJson(value.data);
+      await SaveNumber().saveNumber('${res.data!.phoneNumber}');
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => OtpScreen(
+                confirmationToken: res.data!.confirmationToken.toString(),
+                otp: res.data!.otp.toString(),
+                number: textEditingController.text,
+                countryCode: otp.countryText.value,
+              )));
+    });
   }
 }

@@ -1,12 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:reelpro/models/login_step_two.dart';
+import 'package:reelpro/models/shared_preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // import 'package:reelpro/model/login.dart';
 class VerifyOtp extends GetxController {
   Future<dio.Response> verifyOtp(String otp, String confirmationToken) async {
-  
     try {
       dio.Response response;
       response = await dio.Dio().post(
@@ -16,11 +18,16 @@ class VerifyOtp extends GetxController {
             'Accept': 'application/json',
           }));
       // ignore: avoid_print
-      // print("Response Data  ${response.data}");
+      print("Response Data  ${response.data['message']}");
+      Get.snackbar('', response.data['message'],
+          snackPosition: SnackPosition.BOTTOM,
+          margin: EdgeInsets.only(bottom: 20.h));
       return response;
-    } catch (e) {
-      // ignore: avoid_print
-      print(e.toString());
+    } on dio.DioError catch (err) {
+      print(err.message);
+      print(err.response);
+      print(err.toString());
+      Get.snackbar('error', err.response!.data['error']);
     }
     // ignore: null_argument_to_non_null_type
     return Future.value();

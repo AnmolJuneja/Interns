@@ -1,5 +1,10 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:reelpro/models/shared_preferences.dart';
+import 'package:reelpro/views/registeration_screen.dart';
+
 class StepTwo extends StatelessWidget {
   const StepTwo({Key? key}) : super(key: key);
 
@@ -13,7 +18,11 @@ class StepTwo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-              const  Icon(Icons.arrow_back_ios),
+                GestureDetector(
+                    onTap: () {
+                      Get.to(RegisterationScreen(authToken: null));
+                    },
+                    child: const Icon(Icons.arrow_back_ios)),
                 Image(
                   image: const AssetImage('assets/images/Layer 2.png'),
                   height: 67.h,

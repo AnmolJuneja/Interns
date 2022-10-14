@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/consts/appbar.dart';
 import 'package:reelpro/consts/big_text.dart';
@@ -16,7 +17,11 @@ import 'package:reelpro/consts/upper_design.dart';
 import 'package:reelpro/models/edit_profile.dart';
 import 'package:reelpro/models/registration_step_two.dart';
 import 'package:reelpro/view_models/registeration_step_two.dart';
+import 'package:reelpro/views/bottom_navigation.dart';
+import 'package:reelpro/views/catchlog_list.dart';
 import 'package:reelpro/views/edit_profile.dart';
+import 'package:reelpro/views/home_screen.dart';
+import 'package:reelpro/views/message_screen.dart';
 
 class Registeration2 extends StatefulWidget {
   const Registeration2({Key? key}) : super(key: key);
@@ -26,12 +31,10 @@ class Registeration2 extends StatefulWidget {
 }
 
 class _Registeration2State extends State<Registeration2> {
+  String? _chosenValue;
   @override
   Widget build(BuildContext context) {
     var registerationTwo = Get.put(RegistrationStepTwo2());
-    var fishingType = 'Salt Water';
-    bool isActive = false;
-    String vetran = '0';
     TextEditingController shirtSizeController = TextEditingController();
     TextEditingController clubController = TextEditingController();
     // ignore: use_full_hex_values_for_flutter_colors
@@ -66,33 +69,158 @@ class _Registeration2State extends State<Registeration2> {
                     LabelText(text: 'Fishing Type'),
                     SizedBox(height: 13.h),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SmallContainer(text: 'SaltWater'),
-                        SmallContainer(text: 'FreshWater'),
-                        SmallContainer(text: 'Both')
-                      ],
-                    ),
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Obx(() => GestureDetector(
+                                onTap: () {
+                                  registerationTwo.color1.value =
+                                      registerationTwo.blueColor.value;
+                                  registerationTwo.color2.value =
+                                      const Color.fromRGBO(113, 154, 195, 0.16);
+                                  registerationTwo.color3.value =
+                                      const Color.fromRGBO(113, 154, 195, 0.16);
+                                  registerationTwo.fishingType = 'saltwater';
+                                  registerationTwo.width1.value = 2.0;
+                                  registerationTwo.width2.value = 1.0;
+                                  registerationTwo.width3.value = 1.0;
+                                },
+                                child: SmallContainer(
+                                  text: 'Saltwater',
+                                  color: registerationTwo.color1.value,
+                                  width: registerationTwo.width1.value,
+                                ),
+                              )),
+                          Obx(() => GestureDetector(
+                                onTap: () {
+                                  registerationTwo.color2.value =
+                                      const Color(0xff719AC3);
+                                  registerationTwo.color1.value =
+                                      const Color.fromRGBO(113, 154, 195, 0.16);
+                                  registerationTwo.color3.value =
+                                      const Color.fromRGBO(113, 154, 195, 0.16);
+                                  registerationTwo.fishingType = 'freshwater';
+                                  registerationTwo.width2.value = 2.0;
+                                  registerationTwo.width1.value = 1.0;
+                                  registerationTwo.width3.value = 1.0;
+                                },
+                                child: SmallContainer(
+                                  text: 'FreshWater',
+                                  color: registerationTwo.color2.value,
+                                  width: registerationTwo.width2.value,
+                                ),
+                              )),
+                          Obx(() => GestureDetector(
+                                onTap: () {
+                                  registerationTwo.color3.value =
+                                      const Color(0xff719AC3);
+                                  registerationTwo.color1.value =
+                                      const Color.fromRGBO(113, 154, 195, 0.16);
+                                  registerationTwo.color2.value =
+                                      const Color.fromRGBO(113, 154, 195, 0.16);
+                                  registerationTwo.fishingType = 'both';
+                                  registerationTwo.width3.value = 2.0;
+                                  registerationTwo.width1.value = 1.0;
+                                  registerationTwo.width2.value = 1.0;
+                                },
+                                child: SmallContainer(
+                                  text: 'Both',
+                                  color: registerationTwo.color3.value,
+                                  width: registerationTwo.width3.value,
+                                ),
+                              ))
+                        ]),
                     SizedBox(height: 26.h),
                     LabelText(text: 'Shirt Size'),
                     SizedBox(height: 13.h),
-                    TextF(
-                        textEditingController: shirtSizeController,
-                        hintText: 'Select',
-                        textInputType: TextInputType.number,
-                        prefix: null),
+                    Container(
+                      padding: EdgeInsets.only(left: 20.w),
+                      height: 52.h,
+                      width: 356.w,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: const [
+                            BoxShadow(
+                                // ignore: use_full_hex_values_for_flutter_colors
+                                color: Color.fromRGBO(113, 154, 195, 0.16),
+                                blurRadius: 0,
+                                offset: Offset(0, 4))
+                          ],
+                          borderRadius: BorderRadius.circular(5)),
+                      child: DropdownButton<String>(
+                        iconSize: 0.0,
+                        value: _chosenValue,
+                        items: <String>['S', 'M', 'L', 'XL', 'XXL', 'XXXL']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        hint: Text(
+                          'Select',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline2!
+                              .copyWith(
+                                  fontSize: 15.sp,
+                                  color: const Color(0xff48505899)
+                                  // greyFontColoR.withAlpha(99),
+                                  ),
+                        ),
+                        icon: const Icon(Icons.keyboard_arrow_down,
+                            // ignore: use_full_hex_values_for_flutter_colors
+                            color: Color(0xff48505899)
+                            // color: greyFontColoR.withAlpha(99),
+                            ),
+                        underline: Container(),
+                        onChanged: (String? value) {
+                          setState(() {
+                            _chosenValue = value;
+                          });
+                        },
+                      ),
+                    ),
+                    SizedBox(height: 13.h),
                     SizedBox(height: 20.h),
                     LabelText(text: 'Veteran'),
                     SizedBox(height: 13.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                       BigContainer(
-                                text: 'Yes',),
+                        Obx(() => GestureDetector(
+                            onTap: () {
+                              registerationTwo.color4.value =
+                                  const Color(0xff719AC3);
+                              // ignore: use_full_hex_values_for_flutter_colors
+                              registerationTwo.color5.value =
+                                  const Color(0xf2B67A329);
+                              registerationTwo.width4.value = 2.0;
+                              registerationTwo.width5.value = 1.0;
+                              registerationTwo.vetran = '1';
+                            },
+                            child: BigContainer(
+                              text: 'Yes',
+                              color: registerationTwo.color4.value,
+                              width: registerationTwo.width4.value,
+                            ))),
                         // ignore: use_full_hex_values_for_flutter_colors
-                      BigContainer(
+                        Obx(() => GestureDetector(
+                              onTap: () {
+                                registerationTwo.color5.value =
+                                    registerationTwo.blueColor.value;
+                                // ignore: use_full_hex_values_for_flutter_colors
+                                registerationTwo.color4.value =
+                                    const Color(0xf2B67A329);
+                                registerationTwo.width5.value = 2.0;
+                                registerationTwo.width4.value = 1.0;
+                                registerationTwo.vetran = '0';
+                              },
+                              child: BigContainer(
                                 text: 'No',
-                              )
+                                color: registerationTwo.color5.value,
+                                width: registerationTwo.width5.value,
+                              ),
+                            ))
                       ],
                     ),
                     SizedBox(height: 20.h),
@@ -100,6 +228,7 @@ class _Registeration2State extends State<Registeration2> {
                     SizedBox(height: 13.h),
                     TextF(
                         textEditingController: clubController,
+                        onchanged: (value) {},
                         hintText: 'Select',
                         textInputType: TextInputType.text,
                         prefix: null),
@@ -108,12 +237,15 @@ class _Registeration2State extends State<Registeration2> {
                         onpressed: () async {
                           await registerationTwo
                               .registersteptwo(
-                                  fishingType,
-                                  shirtSizeController.text,
-                                  vetran,
+                                  registerationTwo.fishingType,
+                                  _chosenValue.toString(),
+                                  registerationTwo.vetran,
                                   clubController.text)
                               .then((value) {});
-                          // Get.to(const EditProfile1());
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => BottomNavigation())));
                         },
                         buttonText: 'Submit')
                   ]),

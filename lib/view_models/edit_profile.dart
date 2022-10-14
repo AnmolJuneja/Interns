@@ -1,20 +1,45 @@
+import 'dart:ffi';
 import 'dart:io';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reelpro/models/shared_preferences.dart';
+import 'package:reelpro/view_models/registeration_step_two.dart';
+import 'package:reelpro/views/registeration_step_two.dart';
 
 class Editprofile extends GetxController {
-  Future<dio.Response> editProfile(String firstName, String lastName,
-      String dob, String gender, String description, File profilePic, String email) async {
-          String authToken = await SharedPreferences1().getToken();
+  final instance = Get.put(RegistrationStepTwo2());
+  Future<dio.Response> editProfile(
+      String firstName,
+      String lastName,
+      String dob,
+      String gender,
+      String description,
+      File profilePic,
+      String? email,
+      String? number,
+      String cardId,
+      String customerId,
+      String timeZone) async {
+    email == instance.email1.value?
+      email = null:  email = email;
+
+    number == instance.number.value?
+      number = null: number = number;
+  
+    String authToken = await SharedPreferences1().getToken();
     dio.FormData data = dio.FormData.fromMap({
       'firstname': firstName,
       'lastname': lastName,
       'dob': dob,
       'gender': gender,
       'description': description,
-      'email':email
+      'email': email,
+      'phone_number': number,
+      'card_id': cardId,
+      'customer_id': customerId,
+      'timezone': timeZone
     });
     String fileName = profilePic.path.split('/').last;
     MapEntry<String, dio.MultipartFile> profileImage = MapEntry(
@@ -36,10 +61,16 @@ class Editprofile extends GetxController {
             'Authorization': 'Bearer $authToken'
           }));
       print("Response Data  ${response.data}");
+      Get.snackbar('', response.data['message'],
+          snackPosition: SnackPosition.BOTTOM,
+          margin: EdgeInsets.only(bottom: 20.h));
       return response;
     } on dio.DioError catch (err) {
       print(err.message);
       print(err.response);
+      Get.snackbar('error', err.response!.data['error'],
+          snackPosition: SnackPosition.BOTTOM,
+          margin: EdgeInsets.only(bottom: 20.h));
     }
     return Future.value();
   }

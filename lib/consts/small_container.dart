@@ -4,10 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SmallContainer extends StatelessWidget {
   String text;
-  SmallContainer({
-    Key? key,
-    required this.text,
-  }) : super(key: key);
+  Color color;
+  double width;
+  SmallContainer(
+      {Key? key, required this.text, required this.color, required this.width})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class SmallContainer extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           // ignore: use_full_hex_values_for_flutter_colors
-          border: Border.all(color: const Color(0xf2B67A329)),
+          border: Border.all(color: color, width: width),
           color: Colors.white,
           boxShadow: const [
             BoxShadow(
@@ -41,9 +42,13 @@ class SmallContainer extends StatelessWidget {
 
 class BigContainer extends StatelessWidget {
   String text;
+  Color color;
+  double width;
   BigContainer({
     Key? key,
     required this.text,
+    required this.color,
+    required this.width
   }) : super(key: key);
 
   @override
@@ -54,7 +59,7 @@ class BigContainer extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           // ignore: use_full_hex_values_for_flutter_colors
-          border: Border.all(color: const Color(0xff2B67A329)),
+          border: Border.all(color: color, width: width),
           color: Colors.white,
           boxShadow: const [
             BoxShadow(

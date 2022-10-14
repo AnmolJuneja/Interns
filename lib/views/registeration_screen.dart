@@ -5,19 +5,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/consts/big_text.dart';
 import 'package:reelpro/consts/button.dart';
 import 'package:reelpro/consts/small_text.dart';
-import 'package:get/get.dart';
 import 'package:reelpro/consts/text_field.dart';
 import 'package:reelpro/consts/upper_design.dart';
 import 'package:reelpro/models/registeration.dart';
 import 'package:reelpro/models/shared_preferences.dart';
-// import 'package:reelpro/view_model/auth_token.dart';
+import 'package:reelpro/view_models/validator.dart';
 import 'package:reelpro/view_models/registeration.dart';
-import 'package:reelpro/views/edit_profile.dart';
 import 'package:reelpro/views/registeration_step_two.dart';
+import 'package:get/get.dart';
 
 // ignore: must_be_immutable
 class RegisterationScreen extends StatefulWidget {
-  String authToken;
+  String? authToken;
 
   RegisterationScreen({
     Key? key,
@@ -33,23 +32,28 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
 
   TextEditingController textEditingController2 = TextEditingController();
 
-  TextEditingController textEditingController3 = TextEditingController();
-
   TextEditingController textEditingController4 = TextEditingController();
 
   TextEditingController textEditingController5 = TextEditingController();
 
-  // String authToken =
-  //     'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvcmVlbHByby55YXRpbGFicy5jb21cL2FwaVwvbG9naW4tc3RlcC10d28iLCJpYXQiOjE2NjIxMDExODgsImV4cCI6MTY2MjEzNzE4OCwibmJmIjoxNjYyMTAxMTg4LCJqdGkiOiJIYXBWcnR5bGE4ekhRUDdxIiwic3ViIjozNzcsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.Fo6VjW2LVR9fKNzhGrhYmzGm1wpOU20WjH9AtS9ci3M';
-
   final register = Get.put(RegisterationViewModel());
 
+  final validateEmail = Get.put(ValidateEmail());
   final double lat = 30.403648;
-
+  var date;
   final double lng = 74.027962;
+  List<String> items = <String>['Male', 'Female'];
+  String? _chosenValue;
+  @override
+  void initState() {
+    textEditingController4.text = ""; //set the initial value of text field
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    var firstName;
+    var lastName;
     return Scaffold(
       backgroundColor: const Color(0xffF2F9FF),
       body: Stack(
@@ -58,7 +62,7 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
               top: 736.h,
               child: const Image(
                   image: AssetImage('assets/images/bottom-wave.png'))),
-        const  Upper(),
+          const Upper(),
           Positioned(
               top: 140.h,
               left: 36.w,
@@ -73,49 +77,126 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                             "Tell us a little bit about yourself so we know it's you",
                         color: const Color(0xff485058)),
                     SizedBox(height: 40.h),
-                   TextF(textEditingController: textEditingController1,
-                    hintText: 'Firstname',
-                     textInputType: TextInputType.text, prefix: null),
+                    TextFirstName(
+                        textEditingController: textEditingController1,
+                        hintText: 'Firstname',
+                        textInputType: TextInputType.name,
+                        prefix: null,
+                        onSaved: (value) {},
+                        onchanged: (value) {}),
                     SizedBox(height: 8.h),
-                   TextF(textEditingController: textEditingController2,
-                    hintText: 'Last name', textInputType: TextInputType.text,
-                     prefix: null),
+                    TextFirstName(
+                        onSaved: (value) {},
+                        textEditingController: textEditingController2,
+                        hintText: 'Last name',
+                        textInputType: TextInputType.name,
+                        prefix: null,
+                        onchanged: (value) {}),
                     SizedBox(height: 8.h),
-                   TextF(textEditingController: textEditingController3,
-                    hintText: 'Email',
-                     textInputType: TextInputType.text,
-                      prefix: null),
+                    TextFEmail(
+                        textEditingController: validateEmail.emailController,
+                        onchanged: (value) {},
+                        hintText: 'Email',
+                        textInputType: TextInputType.emailAddress,
+                        prefix: null,
+                        keyValue: validateEmail.formKey,
+                        onSaved: (value) {
+                          validateEmail.email = value!;
+                        },
+                        validator: (value) {
+                          return validateEmail.validateEmailFunction(value!);
+                        }),
                     SizedBox(height: 8.h),
-                  TextF(textEditingController: textEditingController4,
-                   hintText: 'Date of Birth',
-                    textInputType: TextInputType.text,
-                     prefix: null),
+                    TextFieldDatePicker(
+                      onSaved: (value) {},
+                      hintText: 'Date of Birth',
+                      textInputType: TextInputType.datetime,
+                      prefix: null,
+                      onchanged: (value) {},
+                      textEditingController: textEditingController4,
+                    ),
                     SizedBox(height: 8.h),
-                   TextF(textEditingController: textEditingController5,
-                    hintText: 'Gender',
-                     textInputType: TextInputType.text,
-                      prefix: null),
+                    Container(
+                      padding: EdgeInsets.only(left: 20.w),
+                      height: 52.h,
+                      width: 356.w,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(
+                              color: Color.fromRGBO(113, 154, 195, 0.16)),
+                          boxShadow: const [
+                            BoxShadow(
+                                // ignore: use_full_hex_values_for_flutter_colors
+                                color: Color.fromRGBO(113, 154, 195, 0.16),
+                                blurRadius: 0,
+                                offset: Offset(0, 4))
+                          ],
+                          borderRadius: BorderRadius.circular(5)),
+                      child: DropdownButton<String>(
+                        iconSize: 0.0,
+                        value: _chosenValue,
+                        items: <String>['Male', 'Female', 'Transgender']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        hint: Text(
+                          'Gender',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline2!
+                              .copyWith(
+                                  fontSize: 15.sp, color: Color(0xff48505899)
+                                  // greyFontColoR.withAlpha(99),
+                                  ),
+                        ),
+                        icon: const Icon(Icons.keyboard_arrow_down,
+                            color: Color(0xff48505899)
+                            // color: greyFontColoR.withAlpha(99),
+                            ),
+                        underline: Container(),
+                        onChanged: (String? value) {
+                          setState(() {
+                            _chosenValue = value;
+                          });
+                        },
+                      ),
+                    ),
                     SizedBox(height: 156.h),
-                   MyButton(onpressed: ()async{
+                    MyButton(
+                        onpressed: () async {
                           await register
-                            .registerUser(
-                                textEditingController4.text,
-                                textEditingController3.text,
-                                textEditingController5.text,
-                                textEditingController1.text,
-                                textEditingController2.text,
-                                lat,
-                                lng,
-                                widget.authToken)
-                            .then((value) {
+                              .registerUser(
+                                  textEditingController4.text,
+                                  validateEmail.emailController.text,
+                                  _chosenValue.toString(),
+                                  textEditingController1.text,
+                                  textEditingController2.text,
+                                  lat,
+                                  lng,
+                                  widget.authToken!)
+                              .then(
+                            (value) {
+                              // ignore: unused_local_variable
                               var res = Registration.fromJson(value.data);
-                              //  Get.to( EditProfile1(firstname:res.data!.firstname.toString() , 
-                              //  lastname: res.data!.lastname.toString(),
-                              //   email: res.data!.email.toString(), number:res.data!.email.toString(),
-                              //    dob: res.data!.dob.toString(), gender: res.data!.gender.toString()));
-                        });
-                       
-                      }, buttonText: 'Continue')
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: ((context) =>
+                                          const Registeration2())));
+                              SaveFirstName()
+                                  .saveFirstName('${res.data!.firstname}');
+                              SaveLastName()
+                                  .saveLastName('${res.data!.lastname}');
+                              SaveEmail().saveEmail('${res.data!.email}');
+                              Dob().saveDob('${res.data!.dob}');
+                              Gender().saveGender('${res.data!.gender}');
+                            },
+                          );
+                        },
+                        buttonText: 'Continue')
                   ])),
           Positioned(
               right: 36.w,

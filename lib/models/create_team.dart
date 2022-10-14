@@ -1,13 +1,3 @@
-// To parse this JSON data, do
-//
-//     final createTeam = createTeamFromJson(jsonString);
-
-import 'dart:convert';
-
-CreateTeam createTeamFromJson(String str) => CreateTeam.fromJson(json.decode(str));
-
-String createTeamToJson(CreateTeam data) => json.encode(data.toJson());
-
 class CreateTeam {
     CreateTeam({
         this.success,

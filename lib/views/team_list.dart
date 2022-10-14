@@ -6,6 +6,7 @@ import 'package:reelpro/models/shared_preferences.dart';
 import 'package:reelpro/view_models/team_list.dart';
 import 'package:get/get.dart';
 import 'package:reelpro/views/create_team.dart';
+import 'package:reelpro/views/edit_team_screen.dart';
 import '../models/team_list.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -37,10 +38,7 @@ class _TeamViewViewState extends State<TeamViewView> {
             FutureBuilder(
                 future: teamApi.getTeam12(),
                 builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else {
-                    // ignore: sized_box_for_whitespace
+                 
                     return Container(
                         height: 785.h,
                         width: 428.w,
@@ -49,21 +47,21 @@ class _TeamViewViewState extends State<TeamViewView> {
                             itemBuilder: (context, index) {
                               return buildListTile(teamApi.getTeam1[index]);
                             }));
-                  }
+                  
                 })
           ],
         ));
   }
 
   Widget buildListTile(TeamList items) {
-    setId() async {
-      await SharedPreferences2().setId(items.id!.toInt());
-    }
-
     return Column(
       children: [
         Padding(
-            padding: EdgeInsets.only(right: 36.w, left: 36.w),
+          padding: EdgeInsets.only(right: 36.w, left: 36.w),
+          child: GestureDetector(
+            onTap: () {
+              // Get.to(EditTeam());
+            },
             child: Container(
                 margin: EdgeInsets.only(top: 12.h),
                 padding: EdgeInsets.only(top: 16.h, left: 12.w, bottom: 16.h),
@@ -113,7 +111,7 @@ class _TeamViewViewState extends State<TeamViewView> {
                                   child: Row(
                                     children: [
                                       Text(
-                                        'Public',
+                                        items.address.toString(),
                                         style: TextStyle(
                                             fontFamily: 'Helvetica',
                                             fontSize: 14.sp,
@@ -128,7 +126,7 @@ class _TeamViewViewState extends State<TeamViewView> {
                                       ),
                                       SizedBox(width: 8.w),
                                       Text(
-                                        '2 members',
+                                        items.description.toString(),
                                         style: TextStyle(
                                             fontFamily: 'Helvetica',
                                             fontSize: 14.sp,
@@ -139,7 +137,9 @@ class _TeamViewViewState extends State<TeamViewView> {
                                   ))
                             ],
                           )),
-                    ])))
+                    ])),
+          ),
+        )
       ],
     );
   }
