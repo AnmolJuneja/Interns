@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reelpro/consts/appbar.dart';
+import 'package:reelpro/consts/text.dart';
 import 'package:reelpro/models/create_team.dart';
 import 'package:reelpro/views/create_team.dart';
 import 'package:reelpro/views/edit_profile.dart';
+import 'package:reelpro/views/profile_settings.dart';
 
 class MangeTeams extends StatelessWidget {
   const MangeTeams({Key? key}) : super(key: key);
@@ -12,16 +14,30 @@ class MangeTeams extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0xffF2F9FF),
+        elevation: 0,
+        title: Padding(
+            padding: EdgeInsets.only(top: 28.h),
+            child: Text21PtBlack(text: 'Manage Teams')),
+        centerTitle: true,
+        toolbarHeight: 60.h,
+        leading: Padding(
+          padding: EdgeInsets.only(top: 28.h, left: 36.w),
+          child: GestureDetector(
+            onTap: () {
+              Get.to(() => const ProfileSettingsUI());
+            },
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ),
       backgroundColor: const Color(0xffF2F9FF),
       body: Column(
         children: [
-          AppB(
-              title: 'Manage Teams',
-              firstIcon: Icons.arrow_back_ios,
-              ontap: () {
-                // Get.to(const EditProfile1());
-              },
-              ontap1: () {}),
           Container(
               padding: EdgeInsets.only(top: 245.h, left: 145.w, right: 145.w),
               child: Image(

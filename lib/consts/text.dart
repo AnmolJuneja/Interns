@@ -85,6 +85,26 @@ class Text14Pt extends StatelessWidget {
     );
   }
 }
+class Text14Pt58 extends StatelessWidget {
+  String text;
+  Text14Pt58({
+    Key? key,
+    required this.text,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // ignore: use_full_hex_values_for_flutter_colors
+    return Text(
+      text,
+      style: TextStyle(
+          fontFamily: 'Helvetica',
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w400,
+          color: const Color(0xff485058)),
+    );
+  }
+}
 
 class Text14PtBlue extends StatelessWidget {
   String text;
@@ -254,6 +274,21 @@ class Text16PtBlack extends StatelessWidget {
             color: const Color(0xff191A1C)));
   }
 }
+class Text16PtBlack58 extends StatelessWidget {
+  String text;
+  Text16PtBlack58({Key? key, required this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(text,
+        style: TextStyle(
+            fontFamily: 'Helvetica',
+            fontWeight: FontWeight.bold,
+            fontSize: 16.sp,
+            // ignore: use_full_hex_values_for_flutter_colors
+            color: const Color(0xff485058)));
+  }
+}
 
 class Text30ptBlue extends StatelessWidget {
   String text;
@@ -280,6 +315,20 @@ class Text16PtBlue extends StatelessWidget {
         style: const TextStyle(
             fontFamily: 'Helvetica',
             fontWeight: FontWeight.bold,
+            fontSize: 16,
+            color: Color(0xff2B67A3)));
+  }
+}
+class Text16PtBlueMedium extends StatelessWidget {
+  String text;
+  Text16PtBlueMedium({Key? key, required this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(text,
+        style: const TextStyle(
+            fontFamily: 'Helvetica',
+            fontWeight: FontWeight.w500,
             fontSize: 16,
             color: Color(0xff2B67A3)));
   }

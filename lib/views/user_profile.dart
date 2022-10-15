@@ -6,6 +6,8 @@ import 'package:reelpro/view_models/edit_profile.dart';
 import 'package:get/get.dart';
 import 'package:reelpro/view_models/registeration_step_two.dart';
 import 'package:reelpro/views/edit_profile.dart';
+import 'package:reelpro/views/home_page.dart';
+import 'package:reelpro/views/profile_settings.dart';
 
 class UserProfileUI extends StatelessWidget {
   const UserProfileUI({Key? key}) : super(key: key);
@@ -18,17 +20,32 @@ class UserProfileUI extends StatelessWidget {
       child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-              elevation: 0,
-              toolbarHeight: 60.h,
-              backgroundColor: Colors.white,
-              flexibleSpace: Container(
-                  padding: EdgeInsets.only(left: 36.w, right: 36.w, top: 60.h),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Icon(Icons.arrow_back_ios),
-                        Icon(Icons.settings_outlined)
-                      ]))),
+            elevation: 0,
+            toolbarHeight: 60.h,
+            backgroundColor: Colors.white,
+            leading: Padding(
+                padding: EdgeInsets.only(top: 28.h, left: 36.w),
+                child: GestureDetector(
+                    onTap: () {
+                      Get.to(() => const HomePage());
+                    },
+                    child:
+                        const Icon(Icons.arrow_back_ios, color: Colors.black))),
+            actions: [
+              Padding(
+                padding: EdgeInsets.only(top: 28.h, right: 36.w),
+                child: GestureDetector(
+                  onTap: () {
+                    Get.to(() => const ProfileSettingsUI());
+                  },
+                  child: const Icon(
+                    Icons.settings_outlined,
+                    color: Colors.black,
+                  ),
+                ),
+              )
+            ],
+          ),
           body: SingleChildScrollView(
             child: Column(children: [
               Padding(
@@ -45,8 +62,8 @@ class UserProfileUI extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(width: 3, color: Colors.white),
                               image: const DecorationImage(
-                                  image:
-                                      AssetImage('assets/images/compo1.png')))),
+                                  image: AssetImage(
+                                      'assets/images/profile.png')))),
                       SizedBox(width: 16.w),
                       Padding(
                         padding: EdgeInsets.only(top: 5.h),

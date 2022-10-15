@@ -59,18 +59,9 @@ class EventListUI extends StatelessWidget {
                       height: 650.h,
                       child: TabBarView(children: [
                         ListOfEvents(),
-                        Center(child: Text30ptBlue(text: 'Current')),
+                        Center(child: Text30ptBlue(text: 'Current Events')),
                         Center(
-                          child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const OnBoardingScreen()));
-                                SharedPreferences1().setToken('');
-                              },
-                              child: Text('Log Out')),
+                          child: Text30ptBlue(text: 'Upcoming Events'),
                         )
                       ])))
             ])));

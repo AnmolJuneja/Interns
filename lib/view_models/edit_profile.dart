@@ -22,12 +22,10 @@ class Editprofile extends GetxController {
       String cardId,
       String customerId,
       String timeZone) async {
-    email == instance.email1.value?
-      email = null:  email = email;
+    email == instance.email1.value ? email = null : email = email;
 
-    number == instance.number.value?
-      number = null: number = number;
-  
+    number == instance.number.value ? number = null : number = number;
+
     String authToken = await SharedPreferences1().getToken();
     dio.FormData data = dio.FormData.fromMap({
       'firstname': firstName,

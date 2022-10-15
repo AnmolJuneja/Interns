@@ -23,8 +23,8 @@ class SharedPreferences2 {
     return await prefs1.getInt('id') ?? 0;
   }
 }
-class SaveFirstLastName {
-  Future<bool> saveFirstLastName(String firstname) async {
+class SaveUpdatedName {
+  Future<bool> saveUpdatedName(String firstname) async {
     var prefs = await SharedPreferences.getInstance();
     return await prefs.setString('firstname',firstname);
   }

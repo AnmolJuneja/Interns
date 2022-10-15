@@ -13,10 +13,12 @@ import 'package:reelpro/views/edit_team_screen.dart';
 import 'package:reelpro/views/event_details.dart';
 import 'package:reelpro/views/event_list.dart';
 import 'package:reelpro/views/feed_list.dart';
+import 'package:reelpro/views/home_page.dart';
 import 'package:reelpro/views/home_screen.dart';
 import 'package:reelpro/views/manage_team_screen.dart';
 import 'package:reelpro/views/message_screen.dart';
 import 'package:reelpro/views/onboarding_screen.dart';
+import 'package:reelpro/views/profile_settings.dart';
 import 'package:reelpro/views/registeration_step_two.dart';
 import 'package:reelpro/views/splash_screen.dart';
 import 'package:reelpro/views/otp_screen.dart';
@@ -40,6 +42,6 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
         designSize: const Size(428, 926),
         builder: (context, child) =>
-          const GetMaterialApp(home: SplashScreen()));
+            const GetMaterialApp(home: SplashScreen()));
   }
 }

@@ -11,9 +11,9 @@ class FeedListUI extends StatefulWidget {
 }
 
 class _FeedListUIState extends State<FeedListUI> {
-  final feedListInstance = Get.put(FeedListApi());
   @override
   Widget build(BuildContext context) {
+    final feedListInstance = Get.put(FeedListApi());
     return Scaffold(
         body: FutureBuilder(
             future: feedListInstance.getFeedListFinal(),
@@ -27,7 +27,6 @@ class _FeedListUIState extends State<FeedListUI> {
   }
 }
 
-Widget buildList(FeedList feedList) {
-  return Center(
-    child: Container(child: Text(feedList.lat.toString())));
+Widget buildList(SingleFeedResponse feedList) {
+  return Center(child: Container(child: Text(feedList.description.toString())));
 }

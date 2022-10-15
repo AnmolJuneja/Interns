@@ -27,6 +27,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var greetings;
+    var dateTime = DateTime.now().hour;
+    if (dateTime > 12 && dateTime < 16) {
+      greetings = 'Good Afternoon';
+    } else if (dateTime > 16 && dateTime < 24) {
+      greetings = 'Good Evening';
+    } else {
+      greetings = 'Good Morning';
+    }
     final registerationViewModel = Get.put(RegistrationStepTwo2());
     return Scaffold(
         backgroundColor: const Color(0xffF2F9FF),
@@ -44,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               fontWeight: FontWeight.bold,
                               color: const Color(0xff2B67A3))),
                       SizedBox(height: 21.h),
-                      Text('Good Morning,',
+                      Text(greetings,
                           style: TextStyle(
                               fontFamily: 'Helvetica',
                               fontSize: 16.sp,

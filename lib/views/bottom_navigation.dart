@@ -14,6 +14,7 @@ import 'package:reelpro/views/spotlight_screen.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'home_page.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({Key? key}) : super(key: key);
@@ -28,7 +29,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   List screens = [
     const CatchlogListUI(),
     const SpotlightScreen(),
-    const HomeScreen(),
+    const HomePage(),
     const EventListUI(),
     const MessageScreen()
   ];
@@ -63,8 +64,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
           });
         },
         child: Padding(
-          padding: EdgeInsets.only(left: 30.w, right: 30.w),
-          child:SvgPicture.asset(image, color: index==currentIndex?const Color(0xff2B67A3):Colors.grey)
-        ));
+            padding: EdgeInsets.only(left: 30.w, right: 30.w),
+            child: SvgPicture.asset(image,
+                color: index == currentIndex
+                    ? const Color(0xff2B67A3)
+                    : Colors.grey)));
   }
 }

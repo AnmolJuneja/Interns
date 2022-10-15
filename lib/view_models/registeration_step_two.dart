@@ -6,6 +6,7 @@ import 'package:reelpro/models/shared_preferences.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RegistrationStepTwo2 extends GetxController {
+  
   var color1 = const Color(0xf2B67A329).obs;
   var color2 = const Color(0xf2B67A329).obs;
   var color3 = const Color(0xf2B67A329).obs;
