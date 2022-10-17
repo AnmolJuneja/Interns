@@ -57,7 +57,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   TextF10(
                     textEditingController: textEditingController,
                     onchanged: (value) {
-                      if (value.length == 10) {
+                      if (value.isPhoneNumber) {
                         errorText.value = '';
                       }
                     },
@@ -77,7 +77,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   SizedBox(height: 348.h),
                   MyButton(
                       onpressed: () {
-                        if (textEditingController.text.length <= 9) {
+                        if (!textEditingController.text.isPhoneNumber) {
                           errorText.value = 'Please enter a valid phone number';
                         } else {
                           login();

@@ -1,4 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:io';
 
 class SharedPreferences1 {
   Future<bool> setToken(String authToken) async {
@@ -102,5 +103,25 @@ class Gender {
     return await prefs.getString('gender') ?? '';
   }
 }
+class SaveProfilePic {
+  Future<bool> saveProfilePic(String profilePic) async {
+    var prefs = await SharedPreferences.getInstance();
+    return await prefs.setString('profile_pic',profilePic);
+  }
 
+  Future<String> getProfilePic() async {
+    var prefs = await SharedPreferences.getInstance();
+    return await prefs.getString('profile_pic') ?? '';
+  }
+}
+class SaveDescription {
+  Future<bool> saveDescription(String description) async {
+    var prefs = await SharedPreferences.getInstance();
+    return await prefs.setString('description',description);
+  }
 
+  Future<String> getDescripton() async {
+    var prefs = await SharedPreferences.getInstance();
+    return await prefs.getString('description') ?? '';
+  }
+}

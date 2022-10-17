@@ -25,14 +25,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   PageController pageController = PageController(viewportFraction: 0.9);
-
+  final instance = Get.put(RegistrationStepTwo2());
   @override
   Widget build(BuildContext context) {
     var greetings;
     var dateTime = DateTime.now().hour;
-    if (dateTime > 12 && dateTime < 16) {
+    if (dateTime > 11.59 && dateTime < 16) {
       greetings = 'Good Afternoon';
-    } else if (dateTime > 16 && dateTime < 24) {
+    } else if (dateTime > 15.59 && dateTime < 24) {
       greetings = 'Good Evening';
     } else {
       greetings = 'Good Morning';
@@ -62,19 +62,19 @@ class _HomePageState extends State<HomePage> {
                               color: const Color(0xff719AC3),
                               fontWeight: FontWeight.w400)),
                       SizedBox(height: 16.h),
-                      Row(children: [
-                        Obx(() => Text(registerationViewModel.firstName1.value,
-                            style: GoogleFonts.bebasNeue(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 30.sp,
-                                color: const Color(0xff719AC3)))),
-                        SizedBox(width: 5.w),
-                        Text(registerationViewModel.lastName1.value,
-                            style: GoogleFonts.bebasNeue(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 30.sp,
-                                color: const Color(0xff719AC3)))
-                      ]),
+                      Obx(() => Row(children: [
+                            Text(registerationViewModel.firstName1.value,
+                                style: GoogleFonts.bebasNeue(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 30.sp,
+                                    color: const Color(0xff719AC3))),
+                            SizedBox(width: 5.w),
+                            Text(registerationViewModel.lastName1.value,
+                                style: GoogleFonts.bebasNeue(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 30.sp,
+                                    color: const Color(0xff719AC3)))
+                          ])),
                       FutureBuilder(
                           future: eventOrderListApi.getOrderList(),
                           builder: (context, snapshot) {
@@ -100,44 +100,51 @@ class _HomePageState extends State<HomePage> {
                 onTap: () {
                   Get.to(() => const UserProfileUI());
                 },
-                child: Container(
-                    height: 60,
-                    width: 60,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),
-                        image: const DecorationImage(
-                            image: AssetImage('assets/images/profile.png')))),
+                child: Obx(() => Container(
+                      height: 60.h,
+                      width: 60.w,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6),
+                          border: Border.all(width: 2, color: Colors.white),
+                          image: instance.profilePic1.value == ''
+                              ? DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image:
+                                      AssetImage('assets/images/profile.png'))
+                              : DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(
+                                      instance.profilePic1.value))),
+                    )),
               )),
           Positioned(
               top: 400.h,
               left: 36.w,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [Text(
-                'Upcoming events',
-                style: TextStyle(
-                    fontFamily: 'Helvetica',
-                    fontSize: 21.sp,
-                    fontWeight: FontWeight.bold,
-                    color: const Color(0xff2B67A3))),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Upcoming events',
+                        style: TextStyle(
+                            fontFamily: 'Helvetica',
+                            fontSize: 21.sp,
+                            fontWeight: FontWeight.bold,
+                            color: const Color(0xff2B67A3))),
                     FutureBuilder(
-                      future: eventOrderListApi.getOrderList(),
-                      builder: (context, snapshot){
-                      if(snapshot.hasData){
-                        return Container(
-                                padding:
-                                    EdgeInsets.only(top: 80.h, left: 120.w),
-                                child: Text('No Upcoming Events'),
-                              );
-                      }else{
-                        return Container(
-                                padding:
-                                    EdgeInsets.only(top: 80.h, left: 150.w),
-                                child: CircularProgressIndicator(),
-                              );
-                      }
-                    })
-              ]))
+                        future: eventOrderListApi.getOrderList(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return Container(
+                              padding: EdgeInsets.only(top: 80.h, left: 120.w),
+                              child: Text('No Upcoming Events'),
+                            );
+                          } else {
+                            return Container(
+                              padding: EdgeInsets.only(top: 80.h, left: 150.w),
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                        })
+                  ]))
         ]));
   }
 }

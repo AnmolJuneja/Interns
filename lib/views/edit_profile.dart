@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -44,6 +45,7 @@ class _EditProfile1State extends State<EditProfile1> {
   final editprofile = Get.put(Editprofile());
   File? file;
   ImagePicker picker = ImagePicker();
+  final validateEmail = Get.put(ValidateEmail());
   @override
   void initState() {
     firstNameController.text = instanceStepTwo.firstName1.value;
@@ -51,10 +53,10 @@ class _EditProfile1State extends State<EditProfile1> {
     emailController.text = instanceStepTwo.email1.value;
     dobController.text = instanceStepTwo.dob1.value;
     numberController.text = instanceStepTwo.number.value;
+    descriptionController.text = instanceStepTwo.description.value;
     super.initState();
   }
 
-  final validateEmail = Get.put(ValidateEmail());
   String? _chosenValue;
 
   @override
@@ -97,21 +99,32 @@ class _EditProfile1State extends State<EditProfile1> {
                     });
                   }
                 },
-                child: Container(
-                    child: file == null
-                        ? Image(
-                            image:
-                                const AssetImage('assets/images/profile.png'),
-                            height: 132.h,
-                            width: 132.w)
-                        : Container(
-                            height: 132.h,
-                            width: 132.w,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                border:
-                                    Border.all(color: Colors.white, width: 3)),
-                            child: Image.file(file!)))),
+                child: file == null
+                    ? Container(
+                        height: 132.h,
+                        width: 132.w,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(width: 3, color: Colors.white),
+                            image: instanceStepTwo.profilePic1.value == ''
+                                ? DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image:
+                                        AssetImage('assets/images/profile.png'))
+                                : DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(
+                                        instanceStepTwo.profilePic1.value))),
+                      )
+                    : Container(
+                        height: 132.h,
+                        width: 132.w,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.cover, image: FileImage(file!)),
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(color: Colors.white, width: 3)),
+                      )),
             SizedBox(height: 9.h),
             Center(
                 child: Text('Change',
@@ -145,24 +158,37 @@ class _EditProfile1State extends State<EditProfile1> {
             SizedBox(height: 8.h),
             TextFEmail(
                 textEditingController: emailController,
-                onchanged: (value) {},
+                onchanged: (value) {
+                  // if (!value.isEmail) {
+                  //   instanceStepTwo.errorText.value =
+                  //       'Please enter a valid email address.';
+                  // }
+                },
                 hintText: 'Email',
                 textInputType: TextInputType.emailAddress,
                 prefix: null,
                 keyValue: validateEmail.formKey,
                 onSaved: (value) {
-                  validateEmail.email = value!;
+                  // validateEmail.email = value!;
                 },
                 validator: (value) {
-                  return validateEmail.validateEmailFunction(value!);
+                  // return validateEmail.validateEmailFunction(value!);
                 }),
             SizedBox(height: 8.h),
-            TextF(
+            TextF10(
                 textEditingController: numberController,
-                onchanged: (value) {},
                 hintText: 'Phone number',
                 textInputType: TextInputType.number,
-                prefix: null),
+                onSaved: (value) {
+                  // instanceStepTwo.errorText.value = value!;
+                },
+                keyValue: null,
+                validator: (value) {},
+                onchanged: (value) {
+                  // if (value.isPhoneNumber) {
+                  //   instanceStepTwo.errorText.value = '';
+                  // }
+                }),
             SizedBox(height: 8.h),
             TextFieldDatePicker(
               onSaved: (value) {},
@@ -222,27 +248,59 @@ class _EditProfile1State extends State<EditProfile1> {
             ),
             SizedBox(height: 44.h),
             MyButton(
-                onpressed: () async {
-                  await editprofile
-                      .editProfile(
-                          firstNameController.text,
-                          lastNameController.text,
-                          dobController.text,
-                          _chosenValue!,
-                          descriptionController.text,
-                          file!,
-                          emailController.text,
-                          numberController.text,
-                          'card_ashdjahsd132231',
-                          'cust_1318eejndjakn',
-                          'Asia/Kolkata')
-                      .then((value) async {
-                    var res = EditProfile.fromJson(value.data);
-                  });
-                  Get.to(const UserProfileUI());
+                onpressed: () {
+                  if (!numberController.text.isPhoneNumber) {
+                    Get.snackbar('error', 'Please enter a valid phone number',
+                        snackPosition: SnackPosition.BOTTOM);
+                  } else if (!emailController.text.isEmail) {
+                    Get.snackbar('error', 'Please enter a valid Email',
+                        snackPosition: SnackPosition.BOTTOM);
+                  } else {
+                    login();
+                  }
                 },
                 buttonText: 'Submit')
           ])),
         ));
+  }
+
+  login() async {
+    await SaveFirstName().saveFirstName(firstNameController.text);
+    await SaveLastName().saveLastName(lastNameController.text);
+    instanceStepTwo.firstName1.value = firstNameController.text;
+    instanceStepTwo.lastName1.value = lastNameController.text;
+    await Gender().saveGender(_chosenValue!);
+    instanceStepTwo.genderF.value = _chosenValue!;
+    if (numberController.text != instanceStepTwo.number.value) {
+      await SaveNumber().saveNumber(numberController.text);
+      instanceStepTwo.number.value = numberController.text;
+    }
+    if (emailController.text != instanceStepTwo.email1.value) {
+      SaveEmail().saveEmail(emailController.text);
+      instanceStepTwo.email1.value = emailController.text;
+    }
+    await Dob().saveDob(dobController.text);
+    instanceStepTwo.dob1.value = dobController.text;
+    await editprofile
+        .editProfile(
+            firstNameController.text,
+            lastNameController.text,
+            dobController.text,
+            _chosenValue!,
+            descriptionController.text,
+            file,
+            emailController.text,
+            numberController.text,
+            'card_ashdjahsd132231',
+            'cust_1318eejndjakn',
+            'Asia/Kolkata')
+        .then((value) {
+      var res = EditProfile.fromJson(value.data);
+      SaveProfilePic().saveProfilePic(res.data!.profilePic!);
+      instanceStepTwo.profilePic1.value = res.data!.profilePic;
+      SaveDescription().saveDescription(res.data!.description!);
+      instanceStepTwo.description.value = res.data!.description!;
+    });
+    Get.to(() => const UserProfileUI());
   }
 }

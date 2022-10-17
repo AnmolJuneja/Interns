@@ -6,13 +6,18 @@ import 'package:reelpro/models/shared_preferences.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RegistrationStepTwo2 extends GetxController {
-  
   var color1 = const Color(0xf2B67A329).obs;
+  var color6 = const Color(0xf2B67A329).obs;
+  var color7 = const Color(0xf2B67A329).obs;
   var color2 = const Color(0xf2B67A329).obs;
   var color3 = const Color(0xf2B67A329).obs;
   var color4 = const Color(0xf2B67A329).obs;
   var color5 = const Color(0xf2B67A329).obs;
+  var errorText = ''.obs;
+  var genderF = ''.obs;
   var blueColor = const Color(0xff719AC3).obs;
+  var isSelected1 = false.obs;
+  var isSelected2 = false.obs;
   var width1 = 1.0.obs;
   var width2 = 1.0.obs;
   var width3 = 1.0.obs;
@@ -25,6 +30,8 @@ class RegistrationStepTwo2 extends GetxController {
   var gender1 = ''.obs;
   var dob1 = ''.obs;
   var number = ''.obs;
+  var profilePic1 = ''.obs;
+  var description = ''.obs;
   String vetran = '0';
   Future<dio.Response> registersteptwo(
       String fishingType, String shirtSize, String veteran, String club) async {
@@ -35,12 +42,14 @@ class RegistrationStepTwo2 extends GetxController {
     String gender = await Gender().getGender();
     String dob = await Dob().getDob();
     String numb = await SaveNumber().getNumber();
+    String profilePic = await SaveProfilePic().getProfilePic();
+    profilePic1.value = profilePic;
     number.value = numb;
     dob1.value = dob;
     firstName1.value = firstName;
     lastName1.value = lastName;
     email1.value = email;
-    gender1.value = gender;
+    genderF.value = gender;
     try {
       dio.Response response;
       response = await dio.Dio().post(

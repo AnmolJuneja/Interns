@@ -9,14 +9,15 @@ import 'package:reelpro/view_models/registeration_step_two.dart';
 import 'package:reelpro/views/registeration_step_two.dart';
 
 class Editprofile extends GetxController {
+  var genderF = ''.obs;
   final instance = Get.put(RegistrationStepTwo2());
   Future<dio.Response> editProfile(
       String firstName,
       String lastName,
       String dob,
       String gender,
-      String description,
-      File profilePic,
+      String? description,
+      File? profilePic,
       String? email,
       String? number,
       String cardId,
@@ -25,6 +26,8 @@ class Editprofile extends GetxController {
     email == instance.email1.value ? email = null : email = email;
 
     number == instance.number.value ? number = null : number = number;
+
+    description == null ? description = null : description = description;
 
     String authToken = await SharedPreferences1().getToken();
     dio.FormData data = dio.FormData.fromMap({
@@ -39,16 +42,19 @@ class Editprofile extends GetxController {
       'customer_id': customerId,
       'timezone': timeZone
     });
-    String fileName = profilePic.path.split('/').last;
-    MapEntry<String, dio.MultipartFile> profileImage = MapEntry(
-      "profile_pic",
-      await dio.MultipartFile.fromFile(
-        profilePic.path,
-        filename: fileName,
-      ),
-    );
-    data.files.add(profileImage);
-
+    if (profilePic != null) {
+      String fileName = profilePic.path.split('/').last;
+      MapEntry<String, dio.MultipartFile> profileImage = MapEntry(
+        "profile_pic",
+        await dio.MultipartFile.fromFile(
+          profilePic.path,
+          filename: fileName,
+        ),
+      );
+      data.files.add(profileImage);
+    }
+    var gender1 = await Gender().getGender();
+    genderF.value = gender1;
     try {
       dio.Response response;
       response = await dio.Dio().post(

@@ -156,6 +156,7 @@ class BigTextField extends StatelessWidget {
             borderRadius: BorderRadius.circular(5),
             color: Colors.white),
         child: TextField(
+          maxLines: null,
           controller: textEditingController,
           onChanged: onchanged,
           keyboardType: textInputType,
@@ -585,7 +586,7 @@ class _TextF10State extends State<TextF10> {
                       fillColor: Colors.white,
                       // prefixIcon: prefix,
                       filled: true,
-                      contentPadding: EdgeInsets.only(left: 10.w, bottom: 4.h))
+                      contentPadding: EdgeInsets.only(left: 10.w, bottom: 5.h))
                   // ignore: use_full_hex_values_for_flutter_colors)
                   ))
         ]));

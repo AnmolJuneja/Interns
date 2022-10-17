@@ -11,6 +11,7 @@ class FishSpeciesListApi extends GetxController {
   var color4 = const Color(0xffF2F9FF).obs;
   var spareColor = const Color(0xffF2F9FF).obs;
   var selectedColor = Color(0xffd6e9ff).obs;
+  var selectedColor1 = Color(0xffd6e9ff).obs;
   var isSelected1 = false.obs;
   var isSelected2 = false.obs;
   var isSelected3 = false.obs;
@@ -22,12 +23,16 @@ class FishSpeciesListApi extends GetxController {
   var color8 = const Color(0xffF2F9FF).obs;
   var color9 = const Color(0xffF2F9FF).obs;
   var color10 = const Color(0xffF2F9FF).obs;
+  var color11 = const Color(0xffF2F9FF).obs;
+  var color12 = const Color(0xffF2F9FF).obs;
   var isSelected5 = false.obs;
   var isSelected6 = false.obs;
   var isSelected7 = false.obs;
   var isSelected8 = false.obs;
   var isSelected9 = false.obs;
   var isSelected10 = false.obs;
+  var isSelected11 = false.obs;
+  var isSelected12 = false.obs;
   var selectedFish = ''.obs;
   Future<dio.Response> getFishSpecies() async {
     String authToken = await SharedPreferences1().getToken();

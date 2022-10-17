@@ -55,28 +55,39 @@ class UserProfileUI extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Row(children: [
-                      Container(
-                          height: 135.h,
-                          width: 132.w,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(width: 3, color: Colors.white),
-                              image: const DecorationImage(
-                                  image: AssetImage(
-                                      'assets/images/profile.png')))),
+                      Obx(() => Container(
+                            height: 135.h,
+                            width: 132.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                border:
+                                    Border.all(width: 3, color: Colors.white),
+                                image: instance.profilePic1.value == ''
+                                    ? DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: AssetImage(
+                                            'assets/images/profile.png'))
+                                    : DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: NetworkImage(
+                                            instance.profilePic1.value))),
+                          )),
                       SizedBox(width: 16.w),
                       Padding(
                         padding: EdgeInsets.only(top: 5.h),
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                children: [
-                                  Text21PtBlack(
-                                      text: instance.firstName1.value),
-                                  SizedBox(width: 5.w),
-                                  Text21PtBlack(text: instance.lastName1.value)
-                                ],
+                              Obx(
+                                () => Row(
+                                  children: [
+                                    Text21PtBlack(
+                                        text: instance.firstName1.value),
+                                    SizedBox(width: 5.w),
+                                    Text21PtBlack(
+                                        text: instance.lastName1.value),
+                                  ],
+                                ),
                               ),
                               SizedBox(height: 5.h),
                               Text14ptOpacity50(text: 'Member Since Mar 2017'),
@@ -112,8 +123,9 @@ class UserProfileUI extends StatelessWidget {
                     ]),
                     SizedBox(height: 20.h),
                     Text14ptDesc(
-                        text:
-                            'This years Texas Fly Fishing & Brew Festival is held inside the spacious Mesquite Convention Center location.'),
+                        text: instance.description.value == ''
+                            ? 'Add Description.'
+                            : instance.description.value),
                     Padding(
                       padding:
                           EdgeInsets.only(left: 41.w, right: 41.w, top: 22.h),

@@ -38,6 +38,10 @@ class _SplashScreenState extends State<SplashScreen> {
     otp.dob1.value = dob;
     String number = await SaveNumber().getNumber();
     otp.number.value = number;
+    String profilePic = await SaveProfilePic().getProfilePic();
+    otp.profilePic1.value = profilePic;
+    String description = await SaveDescription().getDescripton();
+    otp.description.value = description;
     if (authToken != '') {
       Future.delayed(const Duration(milliseconds: 2000));
       Navigator.pushReplacement(
