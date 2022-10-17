@@ -1,0 +1,6 @@
+.object{display:flex;justify-content:space-around;flex-wrap:wrap}
+.object .first{border:3px solid red;width:300px;min-height:500px;box-sizing:border-box;padding:20px}
+.object .first img{width:100%;height:300px;object-fit:none;object-position:right}
+@media screen and (max-width:768px){
+.object .first{width:100%;margin-bottom:20px}
+}

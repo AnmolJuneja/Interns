@@ -1,0 +1,31 @@
+.object {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  .first {
+    border: 3px solid red;
+    width: 300px;
+    min-height: 500px;
+    box-sizing: border-box;
+    padding: 20px;
+
+    img {
+      width: 100%; //width 100% images all responsive
+      height: 300px; //images size equally  preference height
+      //object-fit: cover; //is uses height and width  in images cover and images is good setting
+      //object-fit: contain; // images all full size use is contain  images not work stretch and skew
+      //   object-fit: fill; // This is file property is work images all stretch work only
+      //   object-fit: scale-down; //This work is same is property is contain name
+      object-fit: none; //This images is not a stretch and skew only cover and images fit the dives height and width
+
+      //   object-position: center; //by default is images is center is object-fit none property but now is property is left, top, right,bottom is cover
+      object-position: right; //by default is images is center is object-fit none property but now is property is left, top, right,bottom is cover
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+}
