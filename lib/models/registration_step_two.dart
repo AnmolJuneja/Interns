@@ -2,7 +2,6 @@
 //
 //     final registrationStepTwo = registrationStepTwoFromJson(jsonString);
 
-import 'dart:convert';
 
 
 class RegistrationStepTwo {

@@ -5,15 +5,7 @@ class ValidateEmail extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   var email = '';
-  @override
-  void onInit() {
-    super.onInit();
-  }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
   @override
   void onClose() {
@@ -47,10 +39,6 @@ class PhoneValidator extends GetxController {
     phoneNumberController = TextEditingController();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
   @override
   void onClose() {

@@ -70,12 +70,12 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    BigText(
-                        color: const Color(0xff2B67A3), text: 'Registeration'),
-                    SmallText(
+                    const BigText(
+                        color: Color(0xff2B67A3), text: 'Registeration'),
+                    const SmallText(
                         text:
                             "Tell us a little bit about yourself so we know it's you",
-                        color: const Color(0xff485058)),
+                        color: Color(0xff485058)),
                     SizedBox(height: 40.h),
                     TextFirstName(
                         textEditingController: textEditingController1,
@@ -105,7 +105,8 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                         },
                         validator: (value) {
                           return validateEmail.validateEmailFunction(value!);
-                        }),
+                        },
+                        suffixText: null),
                     SizedBox(height: 8.h),
                     TextFieldDatePicker(
                       onSaved: (value) {},
@@ -123,7 +124,7 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                       decoration: BoxDecoration(
                           color: Colors.white,
                           border: Border.all(
-                              color: Color.fromRGBO(113, 154, 195, 0.16)),
+                              color: const Color.fromRGBO(113, 154, 195, 0.16)),
                           boxShadow: const [
                             BoxShadow(
                                 // ignore: use_full_hex_values_for_flutter_colors
@@ -148,7 +149,8 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                               .textTheme
                               .headline2!
                               .copyWith(
-                                  fontSize: 15.sp, color: Color(0xff48505899)
+                                  fontSize: 15.sp,
+                                  color: const Color(0xff48505899)
                                   // greyFontColoR.withAlpha(99),
                                   ),
                         ),

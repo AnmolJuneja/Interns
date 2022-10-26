@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/consts/button.dart';
 import 'package:reelpro/consts/text.dart';
@@ -10,13 +8,13 @@ import 'package:image_picker/image_picker.dart';
 import 'package:reelpro/consts/toggle_container.dart';
 import 'package:reelpro/view_models/add_feed.dart';
 import 'package:reelpro/view_models/fetch_lat_lng.dart';
-import 'package:reelpro/views/add_feed.dart';
+import 'package:reelpro/views/bottom_navigation.dart';
 import 'dart:io';
 
-import 'package:reelpro/views/catchlog_list.dart';
+import 'package:reelpro/views/tracker.dart';
 
 class AddFeedConst extends StatefulWidget {
-  AddFeedConst({
+  const AddFeedConst({
     Key? key,
   }) : super(key: key);
 
@@ -48,7 +46,7 @@ class _AddFeedConstState extends State<AddFeedConst> {
               Text21PtBlack(text: 'Add Feed'),
               GestureDetector(
                   onTap: () {
-                    Get.to(() => const CatchlogListUI());
+                    Get.to(() => BottomNavigation(currentIndex: 0));
                   },
                   child: const Icon(Icons.close))
             ]),
@@ -98,7 +96,7 @@ class _AddFeedConstState extends State<AddFeedConst> {
             Container(
                 padding: EdgeInsets.only(left: 54.w),
                 child: file == null
-                    ? Text('')
+                    ? const Text('')
                     : GestureDetector(
                         onDoubleTap: () {
                           height.value = 175.h.toInt();
@@ -107,12 +105,15 @@ class _AddFeedConstState extends State<AddFeedConst> {
                           height.value = 350.h.toInt();
                           width.value = 428.w.toInt();
                         },
-                        child: Obx(
-                          () => Image.file(file!,
+                        child: Obx(() => Container(
                               height: height.value.toDouble(),
                               width: width.value.toDouble(),
-                              fit: BoxFit.cover),
-                        ),
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: FileImage(file!)),
+                                  borderRadius: BorderRadius.circular(10)),
+                            )),
                       )),
             file == null
                 ? SizedBox(
@@ -147,7 +148,7 @@ class _AddFeedConstState extends State<AddFeedConst> {
                         decoration: const BoxDecoration(
                             borderRadius:
                                 BorderRadius.vertical(top: Radius.circular(25)),
-                            color: const Color(0xffF2F9FF)),
+                            color: Color(0xffF2F9FF)),
                         child: Padding(
                           padding: EdgeInsets.only(top: 48.h),
                           child: Column(
@@ -290,13 +291,9 @@ class _AddFeedConstState extends State<AddFeedConst> {
                 : SizedBox(height: 170.h),
             MyButtonGrey(
                 onpressed: () async {
-                  await addFeedApi.addFeed(
-                      fetchAdress.address.value,
-                      double.parse(fetchAdress.lat.value),
-                      double.parse(fetchAdress.lng.value),
-                      textEditingController.text,
-                      viewStatus!,
-                      file!);
+                  await addFeedApi.addFeed('location', 34.7, 37.4,
+                      textEditingController.text, 1, file!);
+                  Get.to(() => BottomNavigation(currentIndex: 0));
                 },
                 buttonText: 'Post')
           ]),
@@ -313,13 +310,6 @@ class _AddFeedConstState extends State<AddFeedConst> {
       });
     }
   }
-
-  // openGallery() async {
-  //   final List<XFile>? selectedImages = await picker.pickMultiImage();
-  //   if (selectedImages!.isNotEmpty) {
-  //     imageFileList!.addAll(selectedImages);
-  //   }
-  // }
 
   openGallery() async {
     XFile? xFile = await picker.pickImage(source: ImageSource.gallery);

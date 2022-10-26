@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reelpro/consts/appbar.dart';
 import 'package:reelpro/consts/text.dart';
-import 'package:reelpro/models/create_team.dart';
 import 'package:reelpro/views/create_team.dart';
-import 'package:reelpro/views/edit_profile.dart';
 import 'package:reelpro/views/profile_settings.dart';
 
 class MangeTeams extends StatelessWidget {
@@ -26,9 +23,9 @@ class MangeTeams extends StatelessWidget {
           padding: EdgeInsets.only(top: 28.h, left: 36.w),
           child: GestureDetector(
             onTap: () {
-              Get.to(() => const ProfileSettingsUI());
+              Get.to(() =>  const ProfileSettingsUI());
             },
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back_ios,
               color: Colors.black,
             ),
@@ -72,7 +69,7 @@ class MangeTeams extends StatelessWidget {
             ),
           ),
           SizedBox(height: 50.h),
-          Container(
+          SizedBox(
             height: 56.h,
             width: 166.w,
             child: ElevatedButton(

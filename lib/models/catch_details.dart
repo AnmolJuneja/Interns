@@ -1,77 +1,78 @@
 class CatchDetailsModel {
-    CatchDetailsModel({
-        this.success,
-        this.message,
-        this.data,
-    });
+  CatchDetailsModel({
+    this.success,
+    this.message,
+    this.data,
+  });
 
-    bool? success;
-    String? message;
-    Data? data;
+  bool? success;
+  String? message;
+  Data? data;
 
-    factory CatchDetailsModel.fromJson(Map<String, dynamic> json) => CatchDetailsModel(
+  factory CatchDetailsModel.fromJson(Map<String, dynamic> json) =>
+      CatchDetailsModel(
         success: json["success"],
         message: json["message"],
         data: Data.fromJson(json["data"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "success": success,
         "message": message,
         "data": data!.toJson(),
-    };
+      };
 }
 
 class Data {
-    Data({
-        this.id,
-        this.location,
-        this.lng,
-        this.lat,
-        this.weight,
-        this.length,
-        this.eventId,
-        this.userId,
-        this.type,
-        this.pic,
-        this.bait,
-        this.comment,
-        this.deletedAt,
-        this.createdAt,
-        this.updatedAt,
-        this.event,
-        this.fishtype,
-        this.challenge,
-        this.isLiked,
-        this.totalComments,
-        this.totalLikes,
-        this.userDetail,
-    });
+  Data({
+    this.id,
+    this.location,
+    this.lng,
+    this.lat,
+    this.weight,
+    this.length,
+    this.eventId,
+    this.userId,
+    this.type,
+    this.pic,
+    this.bait,
+    this.comment,
+    this.deletedAt,
+    this.createdAt,
+    this.updatedAt,
+    this.event,
+    this.fishtype,
+    this.challenge,
+    this.isLiked,
+    this.totalComments,
+    this.totalLikes,
+    this.userDetail,
+  });
 
-    int? id;
-    String? location;
-    double? lng;
-    double? lat;
-    String? weight;
-    String? length;
-    int? eventId;
-    int? userId;
-    int? type;
-    String? pic;
-    String? bait;
-    String? comment;
-    dynamic deletedAt;
-    DateTime? createdAt;
-    DateTime? updatedAt;
-    Event? event;
-    String? fishtype;
-    String? challenge;
-    bool? isLiked;
-    int? totalComments;
-    int? totalLikes;
-    UserDetail? userDetail;
+  int? id;
+  String? location;
+  double? lng;
+  double? lat;
+  String? weight;
+  String? length;
+  int? eventId;
+  int? userId;
+  int? type;
+  String? pic;
+  String? bait;
+  String? comment;
+  dynamic deletedAt;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  Event? event;
+  String? fishtype;
+  String? challenge;
+  bool? isLiked;
+  int? totalComments;
+  int? totalLikes;
+  UserDetail? userDetail;
 
-    factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
         id: json["id"],
         location: json["location"],
         lng: json["lng"].toDouble(),
@@ -94,9 +95,9 @@ class Data {
         totalComments: json["total_comments"],
         totalLikes: json["total_likes"],
         userDetail: UserDetail.fromJson(json["user_detail"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "location": location,
         "lng": lng,
@@ -119,63 +120,63 @@ class Data {
         "total_comments": totalComments,
         "total_likes": totalLikes,
         "user_detail": userDetail!.toJson(),
-    };
+      };
 }
 
 class Event {
-    Event({
-        this.id,
-        this.name,
-        this.eventType,
-        this.address,
-        this.lat,
-        this.lng,
-        this.teamSizeMin,
-        this.teamSizeMax,
-        this.about,
-        this.species,
-        this.anglers,
-        this.teams,
-        this.weather,
-        this.rules,
-        this.disclaimer,
-        this.spUserId,
-        this.logo,
-        this.banner,
-        this.isDeleted,
-        this.isActive,
-        this.createdAt,
-        this.updatedAt,
-        this.startTime,
-        this.endTime,
-    });
+  Event({
+    this.id,
+    this.name,
+    this.eventType,
+    this.address,
+    this.lat,
+    this.lng,
+    this.teamSizeMin,
+    this.teamSizeMax,
+    this.about,
+    this.species,
+    this.anglers,
+    this.teams,
+    this.weather,
+    this.rules,
+    this.disclaimer,
+    this.spUserId,
+    this.logo,
+    this.banner,
+    this.isDeleted,
+    this.isActive,
+    this.createdAt,
+    this.updatedAt,
+    this.startTime,
+    this.endTime,
+  });
 
-    int? id;
-    String? name;
-    dynamic eventType;
-    String? address;
-    String? lat;
-    String? lng;
-    int? teamSizeMin;
-    int? teamSizeMax;
-    String? about;
-    int? species;
-    int? anglers;
-    int? teams;
-    String? weather;
-    String? rules;
-    String? disclaimer;
-    int? spUserId;
-    String? logo;
-    String? banner;
-    int? isDeleted;
-    int? isActive;
-    DateTime? createdAt;
-    DateTime? updatedAt;
-    int? startTime;
-    int? endTime;
+  int? id;
+  String? name;
+  dynamic eventType;
+  String? address;
+  String? lat;
+  String? lng;
+  int? teamSizeMin;
+  int? teamSizeMax;
+  String? about;
+  int? species;
+  int? anglers;
+  int? teams;
+  String? weather;
+  String? rules;
+  String? disclaimer;
+  int? spUserId;
+  String? logo;
+  String? banner;
+  int? isDeleted;
+  int? isActive;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  int? startTime;
+  int? endTime;
 
-    factory Event.fromJson(Map<String, dynamic> json) => Event(
+  factory Event.fromJson(Map<String, dynamic> json) => Event(
         id: json["id"],
         name: json["name"],
         eventType: json["event_type"],
@@ -200,9 +201,9 @@ class Event {
         updatedAt: DateTime.parse(json["updated_at"]),
         startTime: json["start_time"],
         endTime: json["end_time"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "event_type": eventType,
@@ -227,55 +228,55 @@ class Event {
         "updated_at": updatedAt!.toIso8601String(),
         "start_time": startTime,
         "end_time": endTime,
-    };
+      };
 }
 
 class UserDetail {
-    UserDetail({
-        this.id,
-        this.firstname,
-        this.lastname,
-        this.email,
-        this.dob,
-        this.gender,
-        this.profilePic,
-        this.phoneNumber,
-        this.description,
-        this.cardId,
-        this.customerId,
-        this.timezone,
-        this.authToken,
-        this.profileStep,
-        this.isVerified,
-        this.userDetails,
-        this.address,
-        this.following,
-        this.followers,
-        this.wishlist,
-    });
+  UserDetail({
+    this.id,
+    this.firstname,
+    this.lastname,
+    this.email,
+    this.dob,
+    this.gender,
+    this.profilePic,
+    this.phoneNumber,
+    this.description,
+    this.cardId,
+    this.customerId,
+    this.timezone,
+    this.authToken,
+    this.profileStep,
+    this.isVerified,
+    this.userDetails,
+    this.address,
+    this.following,
+    this.followers,
+    this.wishlist,
+  });
 
-    int? id;
-    String? firstname;
-    String? lastname;
-    String? email;
-    String? dob;
-    String? gender;
-    dynamic profilePic;
-    String? phoneNumber;
-    dynamic description;
-    String? cardId;
-    String? customerId;
-    String? timezone;
-    dynamic authToken;
-    int? profileStep;
-    int? isVerified;
-    dynamic userDetails;
-    Address? address;
-    int? following;
-    int? followers;
-    List<dynamic>? wishlist;
+  int? id;
+  String? firstname;
+  String? lastname;
+  String? email;
+  String? dob;
+  String? gender;
+  dynamic profilePic;
+  String? phoneNumber;
+  dynamic description;
+  String? cardId;
+  String? customerId;
+  String? timezone;
+  dynamic authToken;
+  int? profileStep;
+  int? isVerified;
+  dynamic userDetails;
+  Address? address;
+  int? following;
+  int? followers;
+  List<dynamic>? wishlist;
 
-    factory UserDetail.fromJson(Map<String, dynamic> json) => UserDetail(
+  factory UserDetail.fromJson(Map<String, dynamic> json) => UserDetail(
         id: json["id"],
         firstname: json["firstname"],
         lastname: json["lastname"],
@@ -296,9 +297,9 @@ class UserDetail {
         following: json["following"],
         followers: json["followers"],
         wishlist: List<dynamic>.from(json["wishlist"].map((x) => x)),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "firstname": firstname,
         "lastname": lastname,
@@ -319,41 +320,41 @@ class UserDetail {
         "following": following,
         "followers": followers,
         "wishlist": List<dynamic>.from(wishlist!.map((x) => x)),
-    };
+      };
 }
 
 class Address {
-    Address({
-        this.id,
-        this.userId,
-        this.address,
-        this.city,
-        this.state,
-        this.country,
-        this.postalCode,
-        this.lat,
-        this.lng,
-        this.isDeleted,
-        this.isDefault,
-        this.createdAt,
-        this.updatedAt,
-    });
+  Address({
+    this.id,
+    this.userId,
+    this.address,
+    this.city,
+    this.state,
+    this.country,
+    this.postalCode,
+    this.lat,
+    this.lng,
+    this.isDeleted,
+    this.isDefault,
+    this.createdAt,
+    this.updatedAt,
+  });
 
-    int? id;
-    int? userId;
-    String? address;
-    String? city;
-    String? state;
-    String? country;
-    int? postalCode;
-    double? lat;
-    double? lng;
-    int? isDeleted;
-    int? isDefault;
-    DateTime? createdAt;
-    DateTime? updatedAt;
+  int? id;
+  int? userId;
+  String? address;
+  String? city;
+  String? state;
+  String? country;
+  int? postalCode;
+  double? lat;
+  double? lng;
+  int? isDeleted;
+  int? isDefault;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
-    factory Address.fromJson(Map<String, dynamic> json) => Address(
+  factory Address.fromJson(Map<String, dynamic> json) => Address(
         id: json["id"],
         userId: json["user_id"],
         address: json["address"],
@@ -367,9 +368,9 @@ class Address {
         isDefault: json["is_default"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "user_id": userId,
         "address": address,
@@ -383,5 +384,5 @@ class Address {
         "is_default": isDefault,
         "created_at": createdAt!.toIso8601String(),
         "updated_at": updatedAt!.toIso8601String(),
-    };
+      };
 }

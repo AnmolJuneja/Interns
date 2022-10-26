@@ -13,7 +13,7 @@ class AddFeedApi extends GetxController {
   var isSelected1 = false.obs;
   var isSelected2 = false.obs;
   var isSelected3 = false.obs;
-  var selectedColor = Color(0xffd6e9ff).obs;
+  var selectedColor = const Color(0xffd6e9ff).obs;
   var selectedItem = ''.obs;
   Future<dio.Response> addFeed(String location, double lat, double lng,
       String description, int viewStatus, File images) async {
@@ -27,7 +27,7 @@ class AddFeedApi extends GetxController {
     });
     String fileName = images.path.split('/').last;
     MapEntry<String, dio.MultipartFile> image = MapEntry(
-      'images',
+      'images[]',
       await dio.MultipartFile.fromFile(
         images.path,
         filename: fileName,

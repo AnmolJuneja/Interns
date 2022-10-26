@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/consts/text.dart';
 import 'package:reelpro/consts/text_field.dart';
-import 'package:reelpro/models/shared_preferences.dart';
 import 'package:reelpro/views/list_events.dart';
-import 'package:reelpro/views/onboarding_screen.dart';
 
 class EventListUI extends StatelessWidget {
   const EventListUI({Key? key}) : super(key: key);
@@ -54,11 +52,11 @@ class EventListUI extends StatelessWidget {
                 ],
               ),
               Flexible(
-                  child: Container(
+                  child: SizedBox(
                       width: double.infinity,
                       height: 650.h,
                       child: TabBarView(children: [
-                        ListOfEvents(),
+                        const ListOfEvents(),
                         Center(child: Text30ptBlue(text: 'Current Events')),
                         Center(
                           child: Text30ptBlue(text: 'Upcoming Events'),

@@ -1,11 +1,8 @@
-import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:reelpro/models/shared_preferences.dart';
 import 'package:reelpro/models/view_team.dart';
-import 'package:reelpro/views/team_list.dart';
-import 'package:reelpro/views/view_team.dart';
 
 class TeamViewViewModel extends GetxController {
   Future<dio.Response> getTeamDetails() async {

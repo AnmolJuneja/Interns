@@ -37,7 +37,7 @@ class MessageScreen extends StatelessWidget {
                    const Tab(text: 'Announcements'),
                     const Tab(text: 'Notification')
                   ]),
-              Container(
+              SizedBox(
                 width: double.infinity,
                 height: 650.h,
                 child: TabBarView(

@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:reelpro/consts/text.dart';
-import 'package:reelpro/models/add_feed.dart';
-import 'package:reelpro/models/shared_preferences.dart';
 import 'package:reelpro/view_models/fetch_lat_lng.dart';
-import 'package:reelpro/views/add_catch_log.dart';
-import 'package:reelpro/views/catch_details.dart';
-import 'package:reelpro/views/catchlog_list.dart';
+import 'package:reelpro/views/tracker.dart';
 import 'package:reelpro/views/event_list.dart';
-import 'package:reelpro/views/home_screen.dart';
 import 'package:reelpro/views/message_screen.dart';
 import 'package:reelpro/views/spotlight_screen.dart';
 import 'package:get/get.dart';
@@ -17,7 +11,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'home_page.dart';
 
 class BottomNavigation extends StatefulWidget {
-  const BottomNavigation({Key? key}) : super(key: key);
+  int currentIndex = 2;
+   BottomNavigation({Key? key, required this.currentIndex}) : super(key: key);
 
   @override
   State<BottomNavigation> createState() => _BottomNavigationState();
@@ -25,7 +20,8 @@ class BottomNavigation extends StatefulWidget {
 
 class _BottomNavigationState extends State<BottomNavigation> {
   final fetchLatLng = Get.put(FetchLatLng());
-  int currentIndex = 2;
+  
+  
   List screens = [
     const CatchlogListUI(),
     const SpotlightScreen(),
@@ -36,7 +32,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screens[currentIndex],
+      body: screens[widget.currentIndex],
       bottomNavigationBar: Container(
         height: 60.h,
         width: double.infinity,
@@ -60,13 +56,13 @@ class _BottomNavigationState extends State<BottomNavigation> {
     return GestureDetector(
         onTap: () {
           setState(() {
-            currentIndex = index;
+           widget.currentIndex = index;
           });
         },
         child: Padding(
             padding: EdgeInsets.only(left: 30.w, right: 30.w),
             child: SvgPicture.asset(image,
-                color: index == currentIndex
+                color: index == widget.currentIndex
                     ? const Color(0xff2B67A3)
                     : Colors.grey)));
   }

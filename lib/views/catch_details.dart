@@ -12,7 +12,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/view_models/comment_list.dart';
 
 class CatchDetailsUI extends StatefulWidget {
-  const CatchDetailsUI({Key? key}) : super(key: key);
+  final int catchId;
+  const CatchDetailsUI({Key? key, required this.catchId}) : super(key: key);
 
   @override
   State<CatchDetailsUI> createState() => _CatchDetailsUIState();
@@ -26,6 +27,7 @@ class _CatchDetailsUIState extends State<CatchDetailsUI> {
     CommentListApi commentListApi = Get.put(CommentListApi());
     AddCommentApi addCommentApi = Get.put(AddCommentApi());
     final ScrollController scrollController = ScrollController();
+    final commentList = Get.put(CommentList());
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -43,7 +45,7 @@ class _CatchDetailsUIState extends State<CatchDetailsUI> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                 FutureBuilder<CatchDetailsModel>(
-                    future: catchDetailsApi.getDetails(),
+                    future: catchDetailsApi.getDetails(widget.catchId),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         return Column(

@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var greetings;
+    String greetings;
     var dateTime = DateTime.now().hour;
     if (dateTime > 12 && dateTime < 16) {
       greetings = 'Good Afternoon';
@@ -124,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     // ignore: use_full_hex_values_for_flutter_colors
                     boxShadow: const [
                       BoxShadow(
-                          color: Color(0xff2B67A329),
+                          color: Color(0xff2b67a329),
                           blurRadius: 1,
                           offset: Offset(0, 4))
                     ],
@@ -237,7 +237,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 // ignore: use_full_hex_values_for_flutter_colors
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(6),
-                    color: const Color(0xff719AC3CC)),
+                    color: const Color(0xff719ac3cc)),
                 child: Center(
                     child: Text('12',
                         style: TextStyle(
@@ -259,7 +259,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 // ignore: use_full_hex_values_for_flutter_colors
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(6),
-                    color: const Color(0xff719AC3CC)),
+                    color: const Color(0xff719ac3cc)),
                 child: Center(
                     child: Text('19',
                         style: TextStyle(

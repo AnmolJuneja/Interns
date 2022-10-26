@@ -6,13 +6,14 @@ import 'package:reelpro/consts/container.dart';
 import 'package:reelpro/consts/text.dart';
 import 'package:reelpro/consts/text_field.dart';
 import 'package:reelpro/consts/toggle_container.dart';
-import 'package:reelpro/models/fish_species_list.dart';
 import 'package:reelpro/view_models/add_catchlog.dart';
+import 'package:reelpro/view_models/fetch_lat_lng.dart';
 import 'package:reelpro/view_models/fish_species_list.dart';
 import 'package:reelpro/views/bottom_sheet.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:reelpro/views/tracker.dart';
 
 class AddCatchLogUI extends StatefulWidget {
   const AddCatchLogUI({Key? key}) : super(key: key);
@@ -23,6 +24,12 @@ class AddCatchLogUI extends StatefulWidget {
 
 class _AddCatchLogUIState extends State<AddCatchLogUI> {
   @override
+  void initState() {
+    locationController.text = fetchAdress.address.value;
+    super.initState();
+  }
+
+  @override
   AddCatchlogApi addCatchlogApi = Get.put(AddCatchlogApi());
   ImagePicker picker = ImagePicker();
   File? file;
@@ -32,6 +39,8 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
   TextEditingController baitController = TextEditingController();
   TextEditingController commentController = TextEditingController();
   TextEditingController locationController = TextEditingController();
+  final fetchAdress = Get.put(FetchLatLng());
+  @override
   Widget build(BuildContext context) {
     double lat = 30.403648;
     double lng = 74.027962;
@@ -65,16 +74,29 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                       },
                       child: Container(
                           child: file == null
-                              ? Image.asset('assets/images/Group 208.png',
-                                  height: 132.h, width: 132.w)
+                              ? Container(
+                                  height: 132.h,
+                                  width: 132.w,
+                                  decoration: BoxDecoration(
+                                      image: const DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: AssetImage(
+                                              'assets/images/Group 208.png')),
+                                      borderRadius: BorderRadius.circular(15),
+                                      border: Border.all(
+                                          color: Colors.white, width: 3)),
+                                )
                               : Container(
                                   height: 132.h,
                                   width: 132.w,
                                   decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: FileImage(file!)),
                                       borderRadius: BorderRadius.circular(15),
                                       border: Border.all(
                                           color: Colors.white, width: 3)),
-                                  child: Image.file(file!)))),
+                                ))),
                   SizedBox(height: 28.h),
                   Text15PtBlue(text: 'Select Fishtype'),
                   SizedBox(height: 14.h),
@@ -86,7 +108,7 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                             shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.vertical(
                                     top: Radius.circular(25))),
-                            builder: (context) => buildBottomSheet());
+                            builder: (context) => const buildBottomSheet());
                       },
                       child: Obx(() => fishSpeciesListApi
                               .selectedFish.value.isEmpty
@@ -258,7 +280,9 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                                                       .spaceBetween,
                                               children: [
                                                 Button56(
-                                                    onpressed: () {},
+                                                    onpressed: () {
+                                                      Navigator.pop(context);
+                                                    },
                                                     buttonText: 'Cancel',
                                                     textColor:
                                                         const Color(0xff485058),
@@ -292,6 +316,7 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                   Text15PtBlue(text: 'Select Location'),
                   SizedBox(height: 14.h),
                   TextF(
+                      readOnly: false,
                       textEditingController: locationController,
                       hintText: 'Select location',
                       textInputType: TextInputType.text,
@@ -301,6 +326,7 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                   Text15PtBlue(text: 'Enter Weight (g)'),
                   SizedBox(height: 14.h),
                   TextF(
+                      readOnly: false,
                       textEditingController: weightController,
                       hintText: 'Enter weight g',
                       textInputType: TextInputType.number,
@@ -310,6 +336,7 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                   Text15PtBlue(text: 'Enter Length (cm)'),
                   SizedBox(height: 14.h),
                   TextF(
+                      readOnly: false,
                       textEditingController: lengthController,
                       hintText: 'Enter length cm',
                       textInputType: TextInputType.number,
@@ -319,6 +346,7 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                   Text15PtBlue(text: 'Enter Bait'),
                   SizedBox(height: 14.h),
                   TextF(
+                      readOnly: false,
                       textEditingController: baitController,
                       hintText: 'Enter',
                       textInputType: TextInputType.text,
@@ -328,6 +356,7 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                   Text15PtBlue(text: 'Add Comment'),
                   SizedBox(height: 14.h),
                   TextF(
+                      readOnly: false,
                       textEditingController: commentController,
                       hintText: 'make a note',
                       textInputType: TextInputType.text,
@@ -343,9 +372,9 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
             child: MyButton(
                 onpressed: () {
                   addCatchlogApi.addCatch(
-                      fishSpeciesListApi.selectedFish.value,
-                      fishSpeciesListApi.finalSelected.value,
-                      locationController.text,
+                      2,
+                      2,
+                      fetchAdress.address.value,
                       weightController.text,
                       lengthController.text,
                       file!,
@@ -355,6 +384,7 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                       baitController.text,
                       25,
                       commentController.text);
+                  Get.to(() => const CatchlogListUI());
                 },
                 buttonText: 'Save'))
       ]),

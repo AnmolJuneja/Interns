@@ -1,32 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:reelpro/models/feed_list.dart';
 import 'package:reelpro/view_models/feed_list.dart';
+import 'package:get/get.dart';
 
-class FeedListUI extends StatefulWidget {
-  const FeedListUI({Key? key}) : super(key: key);
+class FeedList extends StatelessWidget {
+  const FeedList({Key? key}) : super(key: key);
 
-  @override
-  State<FeedListUI> createState() => _FeedListUIState();
-}
-
-class _FeedListUIState extends State<FeedListUI> {
   @override
   Widget build(BuildContext context) {
-    final feedListInstance = Get.put(FeedListApi());
+    final instance = Get.put(FeedListApi());
     return Scaffold(
-        body: FutureBuilder(
-            future: feedListInstance.getFeedListFinal(),
+        body: FutureBuilder<FeedListResponse>(
+            future: instance.getDetails(),
             builder: (context, snapshot) {
               return ListView.builder(
-                  itemCount: feedListInstance.feedListVar.length,
+                  itemCount: snapshot.data!.data!.data!.length,
                   itemBuilder: (context, index) {
-                    return buildList(feedListInstance.feedListVar[index]);
+                    return buildFeed(snapshot.data!.data!.data![index]);
                   });
             }));
   }
 }
 
-Widget buildList(SingleFeedResponse feedList) {
-  return Center(child: Container(child: Text(feedList.description.toString())));
+Widget buildFeed(Datum datum) {
+  return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(25),
+          border: Border.all(width: 2, color: Colors.black)),
+      // color: Colors.black,
+      height: 400,
+      width: double.infinity,
+      child: PageView.builder(
+          itemCount: datum.getFeedImages!.length,
+          itemBuilder: (context, index) {
+            return Image.network(datum.getFeedImages![index].pic!);
+          }));
 }

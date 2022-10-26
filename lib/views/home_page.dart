@@ -1,19 +1,9 @@
-import 'dart:ffi';
-import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reelpro/consts/text.dart';
-import 'package:reelpro/models/catchlog_list.dart';
-import 'package:reelpro/models/registration_step_two.dart';
-import 'package:reelpro/models/shared_preferences.dart';
 import 'package:reelpro/view_models/event_order_list.dart';
-import 'package:reelpro/view_models/otp_view_model.dart';
-import 'package:reelpro/view_models/registeration.dart';
 import 'package:reelpro/view_models/registeration_step_two.dart';
-import 'package:reelpro/views/message_screen.dart';
-import 'package:reelpro/views/splash_screen.dart';
 import 'package:reelpro/views/user_profile.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   final instance = Get.put(RegistrationStepTwo2());
   @override
   Widget build(BuildContext context) {
-    var greetings;
+    String greetings;
     var dateTime = DateTime.now().hour;
     if (dateTime > 11.59 && dateTime < 16) {
       greetings = 'Good Afternoon';
@@ -82,13 +72,13 @@ class _HomePageState extends State<HomePage> {
                               return Container(
                                 padding:
                                     EdgeInsets.only(top: 80.h, left: 120.w),
-                                child: Text('No Event Running'),
+                                child: const Text('No Event Running'),
                               );
                             } else {
                               return Container(
                                   padding:
                                       EdgeInsets.only(top: 60.h, left: 150.w),
-                                  child: CircularProgressIndicator());
+                                  child: const CircularProgressIndicator());
                             }
                           })
                     ])),
@@ -107,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                           borderRadius: BorderRadius.circular(6),
                           border: Border.all(width: 2, color: Colors.white),
                           image: instance.profilePic1.value == ''
-                              ? DecorationImage(
+                              ? const DecorationImage(
                                   fit: BoxFit.cover,
                                   image:
                                       AssetImage('assets/images/profile.png'))
@@ -135,12 +125,12 @@ class _HomePageState extends State<HomePage> {
                           if (snapshot.hasData) {
                             return Container(
                               padding: EdgeInsets.only(top: 80.h, left: 120.w),
-                              child: Text('No Upcoming Events'),
+                              child: const Text('No Upcoming Events'),
                             );
                           } else {
                             return Container(
                               padding: EdgeInsets.only(top: 80.h, left: 150.w),
-                              child: CircularProgressIndicator(),
+                              child: const CircularProgressIndicator(),
                             );
                           }
                         })

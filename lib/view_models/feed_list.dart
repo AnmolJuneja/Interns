@@ -24,12 +24,11 @@ class FeedListApi extends GetxController {
     return Future.value();
   }
 
-  var feedListVar = <SingleFeedResponse>[];
-  getFeedListFinal() async {
-    await getFeedList().then((value) {
-      var resp = FeedListResponse.fromJson(value.data['data']);
-      feedListVar.clear();
-      feedListVar.addAll(resp.data);
+  Future<FeedListResponse> getDetails() async {
+    var resp1 = await getFeedList().then((value) {
+      var res = FeedListResponse.fromJson(value.data);
+      return res;
     });
+    return resp1;
   }
 }

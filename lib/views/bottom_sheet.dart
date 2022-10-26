@@ -5,7 +5,6 @@ import 'package:reelpro/consts/button.dart';
 import 'package:reelpro/consts/text.dart';
 import 'package:reelpro/consts/text_field.dart';
 import 'package:reelpro/consts/toggle_container.dart';
-import 'package:reelpro/models/fish_species_list.dart';
 import 'package:reelpro/view_models/fish_species_list.dart';
 
 // Widget buildBottomSheet() {

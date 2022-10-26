@@ -6,8 +6,8 @@ import 'package:reelpro/models/shared_preferences.dart';
 
 class AddCatchlogApi extends GetxController {
   Future<dio.Response> addCatch(
-      String fishType,
-      String challenge,
+      int fishType,
+      int challenge,
       String location,
       String weight,
       String length,
@@ -20,19 +20,19 @@ class AddCatchlogApi extends GetxController {
       String comment) async {
     String authToken = await SharedPreferences1().getToken();
     dio.FormData data = dio.FormData.fromMap({
-       'fishtype': fishType,
-            'challenge': challenge,
-            'location': location,
-            'weight': weight,
-            'length': length,
-            'type': type,
-            'lat': lat,
-            'lng': lng,
-            'bait': bait,
-            'comment': comment,
-            'userid':userId
+      'fishtype': fishType,
+      'challenge': challenge,
+      'location': location,
+      'weight': weight,
+      'length': length,
+      'type': type,
+      'lat': lat,
+      'lng': lng,
+      'bait': bait,
+      'comment': comment,
+      'userid': userId
     });
-     String fileName = pic.path.split('/').last;
+    String fileName = pic.path.split('/').last;
     MapEntry<String, dio.MultipartFile> image = MapEntry(
       "pic",
       await dio.MultipartFile.fromFile(

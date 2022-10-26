@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/consts/text.dart';
-import 'package:reelpro/models/registration_step_two.dart';
-import 'package:reelpro/view_models/edit_profile.dart';
 import 'package:get/get.dart';
 import 'package:reelpro/view_models/registeration_step_two.dart';
+import 'package:reelpro/views/bottom_navigation.dart';
 import 'package:reelpro/views/edit_profile.dart';
-import 'package:reelpro/views/home_page.dart';
 import 'package:reelpro/views/profile_settings.dart';
 
 class UserProfileUI extends StatelessWidget {
@@ -27,7 +25,7 @@ class UserProfileUI extends StatelessWidget {
                 padding: EdgeInsets.only(top: 28.h, left: 36.w),
                 child: GestureDetector(
                     onTap: () {
-                      Get.to(() => const HomePage());
+                      Get.to(() => BottomNavigation(currentIndex: 2));
                     },
                     child:
                         const Icon(Icons.arrow_back_ios, color: Colors.black))),
@@ -63,7 +61,7 @@ class UserProfileUI extends StatelessWidget {
                                 border:
                                     Border.all(width: 3, color: Colors.white),
                                 image: instance.profilePic1.value == ''
-                                    ? DecorationImage(
+                                    ? const DecorationImage(
                                         fit: BoxFit.cover,
                                         image: AssetImage(
                                             'assets/images/profile.png'))
@@ -94,7 +92,7 @@ class UserProfileUI extends StatelessWidget {
                               SizedBox(height: 22.h),
                               GestureDetector(
                                 onTap: () {
-                                  Get.to(() => EditProfile1());
+                                  Get.to(() => const EditProfile1());
                                 },
                                 child: Container(
                                   padding: EdgeInsets.only(left: 60.w),
@@ -177,12 +175,12 @@ class UserProfileUI extends StatelessWidget {
                     ],
                   ),
                   Flexible(
-                      child: Container(
+                      child: SizedBox(
                           width: double.infinity,
                           height: 900.h,
                           child: TabBarView(children: [
                             SingleChildScrollView(
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               child: Padding(
                                 padding: EdgeInsets.only(
                                     top: 20.h, left: 36.w, right: 36.w),
@@ -259,10 +257,10 @@ class UserProfileUI extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Center(child: Text('No Data')),
-                            Center(child: Text('No Data')),
-                            Center(child: Text('No Data')),
-                            Center(child: Text('No Data'))
+                            const Center(child: Text('No Data')),
+                            const Center(child: Text('No Data')),
+                            const Center(child: Text('No Data')),
+                            const Center(child: Text('No Data'))
                           ])))
                 ]),
               )

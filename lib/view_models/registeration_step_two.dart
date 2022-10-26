@@ -6,13 +6,21 @@ import 'package:reelpro/models/shared_preferences.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RegistrationStepTwo2 extends GetxController {
-  var color1 = const Color(0xf2B67A329).obs;
-  var color6 = const Color(0xf2B67A329).obs;
-  var color7 = const Color(0xf2B67A329).obs;
-  var color2 = const Color(0xf2B67A329).obs;
-  var color3 = const Color(0xf2B67A329).obs;
-  var color4 = const Color(0xf2B67A329).obs;
-  var color5 = const Color(0xf2B67A329).obs;
+  var selectedValue = ''.obs;
+  var publicColor = const Color(0xffF2F9FF).obs;
+  var privateColor = const Color(0xffF2F9FF).obs;
+  var selectedColor = const Color(0xffF2F9FF).obs;
+  var selectedItemcolor = const Color(0xffd6e9ff).obs;
+  var publicisSelected = false.obs;
+  var privateisSelected = false.obs;
+  var teamCount = ''.obs;
+  var color1 = const Color(0xf2b67a329).obs;
+  var color6 = const Color(0xf2b67a329).obs;
+  var color7 = const Color(0xf2b67a329).obs;
+  var color2 = const Color(0xf2b67a329).obs;
+  var color3 = const Color(0xf2b67a329).obs;
+  var color4 = const Color(0xf2b67a329).obs;
+  var color5 = const Color(0xf2b67a329).obs;
   var errorText = ''.obs;
   var genderF = ''.obs;
   var blueColor = const Color(0xff719AC3).obs;

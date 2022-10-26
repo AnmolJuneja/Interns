@@ -20,12 +20,10 @@ class EventListResponse {
     }
    }
    Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
-    data['message'] = this.message;
-    if (this.data != null) {
-      data['data'] = this.data.map((v) => v.toJson()).toList();
-    }
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['success'] = success;
+    data['message'] = message;
+    data['data'] = this.data.map((v) => v.toJson()).toList();
     return data;
   }
 
@@ -96,7 +94,7 @@ class EventList {
     factory EventList.fromJson(Map<String, dynamic> json) => EventList(
         id: json["id"],
         name: nameValues.map[json["name"]],
-        eventType: json["event_type"] == null ? null : json["event_type"],
+        eventType: json["event_type"],
         address: addressValues.map[json["address"]],
         lat: json["lat"],
         lng: json["lng"],
@@ -127,7 +125,7 @@ class EventList {
     Map<String, dynamic> toJson() => {
         "id": id,
         "name": nameValues.reverse[name],
-        "event_type": eventType == null ? null : eventType,
+        "event_type": eventType,
         "address": addressValues.reverse[address],
         "lat": lat,
         "lng": lng,
@@ -329,9 +327,7 @@ class EnumValues<T> {
     EnumValues(this.map);
 
     Map<T, String> get reverse {
-        if (reverseMap == null) {
-            reverseMap = map.map((k, v) => new MapEntry(v, k));
-        }
+        reverseMap ??= map.map((k, v) => MapEntry(v, k));
         return reverseMap!;
     }
 }

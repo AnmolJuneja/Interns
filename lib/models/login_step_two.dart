@@ -2,7 +2,6 @@
 //
 //     final stepTwo = stepTwoFromJson(jsonString);
 
-import 'dart:convert';
 class StepTwo {
     StepTwo({
         this.success,

@@ -3,15 +3,18 @@ import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:reelpro/models/fish_species_list.dart';
 import 'package:reelpro/models/shared_preferences.dart';
+import 'package:reelpro/view_models/team_list.dart';
 
 class FishSpeciesListApi extends GetxController {
+  final teamApi = Get.put(TeamViewApi());
   var color1 = const Color(0xffF2F9FF).obs;
   var color2 = const Color(0xffF2F9FF).obs;
   var color3 = const Color(0xffF2F9FF).obs;
   var color4 = const Color(0xffF2F9FF).obs;
   var spareColor = const Color(0xffF2F9FF).obs;
-  var selectedColor = Color(0xffd6e9ff).obs;
-  var selectedColor1 = Color(0xffd6e9ff).obs;
+  var selectedColor = const Color(0xffd6e9ff).obs;
+  var selectedColor1 = const Color(0xffd6e9ff).obs;
+  var selectedItemcolor = const Color(0xffd6e9ff).obs;
   var isSelected1 = false.obs;
   var isSelected2 = false.obs;
   var isSelected3 = false.obs;
@@ -25,6 +28,7 @@ class FishSpeciesListApi extends GetxController {
   var color10 = const Color(0xffF2F9FF).obs;
   var color11 = const Color(0xffF2F9FF).obs;
   var color12 = const Color(0xffF2F9FF).obs;
+  var transparentColor = const Color(0xffF2F9FF).obs;
   var isSelected5 = false.obs;
   var isSelected6 = false.obs;
   var isSelected7 = false.obs;

@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/consts/big_text.dart';
 import 'package:reelpro/consts/button.dart';
 import 'package:reelpro/consts/small_text.dart';
-import 'package:dio/dio.dart' as dio;
 import 'package:reelpro/consts/text_field.dart';
 import 'package:reelpro/consts/upper_design.dart';
 import 'package:reelpro/models/login.dart';
@@ -13,10 +12,6 @@ import 'package:reelpro/models/shared_preferences.dart';
 import 'package:reelpro/view_models/otp_view_model.dart';
 import 'package:reelpro/view_models/validator.dart';
 import 'package:reelpro/views/otp_screen.dart';
-import 'package:get/get.dart';
-import 'package:country_code_picker/country_code.dart';
-import 'package:country_code_picker/country_code.dart';
-import 'package:country_picker/country_picker.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({Key? key}) : super(key: key);
@@ -39,19 +34,18 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               top: 736.h,
               child: const Image(
                   image: AssetImage('assets/images/bottom-wave.png'))),
-          Upper(),
+          const Upper(),
           Positioned(
               left: 36.w,
               top: 160.h,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BigText(
-                      color: const Color(0xff2B67A3),
-                      text: 'Enter your digits'),
-                  SmallText(
+                  const BigText(
+                      color: Color(0xff2B67A3), text: 'Enter your digits'),
+                  const SmallText(
                     text: 'Please enter your phone number',
-                    color: const Color(0xff485058),
+                    color: Color(0xff485058),
                   ),
                   SizedBox(height: 76.h),
                   TextF10(
@@ -67,12 +61,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     onSaved: (value) {
                       errorText.value = value!;
                     },
-                    validator: (value) {},
+                    validator: (value) {
+                      return null;
+                    },
                   ),
                   SizedBox(height: 5.h),
                   Obx(() => Text(
                         errorText.value,
-                        style: TextStyle(color: Colors.red),
+                        style: const TextStyle(color: Colors.red),
                       )),
                   SizedBox(height: 348.h),
                   MyButton(
@@ -100,16 +96,16 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   login() async {
     await otp
-        .getOtp(textEditingController.text, otp.countryText.value)
+        .getOtp(textEditingController.text, '+${otp.countryText.value}')
         .then((value) async {
       var res = Login.fromJson(value.data);
-      await SaveNumber().saveNumber('${res.data!.phoneNumber}');
+      await SaveNumber().saveNumber(textEditingController.text);
       Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => OtpScreen(
                 confirmationToken: res.data!.confirmationToken.toString(),
                 otp: res.data!.otp.toString(),
                 number: textEditingController.text,
-                countryCode: otp.countryText.value,
+                countryCode: '+${otp.countryText.value}',
               )));
     });
   }

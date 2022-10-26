@@ -61,7 +61,7 @@ class Text20Pt extends StatelessWidget {
             fontFamily: 'Helvetica',
             fontSize: 20.sp,
             fontWeight: FontWeight.bold,
-            color: Color(0xff2B67A3)));
+            color: const Color(0xff2B67A3)));
   }
 }
 
@@ -85,6 +85,7 @@ class Text14Pt extends StatelessWidget {
     );
   }
 }
+
 class Text14Pt58 extends StatelessWidget {
   String text;
   Text14Pt58({
@@ -184,7 +185,7 @@ class Text14ptOpacity50 extends StatelessWidget {
           fontWeight: FontWeight.w400,
           fontSize: 14.sp,
           // ignore: use_full_hex_values_for_flutter_colors
-          color: Color.fromARGB(255, 159, 163, 169)),
+          color: const Color.fromARGB(255, 159, 163, 169)),
     );
   }
 }
@@ -202,7 +203,7 @@ class Text14ptDesc extends StatelessWidget {
           fontFamily: 'Helvetica',
           fontWeight: FontWeight.w500,
           fontSize: 14.sp,
-          color: Color(0xff485058)),
+          color: const Color(0xff485058)),
     );
   }
 }
@@ -274,6 +275,7 @@ class Text16PtBlack extends StatelessWidget {
             color: const Color(0xff191A1C)));
   }
 }
+
 class Text16PtBlack58 extends StatelessWidget {
   String text;
   Text16PtBlack58({Key? key, required this.text}) : super(key: key);
@@ -319,6 +321,7 @@ class Text16PtBlue extends StatelessWidget {
             color: Color(0xff2B67A3)));
   }
 }
+
 class Text16PtBlueMedium extends StatelessWidget {
   String text;
   Text16PtBlueMedium({Key? key, required this.text}) : super(key: key);
@@ -365,7 +368,7 @@ class Text14PtTime extends StatelessWidget {
           fontFamily: 'Helvetica',
           fontSize: 14.sp,
           fontWeight: FontWeight.w500,
-          color: const Color(0xff485058CC)),
+          color: Color.fromARGB(70, 71, 72, 82)),
     );
   }
 }
@@ -401,6 +404,7 @@ class Text20PtComment extends StatelessWidget {
             color: const Color(0xff485058)));
   }
 }
+
 class Text20PtBold extends StatelessWidget {
   String text;
   Text20PtBold({Key? key, required this.text}) : super(key: key);

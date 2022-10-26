@@ -18,12 +18,10 @@ class CatchlogListResponse {
     }
    }
    Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
-    data['message'] = this.message;
-    if (this.data != null) {
-      data['data'] = this.data.map((v) => v.toJson()).toList();
-    }
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['success'] = success;
+    data['message'] = message;
+    data['data'] = this.data.map((v) => v.toJson()).toList();
     return data;
   }
 }
@@ -184,7 +182,7 @@ class Event {
     factory Event.fromJson(Map<String, dynamic> json) => Event(
         id: json["id"],
         name: json["name"],
-        eventType: json["event_type"] == null ? null : json["event_type"],
+        eventType: json["event_type"],
         address: json["address"],
         lat: json["lat"],
         lng: json["lng"],
@@ -211,7 +209,7 @@ class Event {
     Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
-        "event_type": eventType == null ? null : eventType,
+        "event_type": eventType,
         "address": address,
         "lat": lat,
         "lng": lng,
@@ -288,13 +286,13 @@ class UserDetail {
         email: json["email"],
         dob: json["dob"],
         gender: json["gender"],
-        profilePic: json["profile_pic"] == null ? null : json["profile_pic"],
+        profilePic: json["profile_pic"],
         phoneNumber: json["phone_number"],
-        description: json["description"] == null ? null : json["description"],
-        cardId: json["card_id"] == null ? null : json["card_id"],
-        customerId: json["customer_id"] == null ? null : json["customer_id"],
-        timezone: json["timezone"] == null ? null : json["timezone"],
-        authToken: json["auth_token"] == null ? null : json["auth_token"],
+        description: json["description"],
+        cardId: json["card_id"],
+        customerId: json["customer_id"],
+        timezone: json["timezone"],
+        authToken: json["auth_token"],
         profileStep: json["profile_step"],
         isVerified: json["is_verified"],
         userDetails: json["user_details"] == null ? null : UserDetails.fromJson(json["user_details"]),
@@ -311,13 +309,13 @@ class UserDetail {
         "email": email,
         "dob": dob,
         "gender": gender,
-        "profile_pic": profilePic == null ? null : profilePic,
+        "profile_pic": profilePic,
         "phone_number": phoneNumber,
-        "description": description == null ? null : description,
-        "card_id": cardId == null ? null : cardId,
-        "customer_id": customerId == null ? null : customerId,
-        "timezone": timezone == null ? null : timezone,
-        "auth_token": authToken == null ? null : authToken,
+        "description": description,
+        "card_id": cardId,
+        "customer_id": customerId,
+        "timezone": timezone,
+        "auth_token": authToken,
         "profile_step": profileStep,
         "is_verified": isVerified,
         "user_details": userDetails == null ? null : userDetails!.toJson(),

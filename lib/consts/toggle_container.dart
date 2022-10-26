@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ToggleContainer extends StatefulWidget {
   Color color;
-  bool isSelected;
+  bool? isSelected;
   String text;
   ToggleContainer(
       {Key? key,
@@ -32,10 +32,51 @@ class _ToggleContainerState extends State<ToggleContainer> {
             Text16PtBlack(text: widget.text),
             Padding(
               padding: EdgeInsets.only(bottom: 20.h),
-              child: Container(
+              child: SizedBox(
                   height: 10.h,
                   width: 16.w,
-                  child: widget.isSelected
+                  child: widget.isSelected!
+                      ? const Icon(Icons.check, color: Color(0xff2B67A3))
+                      : null),
+            )
+          ],
+        ));
+  }
+}
+class ToggleContainerPublicPrivate extends StatefulWidget {
+  Color color;
+  bool? isSelected;
+  
+  ToggleContainerPublicPrivate(
+      {Key? key,
+      required this.color,
+      required this.isSelected,
+      })
+      : super(key: key);
+
+  @override
+  State<ToggleContainerPublicPrivate> createState() => _ToggleContainerPublicPrivateState();
+}
+
+class _ToggleContainerPublicPrivateState extends State<ToggleContainerPublicPrivate> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        color: widget.color,
+        padding: EdgeInsets.only(left: 36.w, top: 8.h, right: 36.w),
+        height: 90.h,
+        width: double.infinity,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            // Text16PtBlack(text: widget.text),
+            Padding(
+              padding: EdgeInsets.only(bottom: 20.h),
+              child: SizedBox(
+                  height: 10.h,
+                  width: 16.w,
+                  child: widget.isSelected!
                       ? const Icon(Icons.check, color: Color(0xff2B67A3))
                       : null),
             )
@@ -69,7 +110,7 @@ class _ToggleContainerBigState extends State<ToggleContainerBig> {
         padding: EdgeInsets.only(left: 36.w, top: 8.h, right: 36.w),
         height: 76.h,
         width: double.infinity,
-        child: Container(
+        child: SizedBox(
           width: 355.w,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -81,7 +122,7 @@ class _ToggleContainerBigState extends State<ToggleContainerBig> {
               SizedBox(width: 194.w),
               Padding(
                 padding: EdgeInsets.only(bottom: 20.h),
-                child: Container(
+                child: SizedBox(
                     height: 10.h,
                     width: 16.w,
                     child: widget.isSelected

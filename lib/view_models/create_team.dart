@@ -6,7 +6,7 @@ import 'package:reelpro/models/shared_preferences.dart';
 
 class CreateTeamApi extends GetxController {
   Future<dio.Response> createTeam(String name, String address, File profilePic,
-      double lat, double lng, String visibility, String description) async {
+      double lat, double lng, int visibility, String description) async {
     String authToken = await SharedPreferences1().getToken();
     dio.FormData data = dio.FormData.fromMap({
       'name': name,

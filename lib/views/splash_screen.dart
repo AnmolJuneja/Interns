@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reelpro/models/shared_preferences.dart';
+import 'package:reelpro/view_models/otp_view_model.dart';
 import 'package:reelpro/view_models/registeration_step_two.dart';
-import 'package:reelpro/views/home_screen.dart';
+import 'package:reelpro/view_models/team_list.dart';
 import 'package:reelpro/views/onboarding_screen.dart';
+import 'package:reelpro/views/profile_settings.dart';
 
 import 'bottom_navigation.dart';
 
@@ -24,7 +26,12 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   final otp = Get.put(RegistrationStepTwo2());
+  final teamApi = Get.put(TeamViewApi());
+  final instanceTeam = Get.put(const ProfileSettingsUI());
+  final instanceOtpViewModel = Get.put(OtpViewModel());
   navigateToOnboardingPage() async {
+    // String teamCount = await SaveTeamCount().getTeamCount();
+    // teamApi.getTeam1.value.length = ;
     String firstLastName = await SaveFirstName().getFirstName();
     otp.firstName1.value = firstLastName;
     String lastName = await SaveLastName().getLastName();
@@ -42,14 +49,18 @@ class _SplashScreenState extends State<SplashScreen> {
     otp.profilePic1.value = profilePic;
     String description = await SaveDescription().getDescripton();
     otp.description.value = description;
+    String country = await SaveCountryCode().getCountryCode();
+    instanceOtpViewModel.countryText.value = country;
+    String flag = await SaveFlah().getFlag();
+    instanceOtpViewModel.flagEmoji.value = flag;
     if (authToken != '') {
       Future.delayed(const Duration(milliseconds: 2000));
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => BottomNavigation()));
+          context, MaterialPageRoute(builder: (context) =>  BottomNavigation(currentIndex: 2,)));
     } else {
       await Future.delayed(const Duration(milliseconds: 2000));
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => OnBoardingScreen()));
+          context, MaterialPageRoute(builder: (context) => const OnBoardingScreen()));
     }
   }
 

@@ -1,8 +1,6 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reelpro/models/shared_preferences.dart';
 import 'package:reelpro/views/registeration_screen.dart';
 
 class StepTwo extends StatelessWidget {
@@ -12,7 +10,7 @@ class StepTwo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
         padding: EdgeInsets.only(top: 76.h),
-        child: Container(
+        child: SizedBox(
             height: 68.h,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,

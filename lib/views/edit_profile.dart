@@ -14,13 +14,14 @@ import 'package:reelpro/consts/text_field.dart';
 import 'package:reelpro/models/edit_profile.dart';
 import 'package:reelpro/models/shared_preferences.dart';
 import 'package:reelpro/view_models/edit_profile.dart';
+import 'package:reelpro/view_models/otp_view_model.dart';
 import 'package:reelpro/view_models/registeration_step_two.dart';
 import 'package:reelpro/view_models/validator.dart';
 import 'package:reelpro/views/manage_team_screen.dart';
 import 'package:reelpro/views/user_profile.dart';
 
 class EditProfile1 extends StatefulWidget {
-  EditProfile1({
+  const EditProfile1({
     Key? key,
   }) : super(key: key);
 
@@ -46,6 +47,7 @@ class _EditProfile1State extends State<EditProfile1> {
   File? file;
   ImagePicker picker = ImagePicker();
   final validateEmail = Get.put(ValidateEmail());
+  final instanceOtpViewModel = Get.put(OtpViewModel());
   @override
   void initState() {
     firstNameController.text = instanceStepTwo.firstName1.value;
@@ -53,6 +55,7 @@ class _EditProfile1State extends State<EditProfile1> {
     emailController.text = instanceStepTwo.email1.value;
     dobController.text = instanceStepTwo.dob1.value;
     numberController.text = instanceStepTwo.number.value;
+    _chosenValue = instanceStepTwo.gender1.value;
     descriptionController.text = instanceStepTwo.description.value;
     super.initState();
   }
@@ -64,24 +67,20 @@ class _EditProfile1State extends State<EditProfile1> {
     _chosenValue = instanceStepTwo.gender1.value;
     return Scaffold(
         appBar: AppBar(
-          elevation: 0,
-          toolbarHeight: 60.h,
-          backgroundColor: const Color(0xffF2F9FF),
-          flexibleSpace: Container(
-              padding: EdgeInsets.only(top: 60.h, left: 36.w),
-              child: Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Icon(Icons.arrow_back_ios),
-                  SizedBox(
-                    width: 105.w,
-                  ),
-                  Center(
-                    child: Text21PtBlack(text: 'Edit Profile'),
-                  )
-                ],
-              )),
-        ),
+            elevation: 0,
+            toolbarHeight: 60.h,
+            centerTitle: true,
+            backgroundColor: const Color(0xffF2F9FF),
+            leading: Padding(
+                padding: EdgeInsets.only(left: 36.w, top: 27.h),
+                child: GestureDetector(
+                    onTap: () {
+                      Get.to(() => const UserProfileUI());
+                    },
+                    child: const Icon(Icons.arrow_back_ios, color: Colors.black))),
+            title: Padding(
+                padding: EdgeInsets.only(top: 27.h),
+                child: Text21PtBlack(text: 'Edit Profile'))),
         backgroundColor: const Color(0xffF2F9FF),
         body: Container(
           height: 775.h,
@@ -107,7 +106,7 @@ class _EditProfile1State extends State<EditProfile1> {
                             borderRadius: BorderRadius.circular(15),
                             border: Border.all(width: 3, color: Colors.white),
                             image: instanceStepTwo.profilePic1.value == ''
-                                ? DecorationImage(
+                                ? const DecorationImage(
                                     fit: BoxFit.cover,
                                     image:
                                         AssetImage('assets/images/profile.png'))
@@ -143,6 +142,7 @@ class _EditProfile1State extends State<EditProfile1> {
             SizedBox(height: 8.h),
             // ignore: use_full_hex_values_for_flutter_colors
             TextF(
+              readOnly:false,
                 textEditingController: firstNameController,
                 onchanged: (value) {},
                 hintText: 'First name',
@@ -150,6 +150,7 @@ class _EditProfile1State extends State<EditProfile1> {
                 prefix: null),
             SizedBox(height: 8.h),
             TextF(
+              readOnly:false,
                 textEditingController: lastNameController,
                 onchanged: (value) {},
                 hintText: 'Last name',
@@ -157,38 +158,31 @@ class _EditProfile1State extends State<EditProfile1> {
                 prefix: null),
             SizedBox(height: 8.h),
             TextFEmail(
-                textEditingController: emailController,
-                onchanged: (value) {
-                  // if (!value.isEmail) {
-                  //   instanceStepTwo.errorText.value =
-                  //       'Please enter a valid email address.';
-                  // }
-                },
-                hintText: 'Email',
-                textInputType: TextInputType.emailAddress,
-                prefix: null,
-                keyValue: validateEmail.formKey,
-                onSaved: (value) {
-                  // validateEmail.email = value!;
-                },
-                validator: (value) {
-                  // return validateEmail.validateEmailFunction(value!);
-                }),
+              textEditingController: emailController,
+              onchanged: (value) {},
+              hintText: 'Email',
+              textInputType: TextInputType.emailAddress,
+              prefix: null,
+              keyValue: validateEmail.formKey,
+              onSaved: (value) {
+                validateEmail.email = value!;
+              },
+              validator: (value) {
+                return validateEmail.validateEmailFunction(value!);
+              },
+              suffixText: 'Verify',
+            ),
             SizedBox(height: 8.h),
             TextF10(
                 textEditingController: numberController,
                 hintText: 'Phone number',
                 textInputType: TextInputType.number,
-                onSaved: (value) {
-                  // instanceStepTwo.errorText.value = value!;
-                },
+                onSaved: (value) {},
                 keyValue: null,
-                validator: (value) {},
-                onchanged: (value) {
-                  // if (value.isPhoneNumber) {
-                  //   instanceStepTwo.errorText.value = '';
-                  // }
-                }),
+                validator: (value) {
+                  return null;
+                },
+                onchanged: (value) {}),
             SizedBox(height: 8.h),
             TextFieldDatePicker(
               onSaved: (value) {},
@@ -206,7 +200,7 @@ class _EditProfile1State extends State<EditProfile1> {
               decoration: BoxDecoration(
                   color: Colors.white,
                   border:
-                      Border.all(color: Color.fromRGBO(113, 154, 195, 0.16)),
+                      Border.all(color: const Color.fromRGBO(113, 154, 195, 0.16)),
                   boxShadow: const [
                     BoxShadow(
                         // ignore: use_full_hex_values_for_flutter_colors
@@ -230,7 +224,7 @@ class _EditProfile1State extends State<EditProfile1> {
                   style: Theme.of(context)
                       .textTheme
                       .headline2!
-                      .copyWith(fontSize: 15.sp, color: Color(0xff48505899)
+                      .copyWith(fontSize: 15.sp, color: const Color(0xff48505899)
                           // greyFontColoR.withAlpha(99),
                           ),
                 ),
@@ -271,6 +265,8 @@ class _EditProfile1State extends State<EditProfile1> {
     instanceStepTwo.lastName1.value = lastNameController.text;
     await Gender().saveGender(_chosenValue!);
     instanceStepTwo.genderF.value = _chosenValue!;
+    SaveDescription().saveDescription(descriptionController.text);
+    instanceStepTwo.description.value = descriptionController.text;
     if (numberController.text != instanceStepTwo.number.value) {
       await SaveNumber().saveNumber(numberController.text);
       instanceStepTwo.number.value = numberController.text;
@@ -298,8 +294,8 @@ class _EditProfile1State extends State<EditProfile1> {
       var res = EditProfile.fromJson(value.data);
       SaveProfilePic().saveProfilePic(res.data!.profilePic!);
       instanceStepTwo.profilePic1.value = res.data!.profilePic;
-      SaveDescription().saveDescription(res.data!.description!);
-      instanceStepTwo.description.value = res.data!.description!;
+      SaveCountryCode().saveCountryCode(instanceOtpViewModel.countryText.value);
+      SaveFlah().saveFlag(instanceOtpViewModel.flagEmoji.value);
     });
     Get.to(() => const UserProfileUI());
   }

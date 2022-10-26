@@ -48,7 +48,7 @@ class SpotlightScreen extends StatelessWidget {
               tabs: [Tab(text: 'Spotlight'), Tab(text: 'Members')],
             ),
             Flexible(
-              child: Container(
+              child: SizedBox(
                 width: double.infinity,
                 height: 650.h,
                 child: TabBarView(children: [
@@ -89,7 +89,7 @@ class SpotlightScreen extends StatelessWidget {
                                 commentText: '12',
                                 shareImage: 'assets/images/Group 207.png')
                           ]))),
-                  Column(children: []),
+                  Column(children: const []),
                 ]),
               ),
             )

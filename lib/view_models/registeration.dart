@@ -1,10 +1,7 @@
-import 'dart:developer';
 import 'package:reelpro/models/shared_preferences.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
-import 'package:reelpro/views/registeration_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RegisterationViewModel extends GetxController {

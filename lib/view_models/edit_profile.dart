@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:io';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dio/dio.dart' as dio;
@@ -6,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reelpro/models/shared_preferences.dart';
 import 'package:reelpro/view_models/registeration_step_two.dart';
-import 'package:reelpro/views/registeration_step_two.dart';
 
 class Editprofile extends GetxController {
   var genderF = ''.obs;

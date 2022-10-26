@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:reelpro/consts/text.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,7 +11,7 @@ class MessageConst extends StatelessWidget {
     return Column(children: [
       Slidable(
         endActionPane: ActionPane(
-          motion: StretchMotion(),
+          motion: const StretchMotion(),
           children: [
             SlidableAction(
               onPressed: ((context) {}),
@@ -53,7 +52,7 @@ class MessageConst extends StatelessWidget {
       ),
       Slidable(
           endActionPane: ActionPane(
-            motion: StretchMotion(),
+            motion: const StretchMotion(),
             children: [
               SlidableAction(
                 onPressed: ((context) {}),
@@ -93,7 +92,7 @@ class MessageConst extends StatelessWidget {
                   ]))),
       Slidable(
           endActionPane: ActionPane(
-            motion: StretchMotion(),
+            motion: const StretchMotion(),
             children: [
               SlidableAction(
                 onPressed: ((context) {}),
@@ -133,7 +132,7 @@ class MessageConst extends StatelessWidget {
                   ]))),
       Slidable(
           endActionPane: ActionPane(
-            motion: StretchMotion(),
+            motion: const StretchMotion(),
             children: [
               SlidableAction(
                 onPressed: ((context) {}),
@@ -141,7 +140,7 @@ class MessageConst extends StatelessWidget {
                 icon: Icons.favorite_border,
                 foregroundColor: const Color(0xff2B67A3),
               ),
-              Divider(),
+              const Divider(),
               SlidableAction(
                 onPressed: ((context) {}),
                 backgroundColor: const Color(0xffF2F9FF),

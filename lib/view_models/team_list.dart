@@ -1,9 +1,7 @@
 import 'package:dio/dio.dart' as dio;
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reelpro/models/shared_preferences.dart';
 // import 'package:reelpro/models/team_view.dart';
-import 'package:reelpro/views/team_list.dart';
 
 import '../models/team_list.dart';
 
@@ -14,7 +12,7 @@ class TeamViewApi extends GetxController {
     try {
       dio.Response response;
       response = await dio.Dio().get(
-          'https://reelpro.yatilabs.com/api/v1/team/my-teams',
+          'https://reelpro.yatilabs.com/api/v1/team/my-teams?visibility=&per_page=',
           options: dio.Options(responseType: dio.ResponseType.json, headers: {
             'Accept': 'application/json',
             'Authorization': 'Bearer $authToken'

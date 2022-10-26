@@ -3,9 +3,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
-import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:reelpro/models/shared_preferences.dart';
 
 class OtpViewModel extends GetxController {
   var countryText = '1'.obs;

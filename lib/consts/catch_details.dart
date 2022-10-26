@@ -32,7 +32,7 @@ class CatchDetailsConst extends StatelessWidget {
   Widget build(BuildContext context) {
     var isLiked = false.obs;
     var likeCount = 3.obs;
-    return Container(
+    return SizedBox(
         height: 470.h,
         child: Stack(children: [
           Column(

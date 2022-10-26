@@ -18,7 +18,7 @@ import 'package:reelpro/models/edit_profile.dart';
 import 'package:reelpro/models/registration_step_two.dart';
 import 'package:reelpro/view_models/registeration_step_two.dart';
 import 'package:reelpro/views/bottom_navigation.dart';
-import 'package:reelpro/views/catchlog_list.dart';
+import 'package:reelpro/views/tracker.dart';
 import 'package:reelpro/views/edit_profile.dart';
 import 'package:reelpro/views/home_screen.dart';
 import 'package:reelpro/views/message_screen.dart';
@@ -57,14 +57,14 @@ class _Registeration2State extends State<Registeration2> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const StepTwo(),
-                    BigText(
-                        color: const Color(0xff2B67A3), text: 'Registeration'),
+                    const BigText(
+                        color: Color(0xff2B67A3), text: 'Registeration'),
                     Padding(
                         padding: EdgeInsets.only(right: 50.w),
-                        child: SmallText(
+                        child: const SmallText(
                             text:
                                 'This will be helpful to suggest upcoming events',
-                            color: const Color(0xff485058))),
+                            color: Color(0xff485058))),
                     SizedBox(height: 40.h),
                     LabelText(text: 'Fishing Type'),
                     SizedBox(height: 13.h),
@@ -193,7 +193,7 @@ class _Registeration2State extends State<Registeration2> {
                                   const Color(0xff719AC3);
                               // ignore: use_full_hex_values_for_flutter_colors
                               registerationTwo.color5.value =
-                                  const Color(0xf2B67A329);
+                                  const Color(0xf2b67a329);
                               registerationTwo.width4.value = 2.0;
                               registerationTwo.width5.value = 1.0;
                               registerationTwo.vetran = '1';
@@ -210,7 +210,7 @@ class _Registeration2State extends State<Registeration2> {
                                     registerationTwo.blueColor.value;
                                 // ignore: use_full_hex_values_for_flutter_colors
                                 registerationTwo.color4.value =
-                                    const Color(0xf2B67A329);
+                                    const Color(0xf2b67a329);
                                 registerationTwo.width5.value = 2.0;
                                 registerationTwo.width4.value = 1.0;
                                 registerationTwo.vetran = '0';
@@ -227,6 +227,7 @@ class _Registeration2State extends State<Registeration2> {
                     LabelText(text: 'Club'),
                     SizedBox(height: 13.h),
                     TextF(
+                      readOnly:false,
                         textEditingController: clubController,
                         onchanged: (value) {},
                         hintText: 'Select',
@@ -245,7 +246,7 @@ class _Registeration2State extends State<Registeration2> {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: ((context) => BottomNavigation())));
+                                  builder: ((context) =>  BottomNavigation(currentIndex: 2,))));
                         },
                         buttonText: 'Submit')
                   ]),

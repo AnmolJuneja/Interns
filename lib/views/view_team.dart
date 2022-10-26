@@ -1,14 +1,11 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reelpro/consts/appbar.dart';
 import 'package:reelpro/consts/team_view.dart';
-import 'package:reelpro/models/create_team.dart';
 // import 'package:reelpro/models/create_team.dart';
 import 'package:reelpro/models/view_team.dart';
 import 'package:reelpro/view_models/view_team.dart';
-import 'package:get/get.dart';
 import 'package:reelpro/views/team_list.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

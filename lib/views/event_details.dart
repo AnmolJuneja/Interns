@@ -22,7 +22,7 @@ class EventDetailsUI extends StatelessWidget {
                     firstIcon: Icons.arrow_back_ios,
                     ontap: () {},
                     ontap1: () {}),
-          Container(
+          SizedBox(
               height: 700.h,width: 428.w,
               child: SingleChildScrollView(
                 child: Column(
@@ -58,7 +58,7 @@ class EventDetailsUI extends StatelessWidget {
               padding: EdgeInsets.only(left: 36.w),
               child:Row(children: [
                  MyButton1(onpressed: (){}, buttonText: "\$550  |  Register", ) , SizedBox(width: 20.w) , 
-                 Image(image: AssetImage('assets/images/Group 210.png'))
+                 const Image(image: AssetImage('assets/images/Group 210.png'))
               ],))
            
         ],),

@@ -27,7 +27,7 @@ class MyButton extends StatelessWidget {
                 fontFamily: 'Helvetica',
                 fontWeight: FontWeight.w500,
                 fontSize: 16.sp,
-                color: Color(0xffF2F9FF)),
+                color: const Color(0xffF2F9FF)),
           )),
     );
   }
@@ -87,7 +87,7 @@ class MyButton1 extends StatelessWidget {
                 fontFamily: 'Helvetica',
                 fontWeight: FontWeight.w500,
                 fontSize: 16.sp,
-                color: Color(0xffF2F9FF)),
+                color: const Color(0xffF2F9FF)),
           )),
     );
   }

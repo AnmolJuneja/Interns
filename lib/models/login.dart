@@ -14,7 +14,7 @@ class Login {
 
   Map<String, dynamic> toJson() {
     // ignore: unnecessary_new
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     // ignore: unnecessary_this
     data['success'] = this.success;
     // ignore: unnecessary_this
@@ -42,11 +42,11 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['phone_number'] = this.phoneNumber;
-    data['otp'] = this.otp;
-    data['confirmation_token'] = this.confirmationToken;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['phone_number'] = phoneNumber;
+    data['otp'] = otp;
+    data['confirmation_token'] = confirmationToken;
     return data;
   }
 }

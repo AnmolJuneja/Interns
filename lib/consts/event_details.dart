@@ -138,7 +138,7 @@ class EventDetailsRow extends StatelessWidget {
               children: [
                 Image(image: AssetImage(image2)),
                 SizedBox(width: 8.w),
-                Text16Pt(text: text2 + '-'),
+                Text16Pt(text: '$text2-'),
                 Text16Pt(text: text4),
                 Text(
                   text5,
@@ -181,7 +181,7 @@ class EventDetailsRow extends StatelessWidget {
             SizedBox(height: 31.h),
             Text14ptSilver(text: text11),
             SizedBox(height: 10.h),
-            Container(
+            SizedBox(
                 height: 80.h,
                 width: 356.w,
                 child: Text14ptDesc(

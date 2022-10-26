@@ -4,6 +4,7 @@ import 'package:reelpro/models/comment_list.dart';
 import 'package:reelpro/models/shared_preferences.dart';
 
 class CommentListApi extends GetxController {
+  CommentListApi commentListApi = Get.put(CommentListApi());
   Future<dio.Response> getCommentList() async {
     String authToken = await SharedPreferences1().getToken();
     try {
@@ -22,7 +23,8 @@ class CommentListApi extends GetxController {
     }
     return Future.value();
   }
-   var commentList = <CommentList>[].obs;
+
+  var commentList = <CommentList>[].obs;
   getCommentListFinal() async {
     await getCommentList().then((value) {
       var resp = CommentListRespone.fromJson(value.data);

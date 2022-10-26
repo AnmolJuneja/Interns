@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/consts/image.dart';
 import 'package:reelpro/consts/small_text.dart';
 import 'package:reelpro/consts/text.dart';
-import 'package:reelpro/consts/text_field.dart';
 
 class UpperView extends StatelessWidget {
   String image;

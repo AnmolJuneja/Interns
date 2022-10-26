@@ -16,15 +16,7 @@ class FetchLatLng extends GetxController {
     getLocation();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
 
   getLocation() async {
     bool serviceEnabled;

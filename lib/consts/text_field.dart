@@ -1,11 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:async';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
+import 'package:reelpro/consts/text.dart';
 import 'package:reelpro/view_models/otp_view_model.dart';
 
 class TextF extends StatelessWidget {
@@ -14,8 +14,10 @@ class TextF extends StatelessWidget {
   TextInputType textInputType;
   Widget? prefix;
   void Function(String)? onchanged;
+  bool? readOnly;
   TextF(
       {Key? key,
+      required this.readOnly,
       required this.textEditingController,
       required this.hintText,
       required this.textInputType,
@@ -36,6 +38,7 @@ class TextF extends StatelessWidget {
             offset: Offset(0, 4))
       ], borderRadius: BorderRadius.circular(5)),
       child: TextField(
+        readOnly: readOnly!,
         controller: textEditingController,
         onChanged: onchanged,
         keyboardType: textInputType,
@@ -340,7 +343,7 @@ class TextFSearch extends StatelessWidget {
               enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5),
                   borderSide: BorderSide.none),
-              suffixIcon: Icon(Icons.search)
+              suffixIcon: const Icon(Icons.search)
               // ignore: use_full_hex_values_for_flutter_colors
               )),
     );
@@ -519,7 +522,7 @@ class _TextF10State extends State<TextF10> {
                   },
                 );
               },
-              child: Container(
+              child: SizedBox(
                   // padding: EdgeInsets.only(top: 8.h),
                   height: 35,
                   width: 20,
@@ -690,6 +693,7 @@ class TextFEmail extends StatelessWidget {
   Key keyValue;
   void Function(String?)? onSaved;
   String? Function(String?)? validator;
+  String? suffixText;
   TextFEmail(
       {Key? key,
       required this.textEditingController,
@@ -699,6 +703,7 @@ class TextFEmail extends StatelessWidget {
       required this.keyValue,
       required this.onSaved,
       required this.validator,
+      required this.suffixText,
       required this.onchanged})
       : super(key: key);
 
@@ -709,7 +714,7 @@ class TextFEmail extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
           color: Colors.white,
-          border: Border.all(color: Color.fromRGBO(113, 154, 195, 0.16)),
+          border: Border.all(color: const Color.fromRGBO(113, 154, 195, 0.16)),
           boxShadow: const [
             BoxShadow(
                 // ignore: use_full_hex_values_for_flutter_colors
@@ -727,19 +732,25 @@ class TextFEmail extends StatelessWidget {
           onSaved: onSaved,
           keyboardType: textInputType,
           decoration: InputDecoration(
-            isCollapsed: true,
-            border: InputBorder.none,
-            contentPadding: EdgeInsets.only(left: 20.w, top: 12.h),
-            hintText: hintText,
-            hintStyle: TextStyle(
-                fontFamily: 'Helvetica',
-                fontWeight: FontWeight.w400,
-                fontSize: 15.sp,
-                // ignore: use_full_hex_values_for_flutter_colors
-                color: const Color(0xff48505899)),
-            fillColor: Colors.white,
-            prefix: prefix,
-          )),
+              isCollapsed: true,
+              border: InputBorder.none,
+              contentPadding:
+                  EdgeInsets.only(left: 20.w, top: 12.h, right: 15.w),
+              hintText: hintText,
+              hintStyle: TextStyle(
+                  fontFamily: 'Helvetica',
+                  fontWeight: FontWeight.w400,
+                  fontSize: 15.sp,
+                  // ignore: use_full_hex_values_for_flutter_colors
+                  color: const Color(0xff48505899)),
+              fillColor: Colors.white,
+              prefix: prefix,
+              suffixText: suffixText,
+              suffixStyle: TextStyle(
+                  fontFamily: 'Helvetica',
+                  fontSize: 15.sp,
+                  fontWeight: FontWeight.w400,
+                  color: const Color(0xff2B67A3)))),
     );
   }
 }
@@ -964,7 +975,7 @@ class TextFEventList extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   fontSize: 15.sp,
                   // ignore: use_full_hex_values_for_flutter_colors
-                  color: Color.fromARGB(70, 58, 60, 74)),
+                  color: const Color.fromARGB(70, 58, 60, 74)),
               fillColor: Colors.white,
               prefix: prefix,
               filled: true,
@@ -975,5 +986,64 @@ class TextFEventList extends StatelessWidget {
               // ignore: use_full_hex_values_for_flutter_colors
               )),
     );
+  }
+}
+
+class TextFContainer extends StatelessWidget {
+  String text;
+  TextFContainer({Key? key, required this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(left: 20.w, top: 14.h, bottom: 12.h),
+      height: 52.h,
+      width: 356.w,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: const [
+            BoxShadow(
+                color: Color.fromRGBO(113, 154, 195, 0.16),
+                blurRadius: 0,
+                offset: Offset(0, 4))
+          ],
+          borderRadius: BorderRadius.circular(5),
+          border: Border.all(
+              width: 1, color: const Color.fromRGBO(113, 154, 195, 0.16))),
+      child: Text(text,
+          style: TextStyle(
+              fontFamily: 'Helvetica',
+              fontWeight: FontWeight.w400,
+              fontSize: 15.sp,
+              // ignore: use_full_hex_values_for_flutter_colors
+              color: const Color(0xff48505899))),
+    );
+  }
+}
+
+class TextFCon extends StatelessWidget {
+  String text;
+  TextFCon({Key? key, required this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        padding: EdgeInsets.only(left: 20.w, top: 14.h, bottom: 12.h),
+        height: 52.h,
+        width: 356.w,
+        decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: const [
+              BoxShadow(
+                  color: Color.fromRGBO(113, 154, 195, 0.16),
+                  blurRadius: 0,
+                  offset: Offset(0, 4))
+            ],
+            borderRadius: BorderRadius.circular(5),
+            border: Border.all(
+                width: 1, color: const Color.fromRGBO(113, 154, 195, 0.16))),
+        child: Text16PtBlack(
+          text: text,
+        ));
   }
 }
