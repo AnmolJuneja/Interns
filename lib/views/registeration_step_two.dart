@@ -145,6 +145,9 @@ class _Registeration2State extends State<Registeration2> {
                                 blurRadius: 0,
                                 offset: Offset(0, 4))
                           ],
+                          border: Border.all(
+                              width: 1,
+                              color: const Color.fromRGBO(113, 154, 195, 0.16)),
                           borderRadius: BorderRadius.circular(5)),
                       child: DropdownButton<String>(
                         iconSize: 0.0,
@@ -227,7 +230,7 @@ class _Registeration2State extends State<Registeration2> {
                     LabelText(text: 'Club'),
                     SizedBox(height: 13.h),
                     TextF(
-                      readOnly:false,
+                        readOnly: false,
                         textEditingController: clubController,
                         onchanged: (value) {},
                         hintText: 'Select',
@@ -243,10 +246,11 @@ class _Registeration2State extends State<Registeration2> {
                                   registerationTwo.vetran,
                                   clubController.text)
                               .then((value) {});
-                          Navigator.pushReplacement(
-                              context,
+                          Navigator.of(context).pushAndRemoveUntil(
                               MaterialPageRoute(
-                                  builder: ((context) =>  BottomNavigation(currentIndex: 2,))));
+                                  builder: (context) =>
+                                      BottomNavigation(currentIndex: 2)),
+                              (route) => false);
                         },
                         buttonText: 'Submit')
                   ]),

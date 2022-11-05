@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:reelpro/views/create_team.dart';
 import 'package:reelpro/views/edit_team_screen.dart';
 import 'package:reelpro/views/profile_settings.dart';
+import 'package:reelpro/views/view_team.dart';
 import '../models/team_list.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -28,15 +29,15 @@ class _TeamViewViewState extends State<TeamViewView> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: const Color(0xffF2F9FF),
-          toolbarHeight: 60.h,
+          toolbarHeight: 70.h,
           elevation: 0,
           title: Padding(
-              padding: EdgeInsets.only(top: 27.h),
+              padding: EdgeInsets.only(top: 42.h),
               child: Text21PtBlack(text: 'Manage Teams')),
           centerTitle: true,
           actions: [
             Padding(
-              padding: EdgeInsets.only(top: 27.h, right: 36.w),
+              padding: EdgeInsets.only(top: 42.h, right: 36.w),
               child: GestureDetector(
                 onTap: () {
                   Get.to(() => const CreateTeamView());
@@ -90,7 +91,9 @@ class _TeamViewViewState extends State<TeamViewView> {
         Padding(
           padding: EdgeInsets.only(right: 36.w, left: 36.w),
           child: GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Get.to(() => const ViewTeam());
+            },
             child: Container(
                 margin: EdgeInsets.only(top: 12.h),
                 padding: EdgeInsets.only(top: 16.h, left: 12.w, bottom: 16.h),

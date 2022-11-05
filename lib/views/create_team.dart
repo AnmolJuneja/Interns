@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:reelpro/consts/button.dart';
 import 'package:reelpro/consts/text.dart';
 import 'package:reelpro/consts/text_field.dart';
+import 'package:reelpro/consts/text_fieldc.dart';
 import 'package:reelpro/models/shared_preferences.dart';
 import 'package:reelpro/view_models/create_team.dart';
 import 'package:reelpro/view_models/fetch_lat_lng.dart';
@@ -48,13 +49,14 @@ class _CreateTeamViewState extends State<CreateTeamView> {
     return Scaffold(
         appBar: AppBar(
             elevation: 0,
+            toolbarHeight: 70.h,
             backgroundColor: const Color(0xffF2F9FF),
             centerTitle: true,
             title: Padding(
-                padding: EdgeInsets.only(top: 27.h),
+                padding: EdgeInsets.only(top: 42.h),
                 child: Text21PtBlack(text: 'Create a Team')),
             leading: Padding(
-                padding: EdgeInsets.only(top: 27.h, left: 36.w),
+                padding: EdgeInsets.only(top: 42.h, left: 36.w),
                 child: GestureDetector(
                   onTap: () {
                     Get.to(() => const MangeTeams());

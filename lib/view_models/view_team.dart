@@ -1,4 +1,3 @@
-
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:reelpro/models/shared_preferences.dart';
@@ -7,7 +6,7 @@ import 'package:reelpro/models/view_team.dart';
 class TeamViewViewModel extends GetxController {
   Future<dio.Response> getTeamDetails() async {
     String authToken = await SharedPreferences1().getToken();
-    int id = await SharedPreferences2().getId();
+    var id = await SharedPreferences2().getId();
     try {
       dio.Response response;
       response = await dio.Dio().get(
@@ -24,8 +23,9 @@ class TeamViewViewModel extends GetxController {
     }
     return Future.value();
   }
-    Future<TeamViewModel> getTeam() async {
-      var resp = await TeamViewViewModel().getTeamDetails();
-      return TeamViewModel.fromJson(resp.data);
-    }
+
+  Future<TeamViewModel> getTeam() async {
+    var resp = await TeamViewViewModel().getTeamDetails();
+    return TeamViewModel.fromJson(resp.data);
+  }
 }

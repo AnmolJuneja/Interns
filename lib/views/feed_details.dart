@@ -47,6 +47,7 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
     });
   }
 
+  FeedCList? feedCList;
   final instance = Get.put(FeedDetailsApi());
   final likeFeed = Get.put(LikeFeedApi());
   final commentInstance = Get.put(FeedCommentListApi());
@@ -65,18 +66,18 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-            toolbarHeight: 60.h,
+            toolbarHeight: 70.h,
             elevation: 0,
             backgroundColor: Colors.white,
             title: Padding(
-                padding: EdgeInsets.only(top: 27.h),
+                padding: EdgeInsets.only(top: 42.h),
                 child: Text21PtBlack(text: 'Feed Details')),
             centerTitle: true,
             leading: Padding(
-              padding: EdgeInsets.only(top: 27.h, left: 36.w),
+              padding: EdgeInsets.only(top: 42.h, left: 36.w),
               child: GestureDetector(
                 onTap: () {
-                  Get.to(() => BottomNavigation(currentIndex: 0));
+                  Navigator.pop(context);
                 },
                 child: const Icon(
                   Icons.arrow_back_ios,
@@ -150,7 +151,7 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
                                 ])),
                         SizedBox(height: 10.h),
                         Container(
-                            height: 210.h,
+                            height: 429.h,
                             width: double.infinity,
                             child: PageView.builder(
                                 itemCount: feedDetails
@@ -164,7 +165,7 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
                                 })),
                         Padding(
                             padding: EdgeInsets.only(
-                                top: 56.h, left: 36.w, right: 36.w),
+                                top: 20.h, left: 36.w, right: 36.w),
                             child: Row(children: [
                               LikeIcon(
                                   onTap: () {
@@ -235,23 +236,22 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
             color: Colors.white,
             child: Center(
                 child: TextFCatch(
-              hintText: 'Add your comment',
-              onchanged: null,
-              prefix: null,
-              textEditingController: textEditingController,
-              textInputType: TextInputType.text,
-              ontap: () async {
-                await addCommentInstance.addCommentFeed(
-                    widget.feedId, textEditingController.text);
-                await getCommentListFinal();
-                textEditingController.clear();
-                instance.commentCount.value++;
-                scrollController.animateTo(
-                  scrollController.position.maxScrollExtent,
-                  curve: Curves.easeOut,
-                  duration: const Duration(milliseconds: 200),
-                );
-              },
-            ))));
+                    hintText: 'Add your comment',
+                    onchanged: null,
+                    prefix: null,
+                    textEditingController: textEditingController,
+                    textInputType: TextInputType.text,
+                    ontap: () async {
+                      await addCommentInstance.addCommentFeed(
+                          widget.feedId, textEditingController.text);
+                      await getCommentListFinal();
+                      textEditingController.clear();
+                      instance.commentCount.value++;
+                      scrollController.animateTo(
+                        scrollController.position.maxScrollExtent,
+                        curve: Curves.easeOut,
+                        duration: const Duration(milliseconds: 200),
+                      );
+                    }))));
   }
 }

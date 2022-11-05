@@ -15,15 +15,15 @@ class MangeTeams extends StatelessWidget {
         backgroundColor: const Color(0xffF2F9FF),
         elevation: 0,
         title: Padding(
-            padding: EdgeInsets.only(top: 28.h),
+            padding: EdgeInsets.only(top: 42.h),
             child: Text21PtBlack(text: 'Manage Teams')),
         centerTitle: true,
-        toolbarHeight: 60.h,
+        toolbarHeight: 70.h,
         leading: Padding(
-          padding: EdgeInsets.only(top: 28.h, left: 36.w),
+          padding: EdgeInsets.only(top: 42.h, left: 36.w),
           child: GestureDetector(
             onTap: () {
-              Get.to(() =>  const ProfileSettingsUI());
+              Get.to(() => const ProfileSettingsUI());
             },
             child: const Icon(
               Icons.arrow_back_ios,

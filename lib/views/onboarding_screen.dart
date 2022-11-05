@@ -100,13 +100,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         .then((value) async {
       var res = Login.fromJson(value.data);
       await SaveNumber().saveNumber(textEditingController.text);
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => OtpScreen(
-                confirmationToken: res.data!.confirmationToken.toString(),
-                otp: res.data!.otp.toString(),
-                number: textEditingController.text,
-                countryCode: '+${otp.countryText.value}',
-              )));
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+              builder: (context) => OtpScreen(
+                  otp: res.data!.otp.toString(),
+                  confirmationToken: res.data!.confirmationToken.toString(),
+                  countryCode: '+${otp.countryText}',
+                  number: textEditingController.text)),
+          (route) => false);
     });
   }
 }

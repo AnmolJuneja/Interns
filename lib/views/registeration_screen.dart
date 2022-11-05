@@ -6,11 +6,13 @@ import 'package:reelpro/consts/big_text.dart';
 import 'package:reelpro/consts/button.dart';
 import 'package:reelpro/consts/small_text.dart';
 import 'package:reelpro/consts/text_field.dart';
+import 'package:reelpro/consts/text_fieldc.dart';
 import 'package:reelpro/consts/upper_design.dart';
 import 'package:reelpro/models/registeration.dart';
 import 'package:reelpro/models/shared_preferences.dart';
 import 'package:reelpro/view_models/validator.dart';
 import 'package:reelpro/view_models/registeration.dart';
+import 'package:reelpro/views/address.dart';
 import 'package:reelpro/views/registeration_step_two.dart';
 import 'package:get/get.dart';
 
@@ -183,11 +185,10 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                             (value) {
                               // ignore: unused_local_variable
                               var res = Registration.fromJson(value.data);
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: ((context) =>
-                                          const Registeration2())));
+                               Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (context) => UserAddressScreen()),
+                              (route) => false);
                               SaveFirstName()
                                   .saveFirstName('${res.data!.firstname}');
                               SaveLastName()
@@ -195,6 +196,7 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                               SaveEmail().saveEmail('${res.data!.email}');
                               Dob().saveDob('${res.data!.dob}');
                               Gender().saveGender('${res.data!.gender}');
+                              SaveUserId().setId(res.data!.id!);
                             },
                           );
                         },

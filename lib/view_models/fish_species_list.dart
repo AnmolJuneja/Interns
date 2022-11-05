@@ -15,6 +15,7 @@ class FishSpeciesListApi extends GetxController {
   var selectedColor = const Color(0xffd6e9ff).obs;
   var selectedColor1 = const Color(0xffd6e9ff).obs;
   var selectedItemcolor = const Color(0xffd6e9ff).obs;
+  var selectedItemcolor1 = const Color(0xffd6e9ff).obs;
   var isSelected1 = false.obs;
   var isSelected2 = false.obs;
   var isSelected3 = false.obs;
@@ -29,6 +30,7 @@ class FishSpeciesListApi extends GetxController {
   var color11 = const Color(0xffF2F9FF).obs;
   var color12 = const Color(0xffF2F9FF).obs;
   var transparentColor = const Color(0xffF2F9FF).obs;
+  var transparentColor1 = const Color(0xffF2F9FF).obs;
   var isSelected5 = false.obs;
   var isSelected6 = false.obs;
   var isSelected7 = false.obs;

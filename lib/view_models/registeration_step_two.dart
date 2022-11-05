@@ -14,10 +14,10 @@ class RegistrationStepTwo2 extends GetxController {
   var publicisSelected = false.obs;
   var privateisSelected = false.obs;
   var teamCount = ''.obs;
-  var color1 = const Color(0xf2b67a329).obs;
+  var color1 = const Color.fromRGBO(113, 154, 195, 0.16).obs;
   var color6 = const Color(0xf2b67a329).obs;
   var color7 = const Color(0xf2b67a329).obs;
-  var color2 = const Color(0xf2b67a329).obs;
+  var color2 = const Color.fromRGBO(113, 154, 195, 0.16).obs;
   var color3 = const Color(0xf2b67a329).obs;
   var color4 = const Color(0xf2b67a329).obs;
   var color5 = const Color(0xf2b67a329).obs;
@@ -40,6 +40,7 @@ class RegistrationStepTwo2 extends GetxController {
   var number = ''.obs;
   var profilePic1 = ''.obs;
   var description = ''.obs;
+  var userId = 0;
   String vetran = '0';
   Future<dio.Response> registersteptwo(
       String fishingType, String shirtSize, String veteran, String club) async {
@@ -51,7 +52,9 @@ class RegistrationStepTwo2 extends GetxController {
     String dob = await Dob().getDob();
     String numb = await SaveNumber().getNumber();
     String profilePic = await SaveProfilePic().getProfilePic();
+    var userId1 = await SaveUserId().getId();
     profilePic1.value = profilePic;
+    userId = userId1;
     number.value = numb;
     dob1.value = dob;
     firstName1.value = firstName;

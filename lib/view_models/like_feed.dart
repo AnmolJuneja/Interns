@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
+import 'package:reelpro/models/my_feed_list.dart';
 import 'package:reelpro/models/shared_preferences.dart';
 
 class LikeFeedApi extends GetxController {
+  final instance = Get.put(MyFeed());
   Future<dio.Response> likeFeed(int feedId) async {
     String authToken = await SharedPreferences1().getToken();
     try {

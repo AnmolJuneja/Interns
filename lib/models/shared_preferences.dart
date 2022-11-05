@@ -167,5 +167,62 @@ class SaveTeamCount {
   }
 }
 
+class SaveUserId {
+  Future<bool> setId(int id) async {
+    var prefs1 = await SharedPreferences.getInstance();
+    return await prefs1.setInt('id', id);
+  }
+
+  Future<int> getId() async {
+    var prefs1 = await SharedPreferences.getInstance();
+    return prefs1.getInt('id') ?? 0;
+  }
+}
+class SaveCity {
+  Future<bool> saveCity(String city) async {
+    var prefs = await SharedPreferences.getInstance();
+    return await prefs.setString('city', city);
+  }
+
+  Future<String> getcity() async {
+    var prefs = await SharedPreferences.getInstance();
+    return prefs.getString('city') ?? '';
+  }
+}
+class SaveCountry {
+  Future<bool> saveCountry(String country) async {
+    var prefs = await SharedPreferences.getInstance();
+    return await prefs.setString('country', country);
+  }
+
+  Future<String> getCountry() async {
+    var prefs = await SharedPreferences.getInstance();
+    return prefs.getString('country') ?? '';
+  }
+}
+class SaveState {
+  Future<bool> saveState(String state) async {
+    var prefs = await SharedPreferences.getInstance();
+    return await prefs.setString('state', state);
+  }
+
+  Future<String> getState() async {
+    var prefs = await SharedPreferences.getInstance();
+    return prefs.getString('state') ?? '';
+  }
+}
+class SaveLocality {
+  Future<bool> saveLocality(String locality) async {
+    var prefs = await SharedPreferences.getInstance();
+    return await prefs.setString('locality', locality);
+  }
+
+  Future<String> getLocality() async {
+    var prefs = await SharedPreferences.getInstance();
+    return prefs.getString('locality') ?? '';
+  }
+}
+
+
 
 

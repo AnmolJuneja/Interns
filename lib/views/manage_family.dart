@@ -3,6 +3,8 @@ import 'package:reelpro/consts/button.dart';
 import 'package:reelpro/consts/text.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:reelpro/views/add_family_member.dart';
+import 'package:reelpro/views/family_members_list.dart';
 import 'package:reelpro/views/profile_settings.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -17,12 +19,12 @@ class ManageFamilyUI extends StatelessWidget {
         backgroundColor: const Color(0xffF2F9FF),
         elevation: 0,
         title: Padding(
-            padding: EdgeInsets.only(top: 28.h),
+            padding: EdgeInsets.only(top: 42.h),
             child: Text21PtBlack(text: 'Manage Family')),
         centerTitle: true,
-        toolbarHeight: 60.h,
+        toolbarHeight: 70.h,
         leading: Padding(
-          padding: EdgeInsets.only(top: 28.h, left: 36.w),
+          padding: EdgeInsets.only(top: 42.h, left: 36.w),
           child: GestureDetector(
             onTap: () {
               Get.to(() => const ProfileSettingsUI());
@@ -55,7 +57,9 @@ class ManageFamilyUI extends StatelessWidget {
               ),
               SizedBox(height: 50.h),
               Button56Blue(
-                  onpressed: () {},
+                  onpressed: () {
+                    Get.to(() => const AddFamilyMemberUI());
+                  },
                   buttonText: 'Add',
                   textColor: const Color(0xffF2F9FF),
                   color: const Color(0xff2B67A3))

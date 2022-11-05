@@ -9,6 +9,7 @@ import 'package:reelpro/models/shared_preferences.dart';
 import 'package:reelpro/view_models/fish_species_list.dart';
 import 'package:reelpro/view_models/registeration_step_two.dart';
 import 'package:reelpro/view_models/team_list.dart';
+import 'package:reelpro/views/family_members_list.dart';
 import 'package:reelpro/views/manage_family.dart';
 import 'package:reelpro/views/manage_team_screen.dart';
 import 'package:reelpro/views/onboarding_screen.dart';
@@ -25,6 +26,7 @@ class ProfileSettingsUI extends StatefulWidget {
 class _ProfileSettingsUIState extends State<ProfileSettingsUI> {
   var teamCount = ''.obs;
   var valueOfList = 'Public'.obs;
+  var value1 = 'Public'.obs;
   final instance = Get.put(FishSpeciesListApi());
   final teamApi = Get.put(TeamViewApi());
   final instanceStepTwo = Get.put(RegistrationStepTwo2());
@@ -41,7 +43,7 @@ class _ProfileSettingsUIState extends State<ProfileSettingsUI> {
         backgroundColor: const Color(0xffF2F9FF),
         appBar: AppBar(
             leading: Padding(
-                padding: EdgeInsets.only(top: 28.h, left: 36.w),
+                padding: EdgeInsets.only(top: 42.h, left: 36.w),
                 child: GestureDetector(
                     onTap: () {
                       Get.to(const UserProfileUI());
@@ -49,25 +51,25 @@ class _ProfileSettingsUIState extends State<ProfileSettingsUI> {
                     child:
                         const Icon(Icons.arrow_back_ios, color: Colors.black))),
             title: Padding(
-                padding: EdgeInsets.only(top: 28.h),
+                padding: EdgeInsets.only(top: 42.h),
                 child: Text21PtBlack(text: 'Settings')),
             centerTitle: true,
             actions: [
               Padding(
-                  padding: EdgeInsets.only(top: 28.h, right: 36.w),
+                  padding: EdgeInsets.only(top: 42.h, right: 36.w),
                   child: GestureDetector(
-                    onTap: () {
-                      SharedPreferences1().setToken('');
-                      SaveFirstName().saveFirstName('');
-                      SaveLastName().saveLastName('');
-                      Gender().saveGender('');
-                      SaveDescription().saveDescription('');
+                    onTap: () async {
+                      await SharedPreferences1().setToken('');
+                      await SaveFirstName().saveFirstName('');
+                      await SaveLastName().saveLastName('');
+                      await Gender().saveGender('');
+                      await SaveDescription().saveDescription('');
                       instanceStepTwo.description.value = '';
-                      SaveNumber().saveNumber('');
-                      SaveProfilePic().saveProfilePic('');
-                      Dob().saveDob('');
-                      SaveEmail().saveEmail('');
-                      Navigator.pushReplacement(
+                      await SaveNumber().saveNumber('');
+                      await SaveProfilePic().saveProfilePic('');
+                      await Dob().saveDob('');
+                      await SaveEmail().saveEmail('');
+                      await Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) => const OnBoardingScreen()));
@@ -80,7 +82,7 @@ class _ProfileSettingsUIState extends State<ProfileSettingsUI> {
             ],
             elevation: 0,
             backgroundColor: const Color(0xffF2F9FF),
-            toolbarHeight: 60.h),
+            toolbarHeight: 70.h),
         body: Padding(
             padding: EdgeInsets.only(top: 39.h, left: 36.w, right: 36.w),
             child:
@@ -93,7 +95,7 @@ class _ProfileSettingsUIState extends State<ProfileSettingsUI> {
                     subTitle: 'No member',
                     title: 'Manage Family',
                     onTap: () {
-                      Get.to(() => const ManageFamilyUI());
+                      Get.to(() => const FamilyMembersListUI());
                     },
                   )),
               Obx(() => Settings1(
@@ -187,10 +189,86 @@ class _ProfileSettingsUIState extends State<ProfileSettingsUI> {
                           ]),
                     ));
                   })),
-              Settings1(title: 'Feed Post', subTitle: 'Public', onTap: () {}),
+              Obx(
+                () => Settings1(
+                    title: 'Feed Post',
+                    subTitle: value1.value,
+                    onTap: () {
+                      Get.bottomSheet(Container(
+                        padding: EdgeInsets.only(top: 48.h),
+                        height: 428.h,
+                        decoration: const BoxDecoration(
+                            borderRadius:
+                                BorderRadius.vertical(top: Radius.circular(25)),
+                            color: Color(0xffF2F9FF)),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                  padding: EdgeInsets.only(left: 36.w),
+                                  child: Text15PtBlue(text: 'Post Visibility')),
+                              SizedBox(height: 10.h),
+                              ListView(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                children: postVisibility
+                                    .map((e) => GestureDetector(
+                                          onTap: () {
+                                            value1.value = e;
+                                          },
+                                          child: Padding(
+                                              padding: EdgeInsets.only(
+                                                top: 20.h,
+                                              ),
+                                              child: Obx(() => ToggleContainer(
+                                                  color: value1.value == e
+                                                      ? instance
+                                                          .selectedItemcolor1
+                                                          .value
+                                                      : instance
+                                                          .transparentColor1
+                                                          .value,
+                                                  isSelected: value1.value == e
+                                                      ? true
+                                                      : false,
+                                                  text: e))),
+                                        ))
+                                    .toList(),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    top: 15.h, left: 36.w, right: 36.w),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Button56(
+                                        onpressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        buttonText: 'Cancel',
+                                        textColor: Colors.black,
+                                        width: 1,
+                                        widthColor: Colors.black,
+                                        color: const Color(0xffF2F9FF)),
+                                    Button56Blue(
+                                        onpressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        buttonText: 'Done',
+                                        textColor: const Color(0xffF2F9FF),
+                                        color: const Color(0xff2B67A3))
+                                  ],
+                                ),
+                              )
+                            ]),
+                      ));
+                    }),
+              ),
               Settings1(title: 'Notifications', subTitle: 'All', onTap: () {})
             ])));
   }
 
   final List<String> registerationType = ['Public', 'Private'];
+  final List<String> postVisibility = ['Public', 'Followers', 'Private'];
 }

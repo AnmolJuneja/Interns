@@ -2,8 +2,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:reelpro/models/event_order_list.dart';
+import 'package:reelpro/models/shared_preferences.dart';
 import 'package:reelpro/view_models/event_order_list.dart';
+import 'package:reelpro/view_models/otp_view_model.dart';
 import 'package:reelpro/view_models/registeration_step_two.dart';
+import 'package:reelpro/views/splash_screen.dart';
 import 'package:reelpro/views/user_profile.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,8 +18,40 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    navigateToOnboardingPage();
+  }
+
   PageController pageController = PageController(viewportFraction: 0.9);
   final instance = Get.put(RegistrationStepTwo2());
+  final registerationViewModel = Get.put(RegistrationStepTwo2());
+  final eventOrderListApi = Get.put(EventOrderListApi());
+  final instanceOtpViewModel = Get.put(OtpViewModel());
+  navigateToOnboardingPage() async {
+    String firstLastName = await SaveFirstName().getFirstName();
+    registerationViewModel.firstName1.value = firstLastName;
+    String lastName = await SaveLastName().getLastName();
+    registerationViewModel.lastName1.value = lastName;
+    String email = await SaveEmail().getEmail();
+    registerationViewModel.email1.value = email;
+    String gender = await Gender().getGender();
+    registerationViewModel.gender1.value = gender;
+    String dob = await Dob().getDob();
+    registerationViewModel.dob1.value = dob;
+    String number = await SaveNumber().getNumber();
+    registerationViewModel.number.value = number;
+    String profilePic = await SaveProfilePic().getProfilePic();
+    registerationViewModel.profilePic1.value = profilePic;
+    String description = await SaveDescription().getDescripton();
+    registerationViewModel.description.value = description;
+    String country = await SaveCountryCode().getCountryCode();
+    instanceOtpViewModel.countryText.value = country;
+    String flag = await SaveFlah().getFlag();
+    instanceOtpViewModel.flagEmoji.value = flag;
+  }
+
   @override
   Widget build(BuildContext context) {
     String greetings;
@@ -27,8 +63,7 @@ class _HomePageState extends State<HomePage> {
     } else {
       greetings = 'Good Morning';
     }
-    final registerationViewModel = Get.put(RegistrationStepTwo2());
-    final eventOrderListApi = Get.put(EventOrderListApi());
+
     return Scaffold(
         backgroundColor: const Color(0xffF2F9FF),
         body: Stack(children: [
@@ -65,22 +100,10 @@ class _HomePageState extends State<HomePage> {
                                     fontSize: 30.sp,
                                     color: const Color(0xff719AC3)))
                           ])),
-                      FutureBuilder(
-                          future: eventOrderListApi.getOrderList(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              return Container(
-                                padding:
-                                    EdgeInsets.only(top: 80.h, left: 120.w),
-                                child: const Text('No Event Running'),
-                              );
-                            } else {
-                              return Container(
-                                  padding:
-                                      EdgeInsets.only(top: 60.h, left: 150.w),
-                                  child: const CircularProgressIndicator());
-                            }
-                          })
+                      Container(
+                        padding: EdgeInsets.only(top: 80.h, left: 120.w),
+                        child: const Text('No Event Running'),
+                      )
                     ])),
           ]),
           Positioned(

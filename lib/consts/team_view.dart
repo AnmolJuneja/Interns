@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/consts/image.dart';
 import 'package:reelpro/consts/small_text.dart';
 import 'package:reelpro/consts/text.dart';
+import 'package:get/get.dart';
+import 'package:reelpro/views/invite_team_members.dart';
 
 class UpperView extends StatelessWidget {
   String image;
@@ -29,6 +31,7 @@ class UpperView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(top: 20.h),
       color: Colors.white,
       height: 435.h,
       child: Stack(
@@ -42,7 +45,7 @@ class UpperView extends StatelessWidget {
                 decoration: BoxDecoration(
                     // border: Border.all(color: Colors.white, width: 2),
                     image: DecorationImage(
-                        fit: BoxFit.cover, image: NetworkImage(image))),
+                        fit: BoxFit.cover, image: AssetImage(image))),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 20.h, left: 78.w, right: 93.w),
@@ -95,25 +98,25 @@ class UpperView extends StatelessWidget {
                                 color: const Color(0xff485058)),
                           ))),
                     ),
-                    Container(
-                      height: 44.h,
-                      width: 167.w,
-                      decoration:
-                          BoxDecoration(borderRadius: BorderRadius.circular(5)),
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              primary: const Color(0xff2B67A3)),
-                          onPressed: onpressed,
-                          child: Center(
-                              child: Text(
-                            btn2Text,
-                            style: TextStyle(
-                                fontFamily: 'Helvetica',
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white),
-                          ))),
-                    )
+                       Container(
+                        height: 44.h,
+                        width: 167.w,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5)),
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: const Color(0xff2B67A3)),
+                            onPressed: onpressed,
+                            child: Center(
+                                child: Text(
+                              btn2Text,
+                              style: TextStyle(
+                                  fontFamily: 'Helvetica',
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white),
+                            ))),
+                      ),
                   ],
                 ),
               )
@@ -290,7 +293,10 @@ class TeamViewColumn extends StatelessWidget {
                           SizedBox(width: 8.w),
                           Text14Pt(text: commentText),
                           SizedBox(width: 112.w),
-                          Image(image: AssetImage(shareImage), height: 40.h,width: 40.w)
+                          Image(
+                              image: AssetImage(shareImage),
+                              height: 40.h,
+                              width: 40.w)
                         ],
                       ))
                 ],

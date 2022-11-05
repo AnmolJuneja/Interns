@@ -1,7 +1,8 @@
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:reelpro/models/catch_details.dart';
-import 'package:reelpro/models/catchlog_list.dart';
+
+import 'package:reelpro/models/catchlog_list_response.dart';
 import 'package:reelpro/models/shared_preferences.dart';
 
 class CatchDetailsApi extends GetxController {

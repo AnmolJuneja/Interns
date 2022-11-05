@@ -1,333 +1,252 @@
+
 class EventListResponse {
-    EventListResponse({
-      this.success,
-      this.message,
-     required this.data,
-      this.totalRecords,
-    });
+  bool? success;
+  String? message;
+  List<EventList>? data;
+  int? totalRecords;
 
-    bool? success;
-    String? message;
-    List<EventList> data=[];
-    int? totalRecords;
+  EventListResponse({this.success, this.message, this.data, this.totalRecords});
 
-      EventListResponse.fromJson(Map<String, dynamic> json) {
-    success: json["success"];
-        message: json["message"];
-        if (json["data"] is List) {
-      data =
-          (json["data"] as List).map((e) => EventList.fromJson(e)).toList();
+  EventListResponse.fromJson(Map<String, dynamic> json) {
+    if(json["success"] is bool) {
+      success = json["success"];
     }
-   }
-   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['success'] = success;
-    data['message'] = message;
-    data['data'] = this.data.map((v) => v.toJson()).toList();
-    return data;
+    if(json["message"] is String) {
+      message = json["message"];
+    }
+    if(json["data"] is List) {
+      data = (json["data"] == null ? null : (json["data"] as List).map((e) => EventList.fromJson(e)).toList())!;
+    }
+    if(json["totalRecords"] is int) {
+      totalRecords = json["totalRecords"];
+    }
   }
 
- 
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data["success"] = success;
+    _data["message"] = message;
+    if(data != null) {
+      _data["data"] = data!.map((e) => e.toJson()).toList();
+    }
+    _data["totalRecords"] = totalRecords;
+    return _data;
+  }
 }
 
 class EventList {
-    EventList({
-        this.id,
-        this.name,
-        this.eventType,
-        this.address,
-        this.lat,
-        this.lng,
-        this.teamSizeMin,
-        this.teamSizeMax,
-        this.about,
-        this.species,
-        this.anglers,
-        this.weather,
-        this.rules,
-        this.disclaimer,
-        this.spUserId,
-        this.logo,
-        this.banner,
-        this.isDeleted,
-        this.isActive,
-        this.createdAt,
-        this.updatedAt,
-        this.startTime,
-        this.endTime,
-        this.distance,
-        this.isWishlisted,
-        this.crew,
-        this.schedules,
-        this.eventFishSpecies,
-    });
+  int? id;
+  String? name;
+  int? fee;
+  int? eventType;
+  String? address;
+  String? lat;
+  String? lng;
+  int? teamSizeMin;
+  int? teamSizeMax;
+  String? about;
+  int? species;
+  int? anglers;
+  int? teams;
+  String? weather;
+  String? rules;
+  String? disclaimer;
+  int? spUserId;
+  dynamic logo;
+  dynamic banner;
+  int? isDeleted;
+  int? isActive;
+  String? createdAt;
+  String? updatedAt;
+  int? startTime;
+  int? endTime;
+  dynamic deletedAt;
+  double? distance;
+  int? isWishlisted;
+  dynamic crew;
+  List<Schedules>? schedules;
+  List<dynamic>? eventFishSpecies;
 
-    int? id;
-    Name? name;
-    int? eventType;
-    Address? address;
-    String? lat;
-    String? lng;
-    int? teamSizeMin;
-    int? teamSizeMax;
-    About? about;
-    int? species;
-    int? anglers;
-    Weather? weather;
-    Rules? rules;
-    Disclaimer? disclaimer;
-    int? spUserId;
-    dynamic logo;
-    dynamic banner;
-    int? isDeleted;
-    int? isActive;
-    DateTime? createdAt;
-    DateTime ?updatedAt;
-    int? startTime;
-    int? endTime;
-    double? distance;
-    int? isWishlisted;
-    dynamic crew;
-    List<Schedule>? schedules;
-    List<EventFishSpecy>? eventFishSpecies;
+  EventList({this.id, this.name, this.fee, this.eventType, this.address, this.lat, this.lng, this.teamSizeMin, this.teamSizeMax, this.about, this.species, this.anglers, this.teams, this.weather, this.rules, this.disclaimer, this.spUserId, this.logo, this.banner, this.isDeleted, this.isActive, this.createdAt, this.updatedAt, this.startTime, this.endTime, this.deletedAt, this.distance, this.isWishlisted, this.crew, this.schedules, this.eventFishSpecies});
 
-    factory EventList.fromJson(Map<String, dynamic> json) => EventList(
-        id: json["id"],
-        name: nameValues.map[json["name"]],
-        eventType: json["event_type"],
-        address: addressValues.map[json["address"]],
-        lat: json["lat"],
-        lng: json["lng"],
-        teamSizeMin: json["team_size_min"],
-        teamSizeMax: json["team_size_max"],
-        about: aboutValues.map[json["about"]],
-        species: json["species"],
-        anglers: json["anglers"],
-        weather: weatherValues.map[json["weather"]],
-        rules: rulesValues.map[json["rules"]],
-        disclaimer: disclaimerValues.map[json["disclaimer"]],
-        spUserId: json["sp_user_id"],
-        logo: json["logo"],
-        banner: json["banner"],
-        isDeleted: json["is_deleted"],
-        isActive: json["is_active"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-        startTime: json["start_time"],
-        endTime: json["end_time"],
-        distance: json["distance"].toDouble(),
-        isWishlisted: json["is_wishlisted"],
-        crew: json["crew"],
-        schedules: List<Schedule>.from(json["schedules"].map((x) => Schedule.fromJson(x))),
-        eventFishSpecies: List<EventFishSpecy>.from(json["event_fish_species"].map((x) => EventFishSpecy.fromJson(x))),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": nameValues.reverse[name],
-        "event_type": eventType,
-        "address": addressValues.reverse[address],
-        "lat": lat,
-        "lng": lng,
-        "team_size_min": teamSizeMin,
-        "team_size_max": teamSizeMax,
-        "about": aboutValues.reverse[about],
-        "species": species,
-        "anglers": anglers,
-        "weather": weatherValues.reverse[weather],
-        "rules": rulesValues.reverse[rules],
-        "disclaimer": disclaimerValues.reverse[disclaimer],
-        "sp_user_id": spUserId,
-        "logo": logo,
-        "banner": banner,
-        "is_deleted": isDeleted,
-        "is_active": isActive,
-        "created_at": createdAt!.toIso8601String(),
-        "updated_at": updatedAt!.toIso8601String(),
-        "start_time": startTime,
-        "end_time": endTime,
-        "distance": distance,
-        "is_wishlisted": isWishlisted,
-        "crew": crew,
-        "schedules": List<dynamic>.from(schedules!.map((x) => x.toJson())),
-        "event_fish_species": List<dynamic>.from(eventFishSpecies!.map((x) => x.toJson())),
-    };
-}
-
-enum About { THIS_IS_TEST_EVENT }
-
-final aboutValues = EnumValues({
-    "This is test event": About.THIS_IS_TEST_EVENT
-});
-
-enum Address { DSFSDFSF }
-
-final addressValues = EnumValues({
-    "dsfsdfsf": Address.DSFSDFSF
-});
-
-enum Disclaimer { DISCLAMER_TEXT_HERE_UPDATED }
-
-final disclaimerValues = EnumValues({
-    "Disclamer text here updated": Disclaimer.DISCLAMER_TEXT_HERE_UPDATED
-});
-
-class EventFishSpecy {
-    EventFishSpecy({
-        this.id,
-        this.eventId,
-        this.fishId,
-        this.createdAt,
-        this.updatedAt,
-        this.fishSpecies,
-    });
-
-    int? id;
-    int? eventId;
-    int? fishId;
-    DateTime? createdAt;
-    DateTime? updatedAt;
-    FishSpecies? fishSpecies;
-
-    factory EventFishSpecy.fromJson(Map<String, dynamic> json) => EventFishSpecy(
-        id: json["id"],
-        eventId: json["event_id"],
-        fishId: json["fish_id"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-        fishSpecies: FishSpecies.fromJson(json["fish_species"]),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "event_id": eventId,
-        "fish_id": fishId,
-        "created_at": createdAt!.toIso8601String(),
-        "updated_at": updatedAt!.toIso8601String(),
-        "fish_species": fishSpecies!.toJson(),
-    };
-}
-
-class FishSpecies {
-    FishSpecies({
-        this.id,
-        this.name,
-        this.picture,
-        this.description,
-        this.deletedAt,
-        this.createdAt,
-        this.updatedAt,
-    });
-
-    int? id;
-    String? name;
-    dynamic picture;
-    dynamic description;
-    dynamic deletedAt;
-    DateTime? createdAt;
-    dynamic updatedAt;
-
-    factory FishSpecies.fromJson(Map<String, dynamic> json) => FishSpecies(
-        id: json["id"],
-        name: json["name"],
-        picture: json["picture"],
-        description: json["description"],
-        deletedAt: json["deleted_at"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: json["updated_at"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "picture": picture,
-        "description": description,
-        "deleted_at": deletedAt,
-        "created_at": createdAt!.toIso8601String(),
-        "updated_at": updatedAt,
-    };
-}
-
-enum Name { TEST_UPCOMING_EVENTS, TEST_UPCOMING_EVENTS_ABC }
-
-final nameValues = EnumValues({
-    "Test Upcoming Events": Name.TEST_UPCOMING_EVENTS,
-    "Test Upcoming Events abc": Name.TEST_UPCOMING_EVENTS_ABC
-});
-
-enum Rules { THIS_IS_TEST_RULES_UPDATED }
-
-final rulesValues = EnumValues({
-    "This is test Rules updated": Rules.THIS_IS_TEST_RULES_UPDATED
-});
-
-class Schedule {
-    Schedule({
-        this.id,
-        this.eventId,
-        this.activityText,
-        this.activityDate,
-        this.isDeleted,
-        this.isActive,
-        this.createdAt,
-        this.updatedAt,
-    });
-
-    int? id;
-    int? eventId;
-    ActivityText? activityText;
-    DateTime? activityDate;
-    int? isDeleted;
-    int? isActive;
-    DateTime? createdAt;
-    DateTime? updatedAt;
-
-    factory Schedule.fromJson(Map<String, dynamic> json) => Schedule(
-        id: json["id"],
-        eventId: json["event_id"],
-        activityText: activityTextValues.map[json["activity_text"]],
-        activityDate: DateTime.parse(json["activity_date"]),
-        isDeleted: json["is_deleted"],
-        isActive: json["is_active"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "event_id": eventId,
-        "activity_text": activityTextValues.reverse[activityText],
-        "activity_date": activityDate!.toIso8601String(),
-        "is_deleted": isDeleted,
-        "is_active": isActive,
-        "created_at": createdAt!.toIso8601String(),
-        "updated_at": updatedAt!.toIso8601String(),
-    };
-}
-
-enum ActivityText { LEAVE_THE_DOC, VIRTUAL_WEIGHT_IN_CHECK_IN, TOURNAMENT_CONCLUDE, DEADLINE_PHOTOS_MUST_BE_UPLOADED }
-
-final activityTextValues = EnumValues({
-    "Deadline - Photos must be uploaded": ActivityText.DEADLINE_PHOTOS_MUST_BE_UPLOADED,
-    "Leave the doc": ActivityText.LEAVE_THE_DOC,
-    "Tournament Conclude": ActivityText.TOURNAMENT_CONCLUDE,
-    "Virtual weight-in/Check in": ActivityText.VIRTUAL_WEIGHT_IN_CHECK_IN
-});
-
-enum Weather { WEATHER_IS_SUNNY }
-
-final weatherValues = EnumValues({
-    "Weather is sunny": Weather.WEATHER_IS_SUNNY
-});
-
-class EnumValues<T> {
-    Map<String, T> map;
-    Map<T, String>? reverseMap;
-
-    EnumValues(this.map);
-
-    Map<T, String> get reverse {
-        reverseMap ??= map.map((k, v) => MapEntry(v, k));
-        return reverseMap!;
+  EventList.fromJson(Map<String, dynamic> json) {
+    if(json["id"] is int) {
+      id = json["id"];
     }
+    if(json["name"] is String) {
+      name = json["name"];
+    }
+    if(json["fee"] is int) {
+      fee = json["fee"];
+    }
+    if(json["event_type"] is int) {
+      eventType = json["event_type"];
+    }
+    if(json["address"] is String) {
+      address = json["address"];
+    }
+    if(json["lat"] is String) {
+      lat = json["lat"];
+    }
+    if(json["lng"] is String) {
+      lng = json["lng"];
+    }
+    if(json["team_size_min"] is int) {
+      teamSizeMin = json["team_size_min"];
+    }
+    if(json["team_size_max"] is int) {
+      teamSizeMax = json["team_size_max"];
+    }
+    if(json["about"] is String) {
+      about = json["about"];
+    }
+    if(json["species"] is int) {
+      species = json["species"];
+    }
+    if(json["anglers"] is int) {
+      anglers = json["anglers"];
+    }
+    if(json["teams"] is int) {
+      teams = json["teams"];
+    }
+    if(json["weather"] is String) {
+      weather = json["weather"];
+    }
+    if(json["rules"] is String) {
+      rules = json["rules"];
+    }
+    if(json["disclaimer"] is String) {
+      disclaimer = json["disclaimer"];
+    }
+    if(json["sp_user_id"] is int) {
+      spUserId = json["sp_user_id"];
+    }
+    logo = json["logo"];
+    banner = json["banner"];
+    if(json["is_deleted"] is int) {
+      isDeleted = json["is_deleted"];
+    }
+    if(json["is_active"] is int) {
+      isActive = json["is_active"];
+    }
+    if(json["created_at"] is String) {
+      createdAt = json["created_at"];
+    }
+    if(json["updated_at"] is String) {
+      updatedAt = json["updated_at"];
+    }
+    if(json["start_time"] is int) {
+      startTime = json["start_time"];
+    }
+    if(json["end_time"] is int) {
+      endTime = json["end_time"];
+    }
+    deletedAt = json["deleted_at"];
+    if(json["distance"] is double) {
+      distance = json["distance"];
+    }
+    if(json["is_wishlisted"] is int) {
+      isWishlisted = json["is_wishlisted"];
+    }
+    crew = json["crew"];
+    if(json["schedules"] is List) {
+      schedules = json["schedules"] == null ? null : (json["schedules"] as List).map((e) => Schedules.fromJson(e)).toList();
+    }
+    if(json["event_fish_species"] is List) {
+      eventFishSpecies = json["event_fish_species"] ?? [];
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data["id"] = id;
+    _data["name"] = name;
+    _data["fee"] = fee;
+    _data["event_type"] = eventType;
+    _data["address"] = address;
+    _data["lat"] = lat;
+    _data["lng"] = lng;
+    _data["team_size_min"] = teamSizeMin;
+    _data["team_size_max"] = teamSizeMax;
+    _data["about"] = about;
+    _data["species"] = species;
+    _data["anglers"] = anglers;
+    _data["teams"] = teams;
+    _data["weather"] = weather;
+    _data["rules"] = rules;
+    _data["disclaimer"] = disclaimer;
+    _data["sp_user_id"] = spUserId;
+    _data["logo"] = logo;
+    _data["banner"] = banner;
+    _data["is_deleted"] = isDeleted;
+    _data["is_active"] = isActive;
+    _data["created_at"] = createdAt;
+    _data["updated_at"] = updatedAt;
+    _data["start_time"] = startTime;
+    _data["end_time"] = endTime;
+    _data["deleted_at"] = deletedAt;
+    _data["distance"] = distance;
+    _data["is_wishlisted"] = isWishlisted;
+    _data["crew"] = crew;
+    if(schedules != null) {
+      _data["schedules"] = schedules?.map((e) => e.toJson()).toList();
+    }
+    if(eventFishSpecies != null) {
+      _data["event_fish_species"] = eventFishSpecies;
+    }
+    return _data;
+  }
+}
+
+class Schedules {
+  int? id;
+  int? eventId;
+  String? activityText;
+  String? activityDate;
+  int? isDeleted;
+  int? isActive;
+  String? createdAt;
+  String? updatedAt;
+
+  Schedules({this.id, this.eventId, this.activityText, this.activityDate, this.isDeleted, this.isActive, this.createdAt, this.updatedAt});
+
+  Schedules.fromJson(Map<String, dynamic> json) {
+    if(json["id"] is int) {
+      id = json["id"];
+    }
+    if(json["event_id"] is int) {
+      eventId = json["event_id"];
+    }
+    if(json["activity_text"] is String) {
+      activityText = json["activity_text"];
+    }
+    if(json["activity_date"] is String) {
+      activityDate = json["activity_date"];
+    }
+    if(json["is_deleted"] is int) {
+      isDeleted = json["is_deleted"];
+    }
+    if(json["is_active"] is int) {
+      isActive = json["is_active"];
+    }
+    if(json["created_at"] is String) {
+      createdAt = json["created_at"];
+    }
+    if(json["updated_at"] is String) {
+      updatedAt = json["updated_at"];
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data["id"] = id;
+    _data["event_id"] = eventId;
+    _data["activity_text"] = activityText;
+    _data["activity_date"] = activityDate;
+    _data["is_deleted"] = isDeleted;
+    _data["is_active"] = isActive;
+    _data["created_at"] = createdAt;
+    _data["updated_at"] = updatedAt;
+    return _data;
+  }
 }

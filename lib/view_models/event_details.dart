@@ -4,13 +4,13 @@ import 'package:reelpro/models/event_details.dart';
 import 'package:reelpro/models/shared_preferences.dart';
 
 class EventDetailsApi extends GetxController {
-  Future<dio.Response> getEventDetails() async {
+  Future<dio.Response> getEventDetails(int eventId) async {
     String authToken = await SharedPreferences1().getToken();
     // int getId = await SharedPreferences2().getId();
     try {
       dio.Response response;
       response = await dio.Dio().get(
-          'https://reelpro.yatilabs.com/api/event-detail/52',
+          'https://reelpro.yatilabs.com/api/event-detail/$eventId',
           options: dio.Options(headers: {
             'Accept': 'application/json',
             'Authorization': 'Bearer $authToken'
@@ -24,8 +24,13 @@ class EventDetailsApi extends GetxController {
     return Future.value();
   }
 
-  Future<EventDetails> getDetails() async {
-    var resp = await EventDetailsApi().getEventDetails();
-    return EventDetails.fromJson(resp.data);
+  EventDetails? eventDetails;
+  var isLoading = false.obs;
+  Future<EventDetails> getDetails(int eventId) async {
+    isLoading.value = true;
+    var resp = await EventDetailsApi().getEventDetails(eventId);
+    eventDetails = EventDetails.fromJson(resp.data);
+    isLoading.value = false;
+    return eventDetails!;
   }
 }

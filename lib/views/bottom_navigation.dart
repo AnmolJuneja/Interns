@@ -12,7 +12,7 @@ import 'home_page.dart';
 
 class BottomNavigation extends StatefulWidget {
   int currentIndex = 2;
-   BottomNavigation({Key? key, required this.currentIndex}) : super(key: key);
+  BottomNavigation({Key? key, required this.currentIndex}) : super(key: key);
 
   @override
   State<BottomNavigation> createState() => _BottomNavigationState();
@@ -20,8 +20,7 @@ class BottomNavigation extends StatefulWidget {
 
 class _BottomNavigationState extends State<BottomNavigation> {
   final fetchLatLng = Get.put(FetchLatLng());
-  
-  
+
   List screens = [
     const CatchlogListUI(),
     const SpotlightScreen(),
@@ -56,11 +55,11 @@ class _BottomNavigationState extends State<BottomNavigation> {
     return GestureDetector(
         onTap: () {
           setState(() {
-           widget.currentIndex = index;
+            widget.currentIndex = index;
           });
         },
         child: Padding(
-            padding: EdgeInsets.only(left: 30.w, right: 30.w),
+            padding: EdgeInsets.only(left: 28.w, right: 28.w),
             child: SvgPicture.asset(image,
                 color: index == widget.currentIndex
                     ? const Color(0xff2B67A3)

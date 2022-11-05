@@ -28,29 +28,11 @@ Widget buildCommentList(FeedCList feedCList) {
           ])
         ]),
         Padding(
-            padding: EdgeInsets.only(bottom: 20.h),
+            padding: EdgeInsets.only(bottom: 15.h),
             child: GestureDetector(
                 onTap: () {
-                  Get.bottomSheet(Container(
-                    height: 150.h,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        color: const Color(0xffF2F9FF),
-                        borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(25))),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          MyButtonGrey(
-                              onpressed: () {
-                                instanceDeleteComment
-                                    .deleteFeedComment(feedCList.id!.toInt());
-                                
-                              },
-                              buttonText: 'Delete Comment')
-                        ]),
-                  ));
+                        
                 },
-                child: Icon(Icons.more_horiz)))
+                child: const Icon(Icons.more_horiz, color: Colors.black)))
       ]));
 }

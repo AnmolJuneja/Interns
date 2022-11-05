@@ -2,14 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/consts/text.dart';
 import 'package:reelpro/consts/text_field.dart';
+import 'package:reelpro/consts/text_fieldc.dart';
+import 'package:reelpro/models/event_list.dart';
+import 'package:reelpro/models/search_user.dart';
+import 'package:reelpro/view_models/event_list.dart';
+import 'package:reelpro/view_models/search_user.dart';
+// import 'package:reelpro/views/list.dart';
 import 'package:reelpro/views/list_events.dart';
+import 'package:get/get.dart';
+import 'package:reelpro/views/other_user_profile.dart';
+import 'package:reelpro/views/upcoming_events.dart';
 
-class EventListUI extends StatelessWidget {
+class EventListUI extends StatefulWidget {
   const EventListUI({Key? key}) : super(key: key);
 
   @override
+  State<EventListUI> createState() => _EventListUIState();
+}
+
+class _EventListUIState extends State<EventListUI> {
+  TextEditingController textEditingController = TextEditingController();
+  @override
   Widget build(BuildContext context) {
-    TextEditingController textEditingController = TextEditingController();
     return DefaultTabController(
         length: 3,
         child: Scaffold(
@@ -26,11 +40,13 @@ class EventListUI extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               TextFEventList(
+                                  onSaved: (value) async {},
+                                  onTap: () {},
                                   textEditingController: textEditingController,
                                   hintText: 'Search',
                                   textInputType: TextInputType.text,
                                   prefix: null,
-                                  onchanged: (value) {}),
+                                  onchanged: (value) async {}),
                               Image.asset('assets/images/Group 209.png'),
                             ]),
                         SizedBox(height: 25.h),
@@ -57,10 +73,10 @@ class EventListUI extends StatelessWidget {
                       height: 650.h,
                       child: TabBarView(children: [
                         const ListOfEvents(),
-                        Center(child: Text30ptBlue(text: 'Current Events')),
                         Center(
-                          child: Text30ptBlue(text: 'Upcoming Events'),
-                        )
+                          child: Text16PtBlack(text: 'No Current Events.'),
+                        ),
+                        const ListOfEvents2(),
                       ])))
             ])));
   }

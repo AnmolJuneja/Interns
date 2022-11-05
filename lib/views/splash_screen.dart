@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reelpro/models/shared_preferences.dart';
+import 'package:reelpro/view_models/fetch_lat_lng.dart';
 import 'package:reelpro/view_models/otp_view_model.dart';
 import 'package:reelpro/view_models/registeration_step_two.dart';
 import 'package:reelpro/view_models/team_list.dart';
@@ -30,8 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
   final instanceTeam = Get.put(const ProfileSettingsUI());
   final instanceOtpViewModel = Get.put(OtpViewModel());
   navigateToOnboardingPage() async {
-    // String teamCount = await SaveTeamCount().getTeamCount();
-    // teamApi.getTeam1.value.length = ;
+    await FetchLatLng().getLocation();
     String firstLastName = await SaveFirstName().getFirstName();
     otp.firstName1.value = firstLastName;
     String lastName = await SaveLastName().getLastName();
@@ -53,14 +53,21 @@ class _SplashScreenState extends State<SplashScreen> {
     instanceOtpViewModel.countryText.value = country;
     String flag = await SaveFlah().getFlag();
     instanceOtpViewModel.flagEmoji.value = flag;
-    if (authToken != '') {
+    if (authToken.isNotEmpty) {
       Future.delayed(const Duration(milliseconds: 2000));
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) =>  BottomNavigation(currentIndex: 2,)));
+      // ignore: use_build_context_synchronously
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) => BottomNavigation(currentIndex: 2)),
+          (route) => false);
     } else {
       await Future.delayed(const Duration(milliseconds: 2000));
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const OnBoardingScreen()));
+      // ignore: use_build_context_synchronously
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const OnBoardingScreen()),
+          (route) => false);
     }
   }
 

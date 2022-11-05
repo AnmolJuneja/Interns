@@ -2,27 +2,42 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/consts/text.dart';
 import 'package:get/get.dart';
+import 'package:reelpro/models/event_order_list.dart';
+import 'package:reelpro/models/my_feed_list.dart';
+import 'package:reelpro/models/user_feed_list.dart';
+import 'package:reelpro/view_models/event_order_list.dart';
+import 'package:reelpro/view_models/my_feed_list.dart';
 import 'package:reelpro/view_models/registeration_step_two.dart';
+import 'package:reelpro/view_models/user_feed_list.dart';
 import 'package:reelpro/views/bottom_navigation.dart';
 import 'package:reelpro/views/edit_profile.dart';
+import 'package:reelpro/views/feed_details.dart';
+import 'package:reelpro/views/pending_request.dart';
 import 'package:reelpro/views/profile_settings.dart';
 
-class UserProfileUI extends StatelessWidget {
+class UserProfileUI extends StatefulWidget {
   const UserProfileUI({Key? key}) : super(key: key);
 
   @override
+  State<UserProfileUI> createState() => _UserProfileUIState();
+}
+
+class _UserProfileUIState extends State<UserProfileUI> {
+  final instance = Get.put(RegistrationStepTwo2());
+  final userProfileList = Get.put(UserFeedListApi());
+  final myfeed = Get.put(MyFeedListApi());
+  @override
   Widget build(BuildContext context) {
-    final instance = Get.put(RegistrationStepTwo2());
     return DefaultTabController(
-      length: 5,
-      child: Scaffold(
+        length: 5,
+        child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
             elevation: 0,
-            toolbarHeight: 60.h,
+            toolbarHeight: 70.h,
             backgroundColor: Colors.white,
             leading: Padding(
-                padding: EdgeInsets.only(top: 28.h, left: 36.w),
+                padding: EdgeInsets.only(top: 42.h, left: 36.w),
                 child: GestureDetector(
                     onTap: () {
                       Get.to(() => BottomNavigation(currentIndex: 2));
@@ -31,7 +46,7 @@ class UserProfileUI extends StatelessWidget {
                         const Icon(Icons.arrow_back_ios, color: Colors.black))),
             actions: [
               Padding(
-                padding: EdgeInsets.only(top: 28.h, right: 36.w),
+                padding: EdgeInsets.only(top: 42.h, right: 36.w),
                 child: GestureDetector(
                   onTap: () {
                     Get.to(() => const ProfileSettingsUI());
@@ -54,22 +69,20 @@ class UserProfileUI extends StatelessWidget {
                   children: [
                     Row(children: [
                       Obx(() => Container(
-                            height: 135.h,
-                            width: 132.w,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                border:
-                                    Border.all(width: 3, color: Colors.white),
-                                image: instance.profilePic1.value == ''
-                                    ? const DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: AssetImage(
-                                            'assets/images/profile.png'))
-                                    : DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: NetworkImage(
-                                            instance.profilePic1.value))),
-                          )),
+                          height: 132.h,
+                          width: 132.w,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(width: 3, color: Colors.white),
+                              image: instance.profilePic1.value == ''
+                                  ? const DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: AssetImage(
+                                          'assets/images/profile.png'))
+                                  : DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage(
+                                          instance.profilePic1.value))))),
                       SizedBox(width: 16.w),
                       Padding(
                         padding: EdgeInsets.only(top: 5.h),
@@ -151,7 +164,7 @@ class UserProfileUI extends StatelessWidget {
               ),
               SizedBox(height: 30.h),
               Container(
-                height: 830.h,
+                height: 1150.h,
                 padding: EdgeInsets.only(top: 15.h),
                 width: double.infinity,
                 color: const Color(0xffF2F9FF),
@@ -174,98 +187,73 @@ class UserProfileUI extends StatelessWidget {
                       Tab(text: 'Equipments')
                     ],
                   ),
-                  Flexible(
-                      child: SizedBox(
-                          width: double.infinity,
-                          height: 900.h,
-                          child: TabBarView(children: [
-                            SingleChildScrollView(
-                              physics: const NeverScrollableScrollPhysics(),
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                    top: 20.h, left: 36.w, right: 36.w),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Image.asset(
-                                          'assets/images/compo1.png',
-                                          height: 170.h,
-                                          width: 170.w,
-                                        ),
-                                        Image.asset(
-                                          'assets/images/compo1.png',
-                                          height: 170.h,
-                                          width: 170.w,
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(height: 16.h),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Image.asset(
-                                          'assets/images/compo1.png',
-                                          height: 170.h,
-                                          width: 170.w,
-                                        ),
-                                        Image.asset(
-                                          'assets/images/compo1.png',
-                                          height: 170.h,
-                                          width: 170.w,
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(height: 16.h),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Image.asset(
-                                          'assets/images/compo1.png',
-                                          height: 170.h,
-                                          width: 170.w,
-                                        ),
-                                        Image.asset(
-                                          'assets/images/compo1.png',
-                                          height: 170.h,
-                                          width: 170.w,
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(height: 16.h),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Image.asset(
-                                          'assets/images/compo1.png',
-                                          height: 170.h,
-                                          width: 170.w,
-                                        ),
-                                        Image.asset(
-                                          'assets/images/compo1.png',
-                                          height: 170.h,
-                                          width: 170.w,
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const Center(child: Text('No Data')),
-                            const Center(child: Text('No Data')),
-                            const Center(child: Text('No Data')),
-                            const Center(child: Text('No Data'))
-                          ])))
+                  Expanded(
+                    child: TabBarView(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        children: [
+                          Container(
+                              padding: EdgeInsets.only(
+                                  top: 20.h, left: 36.w, right: 36.w),
+                              child: FutureBuilder(
+                                  future: myfeed.getMyFeedListFinal(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      return myfeed.myFeedList!.data!.data!
+                                              .isNotEmpty
+                                          ? GridView.builder(
+                                              shrinkWrap: true,
+                                              physics:
+                                                  const NeverScrollableScrollPhysics(),
+                                              itemCount: myfeed.myFeedList!
+                                                  .data!.data!.length,
+                                              gridDelegate:
+                                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                                      mainAxisSpacing: 16.h,
+                                                      crossAxisSpacing: 16.w,
+                                                      crossAxisCount: 2),
+                                              itemBuilder: (context, index) {
+                                                return buildImage(myfeed
+                                                    .myFeedList!
+                                                    .data!
+                                                    .data![index]);
+                                              })
+                                          : Padding(
+                                              padding: EdgeInsets.only(
+                                                  top: 100.h, left: 130.w),
+                                              child: Text16PtBlack(
+                                                  text: 'No Feed Data'));
+                                    } else {
+                                      return const Center(
+                                          child: CircularProgressIndicator());
+                                    }
+                                  })),
+                          const Center(child: Text('No Data')),
+                          const Center(child: Text('No Data')),
+                          const Center(child: Text('No Data')),
+                          const Center(child: Text('No Data'))
+                        ]),
+                  ),
                 ]),
               )
             ]),
-          )),
-    );
+          ),
+        ));
   }
+}
+
+Widget buildImage(MyFeed userList) {
+  return GestureDetector(
+    onTap: () {
+      Get.to(() => FeedDetailsUI(feedId: userList.id!.toInt()));
+    },
+    child: Container(
+      height: 170.h,
+      width: 170.w,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          image: DecorationImage(
+              fit: BoxFit.cover,
+              image: NetworkImage(userList.getFeedImages![0].pic!))),
+    ),
+  );
 }

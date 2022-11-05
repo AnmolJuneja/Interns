@@ -6,9 +6,12 @@ import 'package:reelpro/consts/container.dart';
 import 'package:reelpro/consts/text.dart';
 import 'package:reelpro/consts/text_field.dart';
 import 'package:reelpro/consts/toggle_container.dart';
+import 'package:reelpro/models/catchlog_list_response.dart';
 import 'package:reelpro/view_models/add_catchlog.dart';
+import 'package:reelpro/view_models/catchlog_list.dart';
 import 'package:reelpro/view_models/fetch_lat_lng.dart';
 import 'package:reelpro/view_models/fish_species_list.dart';
+import 'package:reelpro/views/bottom_navigation.dart';
 import 'package:reelpro/views/bottom_sheet.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -23,6 +26,9 @@ class AddCatchLogUI extends StatefulWidget {
 }
 
 class _AddCatchLogUIState extends State<AddCatchLogUI> {
+  var catchlogList = <CatchlogList>[].obs;
+  final catchlogListApi = Get.put(CatchlogListApi());
+
   @override
   void initState() {
     locationController.text = fetchAdress.address.value;
@@ -45,17 +51,38 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
     double lat = 30.403648;
     double lng = 74.027962;
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 70.h,
+        elevation: 0,
+        title: Padding(
+            padding: EdgeInsets.only(top: 42.h),
+            child: Text21PtBlack(text: 'Add Catch Log')),
+        backgroundColor: const Color(0xffF2F9FF),
+        leading: Padding(
+            padding: EdgeInsets.only(top: 42.h, left: 36.w),
+            child: GestureDetector(
+              onTap: () {
+                Get.to(() => BottomNavigation(currentIndex: 0));
+                fishSpeciesListApi.finalSelected.value = '';
+                fishSpeciesListApi.selectedFish.value = '';
+              },
+              child: const Icon(
+                Icons.arrow_back_ios,
+                color: Color(0xff2B67A3),
+                size: 15.0,
+              ),
+            )),
+      ),
       backgroundColor: const Color(0xffF2F9FF),
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        AppBAddCatch(
-            title: 'Add Catch Log',
-            firstIcon: Icons.arrow_back_ios,
-            ontap: () {},
-            ontap1: () {}),
         Flexible(
           child: Container(
-            height: 680.h,
-            padding: EdgeInsets.only(top: 24.h, left: 36.w, right: 36.w),
+            height: 710.h,
+            padding: EdgeInsets.only(
+              top: 24.h,
+              left: 36.w,
+              right: 36.w,
+            ),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -371,20 +398,25 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
             padding: EdgeInsets.only(top: 48.h, left: 36.w, right: 36.w),
             child: MyButton(
                 onpressed: () {
-                  addCatchlogApi.addCatch(
-                      2,
-                      2,
-                      fetchAdress.address.value,
-                      weightController.text,
-                      lengthController.text,
-                      file!,
-                      2,
-                      lat,
-                      lng,
-                      baitController.text,
-                      25,
-                      commentController.text);
-                  Get.to(() => const CatchlogListUI());
+                  addCatchlogApi
+                      .addCatch(
+                          2,
+                          2,
+                          fetchAdress.address.value,
+                          weightController.text,
+                          lengthController.text,
+                          file!,
+                          2,
+                          lat,
+                          lng,
+                          baitController.text,
+                          25,
+                          commentController.text)
+                      .then((value) {
+                    Get.to(() => BottomNavigation(currentIndex: 0));
+                    fishSpeciesListApi.finalSelected.value = '';
+                    fishSpeciesListApi.selectedFish.value = '';
+                  });
                 },
                 buttonText: 'Save'))
       ]),

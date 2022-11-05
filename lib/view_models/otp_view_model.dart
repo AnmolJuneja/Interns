@@ -4,11 +4,18 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:reelpro/models/shared_preferences.dart';
+import 'package:reelpro/view_models/fetch_lat_lng.dart';
 
 class OtpViewModel extends GetxController {
   var countryText = '1'.obs;
   var flagEmoji = ''.obs;
+
   Future<dio.Response> getOtp(String phoneNumber, String countryCode) async {
+    await SaveCity().saveCity(FetchLatLng().address.value);
+    await SaveCountry().saveCountry(FetchLatLng().country.value);
+    await SaveState().saveState(FetchLatLng().state.value);
+    await SaveLocality().saveLocality(FetchLatLng().address1.value);
     try {
       dio.Response response;
       response = await dio.Dio().post(

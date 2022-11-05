@@ -167,7 +167,7 @@ class Text14ptSilver extends StatelessWidget {
           fontWeight: FontWeight.w400,
           fontSize: 14.sp,
           // ignore: use_full_hex_values_for_flutter_colors
-          color: const Color(0xff48505899)),
+          color: Color.fromARGB(70, 38, 41, 61)),
     );
   }
 }
@@ -256,6 +256,24 @@ class Text15PtGrey extends StatelessWidget {
           fontSize: 15.sp,
           // ignore: use_full_hex_values_for_flutter_colors
           color: const Color(0xff48505899)),
+    );
+  }
+}
+
+class Text14PtGrey extends StatelessWidget {
+  String text;
+  Text14PtGrey({Key? key, required this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: TextStyle(
+          fontFamily: 'Helvetica',
+          fontWeight: FontWeight.w500,
+          fontSize: 15.sp,
+          // ignore: use_full_hex_values_for_flutter_colors
+          color: Color.fromARGB(70, 27, 27, 32)),
     );
   }
 }
@@ -352,6 +370,21 @@ class Text20PtBlue extends StatelessWidget {
   }
 }
 
+class Text20PtBlueMedium extends StatelessWidget {
+  String text;
+  Text20PtBlueMedium({Key? key, required this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(text,
+        style: TextStyle(
+            fontFamily: 'Helvetica',
+            fontSize: 20.sp,
+            fontWeight: FontWeight.w500,
+            color: const Color(0xff2B67A3)));
+  }
+}
+
 class Text14PtTime extends StatelessWidget {
   String text;
   Text14PtTime({
@@ -368,7 +401,7 @@ class Text14PtTime extends StatelessWidget {
           fontFamily: 'Helvetica',
           fontSize: 14.sp,
           fontWeight: FontWeight.w500,
-          color: Color.fromARGB(70, 71, 72, 82)),
+          color: Color.fromARGB(70, 33, 34, 39)),
     );
   }
 }
@@ -433,7 +466,7 @@ class Text20PtBlack extends StatelessWidget {
             fontWeight: FontWeight.w500,
             fontSize: 20.sp,
             // ignore: use_full_hex_values_for_flutter_colors
-            color: const Color(0xff485058)));
+            color: const Color(0xff191A1C)));
   }
 }
 

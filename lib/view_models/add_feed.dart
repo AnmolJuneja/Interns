@@ -24,17 +24,18 @@ class AddFeedApi extends GetxController {
       'lat': lat,
       'description': description,
       'view_status': viewStatus,
-    });
-    String fileName = images.path.split('/').last;
-    MapEntry<String, dio.MultipartFile> image = MapEntry(
-      'images[]',
-      await dio.MultipartFile.fromFile(
-        images.path,
-        filename: fileName,
-      ),
-    );
-    data.files.add(image);
-    try {
+      });
+       File imageFile = File(images.path);
+        String fileName = imageFile.path.split('/').last;
+        MapEntry<String, dio.MultipartFile> addFeedImage = MapEntry(
+          "images[]",
+          await dio.MultipartFile.fromFile(
+            imageFile.path,
+            filename: fileName,
+          ),
+        );
+        data.files.add(addFeedImage);
+         try {
       dio.Response response;
       response = await dio.Dio().post(
           'https://reelpro.yatilabs.com/api/v1/feed/addfeed',
@@ -58,3 +59,6 @@ class AddFeedApi extends GetxController {
     return Future.value();
   }
 }
+      
+   
+   

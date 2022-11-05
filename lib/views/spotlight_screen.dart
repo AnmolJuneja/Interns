@@ -1,15 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:reelpro/consts/button.dart';
+import 'package:reelpro/consts/container.dart';
 import 'package:reelpro/consts/post.dart';
 import 'package:reelpro/consts/text.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/consts/text_field.dart';
+import 'package:reelpro/consts/text_fieldc.dart';
+import 'package:get/get.dart';
+import 'package:reelpro/consts/toggle_container.dart';
+import 'package:reelpro/models/search_user.dart';
+import 'package:reelpro/view_models/fish_species_list.dart';
+import 'package:reelpro/view_models/search_user.dart';
+import 'package:reelpro/views/other_user_profile.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class SpotlightScreen extends StatelessWidget {
+class SpotlightScreen extends StatefulWidget {
   const SpotlightScreen({Key? key}) : super(key: key);
 
   @override
+  State<SpotlightScreen> createState() => _SpotlightScreenState();
+}
+
+class _SpotlightScreenState extends State<SpotlightScreen> {
+  final instance1 = Get.put(FishSpeciesListApi());
+  var valueOfList = ''.obs;
+  final instance = Get.put(SearchUserApi());
+  TextEditingController textEditingController = TextEditingController();
+  @override
   Widget build(BuildContext context) {
-    TextEditingController textEditingController = TextEditingController();
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -27,11 +45,131 @@ class SpotlightScreen extends StatelessWidget {
                           children: [
                             TextFSpotlight(
                                 textEditingController: textEditingController,
-                                hintText: 'Fish tournament',
+                                hintText: 'Search',
                                 textInputType: TextInputType.text,
                                 prefix: null,
-                                onchanged: (value) {}),
-                            Image.asset('assets/images/Group 209.png'),
+                                onchanged: (value) {
+                                  userSearch();
+                                }),
+                            GestureDetector(
+                                onTap: () {
+                                  Get.bottomSheet(
+                                    Container(
+                                      padding: EdgeInsets.only(top: 48.h),
+                                      height: 478.h,
+                                      decoration: const BoxDecoration(
+                                          borderRadius: BorderRadius.vertical(
+                                              top: Radius.circular(25)),
+                                          color: Color(0xffF2F9FF)),
+                                      child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 36.w),
+                                                child: Text15PtBlue(
+                                                    text: 'View Post by')),
+                                            SizedBox(height: 20.h),
+                                            ListView(
+                                              shrinkWrap: true,
+                                              physics:
+                                                  const NeverScrollableScrollPhysics(),
+                                              children: registerationType
+                                                  .map((e) => GestureDetector(
+                                                        onTap: () {
+                                                          valueOfList.value = e;
+                                                        },
+                                                        child: Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                              top: 20.h,
+                                                            ),
+                                                            child: Obx(() => ToggleContainer(
+                                                                color: valueOfList
+                                                                            .value ==
+                                                                        e
+                                                                    ? instance1
+                                                                        .selectedItemcolor
+                                                                        .value
+                                                                    : instance1
+                                                                        .transparentColor
+                                                                        .value,
+                                                                isSelected:
+                                                                    valueOfList.value ==
+                                                                            e
+                                                                        ? true
+                                                                        : false,
+                                                                text: e))),
+                                                      ))
+                                                  .toList(),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                  top: 10.h,
+                                                  left: 36.w,
+                                                  right: 36.w),
+                                              child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    const Divider(thickness: 1),
+                                                    SizedBox(height: 10.h),
+                                                    Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text14Pt(
+                                                              text:
+                                                                  'Tagged Location'),
+                                                          SvgPicture.asset(
+                                                              'assets/images/button.svg')
+                                                        ]),
+                                                    SizedBox(height: 10.h),
+                                                    const Divider(thickness: 1),
+                                                    SizedBox(height: 20.h),
+                                                    Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Button56(
+                                                              onpressed: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              buttonText:
+                                                                  'Remove',
+                                                              textColor:
+                                                                  Colors.black,
+                                                              width: 1,
+                                                              widthColor:
+                                                                  Colors.black,
+                                                              color: const Color(
+                                                                  0xffF2F9FF)),
+                                                          Button56Blue(
+                                                              onpressed: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              buttonText:
+                                                                  'Apply',
+                                                              textColor:
+                                                                  const Color(
+                                                                      0xffF2F9FF),
+                                                              color: const Color(
+                                                                  0xff2B67A3))
+                                                        ])
+                                                  ]),
+                                            )
+                                          ]),
+                                    ),
+                                    isScrollControlled: true,
+                                  );
+                                },
+                                child:
+                                    Image.asset('assets/images/Group 209.png')),
                           ]),
                       SizedBox(height: 25.h),
                     ])),
@@ -89,11 +227,45 @@ class SpotlightScreen extends StatelessWidget {
                                 commentText: '12',
                                 shareImage: 'assets/images/Group 207.png')
                           ]))),
-                  Column(children: const []),
+                  Obx(() => ListView.builder(
+                      itemCount: instance.getUserLength.length,
+                      itemBuilder: (context, index) {
+                        return search(instance.getUserLength[index]);
+                      })),
                 ]),
               ),
             )
           ])),
     );
   }
+
+  userSearch() async {
+    await instance.searchUserFinal(textEditingController.text);
+  }
+
+  final List<String> registerationType = ['Ascending', 'Descending'];
+}
+
+Widget search(ListOfUser listOfUser) {
+  return GestureDetector(
+      onTap: () {
+        Get.to(() => OtherUserProfileUI(userId: listOfUser.id!.toInt()));
+      },
+      child: Padding(
+        padding: EdgeInsets.only(left: 36.w, right: 36.w, bottom: 12.h),
+        child: Row(
+          children: [
+            listOfUser.profilePic != null
+                ? ProfilePicContainer(
+                    image: NetworkImage(listOfUser.profilePic!))
+                : ProfilePicContainer(
+                    image: AssetImage('assets/images/profile.png')),
+            SizedBox(width: 12.w),
+            Center(
+              child: Text16PtBlack(
+                  text: '${listOfUser.firstname} ${listOfUser.lastname}'),
+            )
+          ],
+        ),
+      ));
 }

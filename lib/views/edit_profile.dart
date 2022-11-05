@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -11,6 +12,7 @@ import 'package:reelpro/consts/appbar.dart';
 import 'package:reelpro/consts/button.dart';
 import 'package:reelpro/consts/text.dart';
 import 'package:reelpro/consts/text_field.dart';
+import 'package:reelpro/consts/text_fieldc.dart';
 import 'package:reelpro/models/edit_profile.dart';
 import 'package:reelpro/models/shared_preferences.dart';
 import 'package:reelpro/view_models/edit_profile.dart';
@@ -19,6 +21,7 @@ import 'package:reelpro/view_models/registeration_step_two.dart';
 import 'package:reelpro/view_models/validator.dart';
 import 'package:reelpro/views/manage_team_screen.dart';
 import 'package:reelpro/views/user_profile.dart';
+import 'package:image_cropper/image_cropper.dart';
 
 class EditProfile1 extends StatefulWidget {
   const EditProfile1({
@@ -48,6 +51,7 @@ class _EditProfile1State extends State<EditProfile1> {
   ImagePicker picker = ImagePicker();
   final validateEmail = Get.put(ValidateEmail());
   final instanceOtpViewModel = Get.put(OtpViewModel());
+  String? _chosenValue;
   @override
   void initState() {
     firstNameController.text = instanceStepTwo.firstName1.value;
@@ -60,26 +64,25 @@ class _EditProfile1State extends State<EditProfile1> {
     super.initState();
   }
 
-  String? _chosenValue;
-
   @override
   Widget build(BuildContext context) {
     _chosenValue = instanceStepTwo.gender1.value;
     return Scaffold(
         appBar: AppBar(
             elevation: 0,
-            toolbarHeight: 60.h,
+            toolbarHeight: 70.h,
             centerTitle: true,
             backgroundColor: const Color(0xffF2F9FF),
             leading: Padding(
-                padding: EdgeInsets.only(left: 36.w, top: 27.h),
+                padding: EdgeInsets.only(left: 36.w, top: 42.h),
                 child: GestureDetector(
                     onTap: () {
                       Get.to(() => const UserProfileUI());
                     },
-                    child: const Icon(Icons.arrow_back_ios, color: Colors.black))),
+                    child:
+                        const Icon(Icons.arrow_back_ios, color: Colors.black))),
             title: Padding(
-                padding: EdgeInsets.only(top: 27.h),
+                padding: EdgeInsets.only(top: 42.h),
                 child: Text21PtBlack(text: 'Edit Profile'))),
         backgroundColor: const Color(0xffF2F9FF),
         body: Container(
@@ -90,13 +93,18 @@ class _EditProfile1State extends State<EditProfile1> {
             SizedBox(height: 44.h),
             GestureDetector(
                 onTap: () async {
-                  XFile? xFile =
-                      await picker.pickImage(source: ImageSource.gallery);
-                  if (xFile != null) {
-                    setState(() {
-                      file = File(xFile.path);
-                    });
-                  }
+                     try {
+              final images = await ImagePicker().pickImage(source: ImageSource.gallery);
+              if (images == null) return;
+              File? tempPath = File(images.path);
+              tempPath = await cropImage(imageFile: tempPath);
+              setState(() {
+                this.file = tempPath;
+              });
+            } on PlatformException catch (e) {
+              print(e);
+              Navigator.of(context).pop();
+            }
                 },
                 child: file == null
                     ? Container(
@@ -142,7 +150,7 @@ class _EditProfile1State extends State<EditProfile1> {
             SizedBox(height: 8.h),
             // ignore: use_full_hex_values_for_flutter_colors
             TextF(
-              readOnly:false,
+                readOnly: false,
                 textEditingController: firstNameController,
                 onchanged: (value) {},
                 hintText: 'First name',
@@ -150,7 +158,7 @@ class _EditProfile1State extends State<EditProfile1> {
                 prefix: null),
             SizedBox(height: 8.h),
             TextF(
-              readOnly:false,
+                readOnly: false,
                 textEditingController: lastNameController,
                 onchanged: (value) {},
                 hintText: 'Last name',
@@ -199,8 +207,8 @@ class _EditProfile1State extends State<EditProfile1> {
               width: 356.w,
               decoration: BoxDecoration(
                   color: Colors.white,
-                  border:
-                      Border.all(color: const Color.fromRGBO(113, 154, 195, 0.16)),
+                  border: Border.all(
+                      color: const Color.fromRGBO(113, 154, 195, 0.16)),
                   boxShadow: const [
                     BoxShadow(
                         // ignore: use_full_hex_values_for_flutter_colors
@@ -211,7 +219,7 @@ class _EditProfile1State extends State<EditProfile1> {
                   borderRadius: BorderRadius.circular(5)),
               child: DropdownButton<String>(
                 iconSize: 0.0,
-                value: _chosenValue,
+                value: instanceStepTwo.gender1.value,
                 items: <String>['Male', 'Female', 'Transgender']
                     .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
@@ -221,12 +229,10 @@ class _EditProfile1State extends State<EditProfile1> {
                 }).toList(),
                 hint: Text(
                   'Gender',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline2!
-                      .copyWith(fontSize: 15.sp, color: const Color(0xff48505899)
-                          // greyFontColoR.withAlpha(99),
-                          ),
+                  style: Theme.of(context).textTheme.headline2!.copyWith(
+                      fontSize: 15.sp, color: const Color(0xff48505899)
+                      // greyFontColoR.withAlpha(99),
+                      ),
                 ),
                 icon: const Icon(Icons.keyboard_arrow_down,
                     color: Color(0xff48505899)
@@ -298,5 +304,15 @@ class _EditProfile1State extends State<EditProfile1> {
       SaveFlah().saveFlag(instanceOtpViewModel.flagEmoji.value);
     });
     Get.to(() => const UserProfileUI());
+  }
+    Future<File?> cropImage({required File imageFile}) async {
+    CroppedFile? cropImage = await ImageCropper().cropImage(
+        maxHeight: 180,
+        maxWidth: 180,
+        compressQuality: 100,
+        aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+        sourcePath: imageFile.path);
+    if (cropImage == null) return null;
+    return File(cropImage.path);
   }
 }

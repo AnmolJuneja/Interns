@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/consts/button.dart';
 import 'package:reelpro/consts/text.dart';
@@ -10,8 +11,14 @@ import 'package:reelpro/view_models/add_feed.dart';
 import 'package:reelpro/view_models/fetch_lat_lng.dart';
 import 'package:reelpro/views/bottom_navigation.dart';
 import 'dart:io';
-
+import 'package:image_cropper/image_cropper.dart';
 import 'package:reelpro/views/tracker.dart';
+
+enum AppState {
+  free,
+  picked,
+  cropped,
+}
 
 class AddFeedConst extends StatefulWidget {
   const AddFeedConst({
@@ -23,18 +30,27 @@ class AddFeedConst extends StatefulWidget {
 }
 
 class _AddFeedConstState extends State<AddFeedConst> {
+  late AppState state;
   ImagePicker picker = ImagePicker();
-  File? file;
   TextEditingController textEditingController = TextEditingController();
+
+  TextEditingController textEditingControllerSearch = TextEditingController();
+  final fetchAdress = Get.put(FetchLatLng());
+  final addFeedApi = Get.put(AddFeedApi());
   var location = true.obs;
   var height = 175.obs;
   var width = 375.obs;
+  var viewStatus = 0;
+  File? file;
+
+  @override
+  void initState() {
+    state = AppState.free;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController textEditingControllerSearch = TextEditingController();
-    final fetchAdress = Get.put(FetchLatLng());
-    final addFeedApi = Get.put(AddFeedApi());
-    int? viewStatus;
     return Scaffold(
       backgroundColor: const Color(0xffF2F9FF),
       body: Padding(
@@ -92,20 +108,22 @@ class _AddFeedConstState extends State<AddFeedConst> {
                   },
                   child: Text16AddFeed(text: 'Add photos'))
             ]),
-            SizedBox(height: 20.h),
+            // SizedBox(height: 20.h),
             Container(
-                padding: EdgeInsets.only(left: 54.w),
-                child: file == null
-                    ? const Text('')
-                    : GestureDetector(
-                        onDoubleTap: () {
-                          height.value = 175.h.toInt();
-                        },
-                        onTap: () {
-                          height.value = 350.h.toInt();
-                          width.value = 428.w.toInt();
-                        },
-                        child: Obx(() => Container(
+              padding: EdgeInsets.only(left: 54.w),
+              child: file == null
+                  ? const Text('')
+                  : GestureDetector(
+                      onDoubleTap: () {
+                        height.value = 175.h.toInt();
+                      },
+                      onTap: () {
+                        height.value = 350.h.toInt();
+                        width.value = 428.w.toInt();
+                      },
+                      child: file == null
+                          ? SizedBox()
+                          : Container(
                               height: height.value.toDouble(),
                               width: width.value.toDouble(),
                               decoration: BoxDecoration(
@@ -114,13 +132,13 @@ class _AddFeedConstState extends State<AddFeedConst> {
                                       image: FileImage(file!)),
                                   borderRadius: BorderRadius.circular(10)),
                             )),
-                      )),
+            ),
             file == null
                 ? SizedBox(
-                    height: 0.h,
+                    height: 20.h,
                   )
                 : SizedBox(
-                    height: 40.h,
+                    height: 20.h,
                   ),
             Row(mainAxisAlignment: MainAxisAlignment.start, children: [
               Image.asset('assets/images/Group 89.png'),
@@ -172,9 +190,8 @@ class _AddFeedConstState extends State<AddFeedConst> {
                                       addFeedApi.isSelected2.value = false;
                                       addFeedApi.isSelected3.value = false;
                                       addFeedApi.selectedItem.value = 'Public';
-                                      setState(() {
-                                        viewStatus = 1;
-                                      });
+
+                                      viewStatus = 1;
                                     },
                                     child: ToggleContainer(
                                       color: addFeedApi.color1.value,
@@ -197,9 +214,8 @@ class _AddFeedConstState extends State<AddFeedConst> {
                                         addFeedApi.isSelected3.value = false;
                                         addFeedApi.selectedItem.value =
                                             'Followers';
-                                        setState(() {
-                                          viewStatus = 2;
-                                        });
+
+                                        viewStatus = 2;
                                       },
                                       child: ToggleContainer(
                                         color: addFeedApi.color2.value,
@@ -224,9 +240,8 @@ class _AddFeedConstState extends State<AddFeedConst> {
                                         addFeedApi.isSelected1.value = false;
                                         addFeedApi.selectedItem.value =
                                             'Private';
-                                        setState(() {
-                                          viewStatus = 3;
-                                        });
+
+                                        viewStatus = 3;
                                       },
                                       child: ToggleContainer(
                                         color: addFeedApi.color3.value,
@@ -288,12 +303,13 @@ class _AddFeedConstState extends State<AddFeedConst> {
                 ? SizedBox(
                     height: 367.h,
                   )
-                : SizedBox(height: 170.h),
-            MyButtonGrey(
+                : SizedBox(height: 160.h),
+            MyButton(
                 onpressed: () async {
                   await addFeedApi.addFeed('location', 34.7, 37.4,
-                      textEditingController.text, 1, file!);
-                  Get.to(() => BottomNavigation(currentIndex: 0));
+                      textEditingController.text, viewStatus, file!);
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => BottomNavigation(currentIndex: 0)));
                 },
                 buttonText: 'Post')
           ]),
@@ -302,21 +318,46 @@ class _AddFeedConstState extends State<AddFeedConst> {
     );
   }
 
-  openCamera() async {
-    XFile? xFile = await picker.pickImage(source: ImageSource.camera);
-    if (xFile != null) {
+  Future openCamera() async {
+    try {
+      final images = await ImagePicker().pickImage(source: ImageSource.camera);
+      if (images == null) return;
+      File? tempPath = File(images.path);
+      tempPath = await cropImage(imageFile: tempPath);
       setState(() {
-        file = File(xFile.path);
+        this.file = tempPath;
+        // Navigator.of(context).pop();
       });
+    } on PlatformException catch (e) {
+      print(e);
+      Navigator.of(context).pop();
     }
   }
 
-  openGallery() async {
-    XFile? xFile = await picker.pickImage(source: ImageSource.gallery);
-    if (xFile != null) {
+  Future<File?> cropImage({required File imageFile}) async {
+    CroppedFile? cropImage = await ImageCropper().cropImage(
+        maxHeight: 180,
+        maxWidth: 180,
+        compressQuality: 100,
+        aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+        sourcePath: imageFile.path);
+    if (cropImage == null) return null;
+    return File(cropImage.path);
+  }
+
+  Future openGallery() async {
+    try {
+      final images = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (images == null) return;
+      File? tempPath = File(images.path);
+      tempPath = await cropImage(imageFile: tempPath);
       setState(() {
-        file = File(xFile.path);
+        this.file = tempPath;
+        // Navigator.of(context).pop();
       });
+    } on PlatformException catch (e) {
+      print(e);
+      Navigator.of(context).pop();
     }
   }
 }

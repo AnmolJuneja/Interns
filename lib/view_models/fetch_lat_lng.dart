@@ -5,9 +5,14 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
 class FetchLatLng extends GetxController {
-  var lat = 'Get lat'.obs;
-  var lng = 'Get lng'.obs;
-  var address = 'Get address'.obs;
+  var lat = ''.obs;
+  var lng = ''.obs;
+  var dlat = 34.7;
+  var dlng = 37.4;
+  var address = ''.obs;
+  var country = ''.obs;
+  var address1 = ''.obs;
+  var state = ''.obs;
   late StreamSubscription<Position> streamSubscription;
 
   @override
@@ -15,8 +20,6 @@ class FetchLatLng extends GetxController {
     super.onInit();
     getLocation();
   }
-
-
 
   getLocation() async {
     bool serviceEnabled;
@@ -51,6 +54,11 @@ class FetchLatLng extends GetxController {
     List<Placemark> placemark =
         await placemarkFromCoordinates(position.latitude, position.longitude);
     Placemark place = placemark[0];
-    address.value = '${place.locality}, ${place.country}';
+    address.value = '${place.locality}';
+    country.value = '${place.country}';
+    state.value = '${place.administrativeArea}';
+    address1.value = '${place.street}';
+
+    ;
   }
 }

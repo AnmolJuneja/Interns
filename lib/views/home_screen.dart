@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reelpro/consts/text.dart';
-import 'package:reelpro/models/catchlog_list.dart';
 import 'package:reelpro/models/registration_step_two.dart';
 import 'package:reelpro/models/shared_preferences.dart';
 import 'package:reelpro/view_models/otp_view_model.dart';
@@ -90,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
               right: 36.w,
               child: GestureDetector(
                 onTap: () {
-                  Get.to(() => const UserProfileUI());
+                  // Get.to(() => const UserProfileUI());
                 },
                 child: Container(
                     height: 60.h,
