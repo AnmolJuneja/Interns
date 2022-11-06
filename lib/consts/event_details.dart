@@ -3,16 +3,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/consts/button.dart';
 import 'package:reelpro/consts/container.dart';
 import 'package:reelpro/consts/text.dart';
-import 'package:reelpro/views/bottom_navigation.dart';
-import 'package:reelpro/views/crew_and_contacts.dart';
-import 'package:reelpro/views/disclaimers.dart';
-import 'package:reelpro/views/event_rules.dart';
-import 'package:reelpro/views/event_weather.dart';
-import 'package:reelpro/views/gallery.dart';
-import 'package:reelpro/views/leaderboard.dart';
+import 'package:reelpro/views/bottom_navigation_screens/bottom_navigation.dart';
+import 'package:reelpro/views/event_screens/crew_and_contacts.dart';
+import 'package:reelpro/views/event_screens/disclaimers.dart';
+import 'package:reelpro/views/event_screens/event_rules.dart';
+import 'package:reelpro/views/event_screens/event_weather.dart';
+import 'package:reelpro/views/event_screens/gallery.dart';
+import 'package:reelpro/views/event_screens/leaderboard.dart';
 import 'package:get/get.dart';
-import 'package:reelpro/views/target_species.dart';
-import 'package:reelpro/views/teams_anglers.dart';
+import 'package:reelpro/views/event_screens/target_species.dart';
+import 'package:reelpro/views/event_screens/teams_anglers.dart';
 
 class EventDetailsConst extends StatelessWidget {
   DecorationImage? image;

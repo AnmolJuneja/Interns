@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:reelpro/views/registeration_screen.dart';
+import 'package:reelpro/views/registeration_screens/registeration_screen.dart';
 
 class StepTwo extends StatelessWidget {
   const StepTwo({Key? key}) : super(key: key);

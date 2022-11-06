@@ -68,8 +68,44 @@ class Container100_88 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(top: 10.h),
-      height: 88.h,
+      height: 95.h,
       width: 110.w,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(5),
+        boxShadow: const [
+          BoxShadow(
+              // ignore: use_full_hex_values_for_flutter_colors
+              color: Color.fromRGBO(113, 154, 195, 0.16),
+              blurRadius: 0,
+              offset: Offset(0, 4))
+        ],
+      ),
+      child: Center(
+        child: Column(
+          children: [
+            Image(image: AssetImage(image), height: 44.h, width: 44.w),
+            SizedBox(height: 8.h),
+            Text16PtBlue(text: text)
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Container100_88w extends StatelessWidget {
+  String image;
+  String text;
+  Container100_88w({Key? key, required this.image, required this.text})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: 10.h),
+      height: 95.h,
+      width: 120.w,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(5),
@@ -222,7 +258,7 @@ class SponserContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 300.h,
+        height: 350.h,
         width: double.infinity,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10), color: Colors.white),

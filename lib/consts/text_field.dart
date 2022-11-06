@@ -6,7 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 import 'package:reelpro/consts/text.dart';
-import 'package:reelpro/view_models/otp_view_model.dart';
+import 'package:reelpro/controllers/registeration_controllers.dart';
+import 'package:reelpro/view_models/register_user_request/otp_view_model.dart';
 
 class TextF extends StatelessWidget {
   TextEditingController textEditingController;
@@ -487,7 +488,7 @@ class TextF10 extends StatefulWidget {
 }
 
 class _TextF10State extends State<TextF10> {
-  final instanceOtpViewModel = Get.put(OtpViewModel());
+  final instanceOtpViewModel = Get.put(RegistrationStepTwo2());
 
   @override
   Widget build(BuildContext context) {
@@ -527,18 +528,20 @@ class _TextF10State extends State<TextF10> {
                   height: 35,
                   width: 20,
                   child: instanceOtpViewModel.flagEmoji.value.isEmpty
-                      ? Image.asset('assets/images/Rectangle 6.png')
+                      ? Padding(
+                          padding: EdgeInsets.only(top: 8.h),
+                          child: Image.asset('assets/images/Rectangle 6.png'))
                       : Padding(
-                          padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
+                          padding: EdgeInsets.only(top: 14.h),
                           child: Text(instanceOtpViewModel.flagEmoji.value))))),
           SizedBox(width: 8.w),
-          Text('+',
-              style: TextStyle(
-                  fontFamily: 'Helvetica',
-                  fontSize: 16.sp,
-                  // ignore: use_full_hex_values_for_flutter_colors
-                  color: const Color(0xff48505889),
-                  fontWeight: FontWeight.normal)),
+          // Text('+',
+          //     style: TextStyle(
+          //         fontFamily: 'Helvetica',
+          //         fontSize: 16.sp,
+          //         // ignore: use_full_hex_values_for_flutter_colors
+          //         color: const Color(0xff48505889),
+          //         fontWeight: FontWeight.normal)),
           Obx(() => GestureDetector(
               onTap: () {
                 showCountryPicker(
@@ -555,13 +558,16 @@ class _TextF10State extends State<TextF10> {
                   },
                 );
               },
-              child: Text(instanceOtpViewModel.countryText.value,
-                  style: TextStyle(
-                      fontFamily: 'Helvetica',
-                      fontSize: 16.sp,
-                      // ignore: use_full_hex_values_for_flutter_colors
-                      color: const Color(0xff48505889),
-                      fontWeight: FontWeight.normal)))),
+              child: Padding(
+                padding: EdgeInsets.only(top: 8.h),
+                child: Text('+${instanceOtpViewModel.countryText.value}',
+                    style: TextStyle(
+                        fontFamily: 'Helvetica',
+                        fontSize: 16.sp,
+                        // ignore: use_full_hex_values_for_flutter_colors
+                        color: const Color(0xff48505889),
+                        fontWeight: FontWeight.normal)),
+              ))),
           Expanded(
               child: TextFormField(
                   // autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -576,20 +582,21 @@ class _TextF10State extends State<TextF10> {
                   keyboardType: widget.textInputType,
                   maxLength: 10,
                   decoration: InputDecoration(
-                      // isCollapsed: true,
-                      counterText: '',
-                      border: InputBorder.none,
-                      hintText: widget.hintText,
-                      hintStyle: TextStyle(
-                          fontFamily: 'Helvetica',
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16.sp,
-                          // ignore: use_full_hex_values_for_flutter_colors
-                          color: const Color(0xff48505899)),
-                      fillColor: Colors.white,
-                      // prefixIcon: prefix,
-                      filled: true,
-                      contentPadding: EdgeInsets.only(left: 10.w, bottom: 5.h)))
+                    // isCollapsed: true,
+                    counterText: '',
+                    border: InputBorder.none,
+                    hintText: widget.hintText,
+                    hintStyle: TextStyle(
+                        fontFamily: 'Helvetica',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16.sp,
+                        // ignore: use_full_hex_values_for_flutter_colors
+                        color: const Color(0xff48505899)),
+                    fillColor: Colors.white,
+                    // prefixIcon: prefix,
+                    filled: true,
+                    // contentPadding: EdgeInsets.only(left: 10.w, bottom: 5.h)
+                  ))
               // ignore: use_full_hex_values_for_flutter_colors)
               )
         ]));

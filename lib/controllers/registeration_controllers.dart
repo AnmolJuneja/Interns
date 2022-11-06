@@ -1,0 +1,77 @@
+import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
+import 'package:reelpro/models/shared_preferences.dart';
+
+class RegistrationStepTwo2 {
+  var genderF = ''.obs;
+  var selectedValue = ''.obs;
+  var publicColor = const Color(0xffF2F9FF).obs;
+  var privateColor = const Color(0xffF2F9FF).obs;
+  var selectedColor = const Color(0xffF2F9FF).obs;
+  var selectedItemcolor = const Color(0xffd6e9ff).obs;
+  var publicisSelected = false.obs;
+  var privateisSelected = false.obs;
+  var teamCount = ''.obs;
+  var color1 = const Color.fromRGBO(113, 154, 195, 0.16).obs;
+  var color6 = const Color(0xf2b67a329).obs;
+  var color7 = const Color(0xf2b67a329).obs;
+  var color2 = const Color.fromRGBO(113, 154, 195, 0.16).obs;
+  var color3 = const Color(0xf2b67a329).obs;
+  var color4 = const Color(0xf2b67a329).obs;
+  var color5 = const Color(0xf2b67a329).obs;
+  var errorText = ''.obs;
+  // var genderF = ''.obs;
+  var blueColor = const Color(0xff719AC3).obs;
+  var isSelected1 = false.obs;
+  var isSelected2 = false.obs;
+  var width1 = 1.0.obs;
+  var width2 = 1.0.obs;
+  var width3 = 1.0.obs;
+  var width4 = 1.0.obs;
+  var width5 = 1.0.obs;
+  var fishingType = '';
+  var firstName1 = ''.obs;
+  var lastName1 = ''.obs;
+  var email1 = ''.obs;
+  var gender1 = ''.obs;
+  var dob1 = ''.obs;
+  var number = ''.obs;
+  var profilePic1 = ''.obs;
+  var description = ''.obs;
+  var userId = 0;
+  String vetran = '0';
+  var countryText = '1'.obs;
+  var flagEmoji = ''.obs;
+  String? greetings;
+  navigateToOnboarding() async {
+        
+    var dateTime = DateTime.now().hour;
+    if (dateTime > 11.59 && dateTime < 16) {
+      greetings = 'Good Afternoon';
+    } else if (dateTime > 15.59 && dateTime < 24) {
+      greetings = 'Good Evening';
+    } else {
+      greetings = 'Good Morning';
+    }
+    String firstLastName = await SaveFirstName().getFirstName();
+    firstName1.value = firstLastName;
+    String lastName = await SaveLastName().getLastName();
+    lastName1.value = lastName;
+    String email = await SaveEmail().getEmail();
+    email1.value = email;
+    String gender = await Gender().getGender();
+    gender1.value = gender;
+    String dob = await Dob().getDob();
+    dob1.value = dob;
+    String number1 = await SaveNumber().getNumber();
+    number.value = number1;
+    String profilePic = await SaveProfilePic().getProfilePic();
+    profilePic1.value = profilePic;
+    String description1 = await SaveDescription().getDescripton();
+    description.value = description1;
+    String country = await SaveCountryCode().getCountryCode();
+    countryText.value = country;
+    String flag = await SaveFlah().getFlag();
+    flagEmoji.value = flag;
+  }
+}

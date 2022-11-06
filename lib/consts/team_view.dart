@@ -5,7 +5,7 @@ import 'package:reelpro/consts/image.dart';
 import 'package:reelpro/consts/small_text.dart';
 import 'package:reelpro/consts/text.dart';
 import 'package:get/get.dart';
-import 'package:reelpro/views/invite_team_members.dart';
+import 'package:reelpro/views/team_screens/invite_team_members.dart';
 
 class UpperView extends StatelessWidget {
   String image;
@@ -48,30 +48,39 @@ class UpperView extends StatelessWidget {
                         fit: BoxFit.cover, image: AssetImage(image))),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 20.h, left: 78.w, right: 93.w),
+                padding: EdgeInsets.only(top: 20.h, left: 36.w, right: 36.w),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    PostText(text: post),
-                    PostText(text: members),
-                    PostText(text: pendingRequests)
+                    Column(children: [
+                      PostText(text: post),
+                      TextF1(text: 'Posts'),
+                    ]),
+                    Column(children: [
+                      PostText(text: members),
+                      TextF1(text: 'Members'),
+                    ]),
+                    Column(children: [
+                      PostText(text: pendingRequests),
+                      TextF1(text: 'Pending Request')
+                    ])
                   ],
                 ),
               ),
-              Padding(
-                // ignore: prefer_const_constructors
-                padding: EdgeInsets.only(left: 68, right: 34),
-                child: Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    TextF1(text: 'Posts'),
-                    SizedBox(width: 74.w),
-                    TextF1(text: 'Members'),
-                    SizedBox(width: 30.w),
-                    TextF1(text: 'Pending Request')
-                  ],
-                ),
-              ),
+              // Padding(
+              //   // ignore: prefer_const_constructors
+              //   padding: EdgeInsets.only(left: 68, right: 34),
+              //   child: Row(
+              //     // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //     children: [
+
+              //       SizedBox(width: 74.w),
+
+              //       SizedBox(width: 30.w),
+
+              //     ],
+              //   ),
+              // ),
               Padding(
                 padding: EdgeInsets.only(top: 30.h, left: 36.w, right: 36.w),
                 child: Row(
@@ -98,25 +107,25 @@ class UpperView extends StatelessWidget {
                                 color: const Color(0xff485058)),
                           ))),
                     ),
-                       Container(
-                        height: 44.h,
-                        width: 167.w,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5)),
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary: const Color(0xff2B67A3)),
-                            onPressed: onpressed,
-                            child: Center(
-                                child: Text(
-                              btn2Text,
-                              style: TextStyle(
-                                  fontFamily: 'Helvetica',
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.white),
-                            ))),
-                      ),
+                    Container(
+                      height: 44.h,
+                      width: 167.w,
+                      decoration:
+                          BoxDecoration(borderRadius: BorderRadius.circular(5)),
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: const Color(0xff2B67A3)),
+                          onPressed: onpressed,
+                          child: Center(
+                              child: Text(
+                            btn2Text,
+                            style: TextStyle(
+                                fontFamily: 'Helvetica',
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white),
+                          ))),
+                    ),
                   ],
                 ),
               )
@@ -209,43 +218,47 @@ class TeamViewColumn extends StatelessWidget {
                           EdgeInsets.only(top: 16.h, left: 12.w, right: 12.w),
                       child: Column(
                         children: [
-                          Row(
-                            // mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Image(
-                                image: AssetImage(image),
-                                height: 56.h,
-                                width: 56.w,
-                              ),
-                              SizedBox(width: 12.w),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text20Pt(text: text),
-                                  SizedBox(height: 7.h),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      const Image(
-                                          image: AssetImage(
-                                              'assets/images/Icon material-date-range.png')),
-                                      SizedBox(width: 6.w),
-                                      Text14Pt(text: text1),
-                                      SizedBox(width: 10.w),
-                                      const Image(
-                                          image: AssetImage(
-                                              'assets/images/Subtraction 1.png')),
-                                      SizedBox(width: 7.w),
-                                      Text14Pt(text: text2)
-                                    ],
-                                  )
-                                ],
-                              ),
-                              SizedBox(width: 25.w),
-                              const Icon(Icons.more_horiz)
-                            ],
-                          ),
+                          Row(children: [
+                            Row(
+                              // mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Image(
+                                  image: AssetImage(image),
+                                  height: 56.h,
+                                  width: 56.w,
+                                ),
+                                SizedBox(width: 12.w),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text20Pt(text: text),
+                                    SizedBox(height: 7.h),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        const Image(
+                                            image: AssetImage(
+                                                'assets/images/Icon material-date-range.png')),
+                                        SizedBox(width: 6.w),
+                                        Text14Pt(text: text1),
+                                        SizedBox(width: 10.w),
+                                        const Image(
+                                            image: AssetImage(
+                                                'assets/images/Subtraction 1.png')),
+                                        SizedBox(width: 7.w),
+                                        Text14Pt(text: text2)
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Padding(
+                                padding: EdgeInsets.only(bottom: 20.h),
+                                child: const Icon(Icons.more_horiz))
+                          ]),
                           SizedBox(height: 18.h),
                           SmallText(
                               text: text3, color: const Color(0xff485058)),
