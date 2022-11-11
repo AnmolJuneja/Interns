@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/consts/text.dart';
-import 'package:reelpro/consts/text_field.dart';
 import 'package:reelpro/consts/text_fieldc.dart';
-import 'package:reelpro/models/event_list.dart';
-import 'package:reelpro/models/search_user.dart';
-import 'package:reelpro/view_models/event_network_request/event_list.dart';
-import 'package:reelpro/view_models/team_and_profile_request/search_user.dart';
 // import 'package:reelpro/views/list.dart';
 import 'package:reelpro/views/bottom_navigation_screens/list_events.dart';
-import 'package:get/get.dart';
-import 'package:reelpro/views/family_and_profile_screens/other_user_profile.dart';
 import 'package:reelpro/views/event_screens/upcoming_events.dart';
 
 class EventListUI extends StatefulWidget {
@@ -27,14 +20,22 @@ class _EventListUIState extends State<EventListUI> {
     return DefaultTabController(
         length: 3,
         child: Scaffold(
+            appBar: AppBar(
+              // toolbarHeight: 80.h,
+              backgroundColor: const Color(0xffF2F9FF),
+              elevation: 0,
+              leadingWidth: 140,
+              leading: Padding(
+                  padding: EdgeInsets.only(top: 28.h, left: 36.w),
+                  child: Text30ptBlue(text: 'Events')),
+            ),
             backgroundColor: const Color(0xffF2F9FF),
             body: Column(children: [
               Padding(
-                  padding: EdgeInsets.only(top: 70.h, left: 36.w, right: 32.w),
+                  padding: EdgeInsets.only(left: 36.w, right: 32.w),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text30ptBlue(text: 'Events'),
                         SizedBox(height: 24.h),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

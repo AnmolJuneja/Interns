@@ -4,8 +4,6 @@ import 'package:reelpro/consts/text.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reelpro/views/family_and_profile_screens/add_family_member.dart';
-import 'package:reelpro/views/family_and_profile_screens/family_members_list.dart';
-import 'package:reelpro/views/family_and_profile_screens/profile_settings.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ManageFamilyUI extends StatelessWidget {

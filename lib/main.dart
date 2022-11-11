@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
         designSize: const Size(428, 926),
-        builder: (context, child) =>
-            const GetMaterialApp(home: SplashScreen()));
+        builder: (context, child) => const GetMaterialApp(
+            debugShowCheckedModeBanner: false, home: SplashScreen()));
   }
 }

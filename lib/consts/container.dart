@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:reelpro/consts/button.dart';
 import 'package:reelpro/consts/text.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class BottomSheetContainer extends StatelessWidget {
   Text15PtGrey widgetText;
@@ -298,7 +296,7 @@ class CircleContainerBlue extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-              color: Color(0xffF2F9FF),
+              color: const Color(0xffF2F9FF),
               fontSize: 18.sp,
               fontWeight: FontWeight.w500),
         ),

@@ -3,18 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:reelpro/consts/button.dart';
 import 'package:reelpro/consts/text.dart';
 import 'package:reelpro/consts/text_field.dart';
-import 'package:reelpro/consts/text_fieldc.dart';
 import 'package:reelpro/controllers/registeration_controllers.dart';
-import 'package:reelpro/models/shared_preferences.dart';
-import 'package:reelpro/view_models/team_and_profile_request/create_team.dart';
 import 'package:reelpro/controllers/fetch_lat_lng.dart';
 // import 'package:reelpro/view_models/register_user_request/registeration_step_two.dart';
 // import 'package:reelpro/view_models/team_and_profile_request/team_list.dart';
-import 'package:reelpro/views/team_screens/manage_team_screen.dart';
-import 'package:reelpro/views/team_screens/team_list.dart';
 
 class AddFamilyMemberUI extends StatefulWidget {
   const AddFamilyMemberUI({

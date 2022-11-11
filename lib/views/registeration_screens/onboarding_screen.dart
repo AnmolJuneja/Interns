@@ -53,8 +53,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   TextF10(
                     textEditingController: textEditingController,
                     onchanged: (value) {
-                      if (value.isPhoneNumber) {
+                      if (value.isPhoneNumber && value.length == 10) {
                         errorText.value = '';
+                        FocusScope.of(context).nextFocus();
                       }
                     },
                     hintText: 'Phone number',

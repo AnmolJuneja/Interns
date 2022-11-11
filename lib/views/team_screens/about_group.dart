@@ -15,12 +15,10 @@ class AboutGroupUI extends StatelessWidget {
         // toolbarHeight: 70.h,
         elevation: 0,
         backgroundColor: const Color(0xffF2F9FF),
-        title: Padding(
-            padding: EdgeInsets.only(top: 42.h),
-            child: Text21PtBlack(text: 'Group Info')),
+        title: Text21PtBlack(text: 'Group Info'),
         centerTitle: true,
         leading: Padding(
-            padding: EdgeInsets.only(top: 42.h, left: 36.w),
+            padding: EdgeInsets.only(left: 36.w),
             child: GestureDetector(
                 onTap: () {
                   Get.to(() => const ViewTeam());

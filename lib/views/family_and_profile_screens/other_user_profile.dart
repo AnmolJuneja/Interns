@@ -8,7 +8,6 @@ import 'package:reelpro/models/user_feed_list.dart';
 import 'package:reelpro/models/view_profile.dart';
 import 'package:reelpro/view_models/feed_and_catch_network_request/all_feed_request.dart';
 import 'package:reelpro/view_models/team_and_profile_request/other_user_profile.dart';
-import 'package:reelpro/view_models/team_and_profile_request/search_user.dart';
 // import 'package:reelpro/view_models/feed_and_catch_network_request/user_feed_list.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:reelpro/views/bottom_navigation_screens/bottom_navigation.dart';
@@ -59,10 +58,9 @@ class _OtherUserProfileUIState extends State<OtherUserProfileUI> {
     return Scaffold(
         backgroundColor: const Color(0xffF2F9FF),
         appBar: AppBar(
-          toolbarHeight: 70.h,
           actions: [
             Padding(
-                padding: EdgeInsets.only(top: 42.h, right: 36.w),
+                padding: EdgeInsets.only(right: 36.w),
                 child: GestureDetector(
                   onTap: () {
                     Get.bottomSheet(Container(
@@ -108,7 +106,7 @@ class _OtherUserProfileUIState extends State<OtherUserProfileUI> {
           elevation: 0,
           backgroundColor: const Color(0xffF2F9FF),
           leading: Padding(
-              padding: EdgeInsets.only(top: 42.h, left: 36.w),
+              padding: EdgeInsets.only(left: 36.w),
               child: GestureDetector(
                   onTap: () {
                     Navigator.pushReplacement(
@@ -162,7 +160,7 @@ class _OtherUserProfileUIState extends State<OtherUserProfileUI> {
                       ],
                     ),
                     SizedBox(height: 20.h),
-                    Container(
+                    SizedBox(
                       height: 60.h,
                       width: 356.w,
                       child: Text14ptDesc(

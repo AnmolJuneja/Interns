@@ -13,7 +13,6 @@ import 'package:reelpro/controllers/fetch_lat_lng.dart';
 import 'package:reelpro/views/bottom_navigation_screens/bottom_navigation.dart';
 import 'dart:io';
 import 'package:image_cropper/image_cropper.dart';
-import 'package:reelpro/views/bottom_navigation_screens/tracker.dart';
 
 enum AppState {
   free,
@@ -123,7 +122,7 @@ class _AddFeedConstState extends State<AddFeedConst> {
                         width.value = 428.w.toInt();
                       },
                       child: file == null
-                          ? SizedBox()
+                          ? const SizedBox()
                           : Container(
                               height: height.value.toDouble(),
                               width: width.value.toDouble(),
@@ -326,7 +325,7 @@ class _AddFeedConstState extends State<AddFeedConst> {
       File? tempPath = File(images.path);
       tempPath = await cropImage(imageFile: tempPath);
       setState(() {
-        this.file = tempPath;
+        file = tempPath;
         // Navigator.of(context).pop();
       });
     } on PlatformException catch (e) {
@@ -340,7 +339,7 @@ class _AddFeedConstState extends State<AddFeedConst> {
         maxHeight: 180,
         maxWidth: 180,
         compressQuality: 100,
-        aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+        aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
         sourcePath: imageFile.path);
     if (cropImage == null) return null;
     return File(cropImage.path);
@@ -353,7 +352,7 @@ class _AddFeedConstState extends State<AddFeedConst> {
       File? tempPath = File(images.path);
       tempPath = await cropImage(imageFile: tempPath);
       setState(() {
-        this.file = tempPath;
+        file = tempPath;
         // Navigator.of(context).pop();
       });
     } on PlatformException catch (e) {
@@ -361,4 +360,5 @@ class _AddFeedConstState extends State<AddFeedConst> {
       Navigator.of(context).pop();
     }
   }
+  
 }

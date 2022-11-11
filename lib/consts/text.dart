@@ -167,7 +167,7 @@ class Text14ptSilver extends StatelessWidget {
           fontWeight: FontWeight.w400,
           fontSize: 14.sp,
           // ignore: use_full_hex_values_for_flutter_colors
-          color: Color.fromARGB(70, 38, 41, 61)),
+          color: const Color.fromARGB(70, 38, 41, 61)),
     );
   }
 }
@@ -273,7 +273,7 @@ class Text14PtGrey extends StatelessWidget {
           fontWeight: FontWeight.w500,
           fontSize: 15.sp,
           // ignore: use_full_hex_values_for_flutter_colors
-          color: Color.fromARGB(70, 27, 27, 32)),
+          color: const Color.fromARGB(70, 27, 27, 32)),
     );
   }
 }
@@ -401,7 +401,7 @@ class Text14PtTime extends StatelessWidget {
           fontFamily: 'Helvetica',
           fontSize: 14.sp,
           fontWeight: FontWeight.w500,
-          color: Color.fromARGB(70, 33, 34, 39)),
+          color: const Color.fromARGB(70, 33, 34, 39)),
     );
   }
 }

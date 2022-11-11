@@ -18,13 +18,11 @@ class MyFeedList {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["success"] = success;
-    _data["message"] = message;
-    if (data != null) {
-      _data["data"] = data?.toJson();
-    }
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["success"] = success;
+    data["message"] = message;
+    data["data"] = data;
+    return data;
   }
 }
 
@@ -101,25 +99,23 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["current_page"] = currentPage;
-    if (data != null) {
-      _data["data"] = data?.map((e) => e.toJson()).toList();
-    }
-    _data["first_page_url"] = firstPageUrl;
-    _data["from"] = from;
-    _data["last_page"] = lastPage;
-    _data["last_page_url"] = lastPageUrl;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["current_page"] = currentPage;
+    data["data"] = data;
+    data["first_page_url"] = firstPageUrl;
+    data["from"] = from;
+    data["last_page"] = lastPage;
+    data["last_page_url"] = lastPageUrl;
     if (links != null) {
-      _data["links"] = links?.map((e) => e.toJson()).toList();
+      data["links"] = links?.map((e) => e.toJson()).toList();
     }
-    _data["next_page_url"] = nextPageUrl;
-    _data["path"] = path;
-    _data["per_page"] = perPage;
-    _data["prev_page_url"] = prevPageUrl;
-    _data["to"] = to;
-    _data["total"] = total;
-    return _data;
+    data["next_page_url"] = nextPageUrl;
+    data["path"] = path;
+    data["per_page"] = perPage;
+    data["prev_page_url"] = prevPageUrl;
+    data["to"] = to;
+    data["total"] = total;
+    return data;
   }
 }
 
@@ -141,11 +137,11 @@ class Links {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["url"] = url;
-    _data["label"] = label;
-    _data["active"] = active;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["url"] = url;
+    data["label"] = label;
+    data["active"] = active;
+    return data;
   }
 }
 
@@ -236,27 +232,27 @@ class MyFeed {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["user_id"] = userId;
-    _data["location"] = location;
-    _data["lng"] = lng;
-    _data["lat"] = lat;
-    _data["description"] = description;
-    _data["view_status"] = viewStatus;
-    _data["deleted_at"] = deletedAt;
-    _data["created_at"] = createdAt;
-    _data["updated_at"] = updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["id"] = id;
+    data["user_id"] = userId;
+    data["location"] = location;
+    data["lng"] = lng;
+    data["lat"] = lat;
+    data["description"] = description;
+    data["view_status"] = viewStatus;
+    data["deleted_at"] = deletedAt;
+    data["created_at"] = createdAt;
+    data["updated_at"] = updatedAt;
     if (feedUserInfo != null) {
-      _data["feed_user_info"] = feedUserInfo?.toJson();
+      data["feed_user_info"] = feedUserInfo?.toJson();
     }
     if (getFeedImages != null) {
-      _data["get_feed_images"] = getFeedImages?.map((e) => e.toJson()).toList();
+      data["get_feed_images"] = getFeedImages?.map((e) => e.toJson()).toList();
     }
-    _data["is_liked"] = isLiked;
-    _data["total_comments"] = totalComments;
-    _data["total_likes"] = totalLikes;
-    return _data;
+    data["is_liked"] = isLiked;
+    data["total_comments"] = totalComments;
+    data["total_likes"] = totalLikes;
+    return data;
   }
 }
 
@@ -276,10 +272,10 @@ class GetFeedImages {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["feed_id"] = feedId;
-    _data["pic"] = pic;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["feed_id"] = feedId;
+    data["pic"] = pic;
+    return data;
   }
 }
 
@@ -406,32 +402,32 @@ class FeedUserInfo {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["firstname"] = firstname;
-    _data["lastname"] = lastname;
-    _data["email"] = email;
-    _data["email_verified_at"] = emailVerifiedAt;
-    _data["phone_number"] = phoneNumber;
-    _data["phone_number_verified_at"] = phoneNumberVerifiedAt;
-    _data["dob"] = dob;
-    _data["gender"] = gender;
-    _data["profile_pic"] = profilePic;
-    _data["description"] = description;
-    _data["otp"] = otp;
-    _data["confirmation_token"] = confirmationToken;
-    _data["auth_token"] = authToken;
-    _data["device_token"] = deviceToken;
-    _data["profile_step"] = profileStep;
-    _data["is_verified"] = isVerified;
-    _data["is_deleted"] = isDeleted;
-    _data["created_at"] = createdAt;
-    _data["updated_at"] = updatedAt;
-    _data["card_id"] = cardId;
-    _data["customer_id"] = customerId;
-    _data["timezone"] = timezone;
-    _data["role_id"] = roleId;
-    _data["deleted_at"] = deletedAt;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["id"] = id;
+    data["firstname"] = firstname;
+    data["lastname"] = lastname;
+    data["email"] = email;
+    data["email_verified_at"] = emailVerifiedAt;
+    data["phone_number"] = phoneNumber;
+    data["phone_number_verified_at"] = phoneNumberVerifiedAt;
+    data["dob"] = dob;
+    data["gender"] = gender;
+    data["profile_pic"] = profilePic;
+    data["description"] = description;
+    data["otp"] = otp;
+    data["confirmation_token"] = confirmationToken;
+    data["auth_token"] = authToken;
+    data["device_token"] = deviceToken;
+    data["profile_step"] = profileStep;
+    data["is_verified"] = isVerified;
+    data["is_deleted"] = isDeleted;
+    data["created_at"] = createdAt;
+    data["updated_at"] = updatedAt;
+    data["card_id"] = cardId;
+    data["customer_id"] = customerId;
+    data["timezone"] = timezone;
+    data["role_id"] = roleId;
+    data["deleted_at"] = deletedAt;
+    return data;
   }
 }

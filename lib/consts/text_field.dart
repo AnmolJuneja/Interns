@@ -3,11 +3,8 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 import 'package:get/get.dart';
-import 'package:reelpro/consts/text.dart';
 import 'package:reelpro/controllers/registeration_controllers.dart';
-import 'package:reelpro/view_models/register_user_request/otp_view_model.dart';
 
 class TextF extends StatelessWidget {
   TextEditingController textEditingController;
@@ -149,7 +146,8 @@ class BigTextField extends StatelessWidget {
         width: 356.w,
         decoration: BoxDecoration(
             // ignore: use_full_hex_values_for_flutter_colors
-            border: Border.all(color: Color.fromRGBO(113, 154, 195, 0.16)),
+            border:
+                Border.all(color: const Color.fromRGBO(113, 154, 195, 0.16)),
             boxShadow: const [
               BoxShadow(
                   // ignore: use_full_hex_values_for_flutter_colors
@@ -381,8 +379,7 @@ class TextFCatch extends StatelessWidget {
           keyboardType: textInputType,
           decoration: InputDecoration(
               border: InputBorder.none,
-              contentPadding:
-                  EdgeInsets.only(top: 17.h, bottom: 14.h, left: 20.w),
+              contentPadding: EdgeInsets.only(bottom: 14.h, left: 20.w),
               hintText: hintText,
               hintStyle: TextStyle(
                   fontFamily: 'Helvetica',
@@ -525,41 +522,30 @@ class _TextF10State extends State<TextF10> {
               },
               child: SizedBox(
                   // padding: EdgeInsets.only(top: 8.h),
-                  height: 35,
-                  width: 20,
+                  height: 45,
+                  width: 25,
                   child: instanceOtpViewModel.flagEmoji.value.isEmpty
-                      ? Padding(
-                          padding: EdgeInsets.only(top: 8.h),
-                          child: Image.asset('assets/images/Rectangle 6.png'))
-                      : Padding(
-                          padding: EdgeInsets.only(top: 14.h),
+                      ? Image.asset('assets/images/Rectangle 6.png')
+                      : Center(
                           child: Text(instanceOtpViewModel.flagEmoji.value))))),
           SizedBox(width: 8.w),
-          // Text('+',
-          //     style: TextStyle(
-          //         fontFamily: 'Helvetica',
-          //         fontSize: 16.sp,
-          //         // ignore: use_full_hex_values_for_flutter_colors
-          //         color: const Color(0xff48505889),
-          //         fontWeight: FontWeight.normal)),
           Obx(() => GestureDetector(
-              onTap: () {
-                showCountryPicker(
-                  context: context,
-                  showPhoneCode:
-                      true, // optional. Shows phone code before the country name.
-                  onSelect: (Country country) {
-                    print('Select country: ${country.displayName}');
-                    setState(() {
-                      instanceOtpViewModel.flagEmoji.value = country.flagEmoji;
-                      instanceOtpViewModel.countryText.value =
-                          country.phoneCode;
-                    });
-                  },
-                );
-              },
-              child: Padding(
-                padding: EdgeInsets.only(top: 8.h),
+                onTap: () {
+                  showCountryPicker(
+                    context: context,
+                    showPhoneCode:
+                        true, // optional. Shows phone code before the country name.
+                    onSelect: (Country country) {
+                      print('Select country: ${country.displayName}');
+                      setState(() {
+                        instanceOtpViewModel.flagEmoji.value =
+                            country.flagEmoji;
+                        instanceOtpViewModel.countryText.value =
+                            country.phoneCode;
+                      });
+                    },
+                  );
+                },
                 child: Text('+${instanceOtpViewModel.countryText.value}',
                     style: TextStyle(
                         fontFamily: 'Helvetica',
@@ -567,7 +553,7 @@ class _TextF10State extends State<TextF10> {
                         // ignore: use_full_hex_values_for_flutter_colors
                         color: const Color(0xff48505889),
                         fontWeight: FontWeight.normal)),
-              ))),
+              )),
           Expanded(
               child: TextFormField(
                   // autovalidateMode: AutovalidateMode.onUserInteraction,

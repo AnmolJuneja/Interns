@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:reelpro/models/shared_preferences.dart';
+import 'package:reelpro/views/bottom_navigation_screens/home_page.dart';
 
 class RegistrationStepTwo2 {
   var genderF = ''.obs;
@@ -42,17 +43,9 @@ class RegistrationStepTwo2 {
   String vetran = '0';
   var countryText = '1'.obs;
   var flagEmoji = ''.obs;
-  String? greetings;
+  // String? greetings;
   navigateToOnboarding() async {
-        
-    var dateTime = DateTime.now().hour;
-    if (dateTime > 11.59 && dateTime < 16) {
-      greetings = 'Good Afternoon';
-    } else if (dateTime > 15.59 && dateTime < 24) {
-      greetings = 'Good Evening';
-    } else {
-      greetings = 'Good Morning';
-    }
+   
     String firstLastName = await SaveFirstName().getFirstName();
     firstName1.value = firstLastName;
     String lastName = await SaveLastName().getLastName();

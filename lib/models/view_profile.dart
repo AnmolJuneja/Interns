@@ -1,4 +1,3 @@
-
 class ViewProfile {
   bool? success;
   String? message;
@@ -7,25 +6,23 @@ class ViewProfile {
   ViewProfile({this.success, this.message, this.data});
 
   ViewProfile.fromJson(Map<String, dynamic> json) {
-    if(json["success"] is bool) {
+    if (json["success"] is bool) {
       success = json["success"];
     }
-    if(json["message"] is String) {
+    if (json["message"] is String) {
       message = json["message"];
     }
-    if(json["data"] is Map) {
+    if (json["data"] is Map) {
       data = json["data"] == null ? null : Data.fromJson(json["data"]);
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["success"] = success;
-    _data["message"] = message;
-    if(data != null) {
-      _data["data"] = data?.toJson();
-    }
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["success"] = success;
+    data["message"] = message;
+    data["data"] = data;
+    return data;
   }
 }
 
@@ -52,96 +49,120 @@ class Data {
   List<dynamic>? wishlist;
   String? isFollowing;
 
-  Data({this.id, this.firstname, this.lastname, this.email, this.dob, this.gender, this.profilePic, this.phoneNumber, this.description, this.cardId, this.customerId, this.timezone, this.authToken, this.profileStep, this.isVerified, this.userDetails, this.address, this.following, this.followers, this.wishlist, this.isFollowing});
+  Data(
+      {this.id,
+      this.firstname,
+      this.lastname,
+      this.email,
+      this.dob,
+      this.gender,
+      this.profilePic,
+      this.phoneNumber,
+      this.description,
+      this.cardId,
+      this.customerId,
+      this.timezone,
+      this.authToken,
+      this.profileStep,
+      this.isVerified,
+      this.userDetails,
+      this.address,
+      this.following,
+      this.followers,
+      this.wishlist,
+      this.isFollowing});
 
   Data.fromJson(Map<String, dynamic> json) {
-    if(json["id"] is int) {
+    if (json["id"] is int) {
       id = json["id"];
     }
-    if(json["firstname"] is String) {
+    if (json["firstname"] is String) {
       firstname = json["firstname"];
     }
-    if(json["lastname"] is String) {
+    if (json["lastname"] is String) {
       lastname = json["lastname"];
     }
-    if(json["email"] is String) {
+    if (json["email"] is String) {
       email = json["email"];
     }
-    if(json["dob"] is String) {
+    if (json["dob"] is String) {
       dob = json["dob"];
     }
-    if(json["gender"] is String) {
+    if (json["gender"] is String) {
       gender = json["gender"];
     }
-    if(json["profile_pic"] is String) {
+    if (json["profile_pic"] is String) {
       profilePic = json["profile_pic"];
     }
-    if(json["phone_number"] is String) {
+    if (json["phone_number"] is String) {
       phoneNumber = json["phone_number"];
     }
     description = json["description"];
     cardId = json["card_id"];
     customerId = json["customer_id"];
-    if(json["timezone"] is String) {
+    if (json["timezone"] is String) {
       timezone = json["timezone"];
     }
     authToken = json["auth_token"];
-    if(json["profile_step"] is int) {
+    if (json["profile_step"] is int) {
       profileStep = json["profile_step"];
     }
-    if(json["is_verified"] is int) {
+    if (json["is_verified"] is int) {
       isVerified = json["is_verified"];
     }
-    if(json["user_details"] is Map) {
-      userDetails = json["user_details"] == null ? null : UserDetails.fromJson(json["user_details"]);
+    if (json["user_details"] is Map) {
+      userDetails = json["user_details"] == null
+          ? null
+          : UserDetails.fromJson(json["user_details"]);
     }
-    if(json["address"] is Map) {
-      address = json["address"] == null ? null : Address.fromJson(json["address"]);
+    if (json["address"] is Map) {
+      address =
+          json["address"] == null ? null : Address.fromJson(json["address"]);
     }
-    if(json["following"] is int) {
+    if (json["following"] is int) {
       following = json["following"];
     }
-    if(json["followers"] is int) {
+    if (json["followers"] is int) {
       followers = json["followers"];
     }
-    if(json["wishlist"] is List) {
+    if (json["wishlist"] is List) {
       wishlist = json["wishlist"] ?? [];
     }
-    if(json["isFollowing"] is String) {
+    if (json["isFollowing"] is String) {
       isFollowing = json["isFollowing"];
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["firstname"] = firstname;
-    _data["lastname"] = lastname;
-    _data["email"] = email;
-    _data["dob"] = dob;
-    _data["gender"] = gender;
-    _data["profile_pic"] = profilePic;
-    _data["phone_number"] = phoneNumber;
-    _data["description"] = description;
-    _data["card_id"] = cardId;
-    _data["customer_id"] = customerId;
-    _data["timezone"] = timezone;
-    _data["auth_token"] = authToken;
-    _data["profile_step"] = profileStep;
-    _data["is_verified"] = isVerified;
-    if(userDetails != null) {
-      _data["user_details"] = userDetails?.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["id"] = id;
+    data["firstname"] = firstname;
+    data["lastname"] = lastname;
+    data["email"] = email;
+    data["dob"] = dob;
+    data["gender"] = gender;
+    data["profile_pic"] = profilePic;
+    data["phone_number"] = phoneNumber;
+    data["description"] = description;
+    data["card_id"] = cardId;
+    data["customer_id"] = customerId;
+    data["timezone"] = timezone;
+    data["auth_token"] = authToken;
+    data["profile_step"] = profileStep;
+    data["is_verified"] = isVerified;
+    if (userDetails != null) {
+      data["user_details"] = userDetails?.toJson();
     }
-    if(address != null) {
-      _data["address"] = address?.toJson();
+    if (address != null) {
+      data["address"] = address?.toJson();
     }
-    _data["following"] = following;
-    _data["followers"] = followers;
-    if(wishlist != null) {
-      _data["wishlist"] = wishlist;
+    data["following"] = following;
+    data["followers"] = followers;
+    if (wishlist != null) {
+      data["wishlist"] = wishlist;
     }
-    _data["isFollowing"] = isFollowing;
-    return _data;
+    data["isFollowing"] = isFollowing;
+    return data;
   }
 }
 
@@ -160,66 +181,79 @@ class Address {
   String? createdAt;
   String? updatedAt;
 
-  Address({this.id, this.userId, this.address, this.city, this.state, this.country, this.postalCode, this.lat, this.lng, this.isDeleted, this.isDefault, this.createdAt, this.updatedAt});
+  Address(
+      {this.id,
+      this.userId,
+      this.address,
+      this.city,
+      this.state,
+      this.country,
+      this.postalCode,
+      this.lat,
+      this.lng,
+      this.isDeleted,
+      this.isDefault,
+      this.createdAt,
+      this.updatedAt});
 
   Address.fromJson(Map<String, dynamic> json) {
-    if(json["id"] is int) {
+    if (json["id"] is int) {
       id = json["id"];
     }
-    if(json["user_id"] is int) {
+    if (json["user_id"] is int) {
       userId = json["user_id"];
     }
-    if(json["address"] is String) {
+    if (json["address"] is String) {
       address = json["address"];
     }
-    if(json["city"] is String) {
+    if (json["city"] is String) {
       city = json["city"];
     }
-    if(json["state"] is String) {
+    if (json["state"] is String) {
       state = json["state"];
     }
-    if(json["country"] is String) {
+    if (json["country"] is String) {
       country = json["country"];
     }
-    if(json["postal_code"] is int) {
+    if (json["postal_code"] is int) {
       postalCode = json["postal_code"];
     }
-    if(json["lat"] is double) {
+    if (json["lat"] is double) {
       lat = json["lat"];
     }
-    if(json["lng"] is double) {
+    if (json["lng"] is double) {
       lng = json["lng"];
     }
-    if(json["is_deleted"] is int) {
+    if (json["is_deleted"] is int) {
       isDeleted = json["is_deleted"];
     }
-    if(json["is_default"] is int) {
+    if (json["is_default"] is int) {
       isDefault = json["is_default"];
     }
-    if(json["created_at"] is String) {
+    if (json["created_at"] is String) {
       createdAt = json["created_at"];
     }
-    if(json["updated_at"] is String) {
+    if (json["updated_at"] is String) {
       updatedAt = json["updated_at"];
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["user_id"] = userId;
-    _data["address"] = address;
-    _data["city"] = city;
-    _data["state"] = state;
-    _data["country"] = country;
-    _data["postal_code"] = postalCode;
-    _data["lat"] = lat;
-    _data["lng"] = lng;
-    _data["is_deleted"] = isDeleted;
-    _data["is_default"] = isDefault;
-    _data["created_at"] = createdAt;
-    _data["updated_at"] = updatedAt;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["id"] = id;
+    data["user_id"] = userId;
+    data["address"] = address;
+    data["city"] = city;
+    data["state"] = state;
+    data["country"] = country;
+    data["postal_code"] = postalCode;
+    data["lat"] = lat;
+    data["lng"] = lng;
+    data["is_deleted"] = isDeleted;
+    data["is_default"] = isDefault;
+    data["created_at"] = createdAt;
+    data["updated_at"] = updatedAt;
+    return data;
   }
 }
 
@@ -233,45 +267,53 @@ class UserDetails {
   String? createdAt;
   String? updatedAt;
 
-  UserDetails({this.id, this.userId, this.fishingType, this.shirtSize, this.isVeteran, this.club, this.createdAt, this.updatedAt});
+  UserDetails(
+      {this.id,
+      this.userId,
+      this.fishingType,
+      this.shirtSize,
+      this.isVeteran,
+      this.club,
+      this.createdAt,
+      this.updatedAt});
 
   UserDetails.fromJson(Map<String, dynamic> json) {
-    if(json["id"] is int) {
+    if (json["id"] is int) {
       id = json["id"];
     }
-    if(json["user_id"] is int) {
+    if (json["user_id"] is int) {
       userId = json["user_id"];
     }
-    if(json["fishing_type"] is String) {
+    if (json["fishing_type"] is String) {
       fishingType = json["fishing_type"];
     }
-    if(json["shirt_size"] is String) {
+    if (json["shirt_size"] is String) {
       shirtSize = json["shirt_size"];
     }
-    if(json["is_veteran"] is String) {
+    if (json["is_veteran"] is String) {
       isVeteran = json["is_veteran"];
     }
-    if(json["club"] is String) {
+    if (json["club"] is String) {
       club = json["club"];
     }
-    if(json["created_at"] is String) {
+    if (json["created_at"] is String) {
       createdAt = json["created_at"];
     }
-    if(json["updated_at"] is String) {
+    if (json["updated_at"] is String) {
       updatedAt = json["updated_at"];
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["user_id"] = userId;
-    _data["fishing_type"] = fishingType;
-    _data["shirt_size"] = shirtSize;
-    _data["is_veteran"] = isVeteran;
-    _data["club"] = club;
-    _data["created_at"] = createdAt;
-    _data["updated_at"] = updatedAt;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["id"] = id;
+    data["user_id"] = userId;
+    data["fishing_type"] = fishingType;
+    data["shirt_size"] = shirtSize;
+    data["is_veteran"] = isVeteran;
+    data["club"] = club;
+    data["created_at"] = createdAt;
+    data["updated_at"] = updatedAt;
+    return data;
   }
 }

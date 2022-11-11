@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/consts/text.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:reelpro/views/team_screens/view_team.dart';
 
@@ -31,7 +30,7 @@ class InviteMembersUI extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.only(left: 36.w, right: 36.w, top: 44.h),
         child: Column(children: [
-          Container(
+          SizedBox(
             height: 700.h,
             child: ListView.builder(
                 itemCount: 6,

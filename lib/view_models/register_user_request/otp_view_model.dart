@@ -44,7 +44,7 @@ class OtpViewModel {
   }
 
   Future<dio.Response> registersteptwo(
-      String fishingType, String shirtSize, String veteran, String club) async {
+    String fishingType, String shirtSize, String veteran, String club) async {
     String authToken = await SharedPreferences1().getToken();
     String firstName = await SaveFirstName().getFirstName();
     String lastName = await SaveLastName().getLastName();

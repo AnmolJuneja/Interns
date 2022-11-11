@@ -67,16 +67,15 @@ class _TeamViewViewState extends State<TeamViewView> {
         child: Column(
           children: [
             FutureBuilder(
-                future: CreateTeamApi().getTeam12(),
+                future: teamApi.getTeam12(),
                 builder: (context, snapshot) {
                   return SizedBox(
                       height: 785.h,
                       width: 428.w,
                       child: ListView.builder(
-                          itemCount: CreateTeamApi().getTeam1.length,
+                          itemCount: teamApi.getTeam1.length,
                           itemBuilder: (context, index) {
-                            return buildListTile(
-                                CreateTeamApi().getTeam1[index]);
+                            return buildListTile(teamApi.getTeam1[index]);
                           }));
                 })
           ],

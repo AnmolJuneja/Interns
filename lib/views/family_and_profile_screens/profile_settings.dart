@@ -13,7 +13,6 @@ import 'package:reelpro/view_models/team_and_profile_request/create_team.dart';
 // import 'package:reelpro/view_models/register_user_request/registeration_step_two.dart';
 // import 'package:reelpro/view_models/team_and_profile_request/team_list.dart';
 import 'package:reelpro/views/family_and_profile_screens/family_members_list.dart';
-import 'package:reelpro/views/family_and_profile_screens/manage_family.dart';
 import 'package:reelpro/views/team_screens/manage_team_screen.dart';
 import 'package:reelpro/views/registeration_screens/onboarding_screen.dart';
 import 'package:reelpro/views/team_screens/team_list.dart';
@@ -34,7 +33,7 @@ class _ProfileSettingsUIState extends State<ProfileSettingsUI> {
   final instanceStepTwo = Get.put(RegistrationStepTwo2());
   @override
   void initState() {
-    teamApi.getTeamFinal();
+    teamApi.getTeam12();
     super.initState();
   }
 

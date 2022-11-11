@@ -80,21 +80,27 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                             "Tell us a little bit about yourself so we know it's you",
                         color: Color(0xff485058)),
                     SizedBox(height: 40.h),
-                    TextFirstName(
+                    TextFEmail(
                         textEditingController: textEditingController1,
                         hintText: 'Firstname',
                         textInputType: TextInputType.name,
                         prefix: null,
                         onSaved: (value) {},
-                        onchanged: (value) {}),
+                        onchanged: (value) {},
+                        keyValue: null,
+                        suffixText: null,
+                        validator: (value) {}),
                     SizedBox(height: 8.h),
-                    TextFirstName(
+                    TextFEmail(
                         onSaved: (value) {},
                         textEditingController: textEditingController2,
                         hintText: 'Last name',
                         textInputType: TextInputType.name,
                         prefix: null,
-                        onchanged: (value) {}),
+                        onchanged: (value) {},
+                        keyValue: null,
+                        suffixText: null,
+                        validator: (value) {}),
                     SizedBox(height: 8.h),
                     TextFEmail(
                         textEditingController: validateEmail.emailController,
@@ -186,10 +192,11 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                             (value) {
                               // ignore: unused_local_variable
                               var res = Registration.fromJson(value.data);
-                               Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (context) => UserAddressScreen()),
-                              (route) => false);
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const UserAddressScreen()),
+                                  (route) => false);
                               SaveFirstName()
                                   .saveFirstName('${res.data!.firstname}');
                               SaveLastName()

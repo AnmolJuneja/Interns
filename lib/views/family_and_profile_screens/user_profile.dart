@@ -3,10 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/consts/text.dart';
 import 'package:get/get.dart';
 import 'package:reelpro/controllers/registeration_controllers.dart';
-import 'package:reelpro/models/event_order_list.dart';
 import 'package:reelpro/models/my_feed_list.dart';
-import 'package:reelpro/models/user_feed_list.dart';
-import 'package:reelpro/view_models/event_network_request/event_order_list.dart';
 import 'package:reelpro/view_models/feed_and_catch_network_request/all_feed_request.dart';
 // import 'package:reelpro/view_models/feed_and_catch_network_request/my_feed_list.dart';
 // import 'package:reelpro/view_models/register_user_request/registeration_step_two.dart';
@@ -14,8 +11,9 @@ import 'package:reelpro/view_models/feed_and_catch_network_request/all_feed_requ
 import 'package:reelpro/views/bottom_navigation_screens/bottom_navigation.dart';
 import 'package:reelpro/views/family_and_profile_screens/edit_profile.dart';
 import 'package:reelpro/views/catch_and_feed_screens/feed_details.dart';
-import 'package:reelpro/views/team_screens/pending_request.dart';
 import 'package:reelpro/views/family_and_profile_screens/profile_settings.dart';
+
+import '../catch_and_feed_screens/user_catch_list.dart';
 
 class UserProfileUI extends StatefulWidget {
   const UserProfileUI({Key? key}) : super(key: key);
@@ -229,7 +227,7 @@ class _UserProfileUIState extends State<UserProfileUI> {
                                           child: CircularProgressIndicator());
                                     }
                                   })),
-                          const Center(child: Text('No Data')),
+                          UserCatchListUI(useId: instance.userId),
                           const Center(child: Text('No Data')),
                           const Center(child: Text('No Data')),
                           const Center(child: Text('No Data'))

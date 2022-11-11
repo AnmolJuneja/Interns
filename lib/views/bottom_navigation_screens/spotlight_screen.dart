@@ -4,7 +4,6 @@ import 'package:reelpro/consts/container.dart';
 import 'package:reelpro/consts/post.dart';
 import 'package:reelpro/consts/text.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:reelpro/consts/text_field.dart';
 import 'package:reelpro/consts/text_fieldc.dart';
 import 'package:get/get.dart';
 import 'package:reelpro/consts/toggle_container.dart';
@@ -23,10 +22,10 @@ class SpotlightScreen extends StatefulWidget {
 }
 
 class _SpotlightScreenState extends State<SpotlightScreen> {
-
   var valueOfList = ''.obs;
 
   TextEditingController textEditingController = TextEditingController();
+  final instance = Get.put(SearchUserApi());
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -229,9 +228,9 @@ class _SpotlightScreenState extends State<SpotlightScreen> {
                                 shareImage: 'assets/images/Group 207.png')
                           ]))),
                   Obx(() => ListView.builder(
-                      itemCount: SearchUserApi().getUserLength.length,
+                      itemCount: instance.getUserLength.length,
                       itemBuilder: (context, index) {
-                        return search(SearchUserApi().getUserLength[index]);
+                        return search(instance.getUserLength[index]);
                       })),
                 ]),
               ),
@@ -241,7 +240,7 @@ class _SpotlightScreenState extends State<SpotlightScreen> {
   }
 
   userSearch() async {
-    await SearchUserApi().searchUserFinal(textEditingController.text);
+    await instance.searchUserFinal(textEditingController.text);
   }
 
   final List<String> registerationType = ['Ascending', 'Descending'];
@@ -260,7 +259,7 @@ Widget search(ListOfUser listOfUser) {
                 ? ProfilePicContainer(
                     image: NetworkImage(listOfUser.profilePic!))
                 : ProfilePicContainer(
-                    image: AssetImage('assets/images/profile.png')),
+                    image: const AssetImage('assets/images/profile.png')),
             SizedBox(width: 12.w),
             Center(
               child: Text16PtBlack(

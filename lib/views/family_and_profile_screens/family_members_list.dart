@@ -4,7 +4,6 @@ import 'package:reelpro/consts/small_container.dart';
 import 'package:reelpro/consts/text.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
-import 'package:reelpro/views/family_and_profile_screens/add_family_member.dart';
 import 'package:reelpro/views/family_and_profile_screens/manage_family.dart';
 
 class FamilyMembersListUI extends StatelessWidget {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/consts/text.dart';
-import 'package:reelpro/views/event_screens/participated_event.dart';
 
 class TargetSpeciesUI extends StatelessWidget {
   const TargetSpeciesUI({Key? key}) : super(key: key);

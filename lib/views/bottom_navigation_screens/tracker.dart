@@ -2,32 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:reelpro/consts/container.dart';
 import 'package:reelpro/consts/text.dart';
 import 'package:reelpro/controllers/feed_and_catch_controllers.dart';
-import 'package:reelpro/controllers/registeration_controllers.dart';
 import 'package:reelpro/models/catchlog_list_response.dart';
-import 'package:reelpro/models/feed_details.dart';
 import 'package:reelpro/models/feed_list.dart';
-import 'package:reelpro/models/my_feed_list.dart';
+import 'package:reelpro/models/like_feed.dart';
 import 'package:reelpro/view_models/feed_and_catch_network_request/all_catchlog_request.dart';
 import 'package:reelpro/view_models/feed_and_catch_network_request/all_feed_request.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/catchlog_list.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/comment_list.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/feed_details.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/feed_list.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/like_catchlog.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/like_feed.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/my_feed_list.dart';
-// import 'package:reelpro/view_models/register_user_request/registeration_step_two.dart';
 import 'package:reelpro/views/catch_and_feed_screens/add_catch_log.dart';
 import 'package:reelpro/views/catch_and_feed_screens/add_feed.dart';
 import 'package:reelpro/views/bottom_navigation_screens/bottom_navigation.dart';
 import 'package:reelpro/views/catch_and_feed_screens/catch_details.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:reelpro/views/catch_and_feed_screens/feed_details.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:reelpro/views/catch_and_feed_screens/feed_list.dart';
-import 'package:reelpro/views/family_and_profile_screens/user_profile.dart';
 
 class CatchlogListUI extends StatefulWidget {
   const CatchlogListUI({Key? key}) : super(key: key);
@@ -37,18 +24,17 @@ class CatchlogListUI extends StatefulWidget {
 }
 
 class _CatchlogListUIState extends State<CatchlogListUI> {
-  // CatchlogListApi catchlogListApi = Get.put(AddCatchlogApi());
- 
-
-
   PageController pageController = PageController(viewportFraction: 0.9);
   PageController pageController1 = PageController(viewportFraction: 0.9);
-  // final instance1 = Get.put(AddFeedApi());
+  final instance1 = Get.put(AddFeedApi1());
+  final instance = Get.put(AddFeedApi());
+  var isLiked = false.obs;
+  var likeCount = 0.obs;
+  var commentCount = 0.obs;
   var userId;
   @override
   void initState() {
-    // instanceApi.getMyFeedListFinal();
-   AddFeedApi1().getList1();
+    instance1.getList1();
     super.initState();
   }
 
@@ -65,7 +51,7 @@ class _CatchlogListUIState extends State<CatchlogListUI> {
             child: Text30ptBlue(text: 'Tracker')),
       ),
       backgroundColor: const Color(0xffF2F9FF),
-      body: Container(
+      body: SizedBox(
         height: 1200.h,
         child: SingleChildScrollView(
           child: Column(children: [
@@ -115,10 +101,10 @@ class _CatchlogListUIState extends State<CatchlogListUI> {
                     SizedBox(height: 20.h),
                   ]),
             ),
-            Container(
+            SizedBox(
                 height: 439.h,
                 child: FutureBuilder<FeedListResponse>(
-                    future: AddFeedApi().getDetails(),
+                    future: instance.getDetails(),
                     builder: (contex, snapshot) {
                       if (snapshot.hasData) {
                         return snapshot.data!.data!.data!.isNotEmpty
@@ -126,7 +112,7 @@ class _CatchlogListUIState extends State<CatchlogListUI> {
                                 controller: pageController1,
                                 itemCount: snapshot.data!.data!.data!.length,
                                 itemBuilder: (context, index) {
-                                  return buildFeed(
+                                  return buildFeed(context,
                                       snapshot.data!.data!.data![index]);
                                 })
                             : Center(
@@ -154,22 +140,20 @@ class _CatchlogListUIState extends State<CatchlogListUI> {
                   ]),
             ),
             SizedBox(height: 20.h),
-            // ignore: sized_box_for_whitespace
             Container(
-                // padding: EdgeInsets.only(left: 15.w),
                 height: 439.h,
-                child: Obx(() => AddFeedApi1().isLoading.value
+                child: Obx(() => instance1.isLoading.value
                     ? const Center(child: CircularProgressIndicator())
-                    : Obx(() => AddFeedApi1().catchlogList.value.isEmpty
+                    : Obx(() => instance1.catchlogList.isEmpty
                         ? Center(
                             child: Text16PtBlack(
                             text: 'No Catchlog Data',
                           ))
                         : PageView.builder(
                             controller: pageController,
-                            itemCount: AddFeedApi1().catchlogList.value.length,
+                            itemCount: instance1.catchlogList.length,
                             itemBuilder: (context, index) {
-                              return buildList(AddFeedApi1().catchlogList.value[index]);
+                              return buildList(instance1.catchlogList[index]);
                             })))),
           ]),
         ),
@@ -207,7 +191,8 @@ Widget buildList(CatchlogList catchlogList) {
                   children: [
                     catchlogList.userDetail!.profilePic == null
                         ? ProfilePicContainer(
-                            image: AssetImage('assets/images/profile.png'))
+                            image:
+                                const AssetImage('assets/images/profile.png'))
                         : ProfilePicContainer(
                             image: NetworkImage(
                                 catchlogList.userDetail!.profilePic!)),
@@ -270,7 +255,7 @@ Widget buildList(CatchlogList catchlogList) {
                     SizedBox(width: 8.w),
                     Obx(() => Text14PtBlue(text: likeCount.value.toString())),
                     SizedBox(width: 44.w),
-                    CommentIcon(),
+                    const CommentIcon(),
                     SizedBox(width: 8.w),
                     Text14ptDesc(text: '${catchlogList.totalComments}'),
                     SizedBox(width: 112.w),
@@ -288,7 +273,7 @@ Widget buildList(CatchlogList catchlogList) {
   );
 }
 
-Widget buildFeed(Datum datum) {
+Widget buildFeed(BuildContext context, Datum datum) {
   final likeFeed = Get.put(AddFeedApi());
   var isLiked = false.obs;
   var likeCount = 0.obs;
@@ -299,7 +284,11 @@ Widget buildFeed(Datum datum) {
 
   return GestureDetector(
     onTap: () {
-      Get.to(FeedDetailsUI(feedId: datum.id!));
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) => FeedDetailsUI(feedId: datum.id!)),
+          (route) => false);
     },
     child: datum.getFeedImages!.isEmpty
         ? Center(child: Text16PtBlack(text: 'No Feed Data'))
@@ -362,7 +351,7 @@ Widget buildFeed(Datum datum) {
                               padding: EdgeInsets.only(top: 60.h),
                               child: Column(
                                 children: [
-                                  Icon(Icons.error, color: Colors.black),
+                                  const Icon(Icons.error, color: Colors.black),
                                   SizedBox(height: 10.h),
                                   Text16PtBlack(text: 'No Image Available')
                                 ],
@@ -371,7 +360,7 @@ Widget buildFeed(Datum datum) {
                           : PageView.builder(
                               itemCount: datum.getFeedImages!.length,
                               itemBuilder: (context, index) {
-                                return Container(
+                                return SizedBox(
                                   width: double.infinity,
                                   child: Image(
                                       fit: BoxFit.fitWidth,
@@ -400,7 +389,7 @@ Widget buildFeed(Datum datum) {
                         Obx(() =>
                             Text14PtBlue(text: likeCount.value.toString())),
                         SizedBox(width: 44.w),
-                        CommentIcon(),
+                        const CommentIcon(),
                         SizedBox(width: 8.w),
                         Text14ptDesc(text: '${datum.totalComments}'),
                         SizedBox(width: 112.w),
@@ -412,7 +401,49 @@ Widget buildFeed(Datum datum) {
                   // Spacer()
                 ]),
                 Positioned(
-                    top: 28.h, left: 318.w, child: const Icon(Icons.more_horiz))
+                    top: 28.h,
+                    left: 318.w,
+                    child: GestureDetector(
+                        onTap: () {
+                          Get.bottomSheet(Container(
+                            padding: EdgeInsets.only(
+                                top: 30.h, left: 36.w, right: 36.w),
+                            height: 250.h,
+                            decoration: const BoxDecoration(
+                                borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(25)),
+                                color: Color(0xffF2F9FF)),
+                            child: Column(children: [
+                              const Divider(thickness: 1),
+                              SizedBox(height: 10.h),
+                              likeFeed.userId == datum.userId
+                                  ? GestureDetector(
+                                      onTap: () {
+                                        likeFeed.deleteFeed(datum.id!);
+                                        Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    BottomNavigation(
+                                                        currentIndex: 0)),
+                                            (route) => false);
+                                      },
+                                      child: Text16PtBlack(text: 'Delete Feed'))
+                                  : const SizedBox(),
+                              likeFeed.userId == datum.userId
+                                  ? SizedBox(height: 10.h)
+                                  : const SizedBox(),
+                              likeFeed.userId == datum.userId
+                                  ? const Divider(thickness: 1)
+                                  : const SizedBox(),
+                              SizedBox(height: 10.h),
+                              Text16PtBlack(text: 'Report Feed'),
+                              SizedBox(height: 10.h),
+                              const Divider(thickness: 1)
+                            ]),
+                          ));
+                        },
+                        child: const Icon(Icons.more_horiz)))
               ],
             )),
   );

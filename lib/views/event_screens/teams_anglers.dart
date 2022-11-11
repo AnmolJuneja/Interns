@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/consts/small_container.dart';
 import 'package:reelpro/consts/text.dart';
-import 'package:reelpro/views/bottom_navigation_screens/list_events.dart';
 
 class TeamsAnglersUI extends StatelessWidget {
   const TeamsAnglersUI({Key? key}) : super(key: key);

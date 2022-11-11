@@ -99,7 +99,7 @@ class _EditProfile1State extends State<EditProfile1> {
                     File? tempPath = File(images.path);
                     tempPath = await cropImage(imageFile: tempPath);
                     setState(() {
-                      this.file = tempPath;
+                      file = tempPath;
                     });
                   } on PlatformException catch (e) {
                     print(e);
@@ -311,7 +311,7 @@ class _EditProfile1State extends State<EditProfile1> {
         maxHeight: 180,
         maxWidth: 180,
         compressQuality: 100,
-        aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+        aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
         sourcePath: imageFile.path);
     if (cropImage == null) return null;
     return File(cropImage.path);

@@ -19,13 +19,11 @@ class CatchlogListResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["success"] = success;
-    _data["message"] = message;
-    if(data != null) {
-      _data["data"] = data.map((e) => e.toJson()).toList();
-    }
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["success"] = success;
+    data["message"] = message;
+    data["data"] = data;
+    return data;
   }
 }
 
@@ -121,32 +119,32 @@ class CatchlogList {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["location"] = location;
-    _data["lng"] = lng;
-    _data["lat"] = lat;
-    _data["weight"] = weight;
-    _data["length"] = length;
-    _data["event_id"] = eventId;
-    _data["user_id"] = userId;
-    _data["type"] = type;
-    _data["pic"] = pic;
-    _data["bait"] = bait;
-    _data["comment"] = comment;
-    _data["deleted_at"] = deletedAt;
-    _data["created_at"] = createdAt;
-    _data["updated_at"] = updatedAt;
-    _data["event"] = event;
-    _data["fishtype"] = fishtype;
-    _data["challenge"] = challenge;
-    _data["is_liked"] = isLiked;
-    _data["total_comments"] = totalComments;
-    _data["total_likes"] = totalLikes;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["id"] = id;
+    data["location"] = location;
+    data["lng"] = lng;
+    data["lat"] = lat;
+    data["weight"] = weight;
+    data["length"] = length;
+    data["event_id"] = eventId;
+    data["user_id"] = userId;
+    data["type"] = type;
+    data["pic"] = pic;
+    data["bait"] = bait;
+    data["comment"] = comment;
+    data["deleted_at"] = deletedAt;
+    data["created_at"] = createdAt;
+    data["updated_at"] = updatedAt;
+    data["event"] = event;
+    data["fishtype"] = fishtype;
+    data["challenge"] = challenge;
+    data["is_liked"] = isLiked;
+    data["total_comments"] = totalComments;
+    data["total_likes"] = totalLikes;
     if(userDetail != null) {
-      _data["user_detail"] = userDetail?.toJson();
+      data["user_detail"] = userDetail?.toJson();
     }
-    return _data;
+    return data;
   }
 }
 
@@ -236,34 +234,34 @@ class UserDetail {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["firstname"] = firstname;
-    _data["lastname"] = lastname;
-    _data["email"] = email;
-    _data["dob"] = dob;
-    _data["gender"] = gender;
-    _data["profile_pic"] = profilePic;
-    _data["phone_number"] = phoneNumber;
-    _data["description"] = description;
-    _data["card_id"] = cardId;
-    _data["customer_id"] = customerId;
-    _data["timezone"] = timezone;
-    _data["auth_token"] = authToken;
-    _data["profile_step"] = profileStep;
-    _data["is_verified"] = isVerified;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["id"] = id;
+    data["firstname"] = firstname;
+    data["lastname"] = lastname;
+    data["email"] = email;
+    data["dob"] = dob;
+    data["gender"] = gender;
+    data["profile_pic"] = profilePic;
+    data["phone_number"] = phoneNumber;
+    data["description"] = description;
+    data["card_id"] = cardId;
+    data["customer_id"] = customerId;
+    data["timezone"] = timezone;
+    data["auth_token"] = authToken;
+    data["profile_step"] = profileStep;
+    data["is_verified"] = isVerified;
     if(userDetails != null) {
-      _data["user_details"] = userDetails?.toJson();
+      data["user_details"] = userDetails?.toJson();
     }
     if(address != null) {
-      _data["address"] = address?.toJson();
+      data["address"] = address?.toJson();
     }
-    _data["following"] = following;
-    _data["followers"] = followers;
+    data["following"] = following;
+    data["followers"] = followers;
     if(wishlist != null) {
-      _data["wishlist"] = wishlist;
+      data["wishlist"] = wishlist;
     }
-    return _data;
+    return data;
   }
 }
 
@@ -327,21 +325,21 @@ class Address {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["user_id"] = userId;
-    _data["address"] = address;
-    _data["city"] = city;
-    _data["state"] = state;
-    _data["country"] = country;
-    _data["postal_code"] = postalCode;
-    _data["lat"] = lat;
-    _data["lng"] = lng;
-    _data["is_deleted"] = isDeleted;
-    _data["is_default"] = isDefault;
-    _data["created_at"] = createdAt;
-    _data["updated_at"] = updatedAt;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["id"] = id;
+    data["user_id"] = userId;
+    data["address"] = address;
+    data["city"] = city;
+    data["state"] = state;
+    data["country"] = country;
+    data["postal_code"] = postalCode;
+    data["lat"] = lat;
+    data["lng"] = lng;
+    data["is_deleted"] = isDeleted;
+    data["is_default"] = isDefault;
+    data["created_at"] = createdAt;
+    data["updated_at"] = updatedAt;
+    return data;
   }
 }
 
@@ -385,15 +383,15 @@ class UserDetails {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["user_id"] = userId;
-    _data["fishing_type"] = fishingType;
-    _data["shirt_size"] = shirtSize;
-    _data["is_veteran"] = isVeteran;
-    _data["club"] = club;
-    _data["created_at"] = createdAt;
-    _data["updated_at"] = updatedAt;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["id"] = id;
+    data["user_id"] = userId;
+    data["fishing_type"] = fishingType;
+    data["shirt_size"] = shirtSize;
+    data["is_veteran"] = isVeteran;
+    data["club"] = club;
+    data["created_at"] = createdAt;
+    data["updated_at"] = updatedAt;
+    return data;
   }
 }

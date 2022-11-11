@@ -1,4 +1,3 @@
-
 class EventListResponse {
   bool? success;
   String? message;
@@ -8,29 +7,29 @@ class EventListResponse {
   EventListResponse({this.success, this.message, this.data, this.totalRecords});
 
   EventListResponse.fromJson(Map<String, dynamic> json) {
-    if(json["success"] is bool) {
+    if (json["success"] is bool) {
       success = json["success"];
     }
-    if(json["message"] is String) {
+    if (json["message"] is String) {
       message = json["message"];
     }
-    if(json["data"] is List) {
-      data = (json["data"] == null ? null : (json["data"] as List).map((e) => EventList.fromJson(e)).toList())!;
+    if (json["data"] is List) {
+      data = (json["data"] == null
+          ? null
+          : (json["data"] as List).map((e) => EventList.fromJson(e)).toList())!;
     }
-    if(json["totalRecords"] is int) {
+    if (json["totalRecords"] is int) {
       totalRecords = json["totalRecords"];
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["success"] = success;
-    _data["message"] = message;
-    if(data != null) {
-      _data["data"] = data!.map((e) => e.toJson()).toList();
-    }
-    _data["totalRecords"] = totalRecords;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["success"] = success;
+    data["message"] = message;
+    data["data"] = data;
+    data["totalRecords"] = totalRecords;
+    return data;
   }
 }
 
@@ -67,134 +66,169 @@ class EventList {
   List<Schedules>? schedules;
   List<dynamic>? eventFishSpecies;
 
-  EventList({this.id, this.name, this.fee, this.eventType, this.address, this.lat, this.lng, this.teamSizeMin, this.teamSizeMax, this.about, this.species, this.anglers, this.teams, this.weather, this.rules, this.disclaimer, this.spUserId, this.logo, this.banner, this.isDeleted, this.isActive, this.createdAt, this.updatedAt, this.startTime, this.endTime, this.deletedAt, this.distance, this.isWishlisted, this.crew, this.schedules, this.eventFishSpecies});
+  EventList(
+      {this.id,
+      this.name,
+      this.fee,
+      this.eventType,
+      this.address,
+      this.lat,
+      this.lng,
+      this.teamSizeMin,
+      this.teamSizeMax,
+      this.about,
+      this.species,
+      this.anglers,
+      this.teams,
+      this.weather,
+      this.rules,
+      this.disclaimer,
+      this.spUserId,
+      this.logo,
+      this.banner,
+      this.isDeleted,
+      this.isActive,
+      this.createdAt,
+      this.updatedAt,
+      this.startTime,
+      this.endTime,
+      this.deletedAt,
+      this.distance,
+      this.isWishlisted,
+      this.crew,
+      this.schedules,
+      this.eventFishSpecies});
 
   EventList.fromJson(Map<String, dynamic> json) {
-    if(json["id"] is int) {
+    if (json["id"] is int) {
       id = json["id"];
     }
-    if(json["name"] is String) {
+    if (json["name"] is String) {
       name = json["name"];
     }
-    if(json["fee"] is int) {
+    if (json["fee"] is int) {
       fee = json["fee"];
     }
-    if(json["event_type"] is int) {
+    if (json["event_type"] is int) {
       eventType = json["event_type"];
     }
-    if(json["address"] is String) {
+    if (json["address"] is String) {
       address = json["address"];
     }
-    if(json["lat"] is String) {
+    if (json["lat"] is String) {
       lat = json["lat"];
     }
-    if(json["lng"] is String) {
+    if (json["lng"] is String) {
       lng = json["lng"];
     }
-    if(json["team_size_min"] is int) {
+    if (json["team_size_min"] is int) {
       teamSizeMin = json["team_size_min"];
     }
-    if(json["team_size_max"] is int) {
+    if (json["team_size_max"] is int) {
       teamSizeMax = json["team_size_max"];
     }
-    if(json["about"] is String) {
+    if (json["about"] is String) {
       about = json["about"];
     }
-    if(json["species"] is int) {
+    if (json["species"] is int) {
       species = json["species"];
     }
-    if(json["anglers"] is int) {
+    if (json["anglers"] is int) {
       anglers = json["anglers"];
     }
-    if(json["teams"] is int) {
+    if (json["teams"] is int) {
       teams = json["teams"];
     }
-    if(json["weather"] is String) {
+    if (json["weather"] is String) {
       weather = json["weather"];
     }
-    if(json["rules"] is String) {
+    if (json["rules"] is String) {
       rules = json["rules"];
     }
-    if(json["disclaimer"] is String) {
+    if (json["disclaimer"] is String) {
       disclaimer = json["disclaimer"];
     }
-    if(json["sp_user_id"] is int) {
+    if (json["sp_user_id"] is int) {
       spUserId = json["sp_user_id"];
     }
     logo = json["logo"];
     banner = json["banner"];
-    if(json["is_deleted"] is int) {
+    if (json["is_deleted"] is int) {
       isDeleted = json["is_deleted"];
     }
-    if(json["is_active"] is int) {
+    if (json["is_active"] is int) {
       isActive = json["is_active"];
     }
-    if(json["created_at"] is String) {
+    if (json["created_at"] is String) {
       createdAt = json["created_at"];
     }
-    if(json["updated_at"] is String) {
+    if (json["updated_at"] is String) {
       updatedAt = json["updated_at"];
     }
-    if(json["start_time"] is int) {
+    if (json["start_time"] is int) {
       startTime = json["start_time"];
     }
-    if(json["end_time"] is int) {
+    if (json["end_time"] is int) {
       endTime = json["end_time"];
     }
     deletedAt = json["deleted_at"];
-    if(json["distance"] is double) {
+    if (json["distance"] is double) {
       distance = json["distance"];
     }
-    if(json["is_wishlisted"] is int) {
+    if (json["is_wishlisted"] is int) {
       isWishlisted = json["is_wishlisted"];
     }
     crew = json["crew"];
-    if(json["schedules"] is List) {
-      schedules = json["schedules"] == null ? null : (json["schedules"] as List).map((e) => Schedules.fromJson(e)).toList();
+    if (json["schedules"] is List) {
+      schedules = json["schedules"] == null
+          ? null
+          : (json["schedules"] as List)
+              .map((e) => Schedules.fromJson(e))
+              .toList();
     }
-    if(json["event_fish_species"] is List) {
+    if (json["event_fish_species"] is List) {
       eventFishSpecies = json["event_fish_species"] ?? [];
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["name"] = name;
-    _data["fee"] = fee;
-    _data["event_type"] = eventType;
-    _data["address"] = address;
-    _data["lat"] = lat;
-    _data["lng"] = lng;
-    _data["team_size_min"] = teamSizeMin;
-    _data["team_size_max"] = teamSizeMax;
-    _data["about"] = about;
-    _data["species"] = species;
-    _data["anglers"] = anglers;
-    _data["teams"] = teams;
-    _data["weather"] = weather;
-    _data["rules"] = rules;
-    _data["disclaimer"] = disclaimer;
-    _data["sp_user_id"] = spUserId;
-    _data["logo"] = logo;
-    _data["banner"] = banner;
-    _data["is_deleted"] = isDeleted;
-    _data["is_active"] = isActive;
-    _data["created_at"] = createdAt;
-    _data["updated_at"] = updatedAt;
-    _data["start_time"] = startTime;
-    _data["end_time"] = endTime;
-    _data["deleted_at"] = deletedAt;
-    _data["distance"] = distance;
-    _data["is_wishlisted"] = isWishlisted;
-    _data["crew"] = crew;
-    if(schedules != null) {
-      _data["schedules"] = schedules?.map((e) => e.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["id"] = id;
+    data["name"] = name;
+    data["fee"] = fee;
+    data["event_type"] = eventType;
+    data["address"] = address;
+    data["lat"] = lat;
+    data["lng"] = lng;
+    data["team_size_min"] = teamSizeMin;
+    data["team_size_max"] = teamSizeMax;
+    data["about"] = about;
+    data["species"] = species;
+    data["anglers"] = anglers;
+    data["teams"] = teams;
+    data["weather"] = weather;
+    data["rules"] = rules;
+    data["disclaimer"] = disclaimer;
+    data["sp_user_id"] = spUserId;
+    data["logo"] = logo;
+    data["banner"] = banner;
+    data["is_deleted"] = isDeleted;
+    data["is_active"] = isActive;
+    data["created_at"] = createdAt;
+    data["updated_at"] = updatedAt;
+    data["start_time"] = startTime;
+    data["end_time"] = endTime;
+    data["deleted_at"] = deletedAt;
+    data["distance"] = distance;
+    data["is_wishlisted"] = isWishlisted;
+    data["crew"] = crew;
+    if (schedules != null) {
+      data["schedules"] = schedules?.map((e) => e.toJson()).toList();
     }
-    if(eventFishSpecies != null) {
-      _data["event_fish_species"] = eventFishSpecies;
+    if (eventFishSpecies != null) {
+      data["event_fish_species"] = eventFishSpecies;
     }
-    return _data;
+    return data;
   }
 }
 
@@ -208,45 +242,53 @@ class Schedules {
   String? createdAt;
   String? updatedAt;
 
-  Schedules({this.id, this.eventId, this.activityText, this.activityDate, this.isDeleted, this.isActive, this.createdAt, this.updatedAt});
+  Schedules(
+      {this.id,
+      this.eventId,
+      this.activityText,
+      this.activityDate,
+      this.isDeleted,
+      this.isActive,
+      this.createdAt,
+      this.updatedAt});
 
   Schedules.fromJson(Map<String, dynamic> json) {
-    if(json["id"] is int) {
+    if (json["id"] is int) {
       id = json["id"];
     }
-    if(json["event_id"] is int) {
+    if (json["event_id"] is int) {
       eventId = json["event_id"];
     }
-    if(json["activity_text"] is String) {
+    if (json["activity_text"] is String) {
       activityText = json["activity_text"];
     }
-    if(json["activity_date"] is String) {
+    if (json["activity_date"] is String) {
       activityDate = json["activity_date"];
     }
-    if(json["is_deleted"] is int) {
+    if (json["is_deleted"] is int) {
       isDeleted = json["is_deleted"];
     }
-    if(json["is_active"] is int) {
+    if (json["is_active"] is int) {
       isActive = json["is_active"];
     }
-    if(json["created_at"] is String) {
+    if (json["created_at"] is String) {
       createdAt = json["created_at"];
     }
-    if(json["updated_at"] is String) {
+    if (json["updated_at"] is String) {
       updatedAt = json["updated_at"];
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["event_id"] = eventId;
-    _data["activity_text"] = activityText;
-    _data["activity_date"] = activityDate;
-    _data["is_deleted"] = isDeleted;
-    _data["is_active"] = isActive;
-    _data["created_at"] = createdAt;
-    _data["updated_at"] = updatedAt;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["id"] = id;
+    data["event_id"] = eventId;
+    data["activity_text"] = activityText;
+    data["activity_date"] = activityDate;
+    data["is_deleted"] = isDeleted;
+    data["is_active"] = isActive;
+    data["created_at"] = createdAt;
+    data["updated_at"] = updatedAt;
+    return data;
   }
 }

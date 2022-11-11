@@ -94,7 +94,7 @@ class CircleContainerAnglers extends StatelessWidget {
           child: Text(
             text,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 18.sp, color: Color(0xffF2F9FF)),
+            style: TextStyle(fontSize: 18.sp, color: const Color(0xffF2F9FF)),
           ),
         ));
   }

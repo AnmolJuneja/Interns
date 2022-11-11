@@ -2,13 +2,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:reelpro/consts/text.dart';
 import 'package:reelpro/controllers/registeration_controllers.dart';
-import 'package:reelpro/models/event_order_list.dart';
-import 'package:reelpro/models/shared_preferences.dart';
 import 'package:reelpro/view_models/event_network_request/event_order_list.dart';
-import 'package:reelpro/view_models/register_user_request/otp_view_model.dart';
 // import 'package:reelpro/view_models/register_user_request/registeration_step_two.dart';
-import 'package:reelpro/views/registeration_screens/splash_screen.dart';
 import 'package:reelpro/views/family_and_profile_screens/user_profile.dart';
 
 class HomePage extends StatefulWidget {
@@ -22,78 +19,101 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    RegistrationStepTwo2().navigateToOnboarding();
+    instance.navigateToOnboarding();
   }
+
   PageController pageController = PageController(viewportFraction: 0.9);
+  final instance = Get.put(RegistrationStepTwo2());
+  var greetings = '';
 
   @override
   Widget build(BuildContext context) {
+    var dateTime = DateTime.now().hour;
+    if (dateTime > 11.59 && dateTime < 16) {
+      greetings = 'Good Afternoon';
+    } else if (dateTime > 15.59 && dateTime < 24) {
+      greetings = 'Good Evening';
+    } else {
+      greetings = 'Good Morning';
+    }
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: const Color(0xffF2F9FF),
+          elevation: 0,
+          leadingWidth: 140,
+          leading: Padding(
+              padding: EdgeInsets.only(top: 28.h, left: 36.w),
+              child: Text30ptBlue(text: 'Home')),
+        ),
         backgroundColor: const Color(0xffF2F9FF),
         body: Stack(children: [
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Container(
-                padding: EdgeInsets.only(top: 64.h, left: 36.w),
+                padding: EdgeInsets.only(left: 36.w, top: 21.h),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Home',
-                          style: TextStyle(
-                              fontFamily: 'Helvetica',
-                              fontSize: 30.sp,
-                              fontWeight: FontWeight.bold,
-                              color: const Color(0xff2B67A3))),
-                      SizedBox(height: 21.h),
-                      Text(RegistrationStepTwo2().greetings!,
+                      Text(greetings,
                           style: TextStyle(
                               fontFamily: 'Helvetica',
                               fontSize: 16.sp,
                               color: const Color(0xff719AC3),
                               fontWeight: FontWeight.w400)),
                       SizedBox(height: 16.h),
-                      Obx(() => Row(children: [
-                            Text(RegistrationStepTwo2().firstName1.value,
-                                style: GoogleFonts.bebasNeue(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 30.sp,
-                                    color: const Color(0xff719AC3))),
-                            SizedBox(width: 5.w),
-                            Text(RegistrationStepTwo2().lastName1.value,
-                                style: GoogleFonts.bebasNeue(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 30.sp,
-                                    color: const Color(0xff719AC3)))
-                          ])),
+                      Obx(() => Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(children: [
+                                  Text(instance.firstName1.value,
+                                      style: GoogleFonts.bebasNeue(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 30.sp,
+                                          color: const Color(0xff719AC3))),
+                                  SizedBox(width: 5.w),
+                                  Text(instance.lastName1.value,
+                                      style: GoogleFonts.bebasNeue(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 30.sp,
+                                          color: const Color(0xff719AC3)))
+                                ]),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      bottom: 20.h, right: 36.w),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Get.to(() => const UserProfileUI());
+                                    },
+                                    child: Obx(() => Container(
+                                          height: 60.h,
+                                          width: 60.w,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(6),
+                                              border: Border.all(
+                                                  width: 2,
+                                                  color: Colors.white),
+                                              image: instance
+                                                          .profilePic1.value ==
+                                                      ''
+                                                  ? const DecorationImage(
+                                                      fit: BoxFit.cover,
+                                                      image: AssetImage(
+                                                          'assets/images/profile.png'))
+                                                  : DecorationImage(
+                                                      fit: BoxFit.cover,
+                                                      image: NetworkImage(
+                                                          instance.profilePic1
+                                                              .value))),
+                                        )),
+                                  ),
+                                ),
+                              ])),
                       Container(
                         padding: EdgeInsets.only(top: 80.h, left: 120.w),
                         child: const Text('No Event Running'),
                       )
                     ])),
           ]),
-          Positioned(
-              top: 120.h,
-              right: 36.w,
-              child: GestureDetector(
-                onTap: () {
-                  Get.to(() => const UserProfileUI());
-                },
-                child: Obx(() => Container(
-                      height: 60.h,
-                      width: 60.w,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          border: Border.all(width: 2, color: Colors.white),
-                          image: RegistrationStepTwo2().profilePic1.value == ''
-                              ? const DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image:
-                                      AssetImage('assets/images/profile.png'))
-                              : DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(
-                                      RegistrationStepTwo2().profilePic1.value))),
-                    )),
-              )),
           Positioned(
               top: 400.h,
               left: 36.w,

@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reelpro/controllers/registeration_controllers.dart';
 import 'package:reelpro/models/shared_preferences.dart';
-import 'package:reelpro/controllers/fetch_lat_lng.dart';
 import 'package:reelpro/view_models/register_user_request/otp_view_model.dart';
 import 'package:reelpro/view_models/team_and_profile_request/create_team.dart';
 // import 'package:reelpro/view_models/register_user_request/registeration_step_two.dart';
@@ -33,7 +32,6 @@ class _SplashScreenState extends State<SplashScreen> {
   final instanceTeam = Get.put(const ProfileSettingsUI());
   final instanceOtpViewModel = Get.put(OtpViewModel());
   navigateToOnboardingPage() async {
-    await FetchLatLng().getLocation();
     String firstLastName = await SaveFirstName().getFirstName();
     otp.firstName1.value = firstLastName;
     String lastName = await SaveLastName().getLastName();

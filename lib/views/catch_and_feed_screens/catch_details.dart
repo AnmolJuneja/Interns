@@ -6,26 +6,11 @@ import 'package:reelpro/consts/text_field.dart';
 import 'package:reelpro/controllers/feed_and_catch_controllers.dart';
 import 'package:reelpro/models/catch_details.dart';
 import 'package:reelpro/models/comment_list.dart';
-import 'package:reelpro/models/feed_comment_list.dart';
-import 'package:reelpro/models/feed_details.dart';
 import 'package:get/get.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/add_comment.dart';
 import 'package:reelpro/view_models/feed_and_catch_network_request/all_catchlog_request.dart';
-import 'package:reelpro/view_models/feed_and_catch_network_request/all_feed_request.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/add_comment_feed.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/catch_details.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/comment_list.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/delete_feed_comment.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/feed_comment_list.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/feed_details.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/feed_list.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/like_catchlog.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/like_feed.dart';
 import 'package:reelpro/views/bottom_navigation_screens/bottom_navigation.dart';
-import 'package:reelpro/views/catch_and_feed_screens/feed_comment_list.dart';
-import '../../models/feed_list.dart';
 
 class CatchDetailsUI extends StatefulWidget {
   final int catchId;
@@ -36,9 +21,7 @@ class CatchDetailsUI extends StatefulWidget {
 }
 
 class _CatchDetailsUIState extends State<CatchDetailsUI> {
-
-  // final likeCatchlogApi = Get.put(AddCatchlogApi());
-   CatchDetailsModel? catchDetails;
+  CatchDetailsModel? catchDetails;
   var isLoading = false.obs;
   Future<void> getDetails() async {
     isLoading.value = true;
@@ -52,11 +35,12 @@ class _CatchDetailsUIState extends State<CatchDetailsUI> {
 
   var commentList = <CommentList>[].obs;
   getCommentListFinal() async {
-    await AddCatchlogApi()..getCommentList(widget.catchId).then((value) {
-      var resp = CommentListRespone.fromJson(value.data);
-      commentList.clear();
-      commentList.addAll(resp.data);
-    });
+    AddCatchlogApi()
+      ..getCommentList(widget.catchId).then((value) {
+        var resp = CommentListRespone.fromJson(value.data);
+        commentList.clear();
+        commentList.addAll(resp.data);
+      });
   }
 
   TextEditingController textEditingController = TextEditingController();
@@ -73,15 +57,13 @@ class _CatchDetailsUIState extends State<CatchDetailsUI> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-            toolbarHeight: 70.h,
+            // toolbarHeight: 70.h,
             elevation: 0,
             backgroundColor: Colors.white,
-            title: Padding(
-                padding: EdgeInsets.only(top: 42.h),
-                child: Text21PtBlack(text: 'Catch Details')),
+            title: Text21PtBlack(text: 'Catch Details'),
             centerTitle: true,
             leading: Padding(
-              padding: EdgeInsets.only(top: 42.h, left: 36.w),
+              padding: EdgeInsets.only(left: 36.w),
               child: GestureDetector(
                 onTap: () {
                   Get.to(() => BottomNavigation(currentIndex: 0));
@@ -97,93 +79,105 @@ class _CatchDetailsUIState extends State<CatchDetailsUI> {
               ? const Center(child: CircularProgressIndicator())
               : SingleChildScrollView(
                   controller: scrollController,
-                  physics: AlwaysScrollableScrollPhysics(),
+                  physics: const AlwaysScrollableScrollPhysics(),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                            padding: EdgeInsets.only(
-                                top: 44.h, left: 36.w, right: 36.w),
+                            padding: EdgeInsets.only(left: 36.w, right: 36.w),
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(children: [
-                                    catchDetails!
-                                                .data!.userDetail!.profilePic ==
-                                            null
-                                        ? ProfilePicContainer(
-                                            image: const AssetImage(
-                                                'assets/images/profile.png'))
-                                        : ProfilePicContainer(
-                                            image: NetworkImage(catchDetails!
-                                                .data!.userDetail!.profilePic)),
-                                    SizedBox(width: 12.w),
-                                    Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text20PtBlue(
-                                              text:
-                                                  '${catchDetails!.data!.userDetail!.firstname} ${catchDetails!.data!.userDetail!.lastname}'),
-                                          SizedBox(height: 7.h),
-                                          Row(children: [
-                                            SvgPicture.asset(
-                                                'assets/images/date.svg'),
-                                            SizedBox(width: 6.w),
-                                            Text14PtTime(
-                                                text: 'Mon, 12 September'),
-                                            SizedBox(width: 10.w),
-                                            SvgPicture.asset(
-                                                'assets/images/Subtraction 1.svg'),
-                                            SizedBox(width: 6.w),
-                                            Text14PtTime(text: '9:00 AM'),
-                                          ])
+                                  Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(children: [
+                                          catchDetails!.data!.userDetail!
+                                                      .profilePic ==
+                                                  null
+                                              ? ProfilePicContainer(
+                                                  image: const AssetImage(
+                                                      'assets/images/profile.png'))
+                                              : ProfilePicContainer(
+                                                  image: NetworkImage(
+                                                      catchDetails!
+                                                          .data!
+                                                          .userDetail!
+                                                          .profilePic)),
+                                          SizedBox(width: 12.w),
+                                          Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text20PtBlue(
+                                                    text:
+                                                        '${catchDetails!.data!.userDetail!.firstname} ${catchDetails!.data!.userDetail!.lastname}'),
+                                                SizedBox(height: 7.h),
+                                                Row(children: [
+                                                  SvgPicture.asset(
+                                                      'assets/images/date.svg'),
+                                                  SizedBox(width: 6.w),
+                                                  Text14PtTime(
+                                                      text:
+                                                          'Mon, 12 September'),
+                                                  SizedBox(width: 10.w),
+                                                  SvgPicture.asset(
+                                                      'assets/images/Subtraction 1.svg'),
+                                                  SizedBox(width: 6.w),
+                                                  Text14PtTime(text: '9:00 AM'),
+                                                ])
+                                              ])
                                         ]),
-                                    SizedBox(width: 30.w),
-                                    Padding(
-                                        padding: EdgeInsets.only(bottom: 25.h),
-                                        child: const Icon(Icons.more_horiz))
-                                  ]),
+                                        Padding(
+                                            padding:
+                                                EdgeInsets.only(bottom: 25.h),
+                                            child: const Icon(Icons.more_horiz))
+                                      ]),
                                   SizedBox(height: 24.h),
-                                  Container(
+                                  SizedBox(
                                       height: 45.h,
                                       child: Text16PtDesc(
                                           text: catchDetails!.data!.comment
                                               .toString())),
                                 ])),
                         SizedBox(height: 10.h),
-                        Container(
-                            height: 210.h,
+                        SizedBox(
+                            height: 429.h,
                             width: double.infinity,
                             child: Image.network(catchDetails!.data!.pic!,
                                 fit: BoxFit.cover)),
                         Padding(
                             padding: EdgeInsets.only(
-                                top: 56.h, left: 36.w, right: 36.w),
+                                top: 20.h, left: 36.w, right: 36.w),
                             child: Row(children: [
                               LikeIcon(
                                   onTap: () {
                                     AddFeedApi1().isLiked1.value = true;
-                                    AddCatchlogApi().
-                                        likeCatchlog(widget.catchId);
+                                    AddCatchlogApi()
+                                        .likeCatchlog(widget.catchId);
                                     AddFeedApi1().likeCount1.value++;
                                   },
                                   onTap1: () {
                                     AddFeedApi1().isLiked1.value = false;
-                                    AddCatchlogApi().
-                                        likeCatchlog(widget.catchId);
+                                    AddCatchlogApi()
+                                        .likeCatchlog(widget.catchId);
                                     AddFeedApi1().likeCount1.value--;
                                   },
                                   isliked: AddFeedApi1().isLiked1.value),
                               SizedBox(width: 8.w),
                               Text14PtBlue(
-                                  text: AddFeedApi1().likeCount1.value
+                                  text: AddFeedApi1()
+                                      .likeCount1
+                                      .value
                                       .toString()),
                               SizedBox(width: 44.w),
                               const CommentIcon(),
                               SizedBox(width: 8.w),
                               Text14Pt58(
-                                  text: AddFeedApi1().commentCount1.value
+                                  text: AddFeedApi1()
+                                      .commentCount1
+                                      .value
                                       .toString()),
                               SizedBox(width: 157.w),
                               Image.asset('assets/images/Group 70.png',
@@ -207,7 +201,7 @@ class _CatchDetailsUIState extends State<CatchDetailsUI> {
                                             padding: EdgeInsets.only(top: 60.h),
                                             child: Text16PtBlack(
                                                 text:
-                                                    'Be First To Add Comment On Feed'),
+                                                    'Be First To Add Comment On Catch'),
                                           ))
                                         : Obx(() => ListView.builder(
                                             shrinkWrap: true,
@@ -216,7 +210,7 @@ class _CatchDetailsUIState extends State<CatchDetailsUI> {
                                             itemCount: commentList.length,
                                             itemBuilder: (context, index) {
                                               return buildCatchComment(
-                                                  commentList[index]);
+                                                  context, commentList[index]);
                                             })),
                                   )
                                 ]))
@@ -250,10 +244,10 @@ class _CatchDetailsUIState extends State<CatchDetailsUI> {
   }
 }
 
-Widget buildCatchComment(CommentList commentList) {
+Widget buildCatchComment(BuildContext context, CommentList commentList) {
   return Container(
       padding: EdgeInsets.only(top: 19.h),
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+      child: Stack(children: [
         Row(children: [
           commentList.commentUserInfo!.profilePic != null
               ? ProfilePicContainerComment(
@@ -266,28 +260,45 @@ Widget buildCatchComment(CommentList commentList) {
                 text:
                     '${commentList.commentUserInfo!.firstname} ${commentList.commentUserInfo!.lastname}'),
             SizedBox(height: 5.h),
-            Container(width: 275.w, child: Text(commentList.comment.toString()))
+            SizedBox(width: 275.w, child: Text(commentList.comment.toString()))
           ])
         ]),
-        Padding(
-            padding: EdgeInsets.only(bottom: 20.h),
+        Positioned(
+            bottom: 35.h,
+            left: 320.w,
             child: GestureDetector(
                 onTap: () {
-                  Get.bottomSheet(Container(
-                    height: 150.h,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        color: const Color(0xffF2F9FF),
-                        borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(25))),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          MyButtonGrey(
-                              onpressed: () {}, buttonText: 'Delete Comment')
-                        ]),
-                  ));
+                  Get.bottomSheet(
+                    Container(
+                      padding:
+                          EdgeInsets.only(top: 30.h, left: 36.w, right: 36.w),
+                      height: 250.h,
+                      decoration: const BoxDecoration(
+                          borderRadius:
+                              BorderRadius.vertical(top: Radius.circular(25)),
+                          color: Color(0xffF2F9FF)),
+                      child: Column(children: [
+                        commentList.userId == commentList.userId
+                            ? const Divider(thickness: 1)
+                            : const SizedBox(),
+                        SizedBox(height: 10.h),
+                        commentList.userId == commentList.userId
+                            ? GestureDetector(
+                                onTap: () async {
+                               
+                                },
+                                child: Text16PtBlack(text: 'Delete comment'))
+                            : const SizedBox(),
+                        SizedBox(height: 10.h),
+                        const Divider(thickness: 1),
+                        SizedBox(height: 10.h),
+                        Text16PtBlack(text: 'Report Comment'),
+                        SizedBox(height: 10.h),
+                        const Divider(thickness: 1)
+                      ]),
+                    ),
+                  );
                 },
-                child: Icon(Icons.more_horiz)))
+                child: const Icon(Icons.more_horiz, color: Colors.black)))
       ]));
 }

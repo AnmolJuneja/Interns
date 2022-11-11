@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:reelpro/consts/appbar.dart';
 import 'package:reelpro/consts/button.dart';
 import 'package:reelpro/consts/event_details.dart';
 import 'package:reelpro/consts/text.dart';
@@ -123,165 +122,156 @@ class _EventDetailsUIState extends State<EventDetailsUI> {
                                           color: Color(0xffF2F9FF)),
                                       child: Padding(
                                           padding: EdgeInsets.only(top: 51.h),
-                                          child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 36.w, right: 36.w),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text14PtGrey(
-                                                          text:
-                                                              'Total Payable'),
-                                                      SizedBox(height: 10.h),
-                                                      Text16PtBlack(
-                                                          text: '\$500'),
-                                                      SizedBox(height: 20.h),
-                                                      const Divider(
-                                                          thickness: 1),
-                                                      SizedBox(height: 20.h),
-                                                      Text14PtGrey(
-                                                          text: 'Pay Through'),
-                                                    ],
-                                                  ),
-                                                ),
-                                                ListView(
-                                                  shrinkWrap: true,
-                                                  physics:
-                                                      const NeverScrollableScrollPhysics(),
-                                                  children: registerationType
-                                                      .map((e) =>
-                                                          GestureDetector(
-                                                            onTap: () {
-                                                              valueOfList
-                                                                  .value = e;
-                                                            },
-                                                            child: Padding(
-                                                                padding:
-                                                                    EdgeInsets
-                                                                        .only(
-                                                                  top: 20.h,
-                                                                ),
-                                                                child: Obx(() => ToggleContainer(
-                                                                    color: valueOfList.value ==
-                                                                            e
-                                                                        ? AddFeedApi1()
-                                                                            .selectedItemcolor
-                                                                            .value
-                                                                        : AddFeedApi1()
-                                                                            .transparentColor
-                                                                            .value,
-                                                                    isSelected:
-                                                                        valueOfList.value ==
-                                                                                e
-                                                                            ? true
-                                                                            : false,
-                                                                    text: e))),
-                                                          ))
-                                                      .toList(),
-                                                ),
-                                                SizedBox(height: 10.h),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 36.w, right: 36.w),
-                                                  child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
+                                          child: SingleChildScrollView(
+                                            child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 36.w,
+                                                        right: 36.w),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
                                                       children: [
-                                                        Button56(
-                                                            onpressed: () {
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
-                                                            },
-                                                            buttonText:
-                                                                'Cancel',
-                                                            textColor:
-                                                                Colors.black,
-                                                            width: 1,
-                                                            widthColor:
-                                                                Colors.black,
-                                                            color: const Color(
-                                                                0xffF2F9FF)),
-                                                        Button56Blue(
-                                                            onpressed: () {
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
-                                                              Get.bottomSheet(
-                                                                  Container(
-                                                                padding: EdgeInsets
-                                                                    .only(
-                                                                        top: 72
-                                                                            .h,
-                                                                        left: 36
-                                                                            .w,
-                                                                        right: 36
-                                                                            .w),
-                                                                height: 370.h,
-                                                                decoration: const BoxDecoration(
-                                                                    borderRadius:
-                                                                        BorderRadius.vertical(
-                                                                            top: Radius.circular(
-                                                                                25)),
-                                                                    color: Color(
-                                                                        0xffF2F9FF)),
-                                                                child: Column(
-                                                                    children: [
-                                                                      SvgPicture
-                                                                          .asset(
-                                                                              'assets/images/tick.svg'),
-                                                                      SizedBox(
-                                                                          height:
-                                                                              28.h),
-                                                                      Text(
-                                                                        'Congratulations!',
-                                                                        style: TextStyle(
-                                                                            fontFamily:
-                                                                                'Helvetica',
-                                                                            fontSize:
-                                                                                25.sp,
-                                                                            fontWeight: FontWeight.bold,
-                                                                            color: Colors.black),
-                                                                      ),
-                                                                      SizedBox(
-                                                                          height:
-                                                                              16.h),
-                                                                      Container(
-                                                                        height:
-                                                                            39.h,
-                                                                        width:
-                                                                            200.w,
-                                                                        child:
-                                                                            const Text(
-                                                                          'You have successfully participated in the event.',
-                                                                          textAlign:
-                                                                              TextAlign.center,
+                                                        Text14PtGrey(
+                                                            text:
+                                                                'Total Payable'),
+                                                        SizedBox(height: 10.h),
+                                                        Text16PtBlack(
+                                                            text: '\$500'),
+                                                        SizedBox(height: 20.h),
+                                                        const Divider(
+                                                            thickness: 1),
+                                                        SizedBox(height: 20.h),
+                                                        Text14PtGrey(
+                                                            text:
+                                                                'Pay Through'),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  ListView(
+                                                    shrinkWrap: true,
+                                                    physics:
+                                                        const NeverScrollableScrollPhysics(),
+                                                    children: registerationType
+                                                        .map(
+                                                            (e) =>
+                                                                GestureDetector(
+                                                                  onTap: () {
+                                                                    valueOfList
+                                                                        .value = e;
+                                                                  },
+                                                                  child:
+                                                                      Padding(
+                                                                          padding: EdgeInsets
+                                                                              .only(
+                                                                            top:
+                                                                                20.h,
+                                                                          ),
+                                                                          child: Obx(() => ToggleContainer(
+                                                                              color: valueOfList.value == e ? AddFeedApi1().selectedItemcolor.value : AddFeedApi1().transparentColor.value,
+                                                                              isSelected: valueOfList.value == e ? true : false,
+                                                                              text: e))),
+                                                                ))
+                                                        .toList(),
+                                                  ),
+                                                  SizedBox(height: 10.h),
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        left: 36.w,
+                                                        right: 36.w),
+                                                    child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Button56(
+                                                              onpressed: () {
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                              },
+                                                              buttonText:
+                                                                  'Cancel',
+                                                              textColor:
+                                                                  Colors.black,
+                                                              width: 1,
+                                                              widthColor:
+                                                                  Colors.black,
+                                                              color: const Color(
+                                                                  0xffF2F9FF)),
+                                                          Button56Blue(
+                                                              onpressed: () {
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                                Get.bottomSheet(
+                                                                    Container(
+                                                                  padding: EdgeInsets.only(
+                                                                      top: 72.h,
+                                                                      left:
+                                                                          36.w,
+                                                                      right:
+                                                                          36.w),
+                                                                  height: 370.h,
+                                                                  decoration: const BoxDecoration(
+                                                                      borderRadius: BorderRadius.vertical(
+                                                                          top: Radius.circular(
+                                                                              25)),
+                                                                      color: Color(
+                                                                          0xffF2F9FF)),
+                                                                  child: Column(
+                                                                      children: [
+                                                                        SvgPicture.asset(
+                                                                            'assets/images/tick.svg'),
+                                                                        SizedBox(
+                                                                            height:
+                                                                                28.h),
+                                                                        Text(
+                                                                          'Congratulations!',
                                                                           style: TextStyle(
                                                                               fontFamily: 'Helvetica',
-                                                                              fontWeight: FontWeight.w500,
-                                                                              color: Color(0xff485058)),
+                                                                              fontSize: 25.sp,
+                                                                              fontWeight: FontWeight.bold,
+                                                                              color: Colors.black),
                                                                         ),
-                                                                      )
-                                                                    ]),
-                                                              ));
-                                                              navigateToAnotherPage();
-                                                            },
-                                                            buttonText: 'Done',
-                                                            textColor:
-                                                                const Color(
-                                                                    0xffF2F9FF),
-                                                            color: const Color(
-                                                                0xff2B67A3))
-                                                      ]),
-                                                )
-                                              ])),
+                                                                        SizedBox(
+                                                                            height:
+                                                                                16.h),
+                                                                        SizedBox(
+                                                                          height:
+                                                                              39.h,
+                                                                          width:
+                                                                              200.w,
+                                                                          child:
+                                                                              const Text(
+                                                                            'You have successfully participated in the event.',
+                                                                            textAlign:
+                                                                                TextAlign.center,
+                                                                            style: TextStyle(
+                                                                                fontFamily: 'Helvetica',
+                                                                                fontWeight: FontWeight.w500,
+                                                                                color: Color(0xff485058)),
+                                                                          ),
+                                                                        )
+                                                                      ]),
+                                                                ));
+                                                                navigateToAnotherPage();
+                                                              },
+                                                              buttonText:
+                                                                  'Done',
+                                                              textColor:
+                                                                  const Color(
+                                                                      0xffF2F9FF),
+                                                              color: const Color(
+                                                                  0xff2B67A3))
+                                                        ]),
+                                                  )
+                                                ]),
+                                          )),
                                     ),
                                     isScrollControlled: true);
                               },

@@ -3,13 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:reelpro/controllers/feed_and_catch_controllers.dart';
 import 'package:reelpro/controllers/registeration_controllers.dart';
 import 'package:reelpro/models/shared_preferences.dart';
 // import 'package:reelpro/view_models/register_user_request/registeration_step_two.dart';
 
 class Editprofile {
-  // final instance = Get.put(RegistrationStepTwo2());
+  final instance = Get.put(RegistrationStepTwo2());
   Future<dio.Response> editProfile(
       String firstName,
       String lastName,
@@ -22,9 +21,9 @@ class Editprofile {
       String cardId,
       String customerId,
       String timeZone) async {
-    email == RegistrationStepTwo2().email1.value ? email = null : email = email;
+    email == instance.email1.value ? email = null : email = email;
 
-    number == RegistrationStepTwo2().number.value ? number = null : number = number;
+    number == instance.number.value ? number = null : number = number;
 
     description == null ? description = null : description = description;
 

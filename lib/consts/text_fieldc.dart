@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/consts/text.dart';
 import 'package:intl/intl.dart';
 
-  class TextFieldDatePicker extends StatefulWidget {
+class TextFieldDatePicker extends StatefulWidget {
   TextEditingController textEditingController;
   String hintText;
   TextInputType textInputType;
@@ -98,7 +98,7 @@ class TextFEmail extends StatelessWidget {
   TextInputType textInputType;
   Widget? prefix;
   void Function(String)? onchanged;
-  Key keyValue;
+  Key? keyValue;
   void Function(String?)? onSaved;
   String? Function(String?)? validator;
   String? suffixText;
@@ -184,26 +184,25 @@ class TextFirstName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 52.h,
-      width: 356.w,
+      width: double.infinity,
       decoration: BoxDecoration(boxShadow: const [
         BoxShadow(
-            // ignore: use_full_hex_values_for_flutter_colors
             color: Color.fromRGBO(113, 154, 195, 0.16),
             blurRadius: 0,
-            offset: Offset(0, 4))
+            offset: Offset(0, 0))
       ], borderRadius: BorderRadius.circular(5)),
       child: TextFormField(
         onSaved: onSaved,
-        // inputFormatters: [
-        //   FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]'))
-        // ],
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]'))
+        ],
         controller: textEditingController,
         onChanged: onchanged,
         keyboardType: textInputType,
         decoration: InputDecoration(
+            isCollapsed: true,
             border: InputBorder.none,
-            contentPadding:
-                EdgeInsets.only(top: 17.h, bottom: 14.h, left: 20.w),
+            contentPadding: EdgeInsets.only(top: 12.h, left: 20.w),
             hintText: hintText,
             hintStyle: TextStyle(
                 fontFamily: 'Helvetica',
@@ -322,9 +321,8 @@ class TextFEventList extends StatelessWidget {
               enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5),
                   borderSide: BorderSide.none),
-              suffixIcon: GestureDetector(
-                onTap: onTap,
-                child: const Icon(Icons.search))
+              suffixIcon:
+                  GestureDetector(onTap: onTap, child: const Icon(Icons.search))
               // ignore: use_full_hex_values_for_flutter_colors
               )),
     );
@@ -389,6 +387,7 @@ class TextFCon extends StatelessWidget {
         ));
   }
 }
+
 class BigTextFieldDetails extends StatelessWidget {
   TextEditingController textEditingController;
   String hintText;
@@ -410,14 +409,17 @@ class BigTextFieldDetails extends StatelessWidget {
         height: 130.h,
         width: 356.w,
         decoration: BoxDecoration(
-          boxShadow: const [
-        BoxShadow(
-            // ignore: use_full_hex_values_for_flutter_colors
-            color: Color.fromRGBO(113, 154, 195, 0.16),
-            blurRadius: 0,
-            offset: Offset(0, 4))
-      ],border: Border.all(width: 1, color: const Color.fromRGBO(113, 154, 195, 0.16)),
-            borderRadius: BorderRadius.circular(5), color: Colors.white),
+            boxShadow: const [
+              BoxShadow(
+                  // ignore: use_full_hex_values_for_flutter_colors
+                  color: Color.fromRGBO(113, 154, 195, 0.16),
+                  blurRadius: 0,
+                  offset: Offset(0, 4))
+            ],
+            border: Border.all(
+                width: 1, color: const Color.fromRGBO(113, 154, 195, 0.16)),
+            borderRadius: BorderRadius.circular(5),
+            color: Colors.white),
         child: TextField(
           controller: textEditingController,
           maxLines: null,

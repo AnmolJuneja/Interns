@@ -5,7 +5,6 @@ import 'package:reelpro/consts/text.dart';
 import 'package:reelpro/consts/text_field.dart';
 import 'package:reelpro/consts/text_fieldc.dart';
 import 'package:get/get.dart';
-import 'package:reelpro/views/team_screens/team_list.dart';
 import 'package:reelpro/views/team_screens/view_team.dart';
 
 class ReportGroupUI extends StatefulWidget {
@@ -25,17 +24,15 @@ class _ReportGroupUIState extends State<ReportGroupUI> {
         // toolbarHeight: 70.h,
         elevation: 0,
         backgroundColor: const Color(0xffF2F9FF),
-        title: Padding(
-            padding: EdgeInsets.only(top: 42.h),
-            child: Text21PtBlack(text: 'Report Group')),
+        title: Text21PtBlack(text: 'Report Group'),
         centerTitle: true,
         leading: Padding(
-            padding: EdgeInsets.only(top: 42.h, left: 36.w),
+            padding: EdgeInsets.only(left: 36.w),
             child: GestureDetector(
                 onTap: () {
                   Get.to(() => const ViewTeam());
                 },
-                child: Icon(Icons.arrow_back_ios, color: Colors.black))),
+                child: const Icon(Icons.arrow_back_ios, color: Colors.black))),
       ),
       backgroundColor: const Color(0xffF2F9FF),
       body: Padding(

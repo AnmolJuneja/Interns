@@ -13,14 +13,12 @@ class PendingRequestUI extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           // toolbarHeight: 70.h,
-          title: Padding(
-              padding: EdgeInsets.only(top: 42.h),
-              child: Text21PtBlack(text: 'Pending Requests')),
+          title: Text21PtBlack(text: 'Pending Requests'),
           centerTitle: true,
           elevation: 0,
           backgroundColor: const Color(0xffF2F9FF),
           leading: Padding(
-              padding: EdgeInsets.only(top: 42.h, left: 36.w),
+              padding: EdgeInsets.only(left: 36.w),
               child: GestureDetector(
                   onTap: () {
                     Get.to(() => const ViewTeam());
@@ -31,7 +29,7 @@ class PendingRequestUI extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.only(left: 36.w, right: 36.w, top: 44.h),
         child: Column(children: [
-          Container(
+          SizedBox(
             height: 700.h,
             child: ListView.builder(
                 itemCount: 9,

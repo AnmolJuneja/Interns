@@ -3,11 +3,14 @@ import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
 import 'dart:io';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:reelpro/controllers/feed_and_catch_controllers.dart';
+import 'package:reelpro/models/feed_comment_list.dart';
 import 'package:reelpro/models/feed_list.dart';
 import 'package:reelpro/models/my_feed_list.dart';
 import 'package:reelpro/models/shared_preferences.dart';
 
 class AddFeedApi {
+  var userId;
   Future<dio.Response> addFeed(String location, double lat, double lng,
       String description, int viewStatus, File images) async {
     String authToken = await SharedPreferences1().getToken();
@@ -53,6 +56,7 @@ class AddFeedApi {
   }
 
   Future<dio.Response> getFeedList() async {
+    userId = await SaveUserId().getId();
     String authToken = await SharedPreferences1().getToken();
     try {
       dio.Response response;
@@ -97,6 +101,17 @@ class AddFeedApi {
       print(err.message);
     }
     return Future.value();
+  }
+
+  var commentList = <FeedCList>[].obs;
+  getCommentListFinal(int feedId) async {
+    isLoading.value = true;
+    await getFeedCommentList(feedId).then((value) {
+      var resp = FeedCommentList.fromJson(value.data);
+      commentList.clear();
+      commentList.addAll(resp.data);
+    });
+    isLoading.value = false;
   }
 
   Future<dio.Response> getFeedDetails(int feedId) async {
@@ -163,6 +178,26 @@ class AddFeedApi {
       dio.Response response;
       response = await dio.Dio().post(
           'https://reelpro.yatilabs.com/api/v1/feed/likedislike',
+          data: {'feed_id': feedId},
+          options: dio.Options(headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer $authToken'
+          }));
+      print('Response data: ${response.data}');
+      return response;
+    } on dio.DioError catch (err) {
+      print(err.message);
+      print(err.response);
+    }
+    return Future.value();
+  }
+
+  Future<dio.Response> deleteFeed(int feedId) async {
+    String authToken = await SharedPreferences1().getToken();
+    try {
+      dio.Response response;
+      response = await dio.Dio().post(
+          'https://reelpro.yatilabs.com/api/v1/feed/deletefeed',
           data: {'feed_id': feedId},
           options: dio.Options(headers: {
             'Accept': 'application/json',

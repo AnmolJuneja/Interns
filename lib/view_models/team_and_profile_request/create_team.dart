@@ -42,6 +42,7 @@ class CreateTeamApi {
   }
 
   Future<dio.Response> getTeam() async {
+
     String authToken = await SharedPreferences1().getToken();
 
     try {
@@ -60,8 +61,7 @@ class CreateTeamApi {
     }
     return Future.value();
   }
-
-  var getTeam1 = <TeamList>[].obs;
+   var getTeam1 = <TeamList>[].obs;
   getTeam12() async {
     await getTeam().then((value) {
       var resp = TeamListResponse.fromJson(value.data);
@@ -69,6 +69,8 @@ class CreateTeamApi {
       getTeam1.addAll(resp.data);
     });
   }
+
+
 
   Future<dio.Response> getTeamDetails() async {
     String authToken = await SharedPreferences1().getToken();

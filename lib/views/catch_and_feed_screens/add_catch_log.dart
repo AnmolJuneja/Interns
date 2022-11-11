@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reelpro/consts/appbar.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/consts/button.dart';
 import 'package:reelpro/consts/container.dart';
@@ -9,15 +9,12 @@ import 'package:reelpro/consts/toggle_container.dart';
 import 'package:reelpro/controllers/feed_and_catch_controllers.dart';
 import 'package:reelpro/models/catchlog_list_response.dart';
 import 'package:reelpro/view_models/feed_and_catch_network_request/all_catchlog_request.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/catchlog_list.dart';
 import 'package:reelpro/controllers/fetch_lat_lng.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/fish_species_list.dart';
 import 'package:reelpro/views/bottom_navigation_screens/bottom_navigation.dart';
-// import 'package:reelpro/views/bottom_navigation_screens/bottom_sheet.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-import 'package:reelpro/views/bottom_navigation_screens/tracker.dart';
+import 'package:image_cropper/image_cropper.dart';
 
 class AddCatchLogUI extends StatefulWidget {
   const AddCatchLogUI({Key? key}) : super(key: key);
@@ -28,7 +25,6 @@ class AddCatchLogUI extends StatefulWidget {
 
 class _AddCatchLogUIState extends State<AddCatchLogUI> {
   var catchlogList = <CatchlogList>[].obs;
-
 
   @override
   void initState() {
@@ -46,7 +42,10 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
   TextEditingController baitController = TextEditingController();
   TextEditingController commentController = TextEditingController();
   TextEditingController locationController = TextEditingController();
+  TextEditingController searchController = TextEditingController();
   final fetchAdress = Get.put(FetchLatLng());
+  var value1 = 'Connect with Challenge'.obs;
+  var value = 'Select Fishtype'.obs;
   @override
   Widget build(BuildContext context) {
     double lat = 30.403648;
@@ -91,14 +90,35 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                   Text15PtBlue(text: 'Click Pictures or Videos'),
                   SizedBox(height: 14.h),
                   GestureDetector(
-                      onTap: () async {
-                        XFile? xFile =
-                            await picker.pickImage(source: ImageSource.gallery);
-                        if (xFile != null) {
-                          setState(() {
-                            file = File(xFile.path);
-                          });
-                        }
+                      onTap: () {
+                        FocusScope.of(context).unfocus();
+                        Get.bottomSheet(Container(
+                          height: 200.h,
+                          width: double.infinity,
+                          decoration:
+                              const BoxDecoration(color: Color(0xffF2F9FF)),
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                top: 35.h, left: 36.w, right: 36.w),
+                            child: Column(
+                              children: [
+                                MyButton(
+                                    onpressed: () {
+                                      openCamera();
+                                      Navigator.pop(context);
+                                    },
+                                    buttonText: 'Camera'),
+                                SizedBox(height: 10.h),
+                                MyButton(
+                                    onpressed: () {
+                                      openGallery();
+                                      Navigator.pop(context);
+                                    },
+                                    buttonText: 'Gallery')
+                              ],
+                            ),
+                          ),
+                        ));
                       },
                       child: Container(
                           child: file == null
@@ -130,22 +150,104 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                   SizedBox(height: 14.h),
                   GestureDetector(
                       onTap: () {
-                        // showModalBottomSheet(
-                        //     context: context,
-                        //     isScrollControlled: true,
-                        //     shape: const RoundedRectangleBorder(
-                        //         borderRadius: BorderRadius.vertical(
-                        //             top: Radius.circular(25))),
-                        //     builder: (context) => const buildBottomSheet());
+                        Get.bottomSheet(
+                            Container(
+                              padding: EdgeInsets.only(top: 48.h),
+                              height: 800.h,
+                              width: double.infinity,
+                              decoration: const BoxDecoration(
+                                  borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(25)),
+                                  color: Color(0xffF2F9FF)),
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 36.w, right: 36.w),
+                                        child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text15PtBlue(
+                                                  text: 'Select Fishtype'),
+                                              SizedBox(height: 25.h),
+                                              TextFSearch(
+                                                  textEditingController:
+                                                      searchController,
+                                                  hintText: 'Search',
+                                                  textInputType:
+                                                      TextInputType.text,
+                                                  prefix: null,
+                                                  onchanged: (value) {})
+                                            ])),
+                                    SizedBox(height: 25.h),
+                                    ListView(
+                                      shrinkWrap: true,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      children: fish
+                                          .map((e) => GestureDetector(
+                                                onTap: () {
+                                                  value.value = e;
+                                                },
+                                                child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                      top: 20.h,
+                                                    ),
+                                                    child: Obx(() => ToggleContainer(
+                                                        color: value.value == e
+                                                            ? AddFeedApi1()
+                                                                .selectedItemcolor1
+                                                                .value
+                                                            : AddFeedApi1()
+                                                                .transparentColor1
+                                                                .value,
+                                                        isSelected:
+                                                            value.value == e
+                                                                ? true
+                                                                : false,
+                                                        text: e))),
+                                              ))
+                                          .toList(),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          top: 30.h, left: 36.w, right: 36.w),
+                                      child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Button56(
+                                                onpressed: () {
+                                                  value.value =
+                                                      'Select Fishtype';
+                                                  Navigator.pop(context);
+                                                },
+                                                buttonText: 'Cancel',
+                                                textColor: Colors.black,
+                                                width: 1,
+                                                widthColor: Colors.black,
+                                                color: const Color(0xffF2F9FF)),
+                                            Button56Blue(
+                                                onpressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                buttonText: 'Done',
+                                                textColor:
+                                                    const Color(0xffF2F9FF),
+                                                color: const Color(0xff2B67A3))
+                                          ]),
+                                    )
+                                  ]),
+                            ),
+                            isScrollControlled: true);
                       },
-                      child: Obx(() => fishSpeciesListApi
-                              .selectedFish.value.isEmpty
+                      child: Obx(() => value.value == 'Select Fishtype'
                           ? BottomSheetContainer(
                               widgetText: Text15PtGrey(text: 'Select Fishtype'))
                           : BottomSheetContainerUpdate(
-                              widgetText: Text16PtBlack(
-                                  text:
-                                      fishSpeciesListApi.selectedFish.value)))),
+                              widgetText: Text16PtBlack(text: value.value)))),
                   SizedBox(height: 18.h),
                   Text15PtBlue(text: 'Connect with Challenge'),
                   SizedBox(height: 14.h),
@@ -169,136 +271,37 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                                               top: 48.h, left: 36.w),
                                           child: Text15PtBlue(
                                               text: 'Connect with Challenge')),
-                                      SizedBox(height: 25.h),
-                                      Obx(() => GestureDetector(
-                                            onTap: () {
-                                              fishSpeciesListApi.color1.value =
-                                                  fishSpeciesListApi
-                                                      .selectedColor.value;
-                                              fishSpeciesListApi.color2.value =
-                                                  fishSpeciesListApi
-                                                      .spareColor.value;
-                                              fishSpeciesListApi.color3.value =
-                                                  fishSpeciesListApi
-                                                      .spareColor.value;
-                                              fishSpeciesListApi.color4.value =
-                                                  fishSpeciesListApi
-                                                      .spareColor.value;
-                                              fishSpeciesListApi
-                                                  .isSelected1.value = true;
-                                              fishSpeciesListApi
-                                                  .isSelected2.value = false;
-                                              fishSpeciesListApi
-                                                  .isSelected3.value = false;
-                                              fishSpeciesListApi
-                                                  .isSelected4.value = false;
-                                              fishSpeciesListApi.finalSelected
-                                                  .value = 'My log';
-                                            },
-                                            child: ToggleContainer(
-                                                color: fishSpeciesListApi
-                                                    .color1.value,
-                                                isSelected: fishSpeciesListApi
-                                                    .isSelected1.value,
-                                                text: 'My log'),
-                                          )),
-                                      Obx(() => GestureDetector(
-                                            onTap: () {
-                                              fishSpeciesListApi.color2.value =
-                                                  fishSpeciesListApi
-                                                      .selectedColor.value;
-                                              fishSpeciesListApi.color1.value =
-                                                  fishSpeciesListApi
-                                                      .spareColor.value;
-                                              fishSpeciesListApi.color3.value =
-                                                  fishSpeciesListApi
-                                                      .spareColor.value;
-                                              fishSpeciesListApi.color4.value =
-                                                  fishSpeciesListApi
-                                                      .spareColor.value;
-                                              fishSpeciesListApi
-                                                  .isSelected2.value = true;
-                                              fishSpeciesListApi
-                                                  .isSelected1.value = false;
-                                              fishSpeciesListApi
-                                                  .isSelected3.value = false;
-                                              fishSpeciesListApi
-                                                  .isSelected4.value = false;
-                                              fishSpeciesListApi.finalSelected
-                                                  .value = 'Rod Ring Rulers';
-                                            },
-                                            child: ToggleContainer(
-                                                color: fishSpeciesListApi
-                                                    .color2.value,
-                                                isSelected: fishSpeciesListApi
-                                                    .isSelected2.value,
-                                                text: 'Rod Ring Rulers'),
-                                          )),
-                                      Obx(() => GestureDetector(
-                                            onTap: () {
-                                              fishSpeciesListApi.color3.value =
-                                                  fishSpeciesListApi
-                                                      .selectedColor.value;
-                                              fishSpeciesListApi.color2.value =
-                                                  fishSpeciesListApi
-                                                      .spareColor.value;
-                                              fishSpeciesListApi.color1.value =
-                                                  fishSpeciesListApi
-                                                      .spareColor.value;
-                                              fishSpeciesListApi.color4.value =
-                                                  fishSpeciesListApi
-                                                      .spareColor.value;
-                                              fishSpeciesListApi
-                                                  .isSelected3.value = true;
-                                              fishSpeciesListApi
-                                                  .isSelected1.value = false;
-                                              fishSpeciesListApi
-                                                  .isSelected2.value = false;
-                                              fishSpeciesListApi
-                                                  .isSelected4.value = false;
-                                              fishSpeciesListApi.finalSelected
-                                                  .value = 'Drifnet Ethos';
-                                            },
-                                            child: ToggleContainer(
-                                                color: fishSpeciesListApi
-                                                    .color3.value,
-                                                isSelected: fishSpeciesListApi
-                                                    .isSelected3.value,
-                                                text: 'Driftnet Ethos'),
-                                          )),
-                                      Obx(() => GestureDetector(
-                                            onTap: () {
-                                              fishSpeciesListApi.color4.value =
-                                                  fishSpeciesListApi
-                                                      .selectedColor.value;
-                                              fishSpeciesListApi.color2.value =
-                                                  fishSpeciesListApi
-                                                      .spareColor.value;
-                                              fishSpeciesListApi.color1.value =
-                                                  fishSpeciesListApi
-                                                      .spareColor.value;
-                                              fishSpeciesListApi.color3.value =
-                                                  fishSpeciesListApi
-                                                      .spareColor.value;
-                                              fishSpeciesListApi
-                                                  .isSelected4.value = true;
-                                              fishSpeciesListApi
-                                                  .isSelected1.value = false;
-                                              fishSpeciesListApi
-                                                  .isSelected2.value = false;
-                                              fishSpeciesListApi
-                                                  .isSelected3.value = false;
-                                              fishSpeciesListApi.finalSelected
-                                                  .value = 'Fish Spell Casters';
-                                            },
-                                            child: ToggleContainer(
-                                                color: fishSpeciesListApi
-                                                    .color4.value,
-                                                isSelected: fishSpeciesListApi
-                                                    .isSelected4.value,
-                                                text: 'Fish Spell Casters'),
-                                          )),
-                                      SizedBox(height: 35.h),
+                                      ListView(
+                                        shrinkWrap: true,
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        children: challenge
+                                            .map((e) => GestureDetector(
+                                                  onTap: () {
+                                                    value1.value = e;
+                                                  },
+                                                  child: Padding(
+                                                      padding: EdgeInsets.only(
+                                                        top: 20.h,
+                                                      ),
+                                                      child: Obx(() => ToggleContainer(
+                                                          color: value1.value ==
+                                                                  e
+                                                              ? AddFeedApi1()
+                                                                  .selectedItemcolor1
+                                                                  .value
+                                                              : AddFeedApi1()
+                                                                  .transparentColor1
+                                                                  .value,
+                                                          isSelected:
+                                                              value1.value == e
+                                                                  ? true
+                                                                  : false,
+                                                          text: e))),
+                                                ))
+                                            .toList(),
+                                      ),
+                                      SizedBox(height: 15.h),
                                       Padding(
                                           padding: EdgeInsets.only(
                                               left: 36.w, right: 36.w),
@@ -309,6 +312,8 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                                               children: [
                                                 Button56(
                                                     onpressed: () {
+                                                      value1.value =
+                                                          'Connect with Challenge';
                                                       Navigator.pop(context);
                                                     },
                                                     buttonText: 'Cancel',
@@ -331,14 +336,13 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                                               ]))
                                     ])));
                       },
-                      child: Obx(() => fishSpeciesListApi
-                              .finalSelected.value.isEmpty
+                      child: Obx(() => value1.value == 'Connect with Challenge'
                           ? BottomSheetContainer(
                               widgetText:
                                   Text15PtGrey(text: 'Connect with Challenge'))
                           : BottomSheetContainerUpdate(
                               widgetText: Text16PtBlack(
-                              text: fishSpeciesListApi.finalSelected.value,
+                              text: value1.value,
                             )))),
                   SizedBox(height: 18.h),
                   Text15PtBlue(text: 'Select Location'),
@@ -422,5 +426,62 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                 buttonText: 'Save'))
       ]),
     );
+  }
+
+  final List<String> challenge = [
+    'My log',
+    'Rod Ring Rulers',
+    'Driftnet Ethos',
+    'Fish Spell Casters'
+  ];
+  final List<String> fish = [
+    'Bass',
+    'Bluegill',
+    'Carp',
+    'Catfish',
+    'Crappy',
+    'Flounder'
+  ];
+  Future openCamera() async {
+    try {
+      final images = await ImagePicker().pickImage(source: ImageSource.camera);
+      if (images == null) return;
+      File? tempPath = File(images.path);
+      tempPath = await cropImage(imageFile: tempPath);
+      setState(() {
+        file = tempPath;
+        // Navigator.of(context).pop();
+      });
+    } on PlatformException catch (e) {
+      print(e);
+      Navigator.of(context).pop();
+    }
+  }
+
+  Future<File?> cropImage({required File imageFile}) async {
+    CroppedFile? cropImage = await ImageCropper().cropImage(
+        maxHeight: 180,
+        maxWidth: 180,
+        compressQuality: 100,
+        aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
+        sourcePath: imageFile.path);
+    if (cropImage == null) return null;
+    return File(cropImage.path);
+  }
+
+  Future openGallery() async {
+    try {
+      final images = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (images == null) return;
+      File? tempPath = File(images.path);
+      tempPath = await cropImage(imageFile: tempPath);
+      setState(() {
+        file = tempPath;
+        // Navigator.of(context).pop();
+      });
+    } on PlatformException catch (e) {
+      print(e);
+      Navigator.of(context).pop();
+    }
   }
 }

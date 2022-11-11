@@ -59,6 +59,5 @@ class FetchLatLng extends GetxController {
     state.value = '${place.administrativeArea}';
     address1.value = '${place.street}';
 
-    ;
   }
 }

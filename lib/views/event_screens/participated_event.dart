@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:reelpro/consts/appbar.dart';
 import 'package:reelpro/consts/button.dart';
 import 'package:reelpro/consts/container.dart';
 import 'package:reelpro/consts/event_details.dart';
 import 'package:reelpro/consts/text.dart';
-import 'package:reelpro/consts/toggle_container.dart';
 import 'package:reelpro/models/event_details.dart';
 import 'package:reelpro/view_models/event_network_request/event_details.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,7 +10,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/views/catch_and_feed_screens/add_catch_log.dart';
 import 'package:reelpro/views/bottom_navigation_screens/bottom_navigation.dart';
 import 'package:get/get.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:reelpro/views/event_screens/teams_anglers.dart';
 
 class ParticipatedEventUI extends StatefulWidget {

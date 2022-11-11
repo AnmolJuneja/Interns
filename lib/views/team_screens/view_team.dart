@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:reelpro/consts/appbar.dart';
 import 'package:reelpro/consts/team_view.dart';
 import 'package:reelpro/consts/text.dart';
-import 'package:reelpro/models/add_feed.dart';
 // import 'package:reelpro/models/create_team.dart';
-import 'package:reelpro/models/view_team.dart';
 import 'package:reelpro/view_models/team_and_profile_request/create_team.dart';
 // import 'package:reelpro/view_models/team_and_profile_request/view_team.dart';
 import 'package:reelpro/views/team_screens/about_group.dart';
@@ -27,7 +24,7 @@ class ViewTeam extends StatelessWidget {
       appBar: AppBar(
         actions: [
           Padding(
-              padding: EdgeInsets.only(right: 30.w, top: 42.h),
+              padding: EdgeInsets.only(right: 30.w),
               child: GestureDetector(
                   onTap: () {
                     Get.bottomSheet(
@@ -82,15 +79,13 @@ class ViewTeam extends StatelessWidget {
                   },
                   child: const Icon(Icons.more_vert, color: Colors.black)))
         ],
-        title: Padding(
-            padding: EdgeInsets.only(top: 42.h),
-            child: Text21PtBlack(text: 'Giant Trevally')),
+        title: Text21PtBlack(text: 'Giant Trevally'),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
         // toolbarHeight: 70.h,
         leading: Padding(
-            padding: EdgeInsets.only(top: 42.h, left: 36.w),
+            padding: EdgeInsets.only(left: 36.w),
             child: GestureDetector(
                 onTap: () {
                   Get.to(() => const TeamViewView());

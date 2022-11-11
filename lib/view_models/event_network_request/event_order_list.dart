@@ -1,7 +1,4 @@
-import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
-import 'package:reelpro/models/event_order_list.dart';
-import 'package:reelpro/models/my_feed_list.dart';
 import 'package:reelpro/models/shared_preferences.dart';
 
 class EventOrderListApi  {

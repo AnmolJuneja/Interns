@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/consts/text.dart';
-import 'package:reelpro/views/event_screens/participated_event.dart';
 
 class LeaderBoardUI extends StatelessWidget {
   const LeaderBoardUI({Key? key}) : super(key: key);
@@ -91,7 +89,7 @@ class LeaderBoardUI extends StatelessWidget {
             bottom: 0.h,
             child: Container(
                 child: ListView.builder(
-                    physics: AlwaysScrollableScrollPhysics(),
+                    physics: const AlwaysScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: 10,
                     itemBuilder: (context, index) {
@@ -113,10 +111,10 @@ class LeaderBoardUI extends StatelessWidget {
                                 Container(
                                   height: 38.h,
                                   width: 38.w,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                       shape: BoxShape.circle,
                                       color: Colors.orange),
-                                  child: Center(
+                                  child: const Center(
                                     child: Text('22',
                                         style: TextStyle(color: Colors.white)),
                                   ),

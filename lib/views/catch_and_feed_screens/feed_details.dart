@@ -6,16 +6,18 @@ import 'package:reelpro/controllers/feed_and_catch_controllers.dart';
 import 'package:reelpro/models/feed_comment_list.dart';
 import 'package:reelpro/models/feed_details.dart';
 import 'package:get/get.dart';
+import 'package:reelpro/models/feed_list.dart';
 // import 'package:reelpro/view_models/feed_and_catch_network_request/add_comment_feed.dart';
 import 'package:reelpro/view_models/feed_and_catch_network_request/all_feed_request.dart';
 // import 'package:reelpro/view_models/feed_and_catch_network_request/delete_feed_comment.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/like_feed.dart';
 import 'package:reelpro/views/bottom_navigation_screens/bottom_navigation.dart';
+import 'package:reelpro/views/bottom_navigation_screens/tracker.dart';
+// import 'package:reelpro/view_models/feed_and_catch_network_request/like_feed.dart';
 import 'package:reelpro/views/catch_and_feed_screens/feed_comment_list.dart';
-import '../../models/feed_list.dart';
+import 'package:reelpro/views/family_and_profile_screens/user_profile.dart';
 
 class FeedDetailsUI extends StatefulWidget {
   final int feedId;
@@ -38,26 +40,15 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
     isLoading.value = false;
   }
 
-  var commentList = <FeedCList>[].obs;
-  getCommentListFinal() async {
-    await likeFeed.getFeedCommentList(widget.feedId).then((value) {
-      var resp = FeedCommentList.fromJson(value.data);
-      commentList.clear();
-      commentList.addAll(resp.data);
-    });
-  }
-
   FeedCList? feedCList;
   final instance = Get.put(AddFeedApi1());
   final likeFeed = Get.put(AddFeedApi());
-  // final commentInstance = Get.put(AddFeedApi());
-  // final addCommentInstance = Get.put(Add);
   TextEditingController textEditingController = TextEditingController();
   final ScrollController scrollController = ScrollController();
   @override
   void initState() {
     getDetails();
-    getCommentListFinal();
+    likeFeed.getCommentListFinal(widget.feedId);
     super.initState();
   }
 
@@ -75,7 +66,8 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
               padding: EdgeInsets.only(left: 36.w),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.pushAndRemoveUntil(context,
+                      MaterialPageRoute(builder: (context) =>BottomNavigation(currentIndex: 0)), (route) => false);
                 },
                 child: const Icon(
                   Icons.arrow_back_ios,
@@ -88,13 +80,12 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
               ? const Center(child: CircularProgressIndicator())
               : SingleChildScrollView(
                   controller: scrollController,
-                  physics: AlwaysScrollableScrollPhysics(),
+                  physics: const AlwaysScrollableScrollPhysics(),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                            padding: EdgeInsets.only(
-                                top: 44.h, left: 36.w, right: 36.w),
+                            padding: EdgeInsets.only(left: 36.w, right: 36.w),
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -148,10 +139,80 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
                                         Padding(
                                             padding:
                                                 EdgeInsets.only(bottom: 25.h),
-                                            child: const Icon(Icons.more_horiz))
+                                            child: GestureDetector(
+                                                onTap: () {
+                                                  Get.bottomSheet(
+                                                    Container(
+                                                      padding: EdgeInsets.only(
+                                                          top: 30.h,
+                                                          left: 36.w,
+                                                          right: 36.w),
+                                                      height: 250.h,
+                                                      decoration: const BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius.vertical(
+                                                                  top: Radius
+                                                                      .circular(
+                                                                          25)),
+                                                          color: Color(
+                                                              0xffF2F9FF)),
+                                                      child: Column(children: [
+                                                        likeFeed.userId ==
+                                                                feedDetails!
+                                                                    .data!
+                                                                    .data!
+                                                                    .first
+                                                                    .userId
+                                                            ? const Divider(
+                                                                thickness: 1)
+                                                            : const SizedBox(),
+                                                        SizedBox(height: 10.h),
+                                                        likeFeed.userId ==
+                                                                feedDetails!
+                                                                    .data!
+                                                                    .data!
+                                                                    .first
+                                                                    .userId
+                                                            ? GestureDetector(
+                                                                onTap: () {
+                                                                  likeFeed.deleteFeed(
+                                                                      feedDetails!
+                                                                          .data!
+                                                                          .data!
+                                                                          .first
+                                                                          .id!);
+                                                                  Navigator.pushAndRemoveUntil(
+                                                                      context,
+                                                                      MaterialPageRoute(
+                                                                          builder: (context) =>
+                                                                              const UserProfileUI()),
+                                                                      (route) =>
+                                                                          false);
+                                                                },
+                                                                child: Text16PtBlack(
+                                                                    text:
+                                                                        'Delete Feed'),
+                                                              )
+                                                            : const SizedBox(),
+                                                        SizedBox(height: 10.h),
+                                                        const Divider(
+                                                            thickness: 1),
+                                                        SizedBox(height: 10.h),
+                                                        Text16PtBlack(
+                                                            text:
+                                                                'Report Feed'),
+                                                        SizedBox(height: 10.h),
+                                                        const Divider(
+                                                            thickness: 1)
+                                                      ]),
+                                                    ),
+                                                  );
+                                                },
+                                                child: const Icon(
+                                                    Icons.more_horiz)))
                                       ]),
                                   SizedBox(height: 24.h),
-                                  Container(
+                                  SizedBox(
                                       height: 45.h,
                                       child: Text16PtDesc(
                                           text: feedDetails!
@@ -159,7 +220,7 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
                                               .toString())),
                                 ])),
                         SizedBox(height: 10.h),
-                        Container(
+                        SizedBox(
                             height: 429.h,
                             width: double.infinity,
                             child: PageView.builder(
@@ -216,7 +277,7 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
                                   Text21PtBlack(text: 'Comments'),
                                   SizedBox(height: 8.h),
                                   Container(
-                                    child: commentList.isEmpty
+                                    child: likeFeed.commentList.isEmpty
                                         ? Center(
                                             child: Padding(
                                             padding: EdgeInsets.only(top: 60.h),
@@ -224,15 +285,22 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
                                                 text:
                                                     'Be First To Add Comment On Feed'),
                                           ))
-                                        : Obx(() => ListView.builder(
-                                            shrinkWrap: true,
-                                            physics:
-                                                const NeverScrollableScrollPhysics(),
-                                            itemCount: commentList.length,
-                                            itemBuilder: (context, index) {
-                                              return buildCommentList(
-                                                  commentList[index]);
-                                            })),
+                                        : Obx(() => likeFeed.isLoading.value
+                                            ? const Center(
+                                                child:
+                                                    CircularProgressIndicator())
+                                            : ListView.builder(
+                                                shrinkWrap: true,
+                                                physics:
+                                                    const NeverScrollableScrollPhysics(),
+                                                itemCount:
+                                                    likeFeed.commentList.length,
+                                                itemBuilder: (context, index) {
+                                                  return buildCommentList(
+                                                      context,
+                                                      likeFeed
+                                                          .commentList[index]);
+                                                })),
                                   )
                                 ]))
                       ]),
@@ -253,7 +321,7 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
                     ontap: () async {
                       await AddFeedApi().addCommentFeed(
                           widget.feedId, textEditingController.text);
-                      await getCommentListFinal();
+                      await likeFeed.getCommentListFinal(widget.feedId);
                       textEditingController.clear();
                       instance.commentCount.value++;
                       scrollController.animateTo(

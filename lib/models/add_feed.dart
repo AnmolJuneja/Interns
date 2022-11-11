@@ -19,13 +19,11 @@ class AddFeed {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["success"] = success;
-    _data["message"] = message;
-    if(data != null) {
-      _data["data"] = data?.toJson();
-    }
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["success"] = success;
+    data["message"] = message;
+    data["data"] = data;
+    return data;
   }
 }
 
@@ -73,16 +71,16 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["location"] = location;
-    _data["lng"] = lng;
-    _data["lat"] = lat;
-    _data["description"] = description;
-    _data["user_id"] = userId;
-    _data["view_status"] = viewStatus;
-    _data["updated_at"] = updatedAt;
-    _data["created_at"] = createdAt;
-    _data["id"] = id;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["location"] = location;
+    data["lng"] = lng;
+    data["lat"] = lat;
+    data["description"] = description;
+    data["user_id"] = userId;
+    data["view_status"] = viewStatus;
+    data["updated_at"] = updatedAt;
+    data["created_at"] = createdAt;
+    data["id"] = id;
+    return data;
   }
 }

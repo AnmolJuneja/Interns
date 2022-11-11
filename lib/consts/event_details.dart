@@ -353,9 +353,9 @@ class EventDetailsRow extends StatelessWidget {
                   text: 'Crew and Contacts'),
             ),
             SizedBox(height: 20.h),
-            Divider(thickness: 1),
+            const Divider(thickness: 1),
             SizedBox(height: 35.h),
-            SponserContainer()
+            const SponserContainer()
           ],
         ));
   }
@@ -557,9 +557,9 @@ class EventDetailsRow1 extends StatelessWidget {
                   text: 'Crew and Contacts'),
             ),
             SizedBox(height: 20.h),
-            Divider(thickness: 1),
+            const Divider(thickness: 1),
             SizedBox(height: 35.h),
-            SponserContainer()
+            const SponserContainer()
           ],
         ));
   }

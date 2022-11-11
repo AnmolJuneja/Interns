@@ -5,21 +5,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/consts/big_text.dart';
 import 'package:reelpro/consts/button.dart';
 import 'package:reelpro/consts/small_text.dart';
-import 'package:reelpro/consts/text_field.dart';
 import 'package:reelpro/consts/text_fieldc.dart';
 import 'package:reelpro/consts/upper_design.dart';
-import 'package:reelpro/models/registeration.dart';
 import 'package:reelpro/models/shared_preferences.dart';
 import 'package:reelpro/controllers/fetch_lat_lng.dart';
-import 'package:reelpro/controllers/validate_email_controller.dart';
 // import 'package:reelpro/view_models/register_user_request/registeration.dart';
-import 'package:reelpro/views/bottom_navigation_screens/bottom_navigation.dart';
 import 'package:reelpro/views/registeration_screens/registeration_step_two.dart';
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable
 class UserAddressScreen extends StatefulWidget {
-  UserAddressScreen({
+  const UserAddressScreen({
     Key? key,
   }) : super(key: key);
 
@@ -42,6 +38,7 @@ class _UserAddressScreenState extends State<UserAddressScreen> {
     super.initState();
     saveData();
   }
+
   saveData() async {
     String city = await SaveCity().getcity();
     cityController.text = city;
@@ -52,8 +49,6 @@ class _UserAddressScreenState extends State<UserAddressScreen> {
     String locality = await SaveLocality().getLocality();
     addressController.text = locality;
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -80,37 +75,51 @@ class _UserAddressScreenState extends State<UserAddressScreen> {
                             "This will be helpful to suggest upcoming events.",
                         color: Color(0xff485058)),
                     SizedBox(height: 40.h),
-                    TextFirstName(
-                        textEditingController: addressController,
-                        hintText: 'Address',
-                        textInputType: TextInputType.name,
-                        prefix: null,
-                        onSaved: (value) {},
-                        onchanged: (value) {}),
+                    TextFEmail(
+                      textEditingController: addressController,
+                      hintText: 'Address',
+                      textInputType: TextInputType.name,
+                      prefix: null,
+                      onSaved: (value) {},
+                      onchanged: (value) {},
+                      keyValue: null,
+                      validator: (value) {},
+                      suffixText: null,
+                    ),
                     SizedBox(height: 8.h),
-                    TextFirstName(
-                        onSaved: (value) {},
-                        textEditingController: cityController,
-                        hintText: 'City',
-                        textInputType: TextInputType.name,
-                        prefix: null,
-                        onchanged: (value) {}),
+                    TextFEmail(
+                      onSaved: (value) {},
+                      textEditingController: cityController,
+                      hintText: 'City',
+                      textInputType: TextInputType.name,
+                      prefix: null,
+                      onchanged: (value) {},
+                      keyValue: null,
+                      validator: (value) {},
+                      suffixText: null,
+                    ),
                     SizedBox(height: 8.h),
-                    TextFirstName(
+                    TextFEmail(
                         textEditingController: stateController,
                         hintText: 'State',
                         textInputType: TextInputType.name,
                         prefix: null,
                         onSaved: (value) {},
-                        onchanged: (value) {}),
+                        onchanged: (value) {},
+                        keyValue: null,
+                        suffixText: null,
+                        validator: (value) {}),
                     SizedBox(height: 8.h),
-                    TextFirstName(
+                    TextFEmail(
                         textEditingController: countryController,
                         hintText: 'Country',
                         textInputType: TextInputType.name,
                         prefix: null,
                         onSaved: (value) {},
-                        onchanged: (value) {}),
+                        onchanged: (value) {},
+                        keyValue: null,
+                        suffixText: null,
+                        validator: (value) {}),
                     SizedBox(height: 8.h),
                     SizedBox(height: 211.h),
                     MyButton(

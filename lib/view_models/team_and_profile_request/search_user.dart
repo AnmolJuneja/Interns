@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:reelpro/models/search_user.dart';
 import 'package:reelpro/models/shared_preferences.dart';
-import 'package:reelpro/models/view_profile.dart';
 
 class SearchUserApi  {
   Future<dio.Response> searchUser(String search) async {
