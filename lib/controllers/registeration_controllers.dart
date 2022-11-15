@@ -43,9 +43,7 @@ class RegistrationStepTwo2 {
   String vetran = '0';
   var countryText = '1'.obs;
   var flagEmoji = ''.obs;
-  // String? greetings;
   navigateToOnboarding() async {
-   
     String firstLastName = await SaveFirstName().getFirstName();
     firstName1.value = firstLastName;
     String lastName = await SaveLastName().getLastName();

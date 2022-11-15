@@ -78,7 +78,7 @@ class _EditProfile1State extends State<EditProfile1> {
                 padding: EdgeInsets.only(left: 36.w),
                 child: GestureDetector(
                     onTap: () {
-                      Get.to(() => const UserProfileUI());
+                      Navigator.pop(context);
                     },
                     child:
                         const Icon(Icons.arrow_back_ios, color: Colors.black))),
@@ -303,7 +303,7 @@ class _EditProfile1State extends State<EditProfile1> {
       SaveCountryCode().saveCountryCode(instanceStepTwo.countryText.value);
       SaveFlah().saveFlag(instanceStepTwo.flagEmoji.value);
     });
-    Get.to(() => const UserProfileUI());
+    Navigator.pop(context);
   }
 
   Future<File?> cropImage({required File imageFile}) async {

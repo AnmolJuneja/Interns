@@ -59,7 +59,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           });
         },
         child: Padding(
-            padding: EdgeInsets.only(left: 27.w, right: 27.w),
+            padding: EdgeInsets.only(left: 27.w, right: 27.w, bottom: 20.h),
             child: SvgPicture.asset(image,
                 color: index == widget.currentIndex
                     ? const Color(0xff2B67A3)

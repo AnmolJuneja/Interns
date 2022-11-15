@@ -86,6 +86,7 @@ class _OtherUserProfileUIState extends State<OtherUserProfileUI> {
                                   } else {
                                     null;
                                   }
+                                  Navigator.pop(context);
                                 },
                                 child: Text16PtBlack(text: 'Unfollow')),
                             SizedBox(height: 42.h),
@@ -109,11 +110,7 @@ class _OtherUserProfileUIState extends State<OtherUserProfileUI> {
               padding: EdgeInsets.only(left: 36.w),
               child: GestureDetector(
                   onTap: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                BottomNavigation(currentIndex: 1)));
+                    Navigator.pop(context);
                   },
                   child:
                       const Icon(Icons.arrow_back_ios, color: Colors.black))),

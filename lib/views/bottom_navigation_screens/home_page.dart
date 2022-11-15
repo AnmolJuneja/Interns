@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:reelpro/consts/text.dart';
 import 'package:reelpro/controllers/registeration_controllers.dart';
 import 'package:reelpro/view_models/event_network_request/event_order_list.dart';
-// import 'package:reelpro/view_models/register_user_request/registeration_step_two.dart';
 import 'package:reelpro/views/family_and_profile_screens/user_profile.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,15 +15,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    super.initState();
-    instance.navigateToOnboarding();
-  }
-
   PageController pageController = PageController(viewportFraction: 0.9);
   final instance = Get.put(RegistrationStepTwo2());
   var greetings = '';
+  @override
+  void initState() {
+    instance.navigateToOnboarding();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +40,7 @@ class _HomePageState extends State<HomePage> {
           elevation: 0,
           leadingWidth: 140,
           leading: Padding(
-              padding: EdgeInsets.only(top: 28.h, left: 36.w),
+              padding: EdgeInsets.only(left: 36.w, top: 28.h),
               child: Text30ptBlue(text: 'Home')),
         ),
         backgroundColor: const Color(0xffF2F9FF),
@@ -59,7 +57,6 @@ class _HomePageState extends State<HomePage> {
                               fontSize: 16.sp,
                               color: const Color(0xff719AC3),
                               fontWeight: FontWeight.w400)),
-                      SizedBox(height: 16.h),
                       Obx(() => Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -84,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                                       Get.to(() => const UserProfileUI());
                                     },
                                     child: Obx(() => Container(
-                                          height: 60.h,
+                                          height: 70.h,
                                           width: 60.w,
                                           decoration: BoxDecoration(
                                               borderRadius:
@@ -110,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                               ])),
                       Container(
                         padding: EdgeInsets.only(top: 80.h, left: 120.w),
-                        child: const Text('No Event Running'),
+                        child: Text('No Event Running'),
                       )
                     ])),
           ]),

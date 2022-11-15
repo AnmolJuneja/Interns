@@ -66,8 +66,12 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
               padding: EdgeInsets.only(left: 36.w),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushAndRemoveUntil(context,
-                      MaterialPageRoute(builder: (context) =>BottomNavigation(currentIndex: 0)), (route) => false);
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              BottomNavigation(currentIndex: 0)),
+                      (route) => false);
                 },
                 child: const Icon(
                   Icons.arrow_back_ios,
@@ -181,13 +185,8 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
                                                                           .data!
                                                                           .first
                                                                           .id!);
-                                                                  Navigator.pushAndRemoveUntil(
-                                                                      context,
-                                                                      MaterialPageRoute(
-                                                                          builder: (context) =>
-                                                                              const UserProfileUI()),
-                                                                      (route) =>
-                                                                          false);
+                                                                  Navigator.pop(
+                                                                      context);
                                                                 },
                                                                 child: Text16PtBlack(
                                                                     text:

@@ -40,7 +40,7 @@ class _TeamViewViewState extends State<TeamViewView> {
             padding: EdgeInsets.only(right: 36.w),
             child: GestureDetector(
               onTap: () {
-                Get.to(() => const CreateTeamView());
+                Navigator.pop(context);
               },
               child: const Icon(
                 Icons.add,

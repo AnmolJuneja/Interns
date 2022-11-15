@@ -13,13 +13,11 @@ class GalleryUI extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xffF2F9FF),
         elevation: 0,
-        toolbarHeight: 70.h,
+        // toolbarHeight: 70.h,
         centerTitle: true,
-        title: Padding(
-            padding: EdgeInsets.only(top: 42.h),
-            child: Text21PtBlack(text: 'Gallery')),
+        title: Text21PtBlack(text: 'Gallery'),
         leading: Padding(
-            padding: EdgeInsets.only(top: 42.h, left: 36.w),
+            padding: EdgeInsets.only(left: 36.w),
             child: GestureDetector(
               onTap: () {
                 Navigator.pop(context);

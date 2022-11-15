@@ -72,25 +72,35 @@ Widget buildList(EventList index) {
                       height: 130.h,
                       width: 356.w,
                       decoration: BoxDecoration(
-                          boxShadow: const [
-                            BoxShadow(
-                                // ignore: use_full_hex_values_for_flutter_colors
-                                color: Color.fromRGBO(113, 154, 195, 0.16),
-                                blurRadius: 0,
-                                offset: Offset(0, 4))
+                        boxShadow: const [
+                          BoxShadow(
+                              // ignore: use_full_hex_values_for_flutter_colors
+                              color: Color.fromRGBO(113, 154, 195, 0.16),
+                              blurRadius: 0,
+                              offset: Offset(0, 4))
+                        ],
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(width: 3, color: Colors.white),
+                      ),
+                      child: Center(
+                        child: Column(
+                          children: [
+                            SizedBox(height: 20.h),
+                            Image.asset(
+                              'assets/images/no.png',
+                              height: 60.h,
+                            ),
+                            Text16PtBlack(text: '         No Image Available')
                           ],
-                          borderRadius: BorderRadius.circular(5),
-                          border: Border.all(width: 3, color: Colors.white),
-                          image: const DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage('assets/images/no.png'))),
+                        ),
+                      ),
                     )),
           Positioned(
               top: 110.h,
               left: 15.w,
               child: index.logo != null
                   ? Container(
-                      height: 100.h,
+                      height: 120.h,
                       width: 100.w,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
@@ -98,16 +108,27 @@ Widget buildList(EventList index) {
                               fit: BoxFit.cover,
                               image: NetworkImage(index.logo))))
                   : Container(
-                      height: 100.h,
+                      height: 120.h,
                       width: 100.w,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          image: const DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage('assets/images/no.png'))))),
+                        color: const Color.fromRGBO(113, 154, 195, 0.16),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Center(
+                          child: Column(children: [
+                        SizedBox(height: 30.h),
+                        Image.asset(
+                          'assets/images/no.png',
+                          height: 30.h,
+                        ),
+                        SizedBox(height: 10.h),
+                        Text16PtBlack(text: 'No Image')
+                      ])),
+                    )),
           Positioned(
               top: 165.h,
               left: 130.w,
+              right: 5.w,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

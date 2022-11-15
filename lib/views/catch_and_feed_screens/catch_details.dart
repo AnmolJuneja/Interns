@@ -21,15 +21,16 @@ class CatchDetailsUI extends StatefulWidget {
 }
 
 class _CatchDetailsUIState extends State<CatchDetailsUI> {
+  final add1 = Get.put(AddFeedApi1());
   CatchDetailsModel? catchDetails;
   var isLoading = false.obs;
   Future<void> getDetails() async {
     isLoading.value = true;
     var res = await AddCatchlogApi().getCatchDetails(widget.catchId);
     catchDetails = CatchDetailsModel.fromJson(res.data);
-    AddFeedApi1().isLiked1.value = catchDetails!.data!.isLiked!;
-    AddFeedApi1().likeCount1.value = catchDetails!.data!.totalLikes!;
-    AddFeedApi1().commentCount1.value = catchDetails!.data!.totalComments!;
+    add1.isLiked1.value = catchDetails!.data!.isLiked!;
+    add1.likeCount1.value = catchDetails!.data!.totalLikes!;
+    add1.commentCount1.value = catchDetails!.data!.totalComments!;
     isLoading.value = false;
   }
 
@@ -153,32 +154,26 @@ class _CatchDetailsUIState extends State<CatchDetailsUI> {
                             child: Row(children: [
                               LikeIcon(
                                   onTap: () {
-                                    AddFeedApi1().isLiked1.value = true;
+                                    add1.isLiked1.value = true;
                                     AddCatchlogApi()
                                         .likeCatchlog(widget.catchId);
-                                    AddFeedApi1().likeCount1.value++;
+                                    add1.likeCount1.value++;
                                   },
                                   onTap1: () {
-                                    AddFeedApi1().isLiked1.value = false;
+                                    add1.isLiked1.value = false;
                                     AddCatchlogApi()
                                         .likeCatchlog(widget.catchId);
-                                    AddFeedApi1().likeCount1.value--;
+                                    add1.likeCount1.value--;
                                   },
-                                  isliked: AddFeedApi1().isLiked1.value),
+                                  isliked: add1.isLiked1.value),
                               SizedBox(width: 8.w),
                               Text14PtBlue(
-                                  text: AddFeedApi1()
-                                      .likeCount1
-                                      .value
-                                      .toString()),
+                                  text: add1.likeCount1.value.toString()),
                               SizedBox(width: 44.w),
                               const CommentIcon(),
                               SizedBox(width: 8.w),
                               Text14Pt58(
-                                  text: AddFeedApi1()
-                                      .commentCount1
-                                      .value
-                                      .toString()),
+                                  text: add1.commentCount1.value.toString()),
                               SizedBox(width: 157.w),
                               Image.asset('assets/images/Group 70.png',
                                   height: 40.h, width: 40.w)
@@ -284,9 +279,7 @@ Widget buildCatchComment(BuildContext context, CommentList commentList) {
                         SizedBox(height: 10.h),
                         commentList.userId == commentList.userId
                             ? GestureDetector(
-                                onTap: () async {
-                               
-                                },
+                                onTap: () async {},
                                 child: Text16PtBlack(text: 'Delete comment'))
                             : const SizedBox(),
                         SizedBox(height: 10.h),

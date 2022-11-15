@@ -461,6 +461,8 @@ class Text20PtBlack extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(text,
+    maxLines: 1,
+    overflow: TextOverflow.ellipsis,
         style: TextStyle(
             fontFamily: 'Helvetica',
             fontWeight: FontWeight.w500,

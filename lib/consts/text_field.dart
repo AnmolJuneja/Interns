@@ -379,7 +379,7 @@ class TextFCatch extends StatelessWidget {
           keyboardType: textInputType,
           decoration: InputDecoration(
               border: InputBorder.none,
-              contentPadding: EdgeInsets.only(bottom: 14.h, left: 20.w),
+              contentPadding: EdgeInsets.only(left: 20.w, top: 10.h),
               hintText: hintText,
               hintStyle: TextStyle(
                   fontFamily: 'Helvetica',
@@ -521,7 +521,6 @@ class _TextF10State extends State<TextF10> {
                 );
               },
               child: SizedBox(
-                  // padding: EdgeInsets.only(top: 8.h),
                   height: 45,
                   width: 25,
                   child: instanceOtpViewModel.flagEmoji.value.isEmpty
@@ -581,10 +580,9 @@ class _TextF10State extends State<TextF10> {
                     fillColor: Colors.white,
                     // prefixIcon: prefix,
                     filled: true,
-                    // contentPadding: EdgeInsets.only(left: 10.w, bottom: 5.h)
-                  ))
-              // ignore: use_full_hex_values_for_flutter_colors)
-              )
+                    // contentPadding: EdgeInsets.only(left: 10.w, bottom: 5.h)))
+                    // ignore: use_full_hex_values_for_flutter_colors)
+                  )))
         ]));
   }
 }
