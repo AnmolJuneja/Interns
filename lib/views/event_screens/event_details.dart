@@ -38,11 +38,7 @@ class _EventDetailsUIState extends State<EventDetailsUI> {
               padding: EdgeInsets.only(left: 36.w),
               child: GestureDetector(
                   onTap: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                BottomNavigation(currentIndex: 3)));
+                    Navigator.pop(context);
                   },
                   child:
                       const Icon(Icons.arrow_back_ios, color: Colors.black))),
@@ -64,7 +60,7 @@ class _EventDetailsUIState extends State<EventDetailsUI> {
                               EventDetailsConst(
                                 image: snapshot.data!.data!.banner == null
                                     ? const DecorationImage(
-                                        fit: BoxFit.cover,
+                                        // fit: BoxFit.cover,
                                         image:
                                             AssetImage('assets/images/no.png'))
                                     : DecorationImage(
@@ -108,8 +104,10 @@ class _EventDetailsUIState extends State<EventDetailsUI> {
                     SizedBox(height: 20.h),
                     Container(
                         height: 60.h,
-                        padding: EdgeInsets.only(left: 36.w, bottom: 10.h),
+                        padding: EdgeInsets.only(
+                            left: 36.w, bottom: 10.h, right: 36.w),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             MyButton1(
                               onpressed: () {
@@ -130,6 +128,7 @@ class _EventDetailsUIState extends State<EventDetailsUI> {
                                                   Padding(
                                                     padding: EdgeInsets.only(
                                                         left: 36.w,
+                                                        bottom: 20.h,
                                                         right: 36.w),
                                                     child: Column(
                                                       crossAxisAlignment:
@@ -164,21 +163,24 @@ class _EventDetailsUIState extends State<EventDetailsUI> {
                                                                     valueOfList
                                                                         .value = e;
                                                                   },
-                                                                  child:
-                                                                      Padding(
-                                                                          padding: EdgeInsets
-                                                                              .only(
-                                                                            top:
-                                                                                20.h,
-                                                                          ),
-                                                                          child: Obx(() => ToggleContainer(
-                                                                              color: valueOfList.value == e ? AddFeedApi1().selectedItemcolor.value : AddFeedApi1().transparentColor.value,
-                                                                              isSelected: valueOfList.value == e ? true : false,
-                                                                              text: e))),
+                                                                  child: Obx(() => ToggleContainer(
+                                                                      color: valueOfList.value ==
+                                                                              e
+                                                                          ? AddFeedApi1()
+                                                                              .selectedItemcolor
+                                                                              .value
+                                                                          : AddFeedApi1()
+                                                                              .transparentColor
+                                                                              .value,
+                                                                      isSelected: valueOfList.value ==
+                                                                              e
+                                                                          ? true
+                                                                          : false,
+                                                                      text: e)),
                                                                 ))
                                                         .toList(),
                                                   ),
-                                                  SizedBox(height: 10.h),
+                                                  // SizedBox(height: 10.h),
                                                   Padding(
                                                     padding: EdgeInsets.only(
                                                         left: 36.w,

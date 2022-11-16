@@ -195,7 +195,7 @@ class _OtherUserProfileUIState extends State<OtherUserProfileUI> {
                               userFollowers.value--;
                               buttonVar.value = false;
                             },
-                            buttonText: 'Unfollow')
+                            buttonText: 'Following')
                         : MyButton(
                             onpressed: () {
                               buttonVar.value = true;

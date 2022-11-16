@@ -44,6 +44,9 @@ class _SpotlightScreenState extends State<SpotlightScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             TextFSpotlight(
+                                onTap: () {
+                                  textEditingController.text = '';
+                                },
                                 textEditingController: textEditingController,
                                 hintText: 'Search',
                                 textInputType: TextInputType.text,

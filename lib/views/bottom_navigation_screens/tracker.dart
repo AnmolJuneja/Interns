@@ -45,9 +45,9 @@ class _CatchlogListUIState extends State<CatchlogListUI> {
         // toolbarHeight: 80.h,
         backgroundColor: const Color(0xffF2F9FF),
         elevation: 0,
-        leadingWidth: 140,
+        leadingWidth: 150,
         leading: Padding(
-            padding: EdgeInsets.only(top: 28.h, left: 36.w),
+            padding: EdgeInsets.only(top: 26.h, left: 36.w),
             child: Text30ptBlue(text: 'Tracker')),
       ),
       backgroundColor: const Color(0xffF2F9FF),

@@ -1,10 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // / ignore: depend_on_referenced_packages
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/consts/big_text.dart';
 import 'package:reelpro/consts/button.dart';
 import 'package:reelpro/consts/small_text.dart';
+import 'package:reelpro/consts/text.dart';
 import 'package:reelpro/consts/text_field.dart';
 import 'package:reelpro/consts/text_fieldc.dart';
 import 'package:reelpro/consts/upper_design.dart';
@@ -47,6 +49,10 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
   final double lng = 74.027962;
   List<String> items = <String>['Male', 'Female'];
   String? _chosenValue;
+  var firstName;
+  var lastName;
+  var sld = ''.obs;
+  DateTime dateTime = DateTime.now();
   @override
   void initState() {
     textEditingController4.text = ""; //set the initial value of text field
@@ -55,8 +61,6 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var firstName;
-    var lastName;
     return Scaffold(
       backgroundColor: const Color(0xffF2F9FF),
       body: Stack(
@@ -117,13 +121,46 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                         },
                         suffixText: null),
                     SizedBox(height: 8.h),
-                    TextFieldDatePicker(
-                      onSaved: (value) {},
-                      hintText: 'Date of Birth',
-                      textInputType: TextInputType.datetime,
-                      prefix: null,
-                      onchanged: (value) {},
-                      textEditingController: textEditingController4,
+                    GestureDetector(
+                      onTap: () {
+                        Get.bottomSheet(Column(children: [
+                          SizedBox(height: 200.h),
+                          Container(
+                            height: 200.h,
+                            child: CupertinoDatePicker(
+                                backgroundColor: const Color(0xffF2F9FF),
+                                onDateTimeChanged: (value) {
+                                  dateTime = value;
+                                },
+                                initialDateTime: dateTime),
+                          ),
+                          SizedBox(height: 20.h),
+                          MyButton(
+                              onpressed: () {
+                                sld.value =
+                                    '${dateTime.day}-${dateTime.month}-${dateTime.year}';
+                                Navigator.pop(context);
+                              },
+                              buttonText: 'Done')
+                        ]));
+                      },
+                      child: Container(
+                        height: 56.h,
+                        width: 356.w,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.white,
+                            border: Border.all(
+                                width: 1,
+                                color:
+                                    const Color.fromRGBO(113, 154, 195, 0.16))),
+                        child: Container(
+                            padding: EdgeInsets.only(right: 232.w),
+                            child: Center(
+                                child: Obx(() => sld.value == ''
+                                    ? Text15PtGrey(text: 'Date Of Birth')
+                                    : Text16PtBlack(text: sld.value)))),
+                      ),
                     ),
                     SizedBox(height: 8.h),
                     Container(
@@ -180,7 +217,7 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                         onpressed: () async {
                           await register
                               .registerUser(
-                                  textEditingController4.text,
+                                  sld.value,
                                   validateEmail.emailController.text,
                                   _chosenValue.toString(),
                                   textEditingController1.text,

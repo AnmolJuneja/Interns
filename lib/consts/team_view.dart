@@ -65,20 +65,6 @@ class UpperView extends StatelessWidget {
                   ],
                 ),
               ),
-              // Padding(
-              //   // ignore: prefer_const_constructors
-              //   padding: EdgeInsets.only(left: 68, right: 34),
-              //   child: Row(
-              //     // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //     children: [
-
-              //       SizedBox(width: 74.w),
-
-              //       SizedBox(width: 30.w),
-
-              //     ],
-              //   ),
-              // ),
               Padding(
                 padding: EdgeInsets.only(top: 30.h, left: 36.w, right: 36.w),
                 child: Row(
@@ -107,7 +93,7 @@ class UpperView extends StatelessWidget {
                     ),
                     Container(
                       height: 44.h,
-                      width: 167.w,
+                      // width: 167.w,
                       decoration:
                           BoxDecoration(borderRadius: BorderRadius.circular(5)),
                       child: ElevatedButton(

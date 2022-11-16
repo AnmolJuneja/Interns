@@ -40,49 +40,47 @@ class _HomePageState extends State<HomePage> {
           elevation: 0,
           leadingWidth: 140,
           leading: Padding(
-              padding: EdgeInsets.only(left: 36.w, top: 28.h),
+              padding: EdgeInsets.only(left: 36.w, top: 26.h),
               child: Text30ptBlue(text: 'Home')),
         ),
         backgroundColor: const Color(0xffF2F9FF),
         body: Stack(children: [
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Container(
-                padding: EdgeInsets.only(left: 36.w, top: 21.h),
+                padding: EdgeInsets.only(left: 36.w, top: 28.h),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(greetings,
-                          style: TextStyle(
-                              fontFamily: 'Helvetica',
-                              fontSize: 16.sp,
-                              color: const Color(0xff719AC3),
-                              fontWeight: FontWeight.w400)),
                       Obx(() => Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Row(children: [
-                                  Text(instance.firstName1.value,
-                                      style: GoogleFonts.bebasNeue(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 30.sp,
-                                          color: const Color(0xff719AC3))),
-                                  SizedBox(width: 5.w),
-                                  Text(instance.lastName1.value,
-                                      style: GoogleFonts.bebasNeue(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 30.sp,
-                                          color: const Color(0xff719AC3)))
-                                ]),
+                                Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(greetings,
+                                          style: TextStyle(
+                                              fontFamily: 'Helvetica',
+                                              fontSize: 16.sp,
+                                              color: const Color(0xff719AC3),
+                                              fontWeight: FontWeight.w400)),
+                                      SizedBox(height: 15.h),
+                                      Text(
+                                          '${instance.firstName1.value}  ${instance.lastName1.value}',
+                                          style: GoogleFonts.bebasNeue(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 30.sp,
+                                              color: const Color(0xff719AC3))),
+                                    ]),
                                 Padding(
-                                  padding: EdgeInsets.only(
-                                      bottom: 20.h, right: 36.w),
+                                  padding: EdgeInsets.only(right: 36.w),
                                   child: GestureDetector(
                                     onTap: () {
                                       Get.to(() => const UserProfileUI());
                                     },
                                     child: Obx(() => Container(
-                                          height: 70.h,
-                                          width: 60.w,
+                                          height: 62.h,
+                                          width: 62.w,
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(6),

@@ -83,7 +83,7 @@ class _UserProfileUIState extends State<UserProfileUI> {
                           children: [
                             Row(children: [
                               Obx(() => Container(
-                                  height: 160.h,
+                                  height: 138.h,
                                   width: 132.w,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),

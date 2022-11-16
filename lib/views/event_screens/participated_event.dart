@@ -26,7 +26,7 @@ class _ParticipatedEventUIState extends State<ParticipatedEventUI> {
     return Scaffold(
       backgroundColor: const Color(0xffF2F9FF),
       appBar: AppBar(
-        toolbarHeight: 110.h,
+        // toolbarHeight: 110.h,
         centerTitle: true,
         title: Text21PtBlack(text: 'Tuff Man Series'),
         elevation: 0,
@@ -80,7 +80,13 @@ class _ParticipatedEventUIState extends State<ParticipatedEventUI> {
                     if (snapshot.hasData) {
                       return Column(children: [
                         EventDetailsConst1(
-                          image: snapshot.data!.data!.banner,
+                          image: snapshot.data!.data!.banner == null
+                              ? const DecorationImage(
+                                  // fit: BoxFit.cover,
+                                  image: AssetImage('assets/images/no.png'))
+                              : DecorationImage(
+                                  image: NetworkImage(
+                                      snapshot.data!.data!.banner)),
                           text15: '12',
                           text2: 'Days',
                           text16: '19',
@@ -157,7 +163,7 @@ class _ParticipatedEventUIState extends State<ParticipatedEventUI> {
         // SizedBox(height: 20.h),
       ]),
       bottomSheet: Container(
-          padding: EdgeInsets.only(left: 36.w, bottom: 20.h),
+          padding: EdgeInsets.only(left: 36.w, bottom: 60.h),
           child: MyButton(
               onpressed: () {
                 Navigator.of(context).pushAndRemoveUntil(

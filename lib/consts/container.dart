@@ -256,7 +256,7 @@ class SponserContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 350.h,
+        height: 300.h,
         width: double.infinity,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10), color: Colors.white),

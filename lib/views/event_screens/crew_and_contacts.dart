@@ -105,7 +105,7 @@ class _CrewAndContactsUIState extends State<CrewAndContactsUI> {
                         const Text('www.tournament2022.com'),
                       ]),
                 ),
-                SizedBox(height: 80.h),
+                SizedBox(height: 60.h),
                 MyButton(
                     onpressed: () {
                       Get.bottomSheet(

@@ -69,7 +69,6 @@ class _TextFieldDatePickerState extends State<TextFieldDatePicker> {
         readOnly: true,
         //set it true, so that user will not able to edit text
         onTap: () async {
-          
           DateTime? pickedDate = await showDatePicker(
               context: context,
               initialDate: DateTime.now(),
@@ -230,6 +229,7 @@ class TextFSpotlight extends StatelessWidget {
   String? hintText;
   TextInputType textInputType;
   Widget? prefix;
+  Function()? onTap;
   void Function(String)? onchanged;
 
   TextFSpotlight(
@@ -238,6 +238,7 @@ class TextFSpotlight extends StatelessWidget {
       required this.hintText,
       required this.textInputType,
       required this.prefix,
+      required this.onTap,
       required this.onchanged})
       : super(key: key);
 
@@ -268,7 +269,8 @@ class TextFSpotlight extends StatelessWidget {
               enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5),
                   borderSide: BorderSide.none),
-              suffixIcon: const Icon(Icons.close)
+              suffixIcon:
+                  GestureDetector(onTap: onTap, child: const Icon(Icons.close))
               // ignore: use_full_hex_values_for_flutter_colors
               )),
     );

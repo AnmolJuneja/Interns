@@ -491,7 +491,7 @@ class _TextF10State extends State<TextF10> {
   Widget build(BuildContext context) {
     return Container(
         padding: EdgeInsets.only(left: 7.w),
-        height: 52.h,
+        height: 56.h,
         width: 356.w,
         decoration: BoxDecoration(
             border: Border.all(
@@ -545,13 +545,21 @@ class _TextF10State extends State<TextF10> {
                     },
                   );
                 },
-                child: Text('+${instanceOtpViewModel.countryText.value}',
-                    style: TextStyle(
-                        fontFamily: 'Helvetica',
-                        fontSize: 16.sp,
-                        // ignore: use_full_hex_values_for_flutter_colors
-                        color: const Color(0xff48505889),
-                        fontWeight: FontWeight.normal)),
+                child: instanceOtpViewModel.countryText.value.isNotEmpty
+                    ? Text('+${instanceOtpViewModel.countryText.value}',
+                        style: TextStyle(
+                            fontFamily: 'Helvetica',
+                            fontSize: 16.sp,
+                            // ignore: use_full_hex_values_for_flutter_colors
+                            color: const Color(0xff48505889),
+                            fontWeight: FontWeight.normal))
+                    : Text('+1',
+                        style: TextStyle(
+                            fontFamily: 'Helvetica',
+                            fontSize: 16.sp,
+                            // ignore: use_full_hex_values_for_flutter_colors
+                            color: const Color(0xff48505889),
+                            fontWeight: FontWeight.normal)),
               )),
           Expanded(
               child: TextFormField(

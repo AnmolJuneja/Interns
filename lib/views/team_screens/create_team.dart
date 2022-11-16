@@ -11,8 +11,6 @@ import 'package:reelpro/controllers/registeration_controllers.dart';
 import 'package:reelpro/models/shared_preferences.dart';
 import 'package:reelpro/view_models/team_and_profile_request/create_team.dart';
 import 'package:reelpro/controllers/fetch_lat_lng.dart';
-// import 'package:reelpro/view_models/register_user_request/registeration_step_two.dart';
-// import 'package:reelpro/view_models/team_and_profile_request/team_list.dart';
 import 'package:reelpro/views/team_screens/manage_team_screen.dart';
 import 'package:reelpro/views/team_screens/team_list.dart';
 
@@ -38,6 +36,7 @@ class _CreateTeamViewState extends State<CreateTeamView> {
   final double lat = 30.403648;
   final double lng = 74.027962;
   final visibility = 'Public'.obs;
+  var color = false.obs;
   final fetchAdress = Get.put(FetchLatLng());
   @override
   void initState() {
@@ -266,6 +265,7 @@ class _CreateTeamViewState extends State<CreateTeamView> {
                                         color: const Color(0xffF2F9FF)),
                                     Button56Blue(
                                         onpressed: () {
+                                          color.value = true;
                                           Navigator.pop(context);
                                         },
                                         buttonText: 'Done',
@@ -285,35 +285,50 @@ class _CreateTeamViewState extends State<CreateTeamView> {
                               .selectedValue.value))),
               SizedBox(height: 177.h),
               Container(
-                height: 56.h,
-                width: 356.w,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(5)),
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        primary: const Color(0xff2B67A3)),
-                    onPressed: () async {
-                      await SaveTeamCount().saveTeamCount(
-                          CreateTeamApi().getTeam1.value.length.toString());
-                      await createTeam.createTeam(
-                          groupNameController.text,
-                          locationController.text,
-                          file!,
-                          lat,
-                          lng,
-                          1,
-                          descriptionController.text);
-                      Get.to(const TeamViewView());
-                    },
-                    child: Text(
-                      'Save',
-                      style: TextStyle(
-                          fontFamily: 'Helvetica',
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w400,
-                          color: const Color(0xffF2F9FF)),
-                    )),
-              )
+                  height: 56.h,
+                  width: 356.w,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(5)),
+                  child: Obx(() => color.value
+                      ? ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: const Color(0xff2B67A3)),
+                          onPressed: () async {
+                            await SaveTeamCount().saveTeamCount(CreateTeamApi()
+                                .getTeam1
+                                .value
+                                .length
+                                .toString());
+                            await createTeam.createTeam(
+                                groupNameController.text,
+                                locationController.text,
+                                file!,
+                                lat,
+                                lng,
+                                1,
+                                descriptionController.text);
+                            Get.to(const TeamViewView());
+                          },
+                          child: Text(
+                            'Save',
+                            style: TextStyle(
+                                fontFamily: 'Helvetica',
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w400,
+                                color: const Color(0xffF2F9FF)),
+                          ))
+                      : ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: const Color(0xffBBBBBB)),
+                          onPressed: () async {},
+                          child: Text(
+                            'Save',
+                            style: TextStyle(
+                                fontFamily: 'Helvetica',
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w400,
+                                color: const Color(0xffF2F9FF)),
+                          ))))
             ]))));
   }
 }

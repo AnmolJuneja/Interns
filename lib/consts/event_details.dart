@@ -38,8 +38,7 @@ class EventDetailsConst extends StatelessWidget {
         Container(
           height: 250.h,
           width: 428.w,
-          decoration: BoxDecoration(
-              image: image),
+          decoration: BoxDecoration(image: image),
         ),
         Positioned(
             top: 208.h,
@@ -70,8 +69,6 @@ class EventDetailsConst extends StatelessWidget {
                 Text16HMedium(text: text17),
                 SizedBox(width: 111.w),
                 Container(
-                  height: 24.h,
-                  width: 100.w,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
                       color: const Color(0xff719AC3)),
@@ -85,12 +82,12 @@ class EventDetailsConst extends StatelessWidget {
 }
 
 class EventDetailsConst1 extends StatelessWidget {
-  String image;
   String text15;
   String text2;
   String text16;
   String text18;
   String text17;
+  DecorationImage? image;
   EventDetailsConst1(
       {Key? key,
       required this.image,
@@ -108,9 +105,7 @@ class EventDetailsConst1 extends StatelessWidget {
         Container(
           height: 180.h,
           width: 428.w,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.fill, image: NetworkImage(image))),
+          decoration: BoxDecoration(color: Colors.white, image: image),
         ),
         Positioned(
             top: 208.h,
@@ -211,9 +206,11 @@ class EventDetailsRow extends StatelessWidget {
                   Text16Pt(text: text),
                 ],
               ),
-              Image(image: AssetImage(image1)),
-              // SizedBox(width: 8.w),
-              Text14PtBlue(text: text1)
+              Row(children: [
+                Image(image: AssetImage(image1)),
+                SizedBox(width: 5.w),
+                Text14PtBlue(text: text1)
+              ])
             ]),
             SizedBox(height: 28.h),
             Row(
@@ -401,17 +398,20 @@ class EventDetailsRow1 extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Image(image: AssetImage(image)),
-                SizedBox(width: 8.w),
-                Text16Pt(text: text),
-                SizedBox(width: 115.w),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              Row(
+                children: [
+                  Image(image: AssetImage(image)),
+                  SizedBox(width: 8.w),
+                  Text16Pt(text: text),
+                ],
+              ),
+              Row(children: [
                 Image(image: AssetImage(image1)),
-                SizedBox(width: 8.w),
+                SizedBox(width: 5.w),
                 Text14PtBlue(text: text1)
-              ],
-            ),
+              ])
+            ]),
             SizedBox(height: 33.h),
             Text14ptSilver(text: text6),
             SizedBox(height: 8.h),
@@ -559,7 +559,8 @@ class EventDetailsRow1 extends StatelessWidget {
             SizedBox(height: 20.h),
             const Divider(thickness: 1),
             SizedBox(height: 35.h),
-            const SponserContainer()
+            const SponserContainer(),
+            SizedBox(height: 30.h)
           ],
         ));
   }

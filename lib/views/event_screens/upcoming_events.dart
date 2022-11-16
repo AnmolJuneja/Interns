@@ -42,7 +42,9 @@ Widget buildList(EventList index) {
     padding: EdgeInsets.only(bottom: 15.h, left: 36.w, right: 36.w),
     child: GestureDetector(
       onTap: () {
-        Get.to(() =>  EventDetailsUI(eventId: index.id!.toInt(),));
+        Get.to(() => EventDetailsUI(
+              eventId: index.id!.toInt(),
+            ));
       },
       child: SizedBox(
         height: 240.h,
@@ -107,6 +109,7 @@ Widget buildList(EventList index) {
           Positioned(
               top: 165.h,
               left: 130.w,
+              right: 3.w,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

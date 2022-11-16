@@ -48,7 +48,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     text: 'Please enter your phone number',
                     color: Color(0xff485058),
                   ),
-                  SizedBox(height: 76.h),
+                  SizedBox(height: 82.h),
                   TextF10(
                     textEditingController: textEditingController,
                     onchanged: (value) {

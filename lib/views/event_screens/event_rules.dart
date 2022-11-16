@@ -14,7 +14,7 @@ class EventRulesUI extends StatelessWidget {
         centerTitle: true,
         title: Text21PtBlack(text: 'Rules'),
         elevation: 0,
-        toolbarHeight: 70.h,
+        // toolbarHeight: 70.h,
         leading: Padding(
             padding: EdgeInsets.only(left: 36.w),
             child: GestureDetector(
@@ -24,7 +24,7 @@ class EventRulesUI extends StatelessWidget {
                 child: const Icon(Icons.arrow_back_ios, color: Colors.black))),
       ),
       body: Padding(
-        padding: EdgeInsets.only(left: 36.w, right: 36.w),
+        padding: EdgeInsets.only(left: 36.w, right: 36.w, top: 29.h),
         child: SingleChildScrollView(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

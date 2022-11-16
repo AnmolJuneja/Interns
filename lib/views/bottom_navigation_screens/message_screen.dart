@@ -11,15 +11,21 @@ class MessageScreen extends StatelessWidget {
     return DefaultTabController(
         length: 4,
         child: Scaffold(
+            appBar: AppBar(
+              // toolbarHeight: 80.h,
+              backgroundColor: const Color(0xffF2F9FF),
+              elevation: 0,
+              leadingWidth: 600.w,
+              leading: Padding(
+                  padding: EdgeInsets.only(top: 26.h, left: 36.w),
+                  child: Text30ptBlue(text: 'Messages')),
+            ),
             backgroundColor: const Color(0xffF2F9FF),
             body: SingleChildScrollView(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                        padding: EdgeInsets.only(top: 70.h, left: 36.w),
-                        child: Text30ptBlue(text: 'Messages')),
-                    SizedBox(height: 43.h),
+                    SizedBox(height: 23.h),
                     TabBar(
                         indicatorWeight: 2.0,
                         isScrollable: true,

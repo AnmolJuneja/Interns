@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/consts/text.dart';
 import 'package:reelpro/consts/text_fieldc.dart';
-// import 'package:reelpro/views/list.dart';
 import 'package:reelpro/views/bottom_navigation_screens/list_events.dart';
 import 'package:reelpro/views/event_screens/upcoming_events.dart';
 
@@ -26,7 +25,7 @@ class _EventListUIState extends State<EventListUI> {
               elevation: 0,
               leadingWidth: 140,
               leading: Padding(
-                  padding: EdgeInsets.only(top: 28.h, left: 36.w),
+                  padding: EdgeInsets.only(top: 26.h, left: 36.w),
                   child: Text30ptBlue(text: 'Events')),
             ),
             backgroundColor: const Color(0xffF2F9FF),

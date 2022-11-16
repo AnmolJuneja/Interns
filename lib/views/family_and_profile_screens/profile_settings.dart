@@ -9,9 +9,6 @@ import 'package:reelpro/controllers/feed_and_catch_controllers.dart';
 import 'package:reelpro/controllers/registeration_controllers.dart';
 import 'package:reelpro/models/shared_preferences.dart';
 import 'package:reelpro/view_models/team_and_profile_request/create_team.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/fish_species_list.dart';
-// import 'package:reelpro/view_models/register_user_request/registeration_step_two.dart';
-// import 'package:reelpro/view_models/team_and_profile_request/team_list.dart';
 import 'package:reelpro/views/family_and_profile_screens/family_members_list.dart';
 import 'package:reelpro/views/team_screens/manage_team_screen.dart';
 import 'package:reelpro/views/registeration_screens/onboarding_screen.dart';
@@ -132,12 +129,12 @@ class _ProfileSettingsUIState extends State<ProfileSettingsUI> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(top: 48.h, left: 36.w),
+                              padding: EdgeInsets.only(top: 38.h, left: 36.w),
                               child: Text15PtBlue(
                                 text: 'Event Registeration',
                               ),
                             ),
-                            SizedBox(height: 25.h),
+                            SizedBox(height: 10.h),
                             ListView(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
@@ -167,8 +164,7 @@ class _ProfileSettingsUIState extends State<ProfileSettingsUI> {
                                   .toList(),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(
-                                  top: 38.h, left: 36.w, right: 36.w),
+                              padding: EdgeInsets.only(left: 36.w, right: 36.w),
                               child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -214,7 +210,7 @@ class _ProfileSettingsUIState extends State<ProfileSettingsUI> {
                               Padding(
                                   padding: EdgeInsets.only(left: 36.w),
                                   child: Text15PtBlue(text: 'Post Visibility')),
-                              SizedBox(height: 10.h),
+                              SizedBox(height: 15.h),
                               ListView(
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
@@ -224,9 +220,8 @@ class _ProfileSettingsUIState extends State<ProfileSettingsUI> {
                                             value1.value = e;
                                           },
                                           child: Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 20.h,
-                                              ),
+                                              padding:
+                                                  EdgeInsets.only(top: 10.h),
                                               child: Obx(() => ToggleContainer(
                                                   color: value1.value == e
                                                       ? AddFeedApi1()
@@ -243,8 +238,8 @@ class _ProfileSettingsUIState extends State<ProfileSettingsUI> {
                                     .toList(),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(
-                                    top: 15.h, left: 36.w, right: 36.w),
+                                padding:
+                                    EdgeInsets.only(left: 36.w, right: 36.w),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
