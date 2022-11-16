@@ -1,0 +1,46 @@
+@font-face {
+  font-family: "MontserratAlternates-Bold";
+  src: url(../../../public/fonts/MontserratAlternates-Bold.otf);
+}
+
+@font-face {
+  font-family: "MontserratAlternates-BoldItalic";
+  src: url(../../../public/fonts/MontserratAlternates-BoldItalic.otf);
+}
+
+@font-face {
+  font-family: "MontserratAlternates-Italic";
+  src: url(../../../public/fonts/MontserratAlternates-Italic.otf);
+}
+
+@font-face {
+  font-family: "MontserratAlternates-Light";
+  src: url(../../../public/fonts/MontserratAlternates-Light.otf);
+}
+
+@font-face {
+  font-family: "MontserratAlternates-Medium";
+  src: url(../../../public/fonts/MontserratAlternates-Medium.otf);
+}
+
+@font-face {
+  font-family: "MontserratAlternates-Regular";
+  src: url(../../../public/fonts/MontserratAlternates-Regular.otf);
+}
+
+.theme-heading {
+  font-family: "MontserratAlternates-Bold";
+}
+.theme-sub-heading {
+  font-family: "MontserratAlternates-Regular";
+}
+.theme-title {
+  font-family: "MontserratAlternates-Medium";
+}
+
+.theme-sub-title {
+  font-family: "MontserratAlternates-Italic";
+}
+.theme-light-heading {
+  font-family: "MontserratAlternates-Light";
+}

@@ -1,0 +1,540 @@
+header {
+  background-color: rgb(107, 105, 105);
+  height: 70px;
+  width: 100%;
+  display: flex;
+  position: relative;
+
+  #click {
+    position: absolute;
+    right: 30px;
+    top: 40%;
+    display: none;
+  }
+
+  .clicking {
+    position: absolute;
+    right: 30px;
+    top: 10%;
+    font-size: 40px;
+    color: #fff;
+    display: none;
+    @media screen and (max-width: 992px) {
+      display: block;
+      z-index: 2;
+    }
+  }
+
+  .logo {
+    .amazon {
+      width: 150px;
+      margin-top: -10px;
+    }
+  }
+  ul {
+    list-style: none;
+
+    @media screen and (max-width: 992px) {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      width: 100%;
+      background-color: #000;
+      transition: all 0.5s ease-in-out;
+      transform: translateX(-100%);
+      z-index: 1;
+    }
+
+    li {
+      display: inline-block;
+      transition: all 0.4s;
+      padding: 0 30px;
+      transform: translate(400px, -70px);
+      @media screen and (max-width: 992px) {
+        display: block;
+        text-align: center;
+        transform: translate(0px, 0px);
+        padding: 20px 0;
+      }
+
+      a {
+        text-decoration: none;
+        font-size: 20px;
+        color: #fff;
+        display: block;
+
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  #click:checked ~ ul {
+    transform: translateX(0%);
+  }
+}
+
+.gun {
+  background-color: #34495e;
+  padding: 10px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  width: 100%;
+
+  .first {
+    margin-right: 20px;
+    img {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      aspect-ratio: 1/1;
+      object-fit: contain;
+      background-color: #fff;
+      box-sizing: border-box;
+      padding: 5px;
+      border-radius: 5px;
+    }
+    p {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 0;
+    }
+  }
+  .second {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .sub-heading {
+      h2 {
+        font-size: 13px;
+        color: #fff;
+        font-weight: 600;
+      }
+      p {
+        color: #fff;
+        font-size: 11px;
+        font-weight: 600;
+        margin-bottom: 0;
+      }
+    }
+
+    .dollar {
+      margin-bottom: 0;
+      font-size: 13px;
+      color: gold;
+      font-weight: bold;
+    }
+  }
+}
+
+.banner {
+  margin: 50px 0;
+  .banner-heading {
+    p {
+      @extend .theme-heading;
+      text-transform: capitalize;
+    }
+    h1 {
+      @extend .theme-heading;
+      font-size: 60px;
+
+      @media screen and (max-width: 678px) {
+        font-size: 30px;
+      }
+    }
+  }
+  .exercise {
+    border-bottom-left-radius: 80px;
+    border-top-right-radius: 80px;
+  }
+}
+
+.offer-timing {
+  background-color: #f5faff;
+  padding: 50px 0;
+  margin-bottom: 50px;
+
+  .timing {
+    text-align: center;
+
+    p {
+      @extend .theme-sub-heading;
+      font-size: 19px;
+      font-weight: 500;
+    }
+    h3 {
+      @extend .theme-heading;
+      font-size: 40px;
+    }
+    .offers {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .first {
+        margin-right: 20px;
+        font-size: 30px;
+        font-weight: bold;
+        p {
+          @extend .theme-sub-title;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+  .card-banner {
+    background-image: url(../../../public/images/card-heading.png);
+    background-position: center center;
+    background-size: cover;
+    border-top-left-radius: 60px;
+    border-bottom-right-radius: 60px;
+    padding-bottom: 36px;
+    padding-top: 360px;
+    text-align: center;
+
+    p {
+      color: #fff;
+      @extend .theme-sub-heading;
+    }
+    h3 {
+      font-size: 20px;
+      @extend .theme-heading;
+      color: #fff;
+    }
+  }
+  .card-price {
+    background-color: #fff;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    @media screen and (max-width: 678px) {
+      flex-wrap: wrap;
+      text-align: center;
+    }
+
+    img {
+      height: 220px;
+    }
+    p {
+      @extend .theme-title;
+      font-size: 14px;
+    }
+    h3 {
+      @extend .theme-heading;
+      font-size: 23px;
+    }
+    h4 {
+      @extend .theme-heading;
+      font-size: 20px;
+      span {
+        color: #b2b4b6;
+        text-decoration: line-through;
+        @extend .theme-light-heading;
+      }
+    }
+
+    .offer-price {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #000;
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 12px;
+    }
+  }
+}
+
+.collection {
+  .collection-title {
+    text-align: center;
+    p {
+      @extend .theme-title;
+      font-size: 14px;
+    }
+    h3 {
+      @extend .theme-heading;
+      font-size: 28px;
+    }
+  }
+  .card {
+    border: 0;
+    .offer-percent {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #000;
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 12px;
+    }
+  }
+  .offer-online {
+    text-decoration: none;
+    font-size: 15px;
+    color: #000;
+    font-weight: bold;
+    @extend .theme-heading;
+
+    span {
+      color: #b2b4b6;
+      text-decoration: line-through;
+      @extend .theme-light-heading;
+    }
+  }
+}
+
+.day-exercise {
+  max-width: 90%;
+  width: 100%;
+  background-color: #222;
+  padding: 50px;
+  margin: 50px auto;
+  border-top-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+
+  .exercise-title {
+    p {
+      color: #fff;
+      font-size: 18px;
+      @extend .theme-sub-title;
+    }
+    h3 {
+      @extend .theme-heading;
+      color: #fff;
+      font-size: 35px;
+    }
+    h4 {
+      font-size: 17px;
+      @extend .theme-title;
+      color: #fff;
+    }
+  }
+  .girl-exercise {
+    border-top-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+  }
+}
+.yoga {
+  text-align: center;
+  .yoga-1 {
+    border: 1px solid #000;
+    height: 170px;
+    aspect-ratio: 1/2;
+    display: flex;
+    align-items: center;
+
+    border-top-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+
+    img {
+      width: 140px;
+      height: 170px;
+      object-fit: cover;
+      margin-right: 20px;
+      border-top-left-radius: 50px;
+    }
+    h3 {
+      font-size: 25px;
+      padding-right: 20px;
+    }
+  }
+}
+.customers {
+  .customers-1 {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #34495e;
+    padding-bottom: 30px;
+  }
+}
+.woman-join {
+  background: #222;
+
+  @extend .day-exercise;
+
+  .input-group {
+    margin: auto;
+  }
+}
+
+// about css start
+.about {
+  background-image: url(../../../public/images/about-banner.png);
+  width: 100%;
+  min-height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+  padding: 50px 0;
+
+  .about-title {
+    h3 {
+      @extend .theme-heading;
+      font-size: 60px;
+      color: #fff;
+    }
+    p {
+      color: #fff;
+      font-size: 25px;
+      @extend .theme-sub-heading;
+    }
+  }
+  .limited-offer {
+    h3 {
+      font-size: 50px;
+      color: #fff;
+      @extend .theme-heading;
+    }
+    p {
+      color: #fff;
+      font-size: 25px;
+      @extend .theme-sub-heading;
+    }
+    .limited-button {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      .day {
+        background-color: #fff;
+        text-decoration: none;
+        padding: 5px 20px;
+        border-radius: 5px;
+        margin: 10px;
+        span {
+          display: block;
+          font-size: 50px;
+          @extend .theme-sub-title;
+          color: #0a083a;
+        }
+        label {
+          color: #0a083a;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}
+.sale {
+  padding: 50px 0;
+
+  h3 {
+    font-size: 40px;
+    color: #0a083a;
+    text-align: center;
+    @extend .theme-heading;
+  }
+  h4 {
+    font-size: 40px;
+    color: #0a083a;
+    margin: 30px 0 0;
+    @extend .theme-heading;
+  }
+  .phone-sale {
+    .card {
+      border: 0;
+      position: relative;
+      .offer-sale {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: red;
+        padding: 4px 10px;
+        border-radius: 50px;
+        color: #fff;
+        font-size: 14px;
+      }
+
+      .card-body {
+        .card-title {
+          font-size: 16px;
+          @extend .theme-title;
+        }
+        .card-text {
+          font-size: 12px;
+          @extend .theme-title;
+        }
+        .card-text-2 {
+          font-size: 18px;
+          @extend .theme-sub-heading;
+
+          span {
+            text-decoration: line-through;
+            color: rgb(155, 150, 150);
+          }
+        }
+        .add-card {
+          color: #fff;
+          font-size: 20px;
+          @extend .theme-heading;
+          border-radius: 15px;
+        }
+      }
+    }
+  }
+}
+.order-now {
+  background-color: #559ff6;
+  padding: 100px 0;
+
+  .order-dv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 0;
+
+    .bi {
+      background-color: #fff;
+      padding: 20px 30px;
+      margin-right: 15px;
+      border-radius: 20px;
+      font-size: 40px;
+      color: #0a083a;
+    }
+    .dv-t {
+      h3 {
+        font-size: 17px;
+        @extend .theme-heading;
+        color: #fff;
+      }
+      p {
+        font-size: 14px;
+        @extend .theme-heading;
+        color: #fff;
+      }
+    }
+  }
+}
+
+.upto {
+  margin: 50px 0;
+
+  .upto-offer {
+    h3 {
+      font-size: 60px;
+      color: #0a083a;
+      @extend .theme-heading;
+    }
+    p {
+      font-size: 20px;
+      @extend .theme-title;
+    }
+  }
+}
+
+// about css end

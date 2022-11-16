@@ -1,0 +1,59 @@
+custom-button {
+  padding: 15px 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  outline: 0;
+  border: 0;
+  margin: 10px 0;
+  box-shadow: none;
+  text-decoration: none;
+  cursor: pointer;
+  // border-radius: 5px;
+}
+
+.theme-button {
+  @extend custom-button;
+  background-color: tomato;
+}
+.theme-button-sub {
+  @extend custom-button;
+  background-color: #222;
+  color: #fff;
+  border-top-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+
+  &:hover {
+    color: #fff;
+    box-shadow: 2px 4px 6px #222;
+  }
+}
+.theme-button-sub-1 {
+  @extend .theme-button-sub;
+  background-color: #fff;
+  color: #000;
+  &:hover {
+    color: #000;
+    box-shadow: 2px 4px 6px rgb(253, 252, 252);
+  }
+}
+
+.theme-card-button {
+  font-size: 14px;
+  padding: 5px 20px;
+  color: #222;
+  @extend .theme-button-sub;
+  background-color: #fff;
+  &:hover {
+    color: #222;
+    box-shadow: 2px 4px 6px rgb(253, 252, 252);
+  }
+}
+.theme-card-button-1 {
+  @extend .theme-card-button;
+  border: 1px solid #000;
+  &:hover {
+    color: #fff;
+    background-color: #000;
+  }
+}
