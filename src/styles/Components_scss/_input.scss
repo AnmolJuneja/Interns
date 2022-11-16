@@ -1,0 +1,21 @@
+custom-input {
+    width: 100%;
+    padding: 18px 16px;
+    border: 1px solid transparent;
+    box-shadow: none;
+    outline: 0;
+    margin-bottom: 15px;
+    @extend .theme-light;
+
+    &:focus {
+        border: 1px solid #000;
+    }
+}
+
+.theme-input {
+    @extend custom-input;
+    background-color: #fff;
+
+
+
+}
