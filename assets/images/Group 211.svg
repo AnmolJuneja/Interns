@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96">
+  <g id="Group_211" data-name="Group 211" transform="translate(1 1)">
+    <g id="Rectangle_30" data-name="Rectangle 30" fill="#fff" stroke="rgba(0,0,0,0.48)" stroke-width="1" stroke-dasharray="2">
+      <rect width="94" height="94" rx="10" stroke="none"/>
+      <rect x="-0.5" y="-0.5" width="95" height="95" rx="10.5" fill="none"/>
+    </g>
+    <g id="Icon_Outline_plus-circle" data-name="Icon/Outline/plus-circle" transform="translate(27 39)" opacity="0.48">
+      <path id="Mask" d="M12.6,5.6H8.4V1.4a1.4,1.4,0,1,0-2.8,0V5.6H1.4a1.4,1.4,0,1,0,0,2.8H5.6v4.2a1.4,1.4,0,0,0,2.8,0V8.4h4.2a1.4,1.4,0,0,0,0-2.8Z" transform="translate(13 1)"/>
+    </g>
+  </g>
+</svg>

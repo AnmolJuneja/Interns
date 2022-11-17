@@ -234,7 +234,7 @@ class _SpotlightScreenState extends State<SpotlightScreen> {
                       itemCount: instance.getUserLength.length,
                       itemBuilder: (context, index) {
                         return search(instance.getUserLength[index]);
-                      })),
+                      }))
                 ]),
               ),
             )

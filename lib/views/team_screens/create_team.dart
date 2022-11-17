@@ -49,14 +49,11 @@ class _CreateTeamViewState extends State<CreateTeamView> {
     return Scaffold(
         appBar: AppBar(
             elevation: 0,
-            toolbarHeight: 70.h,
             backgroundColor: const Color(0xffF2F9FF),
             centerTitle: true,
-            title: Padding(
-                padding: EdgeInsets.only(top: 42.h),
-                child: Text21PtBlack(text: 'Create a Team')),
+            title: Text21PtBlack(text: 'Create a Team'),
             leading: Padding(
-                padding: EdgeInsets.only(top: 42.h, left: 36.w),
+                padding: EdgeInsets.only(left: 36.w),
                 child: GestureDetector(
                   onTap: () {
                     Get.to(() => const MangeTeams());

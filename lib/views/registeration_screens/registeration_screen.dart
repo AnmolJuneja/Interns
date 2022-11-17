@@ -128,6 +128,7 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                           Container(
                             height: 200.h,
                             child: CupertinoDatePicker(
+                                mode: CupertinoDatePickerMode.date,
                                 backgroundColor: const Color(0xffF2F9FF),
                                 onDateTimeChanged: (value) {
                                   dateTime = value;

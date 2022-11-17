@@ -12,7 +12,7 @@ import 'package:reelpro/models/shared_preferences.dart';
 class AddFeedApi {
   var userId;
   Future<dio.Response> addFeed(String location, double lat, double lng,
-      String description, int viewStatus, File images) async {
+      String description, int viewStatus, List<File> images) async {
     String authToken = await SharedPreferences1().getToken();
     dio.FormData data = dio.FormData.fromMap({
       'location': location,
@@ -21,16 +21,19 @@ class AddFeedApi {
       'description': description,
       'view_status': viewStatus,
     });
-    File imageFile = File(images.path);
-    String fileName = imageFile.path.split('/').last;
-    MapEntry<String, dio.MultipartFile> addFeedImage = MapEntry(
-      "images[]",
-      await dio.MultipartFile.fromFile(
-        imageFile.path,
-        filename: fileName,
-      ),
-    );
-    data.files.add(addFeedImage);
+    for (int i = 0; i < images.length; i++) {
+      File imageFile = File(images[i].path);
+      String fileName = imageFile.path.split('/').last;
+      MapEntry<String, dio.MultipartFile> addFeedImage = MapEntry(
+        "images[]",
+        await dio.MultipartFile.fromFile(
+          imageFile.path,
+          filename: fileName,
+        ),
+      );
+      data.files.add(addFeedImage);
+    }
+
     try {
       dio.Response response;
       response = await dio.Dio().post(

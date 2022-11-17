@@ -33,7 +33,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
     return Scaffold(
       body: screens[widget.currentIndex],
       bottomNavigationBar: Container(
-        height: 60.h,
+        height: 70.h,
         width: double.infinity,
         color: const Color(0xffF2F9FF),
         child:
@@ -59,7 +59,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           });
         },
         child: Padding(
-            padding: EdgeInsets.only(left: 27.w, right: 27.w, bottom: 30.h),
+            padding: EdgeInsets.only(left: 27.w, right: 27.w, bottom: 20.h),
             child: SvgPicture.asset(image,
                 color: index == widget.currentIndex
                     ? const Color(0xff2B67A3)

@@ -13,6 +13,7 @@ import 'package:reelpro/controllers/fetch_lat_lng.dart';
 import 'package:reelpro/views/bottom_navigation_screens/bottom_navigation.dart';
 import 'dart:io';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 enum AppState {
   free,
@@ -41,7 +42,7 @@ class _AddFeedConstState extends State<AddFeedConst> {
   var height = 175.obs;
   var width = 375.obs;
   var viewStatus = 0;
-  File? file;
+  List<File> file = [];
 
   @override
   void initState() {
@@ -54,7 +55,11 @@ class _AddFeedConstState extends State<AddFeedConst> {
     return Scaffold(
       backgroundColor: const Color(0xffF2F9FF),
       body: Padding(
-        padding: EdgeInsets.only(top: 71.h, left: 36.w, right: 36.w),
+        padding: EdgeInsets.only(
+          top: 71.h,
+          left: 36.w,
+          right: 36.w,
+        ),
         child: SingleChildScrollView(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -74,74 +79,148 @@ class _AddFeedConstState extends State<AddFeedConst> {
                 onchanged: null),
             SizedBox(height: 40.h),
             Row(children: [
-              Image.asset('assets/images/Icon-Outline-image.png'),
+              file.length <= 1
+                  ? Image.asset('assets/images/Icon-Outline-image.png')
+                  : SizedBox(),
               SizedBox(width: 35.w),
-              GestureDetector(
-                  onTap: () {
-                    FocusScope.of(context).unfocus();
-                    Get.bottomSheet(Container(
-                      height: 200.h,
-                      width: double.infinity,
-                      decoration: const BoxDecoration(color: Color(0xffF2F9FF)),
-                      child: Padding(
-                        padding:
-                            EdgeInsets.only(top: 35.h, left: 36.w, right: 36.w),
-                        child: Column(
-                          children: [
-                            MyButton(
-                                onpressed: () {
-                                  openCamera();
-                                  Navigator.pop(context);
-                                },
-                                buttonText: 'Camera'),
-                            SizedBox(height: 10.h),
-                            MyButton(
-                                onpressed: () {
-                                  openGallery();
-                                  Navigator.pop(context);
-                                },
-                                buttonText: 'Gallery')
-                          ],
-                        ),
-                      ),
-                    ));
-                  },
-                  child: Text16AddFeed(text: 'Add photos'))
-            ]),
-            // SizedBox(height: 20.h),
-            Container(
-              padding: EdgeInsets.only(left: 54.w),
-              child: file == null
-                  ? const Text('')
+              file.length >= 2
+                  ? SizedBox()
                   : GestureDetector(
-                      onDoubleTap: () {
-                        height.value = 175.h.toInt();
-                      },
                       onTap: () {
-                        height.value = 350.h.toInt();
-                        width.value = 428.w.toInt();
+                        FocusScope.of(context).unfocus();
+                        Get.bottomSheet(Container(
+                          height: 200.h,
+                          width: double.infinity,
+                          decoration:
+                              const BoxDecoration(color: Color(0xffF2F9FF)),
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                top: 35.h, left: 36.w, right: 36.w),
+                            child: Column(
+                              children: [
+                                MyButton(
+                                    onpressed: () {
+                                      openCamera();
+                                      Navigator.pop(context);
+                                    },
+                                    buttonText: 'Camera'),
+                                SizedBox(height: 10.h),
+                                MyButton(
+                                    onpressed: () {
+                                      openGallery();
+                                      Navigator.pop(context);
+                                    },
+                                    buttonText: 'Gallery')
+                              ],
+                            ),
+                          ),
+                        ));
                       },
-                      child: file == null
-                          ? const SizedBox()
-                          : Container(
-                              height: height.value.toDouble(),
-                              width: width.value.toDouble(),
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: FileImage(file!)),
-                                  borderRadius: BorderRadius.circular(10)),
-                            )),
+                      child: Text16AddFeed(text: 'Add photos'))
+            ]),
+            file.length <= 1 ? SizedBox(height: 10.h) : const SizedBox(),
+            Container(
+                padding: EdgeInsets.only(left: file.length <= 1 ? 54.w : 0.w),
+                child: file.isEmpty
+                    ? const Text('')
+                    : GestureDetector(
+                        onDoubleTap: () {},
+                        onTap: () {},
+                        child: file.isEmpty
+                            ? const SizedBox()
+                            : Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                    file.length > 1
+                                        ? Padding(
+                                            padding: EdgeInsets.only(
+                                                bottom: 65.h, right: 20.w),
+                                            child: Image.asset(
+                                                'assets/images/Icon-Outline-image.png'),
+                                          )
+                                        : SizedBox(),
+                                    for (var i = 0; i < file.length; i++)
+                                      Container(
+                                        padding: EdgeInsets.only(
+                                            left:
+                                                file.length == 1 ? 260.w : 70.w,
+                                            bottom: file.length == 1
+                                                ? 150.h
+                                                : 70.h),
+                                        margin: EdgeInsets.only(
+                                            left: file.length > 1 ? 15.w : 0.w),
+                                        height: file.length == 1 ? 179.h : 90.h,
+                                        width: file.length == 1 ? 290.w : 90.w,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            image: DecorationImage(
+                                                fit: BoxFit.cover,
+                                                image: FileImage(file[i]))),
+                                        child: GestureDetector(
+                                            onTap: () {
+                                              setState(() {
+                                                file.removeAt(i);
+                                              });
+                                            },
+                                            child:
+                                                Icon(Icons.close, size: 18.0)),
+                                      ),
+                                    file.length == 2
+                                        ? GestureDetector(
+                                            onTap: () {
+                                              FocusScope.of(context).unfocus();
+                                              Get.bottomSheet(Container(
+                                                height: 200.h,
+                                                width: double.infinity,
+                                                decoration: const BoxDecoration(
+                                                    color: Color(0xffF2F9FF)),
+                                                child: Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 35.h,
+                                                      left: 36.w,
+                                                      right: 36.w),
+                                                  child: Column(
+                                                    children: [
+                                                      MyButton(
+                                                          onpressed: () {
+                                                            openCamera();
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          buttonText: 'Camera'),
+                                                      SizedBox(height: 10.h),
+                                                      MyButton(
+                                                          onpressed: () {
+                                                            openGallery();
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          buttonText: 'Gallery')
+                                                    ],
+                                                  ),
+                                                ),
+                                              ));
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  EdgeInsets.only(left: 10.w),
+                                              child: SvgPicture.asset(
+                                                  'assets/images/Group 211.svg',
+                                                  height: 90.h,
+                                                  width: 90.w),
+                                            ),
+                                          )
+                                        : const SizedBox()
+                                  ]),
+                      )),
+            SizedBox(
+              height: 20.h,
             ),
-            file == null
-                ? SizedBox(
-                    height: 20.h,
-                  )
-                : SizedBox(
-                    height: 20.h,
-                  ),
             Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-              Image.asset('assets/images/Group 89.png'),
+              Image.asset(
+                'assets/images/Group 89.png',
+              ),
               SizedBox(width: 36.w),
               GestureDetector(
                   onTap: () {
@@ -152,7 +231,7 @@ class _AddFeedConstState extends State<AddFeedConst> {
                       ? Text16AddFeed(text: 'location')
                       : Text16PtBlack(text: fetchAdress.address.value))),
             ]),
-            SizedBox(height: 40.h),
+            SizedBox(height: 41.h),
             Row(mainAxisAlignment: MainAxisAlignment.start, children: [
               Image.asset('assets/images/Group 90.png'),
               SizedBox(width: 34.w),
@@ -299,15 +378,19 @@ class _AddFeedConstState extends State<AddFeedConst> {
                       ? Text16AddFeed(text: 'Public/Followers/Private')
                       : Text16PtBlack(text: addFeedApi.selectedItem.value)))
             ]),
-            file == null
-                ? SizedBox(
-                    height: 367.h,
-                  )
-                : SizedBox(height: 160.h),
+            file.length == 1
+                ? SizedBox(height: 200.h)
+                : file.length >= 2
+                    ? SizedBox(
+                        height: 330.h,
+                      )
+                    : SizedBox(height: 367.h),
             MyButton(
                 onpressed: () async {
-                  await AddFeedApi().addFeed('location', 34.7, 37.4,
-                      textEditingController.text, viewStatus, file!);
+                  for (int i = 0; i < file.length; i++) {
+                    await AddFeedApi().addFeed('location', 34.7, 37.4,
+                        textEditingController.text, viewStatus, file);
+                  }
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (context) => BottomNavigation(currentIndex: 0)));
                 },
@@ -325,8 +408,7 @@ class _AddFeedConstState extends State<AddFeedConst> {
       File? tempPath = File(images.path);
       tempPath = await cropImage(imageFile: tempPath);
       setState(() {
-        file = tempPath;
-        // Navigator.of(context).pop();
+        file.add(tempPath!);
       });
     } on PlatformException catch (e) {
       print(e);
@@ -352,7 +434,7 @@ class _AddFeedConstState extends State<AddFeedConst> {
       File? tempPath = File(images.path);
       tempPath = await cropImage(imageFile: tempPath);
       setState(() {
-        file = tempPath;
+        file.add(tempPath!);
         // Navigator.of(context).pop();
       });
     } on PlatformException catch (e) {
@@ -360,5 +442,4 @@ class _AddFeedConstState extends State<AddFeedConst> {
       Navigator.of(context).pop();
     }
   }
-  
 }

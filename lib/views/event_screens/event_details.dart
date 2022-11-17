@@ -7,7 +7,6 @@ import 'package:reelpro/controllers/feed_and_catch_controllers.dart';
 import 'package:reelpro/models/event_details.dart';
 import 'package:reelpro/view_models/event_network_request/event_details.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/fish_species_list.dart';
 import 'package:reelpro/views/bottom_navigation_screens/bottom_navigation.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
