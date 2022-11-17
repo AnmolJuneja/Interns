@@ -1,0 +1,50 @@
+@font-face {
+    font-family: 'Roboto-Bold.ttf';
+    src: url(../../../public/fonts/Roboto-Bold.ttf);
+}
+
+@font-face {
+    font-family: 'Roboto-Light.ttf';
+    src: url(../../../public/fonts/Roboto-Light.ttf);
+}
+
+@font-face {
+    font-family: 'g-m';
+    src: url(../../../public/fonts/Gilroy-Medium.woff);
+}
+
+@font-face {
+    font-family: 'Roboto-Regular.ttf';
+    src: url(../../../public/fonts/Roboto-Regular.ttf);
+}
+
+
+
+@font-face {
+    font-family: 'g-b';
+    src: url(../../../public/fonts/Gilroy-Bold.woff);
+}
+
+
+.theme-h {
+    font-family: 'g-b';
+}
+
+.theme-heading-first {
+    font-family: 'Roboto-Bold.ttf';
+
+}
+
+.theme-light-text {
+    font-family: 'Roboto-Light.ttf';
+}
+
+.theme-title {
+    font-family: 'g-m';
+
+}
+
+.theme-light {
+    font-family: 'Roboto-Regular.ttf';
+
+}
