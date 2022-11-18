@@ -14,7 +14,6 @@ class EventRulesUI extends StatelessWidget {
         centerTitle: true,
         title: Text21PtBlack(text: 'Rules'),
         elevation: 0,
-        // toolbarHeight: 70.h,
         leading: Padding(
             padding: EdgeInsets.only(left: 36.w),
             child: GestureDetector(

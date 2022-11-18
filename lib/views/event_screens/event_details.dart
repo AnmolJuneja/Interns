@@ -46,245 +46,251 @@ class _EventDetailsUIState extends State<EventDetailsUI> {
             future: EventDetailsApi().getDetails(widget.eventId),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 700.h,
-                      width: 428.w,
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Column(children: [
-                              EventDetailsConst(
-                                image: snapshot.data!.data!.banner == null
-                                    ? const DecorationImage(
-                                        // fit: BoxFit.cover,
-                                        image:
-                                            AssetImage('assets/images/no.png'))
-                                    : DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: NetworkImage(
-                                            snapshot.data!.data!.banner)),
-                                text15: '12',
-                                text2: 'Days',
-                                text16: '19',
-                                text17: 'Hours',
-                                text18: snapshot.data!.data!.address.toString(),
-                              ),
-                              EventDetailsRow(
-                                image: 'assets/images/Icon open-location.png',
-                                text: snapshot.data!.data!.address.toString(),
-                                image1: 'assets/images/Icon-Outline-map.png',
-                                text1: 'Get directions',
-                                image2: 'assets/images/Icon-Fill-person.png',
-                                text2:
-                                    snapshot.data!.data!.teamSizeMin.toString(),
-                                text4:
-                                    snapshot.data!.data!.teamSizeMax.toString(),
-                                text5: ' (team size)',
-                                text6: 'Starts on',
-                                imagedate:
-                                    'assets/images/Icon material-date-range.png',
-                                text7: ' Mon, 19 September',
-                                imagetime: 'assets/images/Subtraction 1.png',
-                                text8: '8:07 AM',
-                                text9: 'Ends on',
-                                text10: '6:00 PM',
-                                text11: 'About Event',
-                                text12: snapshot.data!.data!.about.toString(),
-                                text13: 'More',
-                              ),
-                            ])
-                          ],
+                return SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 15.h),
+                      SizedBox(
+                        height: 700.h,
+                        width: 428.w,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              Column(children: [
+                                EventDetailsConst(
+                                  image: snapshot.data!.data!.banner == null
+                                      ? const DecorationImage(
+                                          // fit: BoxFit.cover,
+                                          image: AssetImage(
+                                              'assets/images/no.png'))
+                                      : DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: NetworkImage(
+                                              snapshot.data!.data!.banner)),
+                                  text15: '12',
+                                  text2: 'Days',
+                                  text16: '19',
+                                  text17: 'Hours',
+                                  text18:
+                                      snapshot.data!.data!.address.toString(),
+                                ),
+                                EventDetailsRow(
+                                  image: 'assets/images/Icon open-location.png',
+                                  text: snapshot.data!.data!.address.toString(),
+                                  image1: 'assets/images/Icon-Outline-map.png',
+                                  text1: 'Get directions',
+                                  image2: 'assets/images/Icon-Fill-person.png',
+                                  text2: snapshot.data!.data!.teamSizeMin
+                                      .toString(),
+                                  text4: snapshot.data!.data!.teamSizeMax
+                                      .toString(),
+                                  text5: ' (team size)',
+                                  text6: 'Starts on',
+                                  imagedate:
+                                      'assets/images/Icon material-date-range.png',
+                                  text7: ' Mon, 19 September',
+                                  imagetime: 'assets/images/Subtraction 1.png',
+                                  text8: '8:07 AM',
+                                  text9: 'Ends on',
+                                  text10: '6:00 PM',
+                                  text11: 'About Event',
+                                  text12: snapshot.data!.data!.about.toString(),
+                                  text13: 'More',
+                                ),
+                              ])
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 20.h),
-                    Container(
-                        height: 60.h,
-                        padding: EdgeInsets.only(
-                            left: 36.w, bottom: 10.h, right: 36.w),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            MyButton1(
-                              onpressed: () {
-                                Get.bottomSheet(
-                                    Container(
-                                      height: 517.h,
-                                      decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.vertical(
-                                              top: Radius.circular(25)),
-                                          color: Color(0xffF2F9FF)),
-                                      child: Padding(
-                                          padding: EdgeInsets.only(top: 51.h),
-                                          child: SingleChildScrollView(
-                                            child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 36.w,
-                                                        bottom: 20.h,
-                                                        right: 36.w),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text14PtGrey(
-                                                            text:
-                                                                'Total Payable'),
-                                                        SizedBox(height: 10.h),
-                                                        Text16PtBlack(
-                                                            text: '\$500'),
-                                                        SizedBox(height: 20.h),
-                                                        const Divider(
-                                                            thickness: 1),
-                                                        SizedBox(height: 20.h),
-                                                        Text14PtGrey(
-                                                            text:
-                                                                'Pay Through'),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  ListView(
-                                                    shrinkWrap: true,
-                                                    physics:
-                                                        const NeverScrollableScrollPhysics(),
-                                                    children: registerationType
-                                                        .map(
-                                                            (e) =>
-                                                                GestureDetector(
-                                                                  onTap: () {
-                                                                    valueOfList
-                                                                        .value = e;
-                                                                  },
-                                                                  child: Obx(() => ToggleContainer(
-                                                                      color: valueOfList.value ==
-                                                                              e
-                                                                          ? AddFeedApi1()
-                                                                              .selectedItemcolor
-                                                                              .value
-                                                                          : AddFeedApi1()
-                                                                              .transparentColor
-                                                                              .value,
-                                                                      isSelected: valueOfList.value ==
-                                                                              e
-                                                                          ? true
-                                                                          : false,
-                                                                      text: e)),
-                                                                ))
-                                                        .toList(),
-                                                  ),
-                                                  // SizedBox(height: 10.h),
-                                                  Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 36.w,
-                                                        right: 36.w),
-                                                    child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
+                      SizedBox(height: 20.h),
+                      Container(
+                          height: 60.h,
+                          padding: EdgeInsets.only(
+                              left: 36.w, bottom: 10.h, right: 36.w),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              MyButton1(
+                                onpressed: () {
+                                  Get.bottomSheet(
+                                      Container(
+                                        height: 517.h,
+                                        decoration: const BoxDecoration(
+                                            borderRadius: BorderRadius.vertical(
+                                                top: Radius.circular(25)),
+                                            color: Color(0xffF2F9FF)),
+                                        child: Padding(
+                                            padding: EdgeInsets.only(top: 51.h),
+                                            child: SingleChildScrollView(
+                                              child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                          left: 36.w,
+                                                          bottom: 20.h,
+                                                          right: 36.w),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
                                                         children: [
-                                                          Button56(
-                                                              onpressed: () {
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop();
-                                                              },
-                                                              buttonText:
-                                                                  'Cancel',
-                                                              textColor:
-                                                                  Colors.black,
-                                                              width: 1,
-                                                              widthColor:
-                                                                  Colors.black,
-                                                              color: const Color(
-                                                                  0xffF2F9FF)),
-                                                          Button56Blue(
-                                                              onpressed: () {
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop();
-                                                                Get.bottomSheet(
-                                                                    Container(
-                                                                  padding: EdgeInsets.only(
-                                                                      top: 72.h,
-                                                                      left:
-                                                                          36.w,
-                                                                      right:
-                                                                          36.w),
-                                                                  height: 370.h,
-                                                                  decoration: const BoxDecoration(
-                                                                      borderRadius: BorderRadius.vertical(
-                                                                          top: Radius.circular(
-                                                                              25)),
-                                                                      color: Color(
-                                                                          0xffF2F9FF)),
-                                                                  child: Column(
-                                                                      children: [
-                                                                        SvgPicture.asset(
-                                                                            'assets/images/tick.svg'),
-                                                                        SizedBox(
-                                                                            height:
-                                                                                28.h),
-                                                                        Text(
-                                                                          'Congratulations!',
-                                                                          style: TextStyle(
-                                                                              fontFamily: 'Helvetica',
-                                                                              fontSize: 25.sp,
-                                                                              fontWeight: FontWeight.bold,
-                                                                              color: Colors.black),
-                                                                        ),
-                                                                        SizedBox(
-                                                                            height:
-                                                                                16.h),
-                                                                        SizedBox(
-                                                                          height:
-                                                                              39.h,
-                                                                          width:
-                                                                              200.w,
-                                                                          child:
-                                                                              const Text(
-                                                                            'You have successfully participated in the event.',
-                                                                            textAlign:
-                                                                                TextAlign.center,
+                                                          Text14PtGrey(
+                                                              text:
+                                                                  'Total Payable'),
+                                                          SizedBox(
+                                                              height: 10.h),
+                                                          Text16PtBlack(
+                                                              text: '\$500'),
+                                                          SizedBox(
+                                                              height: 20.h),
+                                                          const Divider(
+                                                              thickness: 1),
+                                                          SizedBox(
+                                                              height: 20.h),
+                                                          Text14PtGrey(
+                                                              text:
+                                                                  'Pay Through'),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    ListView(
+                                                      shrinkWrap: true,
+                                                      physics:
+                                                          const NeverScrollableScrollPhysics(),
+                                                      children:
+                                                          registerationType
+                                                              .map((e) =>
+                                                                  GestureDetector(
+                                                                    onTap: () {
+                                                                      valueOfList
+                                                                          .value = e;
+                                                                    },
+                                                                    child: Obx(() => ToggleContainer(
+                                                                        color: valueOfList.value ==
+                                                                                e
+                                                                            ? AddFeedApi1()
+                                                                                .selectedItemcolor
+                                                                                .value
+                                                                            : AddFeedApi1()
+                                                                                .transparentColor
+                                                                                .value,
+                                                                        isSelected: valueOfList.value ==
+                                                                                e
+                                                                            ? true
+                                                                            : false,
+                                                                        text:
+                                                                            e)),
+                                                                  ))
+                                                              .toList(),
+                                                    ),
+                                                    // SizedBox(height: 10.h),
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                          left: 36.w,
+                                                          right: 36.w),
+                                                      child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Button56(
+                                                                onpressed: () {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                },
+                                                                buttonText:
+                                                                    'Cancel',
+                                                                textColor:
+                                                                    Colors
+                                                                        .black,
+                                                                width: 1,
+                                                                widthColor:
+                                                                    Colors
+                                                                        .black,
+                                                                color: const Color(
+                                                                    0xffF2F9FF)),
+                                                            Button56Blue(
+                                                                onpressed: () {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                  Get.bottomSheet(
+                                                                      Container(
+                                                                    padding: EdgeInsets.only(
+                                                                        top: 72
+                                                                            .h,
+                                                                        left: 36
+                                                                            .w,
+                                                                        right: 36
+                                                                            .w),
+                                                                    height:
+                                                                        370.h,
+                                                                    decoration: const BoxDecoration(
+                                                                        borderRadius: BorderRadius.vertical(
+                                                                            top: Radius.circular(
+                                                                                25)),
+                                                                        color: Color(
+                                                                            0xffF2F9FF)),
+                                                                    child: Column(
+                                                                        children: [
+                                                                          SvgPicture.asset(
+                                                                              'assets/images/tick.svg'),
+                                                                          SizedBox(
+                                                                              height: 28.h),
+                                                                          Text(
+                                                                            'Congratulations!',
                                                                             style: TextStyle(
                                                                                 fontFamily: 'Helvetica',
-                                                                                fontWeight: FontWeight.w500,
-                                                                                color: Color(0xff485058)),
+                                                                                fontSize: 25.sp,
+                                                                                fontWeight: FontWeight.bold,
+                                                                                color: Colors.black),
                                                                           ),
-                                                                        )
-                                                                      ]),
-                                                                ));
-                                                                navigateToAnotherPage();
-                                                              },
-                                                              buttonText:
-                                                                  'Done',
-                                                              textColor:
-                                                                  const Color(
-                                                                      0xffF2F9FF),
-                                                              color: const Color(
-                                                                  0xff2B67A3))
-                                                        ]),
-                                                  )
-                                                ]),
-                                          )),
-                                    ),
-                                    isScrollControlled: true);
-                              },
-                              buttonText: "\$550  |  Register",
-                            ),
-                            SizedBox(width: 20.w),
-                            const Image(
-                                image:
-                                    AssetImage('assets/images/Group 210.png'))
-                          ],
-                        ))
-                  ],
+                                                                          SizedBox(
+                                                                              height: 16.h),
+                                                                          SizedBox(
+                                                                            height:
+                                                                                39.h,
+                                                                            width:
+                                                                                200.w,
+                                                                            child:
+                                                                                const Text(
+                                                                              'You have successfully participated in the event.',
+                                                                              textAlign: TextAlign.center,
+                                                                              style: TextStyle(fontFamily: 'Helvetica', fontWeight: FontWeight.w500, color: Color(0xff485058)),
+                                                                            ),
+                                                                          )
+                                                                        ]),
+                                                                  ));
+                                                                  navigateToAnotherPage();
+                                                                },
+                                                                buttonText:
+                                                                    'Done',
+                                                                textColor:
+                                                                    const Color(
+                                                                        0xffF2F9FF),
+                                                                color: const Color(
+                                                                    0xff2B67A3))
+                                                          ]),
+                                                    )
+                                                  ]),
+                                            )),
+                                      ),
+                                      isScrollControlled: true);
+                                },
+                                buttonText: "\$550  |  Register",
+                              ),
+                              SizedBox(width: 20.w),
+                              const Image(
+                                  image:
+                                      AssetImage('assets/images/Group 210.png'))
+                            ],
+                          ))
+                    ],
+                  ),
                 );
               } else {
                 return const Center(child: CircularProgressIndicator());

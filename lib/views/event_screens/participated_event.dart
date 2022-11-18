@@ -44,6 +44,7 @@ class _ParticipatedEventUIState extends State<ParticipatedEventUI> {
                 child: const Icon(Icons.arrow_back_ios, color: Colors.black))),
       ),
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        SizedBox(height: 15.h),
         SizedBox(
           height: 700.h,
           width: 428.w,
@@ -85,6 +86,7 @@ class _ParticipatedEventUIState extends State<ParticipatedEventUI> {
                                   // fit: BoxFit.cover,
                                   image: AssetImage('assets/images/no.png'))
                               : DecorationImage(
+                                  fit: BoxFit.cover,
                                   image: NetworkImage(
                                       snapshot.data!.data!.banner)),
                           text15: '12',

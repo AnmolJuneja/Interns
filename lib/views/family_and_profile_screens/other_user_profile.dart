@@ -158,7 +158,7 @@ class _OtherUserProfileUIState extends State<OtherUserProfileUI> {
                     ),
                     SizedBox(height: 20.h),
                     SizedBox(
-                      height: 60.h,
+                      // height: 60.h,
                       width: 356.w,
                       child: Text14ptDesc(
                           text: '${viewProfile!.data!.description}'),

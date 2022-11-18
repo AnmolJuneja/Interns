@@ -139,7 +139,26 @@ Widget buildList(EventList index) {
               )),
           Positioned(
               top: 191.h, left: 326.w, child: const Icon(Icons.star_outline)),
-          Positioned(left: 263.w, child: Image.asset('assets/images/tag.png'))
+          Positioned(
+              left: 263.w,
+              top: 10.h,
+              child: Image.asset(
+                'assets/images/tag.png',
+                color: const Color(0xff719AC3),
+              )),
+          Positioned(
+              left: 288.w,
+              top: 30.h,
+              child: Column(children: [
+                Text(
+                  'Jan',
+                  style: TextStyle(color: Colors.white),
+                ),
+                Text(
+                  '01/21',
+                  style: TextStyle(color: Colors.white),
+                )
+              ]))
         ]),
       ),
     ),

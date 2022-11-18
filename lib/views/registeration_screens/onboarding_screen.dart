@@ -102,6 +102,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         .then((value) async {
       var res = Login.fromJson(value.data);
       await SaveNumber().saveNumber(textEditingController.text);
+      await SaveFlah().saveFlag(otp.flagEmoji.value);
+      await SaveCountryCode().saveCountryCode(otp.countryText.value);
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
               builder: (context) => OtpScreen(

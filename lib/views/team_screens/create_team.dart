@@ -107,7 +107,11 @@ class _CreateTeamViewState extends State<CreateTeamView> {
               TextF(
                   readOnly: false,
                   textEditingController: groupNameController,
-                  onchanged: (value) {},
+                  onchanged: (value) {
+                    descriptionController.text.isNotEmpty
+                        ? color.value = true
+                        : color.value = false;
+                  },
                   hintText: 'Group name',
                   textInputType: TextInputType.text,
                   prefix: null),
@@ -262,7 +266,11 @@ class _CreateTeamViewState extends State<CreateTeamView> {
                                         color: const Color(0xffF2F9FF)),
                                     Button56Blue(
                                         onpressed: () {
-                                          color.value = true;
+                                          groupNameController.text.isNotEmpty &&
+                                                  descriptionController
+                                                      .text.isNotEmpty
+                                              ? color.value = true
+                                              : color.value = false;
                                           Navigator.pop(context);
                                         },
                                         buttonText: 'Done',

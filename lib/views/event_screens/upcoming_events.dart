@@ -22,12 +22,16 @@ class _ListOfEvents2State extends State<ListOfEvents2> {
             future: EventListApi().getList12(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: snapshot.data!.data!.length,
-                    itemBuilder: (context, index) {
-                      return buildList(snapshot.data!.data![index]);
-                    });
+                return snapshot.data!.data!.length == 0
+                    ? Center(
+                        child: Text16PtBlack(text: 'No Upcoming Events'),
+                      )
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: snapshot.data!.data!.length,
+                        itemBuilder: (context, index) {
+                          return buildList(snapshot.data!.data![index]);
+                        });
               } else {
                 return const Center(
                   child: CircularProgressIndicator(),

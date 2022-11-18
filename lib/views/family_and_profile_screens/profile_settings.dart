@@ -44,11 +44,7 @@ class _ProfileSettingsUIState extends State<ProfileSettingsUI> {
               padding: EdgeInsets.only(left: 36.w),
               child: GestureDetector(
                   onTap: () {
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const UserProfileUI()),
-                        (route) => false);
+                    Navigator.pop(context);
                   },
                   child:
                       const Icon(Icons.arrow_back_ios, color: Colors.black))),

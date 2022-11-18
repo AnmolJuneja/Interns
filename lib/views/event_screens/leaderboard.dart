@@ -35,40 +35,43 @@ class LeaderBoardUI extends StatelessWidget {
                       const Icon(Icons.arrow_back_ios, color: Colors.black)))),
       body: Stack(children: [
         Positioned(
-            top: 60.h,
-            left: 5.w,
+            top: 45.h,
+            left: 35.w,
+            right: 220.w,
             child: Image.asset('assets/images/Reddrum-Girl.png')),
         Positioned(
-            top: 232.h,
-            left: 75.w,
+            top: 180.h,
+            left: 85.w,
             child: Column(children: [
               Text16PtBlack(text: 'Anthony'),
               Text14PtGrey(text: '19')
             ])),
         Positioned(
-            top: 222.h,
-            left: 180.w,
+            top: 170.h,
+            left: 185.w,
             child: Column(children: [
               Text16PtBlack(text: 'Anthony'),
               Text14PtGrey(text: '22')
             ])),
         Positioned(
-            top: 232.h,
-            right: 75.w,
+            top: 180.h,
+            right: 85.w,
             child: Column(children: [
               Text16PtBlack(text: 'Anthony'),
               Text14PtGrey(text: '16')
             ])),
         Positioned(
-            top: 60.h,
-            right: 10.w,
+            top: 45.h,
+            right: 35.w,
+            left: 220.w,
             child: Image.asset('assets/images/brad.png')),
         Positioned(
-            top: 45.h,
+            top: 15.h,
             left: 118.w,
+            right: 118.w,
             child: Image.asset('assets/images/maxresdefault1.png')),
         Positioned(
-            top: 35.h,
+            top: 5.h,
             left: 195.w,
             child: Center(
                 child: Image.asset(
@@ -76,14 +79,14 @@ class LeaderBoardUI extends StatelessWidget {
               height: 40.h,
             ))),
         Positioned(
-            top: 320.h,
+            top: 260.h,
             left: 36.w,
             right: 36.w,
             child: const Divider(
               thickness: 1,
             )),
         Positioned(
-            top: 340.h,
+            top: 280.h,
             left: 36.w,
             right: 36.w,
             bottom: 0.h,

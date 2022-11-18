@@ -1,8 +1,5 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
 import 'dart:io';
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,16 +15,15 @@ import 'package:reelpro/models/edit_profile.dart';
 import 'package:reelpro/models/shared_preferences.dart';
 import 'package:reelpro/view_models/register_user_request/edit_profile.dart';
 import 'package:reelpro/view_models/register_user_request/otp_view_model.dart';
-// import 'package:reelpro/view_models/register_user_request/registeration_step_two.dart';
 import 'package:reelpro/controllers/validate_email_controller.dart';
+import 'package:reelpro/view_models/team_and_profile_request/other_user_profile.dart';
 import 'package:reelpro/views/team_screens/manage_team_screen.dart';
 import 'package:reelpro/views/family_and_profile_screens/user_profile.dart';
 import 'package:image_cropper/image_cropper.dart';
 
 class EditProfile1 extends StatefulWidget {
-  const EditProfile1({
-    Key? key,
-  }) : super(key: key);
+  final String desc;
+  const EditProfile1({Key? key, required this.desc}) : super(key: key);
 
   @override
   State<EditProfile1> createState() => _EditProfile1State();
@@ -52,6 +48,7 @@ class _EditProfile1State extends State<EditProfile1> {
   ImagePicker picker = ImagePicker();
   final validateEmail = Get.put(ValidateEmail());
   final instanceOtpViewModel = Get.put(OtpViewModel());
+  final ff = Get.put(OtherUserProfileApi());
   String? _chosenValue;
   @override
   void initState() {
@@ -61,7 +58,7 @@ class _EditProfile1State extends State<EditProfile1> {
     dobController.text = instanceStepTwo.dob1.value;
     numberController.text = instanceStepTwo.number.value;
     _chosenValue = instanceStepTwo.gender1.value;
-    descriptionController.text = instanceStepTwo.description.value;
+    descriptionController.text = widget.desc;
     super.initState();
   }
 
@@ -134,7 +131,7 @@ class _EditProfile1State extends State<EditProfile1> {
                       )),
             SizedBox(height: 9.h),
             Center(
-                child: Text('Change',
+                child: Text('Upload Profile Picture',
                     style: TextStyle(
                         fontFamily: 'Helvetica',
                         fontSize: 14.sp,
@@ -227,17 +224,11 @@ class _EditProfile1State extends State<EditProfile1> {
                     child: Text(value),
                   );
                 }).toList(),
-                hint: Text(
-                  'Gender',
-                  style: Theme.of(context).textTheme.headline2!.copyWith(
-                      fontSize: 15.sp, color: const Color(0xff48505899)
-                      // greyFontColoR.withAlpha(99),
-                      ),
-                ),
+                hint: Text('Gender',
+                    style: Theme.of(context).textTheme.headline2!.copyWith(
+                        fontSize: 15.sp, color: const Color(0xff48505899))),
                 icon: const Icon(Icons.keyboard_arrow_down,
-                    color: Color(0xff48505899)
-                    // color: greyFontColoR.withAlpha(99),
-                    ),
+                    color: Color(0xff48505899)),
                 underline: Container(),
                 onChanged: (String? value) {
                   setState(() {
@@ -259,7 +250,7 @@ class _EditProfile1State extends State<EditProfile1> {
                     login();
                   }
                 },
-                buttonText: 'Submit')
+                buttonText: 'Update')
           ])),
         ));
   }
@@ -303,7 +294,10 @@ class _EditProfile1State extends State<EditProfile1> {
       SaveCountryCode().saveCountryCode(instanceStepTwo.countryText.value);
       SaveFlah().saveFlag(instanceStepTwo.flagEmoji.value);
     });
-    Navigator.pop(context);
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => UserProfileUI()),
+        (route) => false);
   }
 
   Future<File?> cropImage({required File imageFile}) async {

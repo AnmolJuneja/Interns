@@ -14,7 +14,6 @@ import 'package:reelpro/views/family_and_profile_screens/profile_settings.dart';
 import '../catch_and_feed_screens/user_catch_list.dart';
 
 class UserProfileUI extends StatefulWidget {
-  // final int userId;
   const UserProfileUI({Key? key}) : super(key: key);
 
   @override
@@ -123,7 +122,14 @@ class _UserProfileUIState extends State<UserProfileUI> {
                                       SizedBox(height: 22.h),
                                       GestureDetector(
                                         onTap: () {
-                                          Get.to(() => const EditProfile1());
+                                          Get.to(() => EditProfile1(
+                                                desc: ff.viewProfile!.data!
+                                                            .description ==
+                                                        null
+                                                    ? 'Add Description'
+                                                    : ff.viewProfile!.data!
+                                                        .description,
+                                              ));
                                         },
                                         child: Container(
                                           padding: EdgeInsets.only(left: 60.w),
@@ -154,9 +160,9 @@ class _UserProfileUIState extends State<UserProfileUI> {
                             ]),
                             SizedBox(height: 20.h),
                             Text14ptDesc(
-                                text: instance.description.value == ''
-                                    ? 'Add Description.'
-                                    : instance.description.value),
+                                text: ff.viewProfile!.data!.description == null
+                                    ? 'Add Description'
+                                    : ff.viewProfile!.data!.description),
                             Padding(
                               padding: EdgeInsets.only(
                                   left: 41.w, right: 41.w, top: 22.h),

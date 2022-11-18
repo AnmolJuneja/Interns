@@ -9,9 +9,10 @@ import 'package:get/get.dart';
 import 'package:reelpro/consts/toggle_container.dart';
 import 'package:reelpro/controllers/feed_and_catch_controllers.dart';
 import 'package:reelpro/models/search_user.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/fish_species_list.dart';
 import 'package:reelpro/view_models/team_and_profile_request/search_user.dart';
 import 'package:reelpro/views/family_and_profile_screens/other_user_profile.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SpotlightScreen extends StatefulWidget {
@@ -26,6 +27,7 @@ class _SpotlightScreenState extends State<SpotlightScreen> {
 
   TextEditingController textEditingController = TextEditingController();
   final instance = Get.put(SearchUserApi());
+  var isSwitched = false.obs;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -79,32 +81,28 @@ class _SpotlightScreenState extends State<SpotlightScreen> {
                                               physics:
                                                   const NeverScrollableScrollPhysics(),
                                               children: registerationType
-                                                  .map((e) => GestureDetector(
+                                                  .map(
+                                                    (e) => GestureDetector(
                                                         onTap: () {
                                                           valueOfList.value = e;
                                                         },
-                                                        child: Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                              top: 20.h,
-                                                            ),
-                                                            child: Obx(() => ToggleContainer(
-                                                                color: valueOfList
-                                                                            .value ==
+                                                        child: Obx(() => ToggleContainer(
+                                                            color: valueOfList
+                                                                        .value ==
+                                                                    e
+                                                                ? AddFeedApi1()
+                                                                    .selectedItemcolor
+                                                                    .value
+                                                                : AddFeedApi1()
+                                                                    .transparentColor
+                                                                    .value,
+                                                            isSelected:
+                                                                valueOfList.value ==
                                                                         e
-                                                                    ? AddFeedApi1()
-                                                                        .selectedItemcolor
-                                                                        .value
-                                                                    : AddFeedApi1()
-                                                                        .transparentColor
-                                                                        .value,
-                                                                isSelected:
-                                                                    valueOfList.value ==
-                                                                            e
-                                                                        ? true
-                                                                        : false,
-                                                                text: e))),
-                                                      ))
+                                                                    ? true
+                                                                    : false,
+                                                            text: e))),
+                                                  )
                                                   .toList(),
                                             ),
                                             Padding(
@@ -126,8 +124,23 @@ class _SpotlightScreenState extends State<SpotlightScreen> {
                                                           Text14Pt(
                                                               text:
                                                                   'Tagged Location'),
-                                                          SvgPicture.asset(
-                                                              'assets/images/button.svg')
+                                                          Obx(() =>
+                                                              FlutterSwitch(
+                                                                activeColor:
+                                                                    const Color(
+                                                                        0xff2B67A3),
+                                                                value:
+                                                                    isSwitched
+                                                                        .value,
+                                                                onToggle:
+                                                                    (value) {
+                                                                  setState(() {
+                                                                    isSwitched
+                                                                            .value =
+                                                                        value;
+                                                                  });
+                                                                },
+                                                              ))
                                                         ]),
                                                     SizedBox(height: 10.h),
                                                     const Divider(thickness: 1),
@@ -171,8 +184,15 @@ class _SpotlightScreenState extends State<SpotlightScreen> {
                                     isScrollControlled: true,
                                   );
                                 },
-                                child:
-                                    Image.asset('assets/images/Group 209.png')),
+                                child: isSwitched.value
+                                    ? Image.asset(
+                                        'assets/images/sort.png',
+                                        height: 37.h,
+                                        width: 37.w,
+                                        color: const Color(0xff2B67A3),
+                                      )
+                                    : Image.asset(
+                                        'assets/images/Group 209.png')),
                           ]),
                       SizedBox(height: 25.h),
                     ])),

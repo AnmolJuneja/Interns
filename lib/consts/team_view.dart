@@ -7,31 +7,19 @@ import 'package:reelpro/consts/text.dart';
 
 class UpperView extends StatelessWidget {
   String image;
-  String post;
-  String members;
-  String pendingRequests;
   String location;
-  void Function()? onpressed;
-  String btn1Text;
-  String btn2Text;
+
   UpperView({
     Key? key,
     required this.image,
-    required this.post,
-    required this.members,
-    required this.pendingRequests,
     required this.location,
-    required this.onpressed,
-    required this.btn1Text,
-    required this.btn2Text,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 20.h),
       color: Colors.white,
-      height: 435.h,
+      // height: 435.h,
       child: Stack(
         children: [
           Column(
@@ -45,29 +33,117 @@ class UpperView extends StatelessWidget {
                     image: DecorationImage(
                         fit: BoxFit.cover, image: AssetImage(image))),
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 20.h, left: 36.w, right: 36.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(children: [
-                      PostText(text: post),
-                      TextF1(text: 'Posts'),
-                    ]),
-                    Column(children: [
-                      PostText(text: members),
-                      TextF1(text: 'Members'),
-                    ]),
-                    Column(children: [
-                      PostText(text: pendingRequests),
-                      TextF1(text: 'Pending Request')
-                    ])
-                  ],
+            ],
+          ),
+          Positioned(
+              top: 233.h,
+              right: 36.w,
+              left: 292.w,
+              child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: const Color(0xff719AC3)),
+                  height: 24.h,
+                  width: 100.w,
+                  child: Center(
+                      child: Text(location,
+                          style: TextStyle(
+                              fontFamily: 'Helvetica',
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                              fontSize: 14.sp)))))
+        ],
+      ),
+    );
+  }
+}
+
+class TeamViewColumn extends StatelessWidget {
+  String title;
+  String image;
+  String text;
+  String text1;
+  String text2;
+  String text3;
+  String image1;
+  String image2;
+  String image3;
+  String image4;
+  String textLike;
+  String likeImage;
+  String likeText;
+  String commentImage;
+  String commentText;
+  String shareImage;
+  String post;
+  String members;
+  String pendingRequests;
+  void Function()? onpressed;
+  String btn1Text;
+  String btn2Text;
+  TeamViewColumn(
+      {Key? key,
+      required this.title,
+      required this.shareImage,
+      required this.commentText,
+      required this.image,
+      required this.text,
+      required this.text1,
+      required this.text2,
+      required this.text3,
+      required this.image1,
+      required this.image2,
+      required this.image3,
+      required this.image4,
+      required this.likeImage,
+      required this.post,
+      required this.members,
+      required this.pendingRequests,
+      required this.onpressed,
+      required this.btn1Text,
+      required this.btn2Text,
+      required this.likeText,
+      required this.commentImage,
+      required this.textLike})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(),
+      child: Column(
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: EdgeInsets.only(left: 36.w, right: 36.w),
+            color: Colors.white,
+            child: Column(
+              children: [
+                SizedBox(height: 20.h),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 28.h),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Column(children: [
+                        SizedBox(width: 90.w),
+                        PostText(text: post),
+                        TextF1(text: 'Posts'),
+                      ]),
+                      SizedBox(width: 50.w),
+                      Column(children: [
+                        PostText(text: members),
+                        TextF1(text: 'Members'),
+                      ]),
+                      SizedBox(width: 37.w),
+                      Column(children: [
+                        PostText(text: pendingRequests),
+                        TextF1(text: 'Pending Request')
+                      ])
+                    ],
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 30.h, left: 36.w, right: 36.w),
-                child: Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
@@ -112,82 +188,19 @@ class UpperView extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
-            ],
+                SizedBox(height: 28.h)
+              ],
+            ),
           ),
-          Positioned(
-              top: 233.h,
-              right: 36.w,
-              left: 292.w,
-              child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: const Color(0xff719AC3)),
-                  height: 24.h,
-                  width: 100.w,
-                  child: Center(
-                      child: Text(location,
-                          style: TextStyle(
-                              fontFamily: 'Helvetica',
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white,
-                              fontSize: 14.sp)))))
-        ],
-      ),
-    );
-  }
-}
-
-class TeamViewColumn extends StatelessWidget {
-  String title;
-  String image;
-  String text;
-  String text1;
-  String text2;
-  String text3;
-  String image1;
-  String image2;
-  String image3;
-  String image4;
-  String textLike;
-  String likeImage;
-  String likeText;
-  String commentImage;
-  String commentText;
-  String shareImage;
-  TeamViewColumn(
-      {Key? key,
-      required this.title,
-      required this.shareImage,
-      required this.commentText,
-      required this.image,
-      required this.text,
-      required this.text1,
-      required this.text2,
-      required this.text3,
-      required this.image1,
-      required this.image2,
-      required this.image3,
-      required this.image4,
-      required this.likeImage,
-      required this.likeText,
-      required this.commentImage,
-      required this.textLike})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: 28.h, left: 36.w, right: 36.w),
-      child: Column(
-        // crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text21PtBlue(text: title),
-              const Icon(Icons.add, color: Color(0xff2B67A3))
-            ],
+          Padding(
+            padding: EdgeInsets.only(top: 28.h, left: 36.w, right: 36.w),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text21PtBlue(text: title),
+                const Icon(Icons.add, color: Color(0xff2B67A3))
+              ],
+            ),
           ),
           SizedBox(height: 20.h),
           Container(

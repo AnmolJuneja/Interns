@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:reelpro/consts/container.dart';
 import 'package:reelpro/consts/text.dart';
@@ -155,6 +156,7 @@ class _CatchlogListUIState extends State<CatchlogListUI> {
                             itemBuilder: (context, index) {
                               return buildList(instance1.catchlogList[index]);
                             })))),
+            SizedBox(height: 15.h)
           ]),
         ),
       ),
@@ -281,7 +283,7 @@ Widget buildFeed(BuildContext context, Datum datum) {
   isLiked.value = datum.isLiked!;
   likeCount.value = datum.totalLikes!;
   commentCount.value = datum.totalComments!;
-
+  final localTime = datum.createdAt!.toLocal();
   return GestureDetector(
     onTap: () {
       Navigator.pushAndRemoveUntil(
@@ -325,12 +327,16 @@ Widget buildFeed(BuildContext context, Datum datum) {
                               Row(children: [
                                 SvgPicture.asset('assets/images/date.svg'),
                                 SizedBox(width: 6.w),
-                                Text14PtTime(text: 'Mon, 12 September'),
+                                Text14PtTime(
+                                    text:
+                                        '${localTime.day}, ${localTime.day} ${localTime.month}'),
                                 SizedBox(width: 10.w),
                                 SvgPicture.asset(
                                     'assets/images/Subtraction 1.svg'),
                                 SizedBox(width: 6.w),
-                                Text14PtTime(text: '9:37 AM')
+                                Text14PtTime(
+                                    text:
+                                        '${localTime.hour}:${localTime.minute} AM')
                               ])
                             ])
                       ],
@@ -398,7 +404,6 @@ Widget buildFeed(BuildContext context, Datum datum) {
                       ],
                     ),
                   ),
-                  // Spacer()
                 ]),
                 Positioned(
                     top: 28.h,
