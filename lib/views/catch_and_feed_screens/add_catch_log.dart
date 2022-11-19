@@ -15,6 +15,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AddCatchLogUI extends StatefulWidget {
   const AddCatchLogUI({Key? key}) : super(key: key);
@@ -35,7 +36,7 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
   @override
   AddCatchlogApi addCatchlogApi = Get.put(AddCatchlogApi());
   ImagePicker picker = ImagePicker();
-  File? file;
+  List<File> file = [];
   final fishSpeciesListApi = Get.put(AddFeedApi1());
   TextEditingController weightController = TextEditingController();
   TextEditingController lengthController = TextEditingController();
@@ -52,14 +53,13 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
     double lng = 74.027962;
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 70.h,
         elevation: 0,
         title: Padding(
-            padding: EdgeInsets.only(top: 42.h),
+            padding: EdgeInsets.only(right: 120.w),
             child: Text21PtBlack(text: 'Add Catch Log')),
         backgroundColor: const Color(0xffF2F9FF),
         leading: Padding(
-            padding: EdgeInsets.only(top: 42.h, left: 36.w),
+            padding: EdgeInsets.only(left: 36.w),
             child: GestureDetector(
               onTap: () {
                 Get.to(() => BottomNavigation(currentIndex: 0));
@@ -77,9 +77,8 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Flexible(
           child: Container(
-            height: 710.h,
+            height: 680.h,
             padding: EdgeInsets.only(
-              top: 24.h,
               left: 36.w,
               right: 36.w,
             ),
@@ -87,6 +86,7 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(height: 34.h),
                   Text15PtBlue(text: 'Click Pictures or Videos'),
                   SizedBox(height: 14.h),
                   GestureDetector(
@@ -120,31 +120,38 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                           ),
                         ));
                       },
-                      child: Container(
-                          child: file == null
-                              ? Container(
-                                  height: 132.h,
-                                  width: 132.w,
-                                  decoration: BoxDecoration(
-                                      image: const DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: AssetImage(
-                                              'assets/images/Group 208.png')),
-                                      borderRadius: BorderRadius.circular(15),
-                                      border: Border.all(
-                                          color: Colors.white, width: 3)),
-                                )
-                              : Container(
-                                  height: 132.h,
-                                  width: 132.w,
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: FileImage(file!)),
-                                      borderRadius: BorderRadius.circular(15),
-                                      border: Border.all(
-                                          color: Colors.white, width: 3)),
-                                ))),
+                      child: Row(children: [
+                        Container(
+                            child: file.isEmpty
+                                ? SvgPicture.asset('assets/images/add.svg',
+                                    height: 132.h, width: 132.w)
+                                : Container(
+                                    height: 132.h,
+                                    width: 132.w,
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: FileImage(file[0])),
+                                        borderRadius: BorderRadius.circular(15),
+                                        border: Border.all(
+                                            color: Colors.white, width: 3)),
+                                  )),
+                        SizedBox(width: 10.w),
+                        file.length <= 1
+                            ? SvgPicture.asset('assets/images/add.svg',
+                                height: 132.h, width: 132.w)
+                            : Container(
+                                height: 132.h,
+                                width: 132.w,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: FileImage(file[1])),
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(
+                                        color: Colors.white, width: 3)),
+                              ),
+                      ])),
                   SizedBox(height: 28.h),
                   Text15PtBlue(text: 'Select Fishtype'),
                   SizedBox(height: 14.h),
@@ -193,8 +200,7 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                                                 },
                                                 child: Padding(
                                                     padding: EdgeInsets.only(
-                                                      top: 20.h,
-                                                    ),
+                                                        top: 14.h),
                                                     child: Obx(() => ToggleContainer(
                                                         color: value.value == e
                                                             ? AddFeedApi1()
@@ -213,7 +219,7 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(
-                                          top: 30.h, left: 36.w, right: 36.w),
+                                          top: 20.h, left: 36.w, right: 36.w),
                                       child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
@@ -282,8 +288,7 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                                                   },
                                                   child: Padding(
                                                       padding: EdgeInsets.only(
-                                                        top: 20.h,
-                                                      ),
+                                                          top: 10.h),
                                                       child: Obx(() => ToggleContainer(
                                                           color: value1.value ==
                                                                   e
@@ -400,7 +405,7 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
           ),
         ),
         Padding(
-            padding: EdgeInsets.only(top: 48.h, left: 36.w, right: 36.w),
+            padding: EdgeInsets.only(top: 40.h, left: 36.w, right: 36.w),
             child: MyButton(
                 onpressed: () {
                   addCatchlogApi
@@ -410,7 +415,7 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                           fetchAdress.address.value,
                           weightController.text,
                           lengthController.text,
-                          file!,
+                          file,
                           2,
                           lat,
                           lng,
@@ -449,7 +454,7 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
       File? tempPath = File(images.path);
       tempPath = await cropImage(imageFile: tempPath);
       setState(() {
-        file = tempPath;
+        file.add(tempPath!);
         // Navigator.of(context).pop();
       });
     } on PlatformException catch (e) {
@@ -476,8 +481,7 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
       File? tempPath = File(images.path);
       tempPath = await cropImage(imageFile: tempPath);
       setState(() {
-        file = tempPath;
-        // Navigator.of(context).pop();
+        file.add(tempPath!);
       });
     } on PlatformException catch (e) {
       print(e);

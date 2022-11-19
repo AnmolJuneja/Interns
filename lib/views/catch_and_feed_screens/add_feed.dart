@@ -94,7 +94,7 @@ class _AddFeedConstState extends State<AddFeedConst> {
                   : SizedBox(width: 35.w),
               SizedBox(width: 35.w),
               file.length >= 2
-                  ? SizedBox()
+                  ? const SizedBox()
                   : GestureDetector(
                       onTap: () {
                         FocusScope.of(context).unfocus();
@@ -268,28 +268,24 @@ class _AddFeedConstState extends State<AddFeedConst> {
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
                               children: postVisibility
-                                  .map((e) => GestureDetector(
+                                  .map(
+                                    (e) => GestureDetector(
                                         onTap: () {
                                           valueOfList.value = e;
                                         },
-                                        child: Padding(
-                                            padding: EdgeInsets.only(
-                                                // top: 20.h,
-                                                ),
-                                            child: Obx(() => ToggleContainer(
-                                                color: valueOfList.value == e
-                                                    ? AddFeedApi1()
-                                                        .selectedItemcolor
-                                                        .value
-                                                    : AddFeedApi1()
-                                                        .transparentColor
-                                                        .value,
-                                                isSelected:
-                                                    valueOfList.value == e
-                                                        ? true
-                                                        : false,
-                                                text: e))),
-                                      ))
+                                        child: Obx(() => ToggleContainer(
+                                            color: valueOfList.value == e
+                                                ? AddFeedApi1()
+                                                    .selectedItemcolor
+                                                    .value
+                                                : AddFeedApi1()
+                                                    .transparentColor
+                                                    .value,
+                                            isSelected: valueOfList.value == e
+                                                ? true
+                                                : false,
+                                            text: e))),
+                                  )
                                   .toList(),
                             ),
                             Padding(
@@ -316,6 +312,14 @@ class _AddFeedConstState extends State<AddFeedConst> {
                                           textEditingController.text.isNotEmpty
                                               ? btn.value = false
                                               : true;
+                                          if (valueOfList.value == 'Public') {
+                                            viewStatus = 1;
+                                          } else if (valueOfList.value ==
+                                              'Followers') {
+                                            viewStatus = 2;
+                                          } else {
+                                            viewStatus = 3;
+                                          }
                                         },
                                         buttonText: 'Done',
                                         textColor: const Color(0xffF2F9FF),
@@ -335,7 +339,7 @@ class _AddFeedConstState extends State<AddFeedConst> {
                     ? SizedBox(
                         height: 330.h,
                       )
-                    : SizedBox(height: 367.h),
+                    : SizedBox(height: 360.h),
             Obx(() => btn.value
                 ? Container(
                     height: 56.h,

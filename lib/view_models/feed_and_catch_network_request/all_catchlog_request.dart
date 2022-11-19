@@ -16,7 +16,7 @@ class AddCatchlogApi {
       String location,
       String weight,
       String length,
-      File pic,
+      List<File>? pic,
       int type,
       double lat,
       double lng,
@@ -37,15 +37,17 @@ class AddCatchlogApi {
       'comment': comment,
       'userid': userId
     });
-    String fileName = pic.path.split('/').last;
-    MapEntry<String, dio.MultipartFile> image = MapEntry(
-      "pic",
-      await dio.MultipartFile.fromFile(
-        pic.path,
-        filename: fileName,
-      ),
-    );
-    data.files.add(image);
+    for (int i = 0; i < pic!.length; i++) {
+      String fileName = pic[i].path.split('/').last;
+      MapEntry<String, dio.MultipartFile> image = MapEntry(
+        "pic",
+        await dio.MultipartFile.fromFile(
+          pic[i].path,
+          filename: fileName,
+        ),
+      );
+      data.files.add(image);
+    }
     try {
       dio.Response response;
       response = await dio.Dio().post(

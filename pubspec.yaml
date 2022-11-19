@@ -67,6 +67,7 @@ dev_dependencies:
   geocoding: ^2.0.5
   cached_network_image: ^3.0.0
   flutter_switch: ^0.3.2
+  smooth_page_indicator: ^1.0.0+2
   # flutter_secure_storage: ^6.0.0
 
 # For information on the generic Dart part of this file, see the

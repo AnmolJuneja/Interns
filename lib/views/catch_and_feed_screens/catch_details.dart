@@ -58,7 +58,6 @@ class _CatchDetailsUIState extends State<CatchDetailsUI> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-            // toolbarHeight: 70.h,
             elevation: 0,
             backgroundColor: Colors.white,
             title: Text21PtBlack(text: 'Catch Details'),
@@ -85,7 +84,8 @@ class _CatchDetailsUIState extends State<CatchDetailsUI> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                            padding: EdgeInsets.only(left: 36.w, right: 36.w),
+                            padding: EdgeInsets.only(
+                                left: 36.w, right: 36.w, top: 24.h),
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [

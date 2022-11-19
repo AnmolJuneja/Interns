@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
           elevation: 0,
           leadingWidth: 140,
           leading: Padding(
-              padding: EdgeInsets.only(left: 36.w, top: 26.h),
+              padding: EdgeInsets.only(left: 36.w, top: 15.h),
               child: Text30ptBlue(text: 'Home')),
         ),
         backgroundColor: const Color(0xffF2F9FF),

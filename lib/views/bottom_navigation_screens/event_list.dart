@@ -20,7 +20,6 @@ class _EventListUIState extends State<EventListUI> {
         length: 3,
         child: Scaffold(
             appBar: AppBar(
-              // toolbarHeight: 80.h,
               backgroundColor: const Color(0xffF2F9FF),
               elevation: 0,
               leadingWidth: 140,

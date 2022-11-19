@@ -12,12 +12,11 @@ class MessageScreen extends StatelessWidget {
         length: 4,
         child: Scaffold(
             appBar: AppBar(
-              // toolbarHeight: 80.h,
               backgroundColor: const Color(0xffF2F9FF),
               elevation: 0,
-              leadingWidth: 600.w,
-              leading: Padding(
-                  padding: EdgeInsets.only(top: 26.h, left: 36.w),
+              centerTitle: false,
+              title: Padding(
+                  padding: EdgeInsets.only(left: 21.w, top: 26.h, bottom: 20.h),
                   child: Text30ptBlue(text: 'Messages')),
             ),
             backgroundColor: const Color(0xffF2F9FF),

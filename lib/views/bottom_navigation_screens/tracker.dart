@@ -16,6 +16,8 @@ import 'package:reelpro/views/bottom_navigation_screens/bottom_navigation.dart';
 import 'package:reelpro/views/catch_and_feed_screens/catch_details.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:reelpro/views/catch_and_feed_screens/feed_details.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:intl/intl.dart';
 
 class CatchlogListUI extends StatefulWidget {
   const CatchlogListUI({Key? key}) : super(key: key);
@@ -43,12 +45,11 @@ class _CatchlogListUIState extends State<CatchlogListUI> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // toolbarHeight: 80.h,
         backgroundColor: const Color(0xffF2F9FF),
         elevation: 0,
-        leadingWidth: 150,
-        leading: Padding(
-            padding: EdgeInsets.only(top: 26.h, left: 36.w),
+        centerTitle: false,
+        title: Padding(
+            padding: EdgeInsets.only(left: 21.w, top: 26.h, bottom: 20.h),
             child: Text30ptBlue(text: 'Tracker')),
       ),
       backgroundColor: const Color(0xffF2F9FF),
@@ -57,11 +58,10 @@ class _CatchlogListUIState extends State<CatchlogListUI> {
         child: SingleChildScrollView(
           child: Column(children: [
             Padding(
-              padding: EdgeInsets.only(left: 36.w, right: 36.w),
+              padding: EdgeInsets.only(left: 36.w, right: 36.w, top: 24.h),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 24.h),
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -172,6 +172,7 @@ Widget buildList(CatchlogList catchlogList) {
   isLiked.value = catchlogList.isLiked!;
   likeCount.value = catchlogList.totalLikes!;
   commentCount.value = catchlogList.totalComments!;
+  PageController pageController = PageController();
   return GestureDetector(
     onTap: () {
       Get.to(CatchDetailsUI(catchId: catchlogList.id!.toInt()));
@@ -222,19 +223,37 @@ Widget buildList(CatchlogList catchlogList) {
                   ],
                 ),
               ),
-              // Spacer(),
               Container(
                 height: 65.h,
                 padding: EdgeInsets.only(top: 22.h, left: 12.w),
                 child: Text16PtDesc(text: catchlogList.comment.toString()),
               ),
               SizedBox(height: 8.h),
-              // Spacer(),
-
               SizedBox(
                   height: 179.h,
                   width: double.infinity,
-                  child: Image.network(catchlogList.pic!, fit: BoxFit.cover)),
+                  child: catchlogList.pic!.isEmpty
+                      ? Padding(
+                          padding: EdgeInsets.only(top: 60.h),
+                          child: Column(
+                            children: [
+                              const Icon(Icons.error, color: Colors.black),
+                              SizedBox(height: 10.h),
+                              Text16PtBlack(text: 'No Image Available')
+                            ],
+                          ),
+                        )
+                      : PageView.builder(
+                          controller: pageController,
+                          itemCount: catchlogList.pic!.length,
+                          itemBuilder: (context, index) {
+                            return SizedBox(
+                              width: double.infinity,
+                              child: Image(
+                                  fit: BoxFit.fitWidth,
+                                  image: NetworkImage(catchlogList.pic!)),
+                            );
+                          })),
               SizedBox(height: 45.h),
               Padding(
                 padding: EdgeInsets.only(left: 16.w, right: 16.w),
@@ -269,13 +288,30 @@ Widget buildList(CatchlogList catchlogList) {
               // Spacer()
             ]),
             Positioned(
-                top: 28.h, left: 318.w, child: const Icon(Icons.more_horiz))
+                top: 28.h, left: 318.w, child: const Icon(Icons.more_horiz)),
+            catchlogList.pic!.length > 1
+                ? Positioned(
+                    top: 305.h,
+                    left: 160.w,
+                    child: SmoothPageIndicator(
+                      effect: SwapEffect(
+                        activeDotColor: const Color(0xff2B67A3),
+                        dotColor: Colors.grey,
+                        dotHeight: 10.h,
+                        dotWidth: 10.w,
+                      ),
+                      controller: pageController,
+                      count: 2,
+                    ),
+                  )
+                : const SizedBox()
           ],
         )),
   );
 }
 
 Widget buildFeed(BuildContext context, Datum datum) {
+  PageController pageController = PageController();
   final likeFeed = Get.put(AddFeedApi());
   var isLiked = false.obs;
   var likeCount = 0.obs;
@@ -283,27 +319,31 @@ Widget buildFeed(BuildContext context, Datum datum) {
   isLiked.value = datum.isLiked!;
   likeCount.value = datum.totalLikes!;
   commentCount.value = datum.totalComments!;
-  final localTime = datum.createdAt!.toLocal();
+  final local = DateFormat.E().format(datum.createdAt!);
+  final local2 = DateFormat.MMM().format(datum.createdAt!);
+  final local1 = datum.createdAt!.toLocal();
+  final local3 = DateFormat('hh:mm a').format(DateTime.now());
+  print(local);
+
   return GestureDetector(
-    onTap: () {
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) => FeedDetailsUI(feedId: datum.id!)),
-          (route) => false);
-    },
-    child: datum.getFeedImages!.isEmpty
-        ? Center(child: Text16PtBlack(text: 'No Feed Data'))
-        : Container(
-            height: 439.h,
-            width: 356.w,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Colors.white,
-            ),
-            margin: EdgeInsets.only(left: 10.w),
-            child: Stack(
-              children: [
+      onTap: () {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => FeedDetailsUI(feedId: datum.id!)),
+            (route) => false);
+      },
+      child: datum.getFeedImages!.isEmpty
+          ? Center(child: Text16PtBlack(text: 'No Feed Data'))
+          : Container(
+              height: 439.h,
+              width: 356.w,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.white,
+              ),
+              margin: EdgeInsets.only(left: 10.w),
+              child: Stack(children: [
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Padding(
                     padding: EdgeInsets.only(top: 16.h, left: 12.w),
@@ -328,21 +368,17 @@ Widget buildFeed(BuildContext context, Datum datum) {
                                 SvgPicture.asset('assets/images/date.svg'),
                                 SizedBox(width: 6.w),
                                 Text14PtTime(
-                                    text:
-                                        '${localTime.day}, ${localTime.day} ${localTime.month}'),
+                                    text: '${local}, ${local1.day} ${local2}'),
                                 SizedBox(width: 10.w),
                                 SvgPicture.asset(
                                     'assets/images/Subtraction 1.svg'),
                                 SizedBox(width: 6.w),
-                                Text14PtTime(
-                                    text:
-                                        '${localTime.hour}:${localTime.minute} AM')
+                                Text14PtTime(text: '${local3}')
                               ])
                             ])
                       ],
                     ),
                   ),
-                  // Spacer(),
                   Container(
                     height: 65.h,
                     padding: EdgeInsets.only(top: 22.h, left: 12.w),
@@ -364,6 +400,7 @@ Widget buildFeed(BuildContext context, Datum datum) {
                               ),
                             )
                           : PageView.builder(
+                              controller: pageController,
                               itemCount: datum.getFeedImages!.length,
                               itemBuilder: (context, index) {
                                 return SizedBox(
@@ -448,8 +485,22 @@ Widget buildFeed(BuildContext context, Datum datum) {
                             ]),
                           ));
                         },
-                        child: const Icon(Icons.more_horiz)))
-              ],
-            )),
-  );
+                        child: const Icon(Icons.more_horiz))),
+                datum.getFeedImages!.length > 1
+                    ? Positioned(
+                        top: 305.h,
+                        left: 160.w,
+                        child: SmoothPageIndicator(
+                          effect: SwapEffect(
+                            activeDotColor: const Color(0xff2B67A3),
+                            dotColor: Colors.grey,
+                            dotHeight: 10.h,
+                            dotWidth: 10.w,
+                          ),
+                          controller: pageController,
+                          count: datum.getFeedImages!.length,
+                        ),
+                      )
+                    : const SizedBox()
+              ])));
 }

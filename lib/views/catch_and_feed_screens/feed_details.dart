@@ -7,17 +7,14 @@ import 'package:reelpro/models/feed_comment_list.dart';
 import 'package:reelpro/models/feed_details.dart';
 import 'package:get/get.dart';
 import 'package:reelpro/models/feed_list.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/add_comment_feed.dart';
 import 'package:reelpro/view_models/feed_and_catch_network_request/all_feed_request.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/delete_feed_comment.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:reelpro/views/bottom_navigation_screens/bottom_navigation.dart';
 import 'package:reelpro/views/bottom_navigation_screens/tracker.dart';
-// import 'package:reelpro/view_models/feed_and_catch_network_request/like_feed.dart';
 import 'package:reelpro/views/catch_and_feed_screens/feed_comment_list.dart';
 import 'package:reelpro/views/family_and_profile_screens/user_profile.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class FeedDetailsUI extends StatefulWidget {
   final int feedId;
@@ -45,6 +42,7 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
   final likeFeed = Get.put(AddFeedApi());
   TextEditingController textEditingController = TextEditingController();
   final ScrollController scrollController = ScrollController();
+  PageController pageController = PageController();
   @override
   void initState() {
     getDetails();
@@ -57,7 +55,6 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-            // toolbarHeight: 70.h,
             elevation: 0,
             backgroundColor: Colors.white,
             title: Text21PtBlack(text: 'Feed Details'),
@@ -79,17 +76,18 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
                 ),
               ),
             )),
-        body: Obx(
-          () => isLoading.value
-              ? const Center(child: CircularProgressIndicator())
-              : SingleChildScrollView(
+        body: Obx(() => isLoading.value
+            ? const Center(child: CircularProgressIndicator())
+            : Stack(children: [
+                SingleChildScrollView(
                   controller: scrollController,
                   physics: const AlwaysScrollableScrollPhysics(),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                            padding: EdgeInsets.only(left: 36.w, right: 36.w),
+                            padding: EdgeInsets.only(
+                                left: 36.w, right: 36.w, top: 24.h),
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -223,6 +221,7 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
                             height: 429.h,
                             width: double.infinity,
                             child: PageView.builder(
+                                controller: pageController,
                                 itemCount: feedDetails
                                     ?.data?.data?.first.getFeedImages.length,
                                 itemBuilder: (context, index) {
@@ -304,7 +303,24 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
                                 ]))
                       ]),
                 ),
-        ),
+                feedDetails!.data!.data!.first.getFeedImages.length > 1
+                    ? Positioned(
+                        top: 565.h,
+                        left: 185.w,
+                        child: SmoothPageIndicator(
+                          effect: SwapEffect(
+                            activeDotColor: const Color(0xff2B67A3),
+                            dotColor: Colors.grey,
+                            dotHeight: 10.h,
+                            dotWidth: 10.w,
+                          ),
+                          controller: pageController,
+                          count: feedDetails!
+                              .data!.data!.first.getFeedImages.length,
+                        ),
+                      )
+                    : const SizedBox()
+              ])),
         bottomSheet: Container(
             padding: EdgeInsets.only(left: 36.w, right: 36.w),
             height: 75.h,

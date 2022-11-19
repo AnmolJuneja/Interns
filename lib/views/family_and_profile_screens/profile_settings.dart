@@ -44,7 +44,11 @@ class _ProfileSettingsUIState extends State<ProfileSettingsUI> {
               padding: EdgeInsets.only(left: 36.w),
               child: GestureDetector(
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const UserProfileUI()),
+                        (route) => false);
                   },
                   child:
                       const Icon(Icons.arrow_back_ios, color: Colors.black))),
@@ -140,9 +144,8 @@ class _ProfileSettingsUIState extends State<ProfileSettingsUI> {
                                           valueOfList.value = e;
                                         },
                                         child: Padding(
-                                            padding: EdgeInsets.only(
-                                              top: 20.h,
-                                            ),
+                                            padding:
+                                                EdgeInsets.only(bottom: 15.h),
                                             child: Obx(() => ToggleContainer(
                                                 color: valueOfList.value == e
                                                     ? AddFeedApi1()
@@ -160,7 +163,8 @@ class _ProfileSettingsUIState extends State<ProfileSettingsUI> {
                                   .toList(),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(left: 36.w, right: 36.w),
+                              padding: EdgeInsets.only(
+                                  left: 36.w, right: 36.w, top: 5.h),
                               child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
