@@ -19,8 +19,6 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
-  final fetchLatLng = Get.put(FetchLatLng());
-
   List screens = [
     const CatchlogListUI(),
     const SpotlightScreen(),
@@ -39,7 +37,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           buildBottomBar('assets/images/tracker.svg', 0),
-          buildBottomBar('assets/images/realspotlight.svg', 1),
+          buildBottomBar('assets/images/sp.svg', 1),
           buildBottomBar('assets/images/home.svg', 2),
           buildBottomBar('assets/images/location.svg', 3),
           buildBottomBar('assets/images/message.svg', 4)

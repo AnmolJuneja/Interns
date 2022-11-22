@@ -83,7 +83,7 @@ class Editprofile {
     try {
       dio.Response response;
       response = await dio.Dio().get(
-          'https://reelpro.yatilabs.com/api/follower-list',
+          'https://reelpro.yatilabs.com/api/following-list',
           options: dio.Options(headers: {
             'Accept': 'application/json',
             'Authorization': 'Bearer $authToken'

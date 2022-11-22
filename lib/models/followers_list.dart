@@ -1,7 +1,7 @@
 class FollowersList {
   bool? success;
   String? message;
-  List<Data>? data;
+  List<Follower>? data;
 
   FollowersList({this.success, this.message, this.data});
 
@@ -15,7 +15,7 @@ class FollowersList {
     if (json["data"] is List) {
       data = json["data"] == null
           ? null
-          : (json["data"] as List).map((e) => Data.fromJson(e)).toList();
+          : (json["data"] as List).map((e) => Follower.fromJson(e)).toList();
     }
   }
 
@@ -28,7 +28,7 @@ class FollowersList {
   }
 }
 
-class Data {
+class Follower {
   int? id;
   String? firstname;
   String? lastname;
@@ -37,7 +37,7 @@ class Data {
   String? profilePic;
   Pivot? pivot;
 
-  Data(
+  Follower(
       {this.id,
       this.firstname,
       this.lastname,
@@ -46,7 +46,7 @@ class Data {
       this.profilePic,
       this.pivot});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  Follower.fromJson(Map<String, dynamic> json) {
     if (json["id"] is int) {
       id = json["id"];
     }

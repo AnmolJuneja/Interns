@@ -8,7 +8,10 @@ import 'package:reelpro/consts/text_fieldc.dart';
 import 'package:get/get.dart';
 import 'package:reelpro/consts/toggle_container.dart';
 import 'package:reelpro/controllers/feed_and_catch_controllers.dart';
+import 'package:reelpro/models/edit_profile.dart';
+import 'package:reelpro/models/followers_list.dart';
 import 'package:reelpro/models/search_user.dart';
+import 'package:reelpro/view_models/register_user_request/edit_profile.dart';
 import 'package:reelpro/view_models/team_and_profile_request/search_user.dart';
 import 'package:reelpro/views/family_and_profile_screens/other_user_profile.dart';
 import 'package:flutter_switch/flutter_switch.dart';
@@ -25,7 +28,14 @@ class _SpotlightScreenState extends State<SpotlightScreen> {
 
   TextEditingController textEditingController = TextEditingController();
   final instance = Get.put(SearchUserApi());
+  final ep = Get.put(Editprofile());
   var isSwitched = false.obs;
+  @override
+  void initState() {
+    ep.getFollowersListFinal();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -254,11 +264,18 @@ class _SpotlightScreenState extends State<SpotlightScreen> {
                                 commentText: '12',
                                 shareImage: 'assets/images/Group 207.png')
                           ]))),
-                  Obx(() => ListView.builder(
-                      itemCount: instance.getUserLength.length,
-                      itemBuilder: (context, index) {
-                        return search(instance.getUserLength[index]);
-                      }))
+                  Obx(() => instance.getUserLength.length == 0
+                      ? ListView.builder(
+                          itemCount: ep.followersList!.data!.length,
+                          itemBuilder: (context, index) {
+                            return followingList(
+                                ep.followersList!.data![index]);
+                          })
+                      : ListView.builder(
+                          itemCount: instance.getUserLength.length,
+                          itemBuilder: (context, index) {
+                            return search(instance.getUserLength[index]);
+                          }))
                 ]),
               ),
             )
@@ -295,4 +312,24 @@ Widget search(ListOfUser listOfUser) {
           ],
         ),
       ));
+}
+
+Widget followingList(Follower follower) {
+  return GestureDetector(
+      onTap: () {
+        Get.to(() => OtherUserProfileUI(userId: follower.id!.toInt()));
+      },
+      child: Padding(
+          padding: EdgeInsets.only(left: 36.w, right: 36.w, bottom: 12.h),
+          child: Row(children: [
+            follower.profilePic != null
+                ? ProfilePicContainer(image: NetworkImage(follower.profilePic!))
+                : ProfilePicContainer(
+                    image: const AssetImage('assets/images/profile.png')),
+            SizedBox(width: 12.w),
+            Center(
+              child: Text16PtBlack(
+                  text: '${follower.firstname} ${follower.lastname}'),
+            )
+          ])));
 }
