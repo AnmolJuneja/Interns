@@ -83,7 +83,9 @@ class _UserAddressScreenState extends State<UserAddressScreen> {
                       onSaved: (value) {},
                       onchanged: (value) {},
                       keyValue: null,
-                      validator: (value) {},
+                      validator: (value) {
+                        return null;
+                      },
                       suffixText: null,
                     ),
                     SizedBox(height: 8.h),
@@ -95,7 +97,9 @@ class _UserAddressScreenState extends State<UserAddressScreen> {
                       prefix: null,
                       onchanged: (value) {},
                       keyValue: null,
-                      validator: (value) {},
+                      validator: (value) {
+                        return null;
+                      },
                       suffixText: null,
                     ),
                     SizedBox(height: 8.h),
@@ -108,7 +112,9 @@ class _UserAddressScreenState extends State<UserAddressScreen> {
                         onchanged: (value) {},
                         keyValue: null,
                         suffixText: null,
-                        validator: (value) {}),
+                        validator: (value) {
+                          return null;
+                        }),
                     SizedBox(height: 8.h),
                     TextFEmail(
                         textEditingController: countryController,
@@ -119,7 +125,9 @@ class _UserAddressScreenState extends State<UserAddressScreen> {
                         onchanged: (value) {},
                         keyValue: null,
                         suffixText: null,
-                        validator: (value) {}),
+                        validator: (value) {
+                          return null;
+                        }),
                     SizedBox(height: 8.h),
                     SizedBox(height: 211.h),
                     MyButton(

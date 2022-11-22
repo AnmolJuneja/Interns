@@ -102,7 +102,7 @@ class _CreateTeamViewState extends State<CreateTeamView> {
                             ))),
 
               SizedBox(height: 9.h),
-              Center(child: Text14Pt(text: 'Add group pic')),
+              Center(child: Text14PtBlue(text: 'Add group pic')),
               SizedBox(height: 34.h),
               TextF(
                   readOnly: false,
@@ -297,7 +297,7 @@ class _CreateTeamViewState extends State<CreateTeamView> {
                   child: Obx(() => color.value
                       ? ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary: const Color(0xff2B67A3)),
+                              backgroundColor: const Color(0xff2B67A3)),
                           onPressed: () async {
                             await SaveTeamCount().saveTeamCount(CreateTeamApi()
                                 .getTeam1
@@ -324,7 +324,7 @@ class _CreateTeamViewState extends State<CreateTeamView> {
                           ))
                       : ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary: const Color(0xffBBBBBB)),
+                              backgroundColor: const Color(0xffBBBBBB)),
                           onPressed: () async {},
                           child: Text(
                             'Save',

@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
         body: Stack(children: [
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Container(
-                padding: EdgeInsets.only(left: 36.w, top: 28.h),
+                padding: EdgeInsets.only(left: 36.w, top: 21.h),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                               ])),
                       Container(
                         padding: EdgeInsets.only(top: 80.h, left: 120.w),
-                        child: Text('No Event Running'),
+                        child: const Text('No Event Running'),
                       )
                     ])),
           ]),

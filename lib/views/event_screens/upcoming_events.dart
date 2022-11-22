@@ -22,7 +22,7 @@ class _ListOfEvents2State extends State<ListOfEvents2> {
             future: EventListApi().getList12(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return snapshot.data!.data!.length == 0
+                return snapshot.data!.data!.isEmpty
                     ? Center(
                         child: Text16PtBlack(text: 'No Upcoming Events'),
                       )

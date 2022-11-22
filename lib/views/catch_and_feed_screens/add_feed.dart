@@ -148,7 +148,7 @@ class _AddFeedConstState extends State<AddFeedConst> {
                                             child: SvgPicture.asset(
                                                 'assets/images/Icon-Outline-image.svg'),
                                           )
-                                        : SizedBox(),
+                                        : const SizedBox(),
                                     for (var i = 0; i < file.length; i++)
                                       Container(
                                         padding: EdgeInsets.only(
@@ -174,7 +174,7 @@ class _AddFeedConstState extends State<AddFeedConst> {
                                               });
                                             },
                                             child:
-                                                Icon(Icons.close, size: 18.0)),
+                                                const Icon(Icons.close, size: 18.0)),
                                       ),
                                     file.length == 2
                                         ? GestureDetector(
@@ -341,12 +341,12 @@ class _AddFeedConstState extends State<AddFeedConst> {
                       )
                     : SizedBox(height: 360.h),
             Obx(() => btn.value
-                ? Container(
+                ? SizedBox(
                     height: 56.h,
                     width: 356.w,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            primary: const Color(0xffBBBBBB)),
+                            backgroundColor: const Color(0xffBBBBBB)),
                         onPressed: () async {},
                         child: Text(
                           'Post',

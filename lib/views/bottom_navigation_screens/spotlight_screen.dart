@@ -11,9 +11,7 @@ import 'package:reelpro/controllers/feed_and_catch_controllers.dart';
 import 'package:reelpro/models/search_user.dart';
 import 'package:reelpro/view_models/team_and_profile_request/search_user.dart';
 import 'package:reelpro/views/family_and_profile_screens/other_user_profile.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class SpotlightScreen extends StatefulWidget {
   const SpotlightScreen({Key? key}) : super(key: key);
@@ -33,15 +31,21 @@ class _SpotlightScreenState extends State<SpotlightScreen> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: const Color(0xffF2F9FF),
+            elevation: 0,
+            centerTitle: false,
+            title: Padding(
+                padding: EdgeInsets.only(top: 26.h, bottom: 20.h, left: 24.w),
+                child: Text30ptBlue(text: 'Explore')),
+          ),
           backgroundColor: const Color(0xffF2F9FF),
           body: Column(children: [
             Padding(
-                padding: EdgeInsets.only(top: 64.h, left: 36.w, right: 32.w),
+                padding: EdgeInsets.only(top: 24.h, left: 36.w, right: 32.w),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text30ptBlue(text: 'Explore'),
-                      SizedBox(height: 24.h),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

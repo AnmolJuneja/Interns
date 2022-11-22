@@ -19,7 +19,7 @@ class MyButton extends StatelessWidget {
       width: 356.w,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
       child: ElevatedButton(
-          style: ElevatedButton.styleFrom(primary: const Color(0xff2B67A3)),
+          style: ElevatedButton.styleFrom(backgroundColor: const Color(0xff2B67A3)),
           // ignore: prefer_const_constructors
           onPressed: onpressed,
           child: Text(
@@ -120,7 +120,7 @@ class MyButton1 extends StatelessWidget {
       width: 280.w,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
       child: ElevatedButton(
-          style: ElevatedButton.styleFrom(primary: const Color(0xff2B67A3)),
+          style: ElevatedButton.styleFrom(backgroundColor: const Color(0xff2B67A3)),
           // ignore: prefer_const_constructors
           onPressed: onpressed,
           child: Text(
@@ -161,7 +161,7 @@ class Button56 extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
           border: Border.all(width: width!, color: widthColor!)),
       child: ElevatedButton(
-          style: ElevatedButton.styleFrom(primary: color),
+          style: ElevatedButton.styleFrom(backgroundColor: color),
           // ignore: prefer_const_constructors
           onPressed: onpressed,
           child: Text(
@@ -202,7 +202,7 @@ class ButtonTrans extends StatelessWidget {
           borderRadius: BorderRadius.circular(5),
           border: Border.all(width: width!, color: widthColor!)),
       child: ElevatedButton(
-          style: ElevatedButton.styleFrom(primary: color),
+          style: ElevatedButton.styleFrom(backgroundColor: color),
           // ignore: prefer_const_constructors
           onPressed: onpressed,
           child: Text(
@@ -240,7 +240,7 @@ class Button56Blue extends StatelessWidget {
         borderRadius: BorderRadius.circular(5),
       ),
       child: ElevatedButton(
-          style: ElevatedButton.styleFrom(primary: color),
+          style: ElevatedButton.styleFrom(backgroundColor: color),
           // ignore: prefer_const_constructors
           onPressed: onpressed,
           child: Text(
@@ -271,7 +271,7 @@ class MyButtonGrey extends StatelessWidget {
       width: 356.w,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
       child: ElevatedButton(
-          style: ElevatedButton.styleFrom(primary: const Color(0xff2B67A3)),
+          style: ElevatedButton.styleFrom(backgroundColor: const Color(0xff2B67A3)),
           // ignore: prefer_const_constructors
           onPressed: onpressed,
           child: Text(

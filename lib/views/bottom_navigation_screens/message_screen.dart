@@ -38,11 +38,11 @@ class MessageScreen extends StatelessWidget {
                         tabs: [
                           const Tab(text: 'Messages'),
                           Tab(
-                            text: 'Alerts',
+                            text: 'Notifications',
                             iconMargin: EdgeInsets.only(left: 50.w),
                           ),
                           const Tab(text: 'Announcements'),
-                          const Tab(text: 'Notification')
+                          const Tab(text: 'Alerts')
                         ]),
                     SizedBox(
                       width: double.infinity,
@@ -53,7 +53,7 @@ class MessageScreen extends StatelessWidget {
                             const MessageConst(),
                             Center(
                                 child: Text30ptBlue(
-                              text: 'Alerts',
+                              text: 'Notifications',
                             )),
                             Center(
                                 child: Text30ptBlue(
@@ -61,7 +61,7 @@ class MessageScreen extends StatelessWidget {
                             )),
                             Center(
                                 child: Text30ptBlue(
-                              text: 'Notifications',
+                              text: 'Alerts',
                             ))
                           ]),
                     )

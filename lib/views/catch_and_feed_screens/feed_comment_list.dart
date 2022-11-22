@@ -5,7 +5,6 @@ import 'package:reelpro/models/feed_comment_list.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:reelpro/view_models/feed_and_catch_network_request/all_feed_request.dart';
-import 'package:reelpro/views/catch_and_feed_screens/feed_details.dart';
 // import 'package:reelpro/view_models/feed_and_catch_network_request/delete_feed_comment.dart';
 
 Widget buildCommentList(BuildContext context, FeedCList feedCList) {

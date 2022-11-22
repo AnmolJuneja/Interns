@@ -22,9 +22,9 @@ class _EventListUIState extends State<EventListUI> {
             appBar: AppBar(
               backgroundColor: const Color(0xffF2F9FF),
               elevation: 0,
-              leadingWidth: 140,
-              leading: Padding(
-                  padding: EdgeInsets.only(top: 26.h, left: 36.w),
+              centerTitle: false,
+              title: Padding(
+                  padding: EdgeInsets.only(top: 26.h, bottom: 20.h, left: 24.w),
                   child: Text30ptBlue(text: 'Events')),
             ),
             backgroundColor: const Color(0xffF2F9FF),

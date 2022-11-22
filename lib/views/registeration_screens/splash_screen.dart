@@ -62,7 +62,6 @@ class _SplashScreenState extends State<SplashScreen> {
               builder: (context) => BottomNavigation(currentIndex: 2)),
           (route) => false);
     } else {
-      await Future.delayed(const Duration(milliseconds: 2000));
       // ignore: use_build_context_synchronously
       Navigator.pushAndRemoveUntil(
           context,

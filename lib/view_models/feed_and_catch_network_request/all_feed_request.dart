@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
 import 'dart:io';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:reelpro/controllers/feed_and_catch_controllers.dart';
 import 'package:reelpro/models/feed_comment_list.dart';
+import 'package:reelpro/models/feed_like_list.dart';
 import 'package:reelpro/models/feed_list.dart';
 import 'package:reelpro/models/my_feed_list.dart';
 import 'package:reelpro/models/shared_preferences.dart';
@@ -261,5 +261,34 @@ class AddFeedApi {
     myFeedList = MyFeedList.fromJson(resp.data);
     isLoading.value = false;
     return myFeedList!;
+  }
+
+  Future<dio.Response> getLikeList(int feedId) async {
+    String authToken = await SharedPreferences1().getToken();
+    try {
+      dio.Response response;
+      response = await dio.Dio().get(
+          'https://reelpro.yatilabs.com/api/v1/feed/likelist/$feedId',
+          options: dio.Options(headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer $authToken'
+          }));
+      response.data['data'];
+      print('Response data: ${response.data}');
+      return response;
+    } on dio.DioError catch (err) {
+      print(err.message);
+      print(err.response);
+    }
+    return Future.value();
+  }
+
+  FeedLikeList? feedLikeList;
+  Future<FeedLikeList> getLikeListFinal(int feedId) async {
+    isLoading.value = true;
+    var resp = await getLikeList(feedId);
+    feedLikeList = FeedLikeList.fromJson(resp.data);
+    isLoading.value = false;
+    return feedLikeList!;
   }
 }

@@ -110,7 +110,7 @@ class TeamViewColumn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(),
+      padding: const EdgeInsets.only(),
       child: Column(
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -155,7 +155,7 @@ class TeamViewColumn extends StatelessWidget {
                           borderRadius: BorderRadius.circular(5)),
                       child: ElevatedButton(
                           style:
-                              ElevatedButton.styleFrom(primary: Colors.white),
+                              ElevatedButton.styleFrom(backgroundColor: Colors.white),
                           onPressed: onpressed,
                           child: Center(
                               child: Text(
@@ -174,7 +174,7 @@ class TeamViewColumn extends StatelessWidget {
                           BoxDecoration(borderRadius: BorderRadius.circular(5)),
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary: const Color(0xff2B67A3)),
+                              backgroundColor: const Color(0xff2B67A3)),
                           onPressed: onpressed,
                           child: Center(
                               child: Text(

@@ -6,14 +6,12 @@ import 'package:reelpro/controllers/feed_and_catch_controllers.dart';
 import 'package:reelpro/models/feed_comment_list.dart';
 import 'package:reelpro/models/feed_details.dart';
 import 'package:get/get.dart';
-import 'package:reelpro/models/feed_list.dart';
+import 'package:reelpro/models/feed_like_list.dart';
 import 'package:reelpro/view_models/feed_and_catch_network_request/all_feed_request.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:reelpro/views/bottom_navigation_screens/bottom_navigation.dart';
-import 'package:reelpro/views/bottom_navigation_screens/tracker.dart';
 import 'package:reelpro/views/catch_and_feed_screens/feed_comment_list.dart';
-import 'package:reelpro/views/family_and_profile_screens/user_profile.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class FeedDetailsUI extends StatefulWidget {
@@ -25,6 +23,7 @@ class FeedDetailsUI extends StatefulWidget {
 }
 
 class _FeedDetailsUIState extends State<FeedDetailsUI> {
+  PageController pageController1 = PageController(viewportFraction: 0.2);
   FeedDetails? feedDetails;
   var isLoading = false.obs;
   Future<void> getDetails() async {
@@ -43,6 +42,9 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
   TextEditingController textEditingController = TextEditingController();
   final ScrollController scrollController = ScrollController();
   PageController pageController = PageController();
+  var total34;
+  var total1;
+  var element;
   @override
   void initState() {
     getDetails();
@@ -50,6 +52,7 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
     super.initState();
   }
 
+  final ll = Get.put(AddFeedApi());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -225,15 +228,137 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
                                 itemCount: feedDetails
                                     ?.data?.data?.first.getFeedImages.length,
                                 itemBuilder: (context, index) {
-                                  return Image.network(
-                                      feedDetails?.data?.data?.first
-                                              .getFeedImages[index].pic ??
-                                          '',
-                                      fit: BoxFit.cover);
+                                  return Stack(
+                                    children: [
+                                      Image.network(
+                                          feedDetails?.data?.data?.first
+                                                  .getFeedImages[index].pic ??
+                                              '',
+                                          height: 440.h,
+                                          fit: BoxFit.cover),
+                                      feedDetails!.data!.data!.first
+                                                  .getFeedImages.length >
+                                              1
+                                          ? Positioned(
+                                              top: 410.h,
+                                              left: 185.w,
+                                              child: SmoothPageIndicator(
+                                                effect: SwapEffect(
+                                                  activeDotColor:
+                                                      const Color(0xff2B67A3),
+                                                  dotColor: Colors.grey,
+                                                  dotHeight: 10.h,
+                                                  dotWidth: 10.w,
+                                                ),
+                                                controller: pageController,
+                                                count: feedDetails!.data!.data!
+                                                    .first.getFeedImages.length,
+                                              ),
+                                            )
+                                          : const SizedBox()
+                                    ],
+                                  );
                                 })),
                         Padding(
+                          padding: EdgeInsets.only(top: 16.h, left: 38.w),
+                          child: SizedBox(
+                            height: 24.h,
+                            child: FutureBuilder<FeedLikeList>(
+                                future: likeFeed.getLikeListFinal(
+                                    feedDetails!.data!.data!.first.id!),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    var oc = feedDetails!
+                                        .data!.data!.first.totalLikes;
+                                    var oc1 = oc! - 3;
+                                    return feedDetails!
+                                                .data!.data!.first.totalLikes!
+                                                .toInt() >=
+                                            1
+                                        ? Row(children: [
+                                            Stack(
+                                                children: List.generate(
+                                                    snapshot.data!.data
+                                                                .length ==
+                                                            1
+                                                        ? 1
+                                                        : snapshot.data!.data
+                                                                    .length ==
+                                                                2
+                                                            ? 2
+                                                            : 3, (index) {
+                                              element =
+                                                  snapshot.data!.data[index];
+                                              return element.user!.profilePic ==
+                                                      null
+                                                  ? Container(
+                                                      padding: EdgeInsets.only(
+                                                          left: 20.w),
+                                                      height: 24.h,
+                                                      width: 24.w,
+                                                      decoration: const BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          image: DecorationImage(
+                                                              image: AssetImage(
+                                                                  'assets/images/profile.png'))),
+                                                    )
+                                                  : Container(
+                                                      margin: EdgeInsets.only(
+                                                          left: index == 0
+                                                              ? 0
+                                                              : index == 1
+                                                                  ? 15
+                                                                  : 30),
+                                                      height: 24.h,
+                                                      width: 24.w,
+                                                      decoration: BoxDecoration(
+                                                          border: Border.all(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 1),
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          image: DecorationImage(
+                                                              image: NetworkImage(
+                                                                  element.user!
+                                                                      .profilePic!))),
+                                                    );
+                                            })),
+                                            SizedBox(width: 5.w),
+                                            Row(
+                                                children: List.generate(
+                                                    snapshot.data!.data.length,
+                                                    (index) {
+                                              var el =
+                                                  snapshot.data!.data[index];
+
+                                              return index <= 2
+                                                  ? Padding(
+                                                      padding: EdgeInsets.only(
+                                                          left: 5.w),
+                                                      child: Text14PtGrey(
+                                                          text:
+                                                              '${el.user!.firstname},'),
+                                                    )
+                                                  : const SizedBox();
+                                            })),
+                                            SizedBox(width: 8.w),
+                                            snapshot.data!.data.length > 3
+                                                ? Text14PtGrey(
+                                                    text: 'And $oc1 others')
+                                                : const SizedBox()
+                                          ])
+                                        : const SizedBox();
+                                  } else {
+                                    return const SizedBox();
+                                  }
+                                }),
+                          ),
+                        ),
+                        Padding(
                             padding: EdgeInsets.only(
-                                top: 20.h, left: 36.w, right: 36.w),
+                                top: 16.h, left: 36.w, right: 36.w),
                             child: Row(children: [
                               LikeIcon(
                                   onTap: () {
@@ -265,7 +390,7 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
                             ])),
                         Padding(
                             padding: EdgeInsets.only(
-                                top: 36.h,
+                                top: 16.h,
                                 left: 36.w,
                                 right: 36.w,
                                 bottom: 80.h),
@@ -303,23 +428,6 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
                                 ]))
                       ]),
                 ),
-                feedDetails!.data!.data!.first.getFeedImages.length > 1
-                    ? Positioned(
-                        top: 565.h,
-                        left: 185.w,
-                        child: SmoothPageIndicator(
-                          effect: SwapEffect(
-                            activeDotColor: const Color(0xff2B67A3),
-                            dotColor: Colors.grey,
-                            dotHeight: 10.h,
-                            dotWidth: 10.w,
-                          ),
-                          controller: pageController,
-                          count: feedDetails!
-                              .data!.data!.first.getFeedImages.length,
-                        ),
-                      )
-                    : const SizedBox()
               ])),
         bottomSheet: Container(
             padding: EdgeInsets.only(left: 36.w, right: 36.w),
@@ -346,4 +454,8 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
                       );
                     }))));
   }
+}
+
+Widget buildText(FeedLike feedLike) {
+  return Text14PtGrey(text: feedLike.user!.firstname!);
 }

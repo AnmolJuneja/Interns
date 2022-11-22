@@ -82,11 +82,11 @@ class _EditProfile1State extends State<EditProfile1> {
             title: Text21PtBlack(text: 'Edit Profile')),
         backgroundColor: const Color(0xffF2F9FF),
         body: Container(
-          height: 775.h,
+          height: 755.h,
           padding: EdgeInsets.only(left: 36.w, right: 36.w),
           child: SingleChildScrollView(
               child: Column(children: [
-            SizedBox(height: 44.h),
+            SizedBox(height: 24.h),
             GestureDetector(
                 onTap: () async {
                   try {
@@ -296,7 +296,7 @@ class _EditProfile1State extends State<EditProfile1> {
     });
     Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => UserProfileUI()),
+        MaterialPageRoute(builder: (context) => const UserProfileUI()),
         (route) => false);
   }
 

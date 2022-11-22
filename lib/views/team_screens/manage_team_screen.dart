@@ -72,7 +72,7 @@ class MangeTeams extends StatelessWidget {
             width: 166.w,
             child: ElevatedButton(
                 style:
-                    ElevatedButton.styleFrom(primary: const Color(0xff2B67A3)),
+                    ElevatedButton.styleFrom(backgroundColor: const Color(0xff2B67A3)),
                 onPressed: () {
                   Get.to(const CreateTeamView());
                 },

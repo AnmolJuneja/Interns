@@ -130,17 +130,21 @@ class _OtpScreenState extends State<OtpScreen> {
                       Gender().saveGender('${res1.data!.gender}');
                       SaveUserId().setId(res1.data!.id!);
                       SharedPreferences1().setToken(res1.data!.authToken ?? '');
-                      res1.data!.firstname != null
-                          ? Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      BottomNavigation(currentIndex: 2)),
-                              (route) => false)
-                          : Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (context) => RegisterationScreen(
-                                      authToken: res1.data!.authToken)),
-                              (route) => false);
+                      if (res1.data!.firstname != null) {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    BottomNavigation(currentIndex: 2)),
+                            (route) => false);
+                      } else {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RegisterationScreen(
+                                    authToken: res1.data!.authToken)),
+                            (route) => false);
+                      }
                     });
                   },
                   buttonText: 'Continue')),

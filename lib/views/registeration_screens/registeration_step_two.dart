@@ -34,12 +34,24 @@ class Registeration2 extends StatefulWidget {
 
 class _Registeration2State extends State<Registeration2> {
   String? _chosenValue;
+  var registerationTwo = Get.put(RegistrationStepTwo2());
+  var registerationTwo1 = Get.put(OtpViewModel());
+  TextEditingController shirtSizeController = TextEditingController();
+  TextEditingController clubController = TextEditingController();
+  @override
+  void initState() {
+    if (registerationTwo.vetran.isNotEmpty) {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (context) => BottomNavigation(currentIndex: 2)),
+          (route) => false);
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    var registerationTwo = Get.put(RegistrationStepTwo2());
-    var registerationTwo1 = Get.put(OtpViewModel());
-    TextEditingController shirtSizeController = TextEditingController();
-    TextEditingController clubController = TextEditingController();
     // ignore: use_full_hex_values_for_flutter_colors
     return Scaffold(
       backgroundColor: const Color(0xffF2F9FF),

@@ -10,7 +10,6 @@ import 'package:reelpro/view_models/feed_and_catch_network_request/all_feed_requ
 import 'package:reelpro/view_models/team_and_profile_request/other_user_profile.dart';
 // import 'package:reelpro/view_models/feed_and_catch_network_request/user_feed_list.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:reelpro/views/bottom_navigation_screens/bottom_navigation.dart';
 
 class OtherUserProfileUI extends StatefulWidget {
   final int userId;

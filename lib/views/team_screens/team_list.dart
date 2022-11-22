@@ -70,6 +70,7 @@ class _TeamViewViewState extends State<TeamViewView> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(height: 20.h),
             FutureBuilder(
                 future: teamApi.getTeam12(),
                 builder: (context, snapshot) {

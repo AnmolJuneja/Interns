@@ -149,7 +149,7 @@ Widget buildList(EventList index) {
           Positioned(
               left: 288.w,
               top: 30.h,
-              child: Column(children: [
+              child: Column(children: const [
                 Text(
                   'Jan',
                   style: TextStyle(color: Colors.white),

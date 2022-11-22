@@ -471,22 +471,22 @@ class EventDetailsRow1 extends StatelessWidget {
             SizedBox(height: 15.h),
             Row(mainAxisAlignment: MainAxisAlignment.start, children: [
               Container(
-                height: 150.h,
-                width: 150.w,
+                height: 170.h,
+                width: 170.w,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     image: const DecorationImage(
                         fit: BoxFit.cover,
-                        image: AssetImage('assets/images/for designer.png'))),
+                        image: AssetImage('assets/images/y3.png'))),
               ),
-              SizedBox(width: 20.w),
+              SizedBox(width: 14.w),
               GestureDetector(
                 onTap: () {
                   Get.to(() => const GalleryUI());
                 },
                 child: Container(
-                  height: 150.h,
-                  width: 150.w,
+                  height: 170.h,
+                  width: 170.w,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       image: const DecorationImage(

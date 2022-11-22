@@ -84,11 +84,11 @@ class _ProfileSettingsUIState extends State<ProfileSettingsUI> {
           backgroundColor: const Color(0xffF2F9FF),
         ),
         body: Padding(
-            padding: EdgeInsets.only(left: 36.w, right: 36.w),
+            padding: EdgeInsets.only(left: 36.w, right: 36.w, top: 25.h),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text16PtBlueMedium(text: 'Account'),
-              SizedBox(height: 17.h),
+              SizedBox(height: 10.h),
               GestureDetector(
                   onTap: () {},
                   child: Settings(

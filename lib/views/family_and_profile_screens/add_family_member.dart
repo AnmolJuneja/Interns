@@ -158,7 +158,7 @@ class _AddFamilyMemberUIState extends State<AddFamilyMemberUI> {
                     BoxDecoration(borderRadius: BorderRadius.circular(5)),
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        primary: const Color(0xff2B67A3)),
+                        backgroundColor: const Color(0xff2B67A3)),
                     onPressed: () async {},
                     child: Text(
                       'Save',

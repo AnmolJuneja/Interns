@@ -19,11 +19,21 @@ class MessageConst extends StatelessWidget {
               icon: Icons.favorite_border,
               foregroundColor: const Color(0xff2B67A3),
             ),
+            Container(
+              height: 30.h,
+              width: 1.w,
+              color: Colors.grey,
+            ),
             SlidableAction(
               onPressed: ((context) {}),
               backgroundColor: const Color(0xffF2F9FF),
               icon: Icons.reply,
               foregroundColor: const Color(0xff2B67A3),
+            ),
+            Container(
+              height: 30.h,
+              width: 1.w,
+              color: Colors.grey,
             ),
             SlidableAction(
               onPressed: ((context) {}),
@@ -45,10 +55,13 @@ class MessageConst extends StatelessWidget {
                     "This year's Texas Fly Fishing and Brew Festival is held inside the spacious Mesquite Convention Center loc...",
               ),
               SizedBox(height: 15.h),
-              const Divider(
-                thickness: 1,
-              )
             ])),
+      ),
+      Padding(
+        padding: EdgeInsets.only(left: 36.w, right: 36.w),
+        child: const Divider(
+          thickness: 1,
+        ),
       ),
       Slidable(
           endActionPane: ActionPane(
@@ -60,11 +73,21 @@ class MessageConst extends StatelessWidget {
                 icon: Icons.favorite_border,
                 foregroundColor: const Color(0xff2B67A3),
               ),
+              Container(
+                height: 30.h,
+                width: 1.w,
+                color: Colors.grey,
+              ),
               SlidableAction(
                 onPressed: ((context) {}),
                 backgroundColor: const Color(0xffF2F9FF),
                 icon: Icons.reply,
                 foregroundColor: const Color(0xff2B67A3),
+              ),
+              Container(
+                height: 30.h,
+                width: 1.w,
+                color: Colors.grey,
               ),
               SlidableAction(
                 onPressed: ((context) {}),
@@ -86,10 +109,13 @@ class MessageConst extends StatelessWidget {
                           "DSC is a mission-focused conservation organization, funded by hunters from around the world.",
                     ),
                     SizedBox(height: 15.h),
-                    const Divider(
-                      thickness: 1,
-                    )
                   ]))),
+      Padding(
+        padding: EdgeInsets.only(left: 36.w, right: 36.w),
+        child: const Divider(
+          thickness: 1,
+        ),
+      ),
       Slidable(
           endActionPane: ActionPane(
             motion: const StretchMotion(),
@@ -100,11 +126,21 @@ class MessageConst extends StatelessWidget {
                 icon: Icons.favorite_border,
                 foregroundColor: const Color(0xff2B67A3),
               ),
+              Container(
+                height: 30.h,
+                width: 1.w,
+                color: Colors.grey,
+              ),
               SlidableAction(
                 onPressed: ((context) {}),
                 backgroundColor: const Color(0xffF2F9FF),
                 icon: Icons.reply,
                 foregroundColor: const Color(0xff2B67A3),
+              ),
+              Container(
+                height: 30.h,
+                width: 1.w,
+                color: Colors.grey,
               ),
               SlidableAction(
                 onPressed: ((context) {}),
@@ -126,10 +162,13 @@ class MessageConst extends StatelessWidget {
                           "DSC is a mission-focused conservation organization, funded by hunters from around the world.",
                     ),
                     SizedBox(height: 15.h),
-                    const Divider(
-                      thickness: 1,
-                    )
                   ]))),
+      Padding(
+        padding: EdgeInsets.only(left: 36.w, right: 36.w),
+        child: const Divider(
+          thickness: 1,
+        ),
+      ),
       Slidable(
           endActionPane: ActionPane(
             motion: const StretchMotion(),
@@ -140,12 +179,21 @@ class MessageConst extends StatelessWidget {
                 icon: Icons.favorite_border,
                 foregroundColor: const Color(0xff2B67A3),
               ),
-              const Divider(),
+              Container(
+                height: 30.h,
+                width: 1.w,
+                color: Colors.grey,
+              ),
               SlidableAction(
                 onPressed: ((context) {}),
                 backgroundColor: const Color(0xffF2F9FF),
                 icon: Icons.reply,
                 foregroundColor: const Color(0xff2B67A3),
+              ),
+              Container(
+                height: 30.h,
+                width: 1.w,
+                color: Colors.grey,
               ),
               SlidableAction(
                 onPressed: ((context) {}),
@@ -167,10 +215,13 @@ class MessageConst extends StatelessWidget {
                           "This year's Texas Fly Fishing & Brew Festival is held inside the spacious.",
                     ),
                     SizedBox(height: 15.h),
-                    const Divider(
-                      thickness: 1,
-                    )
-                  ])))
+                  ]))),
+      Padding(
+        padding: EdgeInsets.only(left: 36.w, right: 36.w),
+        child: const Divider(
+          thickness: 1,
+        ),
+      ),
     ]);
   }
 }

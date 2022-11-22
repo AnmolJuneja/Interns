@@ -171,7 +171,7 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                                   children: [
                                     Padding(
                                         padding: EdgeInsets.only(
-                                            left: 36.w, right: 36.w),
+                                            left: 36.w, right: 36.w, top: 20.h),
                                         child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -188,7 +188,6 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                                                   prefix: null,
                                                   onchanged: (value) {})
                                             ])),
-                                    SizedBox(height: 25.h),
                                     ListView(
                                       shrinkWrap: true,
                                       physics:
@@ -201,25 +200,31 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                                                 child: Padding(
                                                     padding: EdgeInsets.only(
                                                         top: 14.h),
-                                                    child: Obx(() => ToggleContainer(
-                                                        color: value.value == e
-                                                            ? AddFeedApi1()
-                                                                .selectedItemcolor1
-                                                                .value
-                                                            : AddFeedApi1()
-                                                                .transparentColor1
-                                                                .value,
-                                                        isSelected:
-                                                            value.value == e
-                                                                ? true
-                                                                : false,
-                                                        text: e))),
+                                                    child: Obx(() => Column(
+                                                          children: [
+                                                            ToggleContainer(
+                                                                color: value.value ==
+                                                                        e
+                                                                    ? AddFeedApi1()
+                                                                        .selectedItemcolor1
+                                                                        .value
+                                                                    : AddFeedApi1()
+                                                                        .transparentColor1
+                                                                        .value,
+                                                                isSelected:
+                                                                    value.value ==
+                                                                            e
+                                                                        ? true
+                                                                        : false,
+                                                                text: e)
+                                                          ],
+                                                        ))),
                                               ))
                                           .toList(),
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(
-                                          top: 20.h, left: 36.w, right: 36.w),
+                                          top: 30.h, left: 36.w, right: 36.w),
                                       child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,

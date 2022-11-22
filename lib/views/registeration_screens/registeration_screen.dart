@@ -10,10 +10,14 @@ import 'package:reelpro/consts/text.dart';
 import 'package:reelpro/consts/text_field.dart';
 import 'package:reelpro/consts/text_fieldc.dart';
 import 'package:reelpro/consts/upper_design.dart';
+import 'package:reelpro/controllers/registeration_controllers.dart';
 import 'package:reelpro/models/registeration.dart';
+import 'package:reelpro/models/registration_step_two.dart';
 import 'package:reelpro/models/shared_preferences.dart';
 import 'package:reelpro/view_models/register_user_request/otp_view_model.dart';
 import 'package:reelpro/controllers/validate_email_controller.dart';
+import 'package:reelpro/views/bottom_navigation_screens/bottom_navigation.dart';
+import 'package:reelpro/views/family_and_profile_screens/profile_settings.dart';
 // import 'package:reelpro/view_models/register_user_request/registeration.dart';
 import 'package:reelpro/views/registeration_screens/address.dart';
 import 'package:reelpro/views/registeration_screens/registeration_step_two.dart';
@@ -56,6 +60,7 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
   @override
   void initState() {
     textEditingController4.text = ""; //set the initial value of text field
+
     super.initState();
   }
 
@@ -93,7 +98,9 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                         onchanged: (value) {},
                         keyValue: null,
                         suffixText: null,
-                        validator: (value) {}),
+                        validator: (value) {
+                          return null;
+                        }),
                     SizedBox(height: 8.h),
                     TextFEmail(
                         onSaved: (value) {},
@@ -104,7 +111,9 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                         onchanged: (value) {},
                         keyValue: null,
                         suffixText: null,
-                        validator: (value) {}),
+                        validator: (value) {
+                          return null;
+                        }),
                     SizedBox(height: 8.h),
                     TextFEmail(
                         textEditingController: validateEmail.emailController,
@@ -125,7 +134,7 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                       onTap: () {
                         Get.bottomSheet(Column(children: [
                           SizedBox(height: 200.h),
-                          Container(
+                          SizedBox(
                             height: 200.h,
                             child: CupertinoDatePicker(
                                 mode: CupertinoDatePickerMode.date,

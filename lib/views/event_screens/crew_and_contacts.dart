@@ -43,33 +43,39 @@ class _CrewAndContactsUIState extends State<CrewAndContactsUI> {
                 child: const Icon(Icons.arrow_back_ios, color: Colors.black))),
       ),
       body: Padding(
-          padding: EdgeInsets.only(left: 36.w, right: 36.w),
+          padding: EdgeInsets.only(left: 36.w, right: 36.w, top: 34.h),
           child: SingleChildScrollView(
             child: Column(
               children: [
                 const SponserContainer(),
                 SizedBox(height: 32.h),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Image.asset('assets/images/for designer.png',
-                          height: 64.h, width: 64.w),
-                      Image.asset('assets/images/for designer.png',
-                          height: 64.h, width: 64.w),
-                      Image.asset('assets/images/for designer.png',
-                          height: 64.h, width: 64.w),
-                      Image.asset('assets/images/for designer.png',
-                          height: 64.h, width: 64.w)
-                    ]),
+                Padding(
+                  padding: EdgeInsets.only(right: 15.w),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Image.asset('assets/images/for designer.png',
+                            height: 64.h, width: 64.w),
+                        Image.asset('assets/images/for designer.png',
+                            height: 64.h, width: 64.w),
+                        Image.asset('assets/images/for designer.png',
+                            height: 64.h, width: 64.w),
+                        Image.asset('assets/images/for designer.png',
+                            height: 64.h, width: 64.w)
+                      ]),
+                ),
                 SizedBox(height: 7.h),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text16PtBlack(text: 'Director'),
-                      Text16PtBlack(text: 'Manager'),
-                      Text16PtBlack(text: 'Manager'),
-                      Text16PtBlack(text: 'Manager'),
-                    ]),
+                Padding(
+                  padding: EdgeInsets.only(right: 15.w),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text16PtBlack(text: 'Director'),
+                        Text16PtBlack(text: 'Manager'),
+                        Text16PtBlack(text: 'Manager'),
+                        Text16PtBlack(text: 'Manager'),
+                      ]),
+                ),
                 SizedBox(height: 30.h),
                 const Divider(thickness: 1),
                 SizedBox(height: 30.h),
@@ -105,7 +111,7 @@ class _CrewAndContactsUIState extends State<CrewAndContactsUI> {
                         const Text('www.tournament2022.com'),
                       ]),
                 ),
-                SizedBox(height: 60.h),
+                SizedBox(height: 80.h),
                 MyButton(
                     onpressed: () {
                       Get.bottomSheet(
