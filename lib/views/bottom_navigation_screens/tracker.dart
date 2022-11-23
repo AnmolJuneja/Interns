@@ -26,8 +26,8 @@ class CatchlogListUI extends StatefulWidget {
 }
 
 class _CatchlogListUIState extends State<CatchlogListUI> {
-  PageController pageController = PageController(viewportFraction: 0.9);
-  PageController pageController1 = PageController(viewportFraction: 0.9);
+  PageController pageController = PageController(viewportFraction: 0.88);
+  PageController pageController1 = PageController(viewportFraction: 0.88);
   final instance1 = Get.put(AddFeedApi1());
   final instance = Get.put(AddFeedApi());
   var isLiked = false.obs;
@@ -37,6 +37,7 @@ class _CatchlogListUIState extends State<CatchlogListUI> {
   @override
   void initState() {
     instance1.getList1();
+    instance.getDetails();
     super.initState();
   }
 
@@ -46,9 +47,9 @@ class _CatchlogListUIState extends State<CatchlogListUI> {
       appBar: AppBar(
         backgroundColor: const Color(0xffF2F9FF),
         elevation: 0,
-        centerTitle: false,
-        title: Padding(
-            padding: EdgeInsets.only(top: 26.h, bottom: 20.h, left: 24.w),
+        leadingWidth: 150,
+        leading: Padding(
+            padding: EdgeInsets.only(left: 36.w, top: 13.h),
             child: Text30ptBlue(text: 'Tracker')),
       ),
       backgroundColor: const Color(0xffF2F9FF),
@@ -102,27 +103,20 @@ class _CatchlogListUIState extends State<CatchlogListUI> {
                   ]),
             ),
             SizedBox(
-              height: 439.h,
-              child: FutureBuilder<FeedListResponse>(
-                  future: instance.getDetails(),
-                  builder: (contex, snapshot) {
-                    if (snapshot.hasData) {
-                      return snapshot.data!.data!.data!.isNotEmpty
-                          ? PageView.builder(
-                              controller: pageController1,
-                              itemCount: snapshot.data!.data!.data!.length,
-                              itemBuilder: (context, index) {
-                                return buildFeed(
-                                  context,
-                                  snapshot.data!.data!.data![index],
-                                );
-                              })
-                          : Center(child: Text16PtBlack(text: 'No Feed Data'));
-                    } else {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                  }),
-            ),
+                height: 439.h,
+                child: Obx(() => instance.isLoading3.value
+                    ? const Center(child: CircularProgressIndicator())
+                    : instance.list1.isNotEmpty
+                        ? PageView.builder(
+                            controller: pageController1,
+                            itemCount: instance.list1.length,
+                            itemBuilder: (context, index) {
+                              return buildFeed(
+                                context,
+                                instance.list1[index],
+                              );
+                            })
+                        : Center(child: Text16PtBlack(text: 'No Feed Data')))),
             Padding(
               padding: EdgeInsets.only(left: 36.w, top: 40.h, right: 36.w),
               child: Row(
@@ -185,7 +179,7 @@ Widget buildList(CatchlogList catchlogList) {
           borderRadius: BorderRadius.circular(5),
           color: Colors.white,
         ),
-        margin: EdgeInsets.only(left: 10.w, right: 12.w),
+        margin: EdgeInsets.only(left: 10.w, right: 10.w),
         child: Stack(
           children: [
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -291,6 +285,7 @@ Widget buildList(CatchlogList catchlogList) {
 }
 
 Widget buildFeed(BuildContext context, Datum datum) {
+  final afa = Get.put(AddFeedApi());
   PageController pageController = PageController();
   final likeFeed = Get.put(AddFeedApi());
   var isLiked = false.obs;
@@ -323,7 +318,7 @@ Widget buildFeed(BuildContext context, Datum datum) {
                 borderRadius: BorderRadius.circular(5),
                 color: Colors.white,
               ),
-              margin: EdgeInsets.only(left: 10.w, right: 12.w),
+              margin: EdgeInsets.only(left: 10.w, right: 10.w),
               child: Stack(children: [
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Padding(
@@ -402,13 +397,13 @@ Widget buildFeed(BuildContext context, Datum datum) {
                               likeFeed.likeFeed(datum.id!.toInt());
                               isLiked.value = true;
                               likeCount.value++;
-                              likeFeed.getLikeListFinal(datum.id!);
+                              likeFeed.getLikeListFinal1(datum.id!);
                             },
                             onTap1: () {
                               likeCount.value--;
                               isLiked.value = false;
                               likeFeed.likeFeed(datum.id!.toInt());
-                              likeFeed.getLikeListFinal(datum.id!);
+                              likeFeed.getLikeListFinal1(datum.id!);
                             },
                             isliked: isLiked.value)),
                         SizedBox(width: 8.w),
@@ -443,15 +438,10 @@ Widget buildFeed(BuildContext context, Datum datum) {
                               SizedBox(height: 10.h),
                               likeFeed.userId == datum.userId
                                   ? GestureDetector(
-                                      onTap: () {
-                                        likeFeed.deleteFeed(datum.id!);
-                                        Navigator.pushAndRemoveUntil(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    BottomNavigation(
-                                                        currentIndex: 0)),
-                                            (route) => false);
+                                      onTap: () async {
+                                        Navigator.pop(context);
+                                        await likeFeed.deleteFeed(datum.id!);
+                                        await afa.getDetails();
                                       },
                                       child: Text16PtBlack(text: 'Delete Feed'))
                                   : const SizedBox(),
@@ -489,7 +479,7 @@ Widget buildFeed(BuildContext context, Datum datum) {
                   top: 340.h,
                   left: 18.w,
                   child: FutureBuilder<FeedLikeList>(
-                      future: likeFeed.getLikeListFinal(datum.id!),
+                      future: likeFeed.getLikeListFinal1(datum.id!),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           return datum.totalLikes!.toInt() >= 1

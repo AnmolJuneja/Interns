@@ -11,15 +11,12 @@ class InviteMembersUI extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          toolbarHeight: 70.h,
-          title: Padding(
-              padding: EdgeInsets.only(top: 42.h),
-              child: Text21PtBlack(text: 'Invite')),
+          title: Text21PtBlack(text: 'Invite'),
           centerTitle: true,
           elevation: 0,
           backgroundColor: const Color(0xffF2F9FF),
           leading: Padding(
-              padding: EdgeInsets.only(top: 42.h, left: 36.w),
+              padding: EdgeInsets.only(left: 36.w),
               child: GestureDetector(
                   onTap: () {
                     Get.to(() => const ViewTeam());

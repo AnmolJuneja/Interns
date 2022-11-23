@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:reelpro/consts/button.dart';
 import 'package:reelpro/consts/event_details.dart';
@@ -120,7 +122,7 @@ class _EventDetailsUIState extends State<EventDetailsUI> {
                                                 top: Radius.circular(25)),
                                             color: Color(0xffF2F9FF)),
                                         child: Padding(
-                                            padding: EdgeInsets.only(top: 51.h),
+                                            padding: EdgeInsets.only(top: 39.h),
                                             child: SingleChildScrollView(
                                               child: Column(
                                                   crossAxisAlignment:
@@ -144,7 +146,7 @@ class _EventDetailsUIState extends State<EventDetailsUI> {
                                                           Text16PtBlack(
                                                               text: '\$500'),
                                                           SizedBox(
-                                                              height: 20.h),
+                                                              height: 10.h),
                                                           const Divider(
                                                               thickness: 1),
                                                           SizedBox(
@@ -167,29 +169,28 @@ class _EventDetailsUIState extends State<EventDetailsUI> {
                                                                       valueOfList
                                                                           .value = e;
                                                                     },
-                                                                    child: Obx(() => ToggleContainer(
-                                                                        color: valueOfList.value ==
-                                                                                e
-                                                                            ? AddFeedApi1()
-                                                                                .selectedItemcolor
-                                                                                .value
-                                                                            : AddFeedApi1()
-                                                                                .transparentColor
-                                                                                .value,
-                                                                        isSelected: valueOfList.value ==
-                                                                                e
-                                                                            ? true
-                                                                            : false,
-                                                                        text:
-                                                                            e)),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: EdgeInsets.only(
+                                                                          top: 5
+                                                                              .h),
+                                                                      child: Obx(() => ToggleContainer(
+                                                                          color: valueOfList.value == e
+                                                                              ? AddFeedApi1().selectedItemcolor.value
+                                                                              : AddFeedApi1().transparentColor.value,
+                                                                          isSelected: valueOfList.value == e ? true : false,
+                                                                          text: e)),
+                                                                    ),
                                                                   ))
                                                               .toList(),
                                                     ),
-                                                    // SizedBox(height: 10.h),
                                                     Padding(
                                                       padding: EdgeInsets.only(
                                                           left: 36.w,
-                                                          right: 36.w),
+                                                          right: 36.w,
+                                                          top: Platform.isIOS
+                                                              ? 22.h
+                                                              : 60.h),
                                                       child: Row(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment

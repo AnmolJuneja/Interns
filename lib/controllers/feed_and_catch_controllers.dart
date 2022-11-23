@@ -62,9 +62,7 @@ class AddFeedApi1 {
       var resp = CatchlogListResponse.fromJson(value.data);
       catchlogList.clear();
       catchlogList.addAll(resp.data);
+      isLoading.value = false;
     });
-    isLoading.value = false;
   }
-  
- 
 }

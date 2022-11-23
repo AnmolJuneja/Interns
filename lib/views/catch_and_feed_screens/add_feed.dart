@@ -14,6 +14,7 @@ import 'package:reelpro/views/bottom_navigation_screens/bottom_navigation.dart';
 import 'dart:io';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:reelpro/views/bottom_navigation_screens/tracker.dart';
 
 enum AppState {
   free,
@@ -45,6 +46,7 @@ class _AddFeedConstState extends State<AddFeedConst> {
   var viewStatus = 0;
   var btn = true.obs;
   List<File> file = [];
+  final instance = Get.put(AddFeedApi());
 
   @override
   void initState() {
@@ -69,7 +71,7 @@ class _AddFeedConstState extends State<AddFeedConst> {
               Text21PtBlack(text: 'Add Feed'),
               GestureDetector(
                   onTap: () {
-                    Get.to(() => BottomNavigation(currentIndex: 0));
+                    Navigator.pop(context);
                     addFeedApi.selectedItem.value = '';
                     addFeedApi.color1.value = const Color(0xffF2F9FF);
                     addFeedApi.color2.value = const Color(0xffF2F9FF);
@@ -173,8 +175,8 @@ class _AddFeedConstState extends State<AddFeedConst> {
                                                 file.removeAt(i);
                                               });
                                             },
-                                            child:
-                                                const Icon(Icons.close, size: 18.0)),
+                                            child: const Icon(Icons.close,
+                                                size: 18.0)),
                                       ),
                                     file.length == 2
                                         ? GestureDetector(
@@ -252,18 +254,18 @@ class _AddFeedConstState extends State<AddFeedConst> {
                           borderRadius: BorderRadius.vertical(
                             top: Radius.circular(25),
                           )),
-                      height: 367.h,
+                      height: 428.h,
                       width: double.infinity,
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(top: 38.h, left: 36.w),
+                              padding: EdgeInsets.only(top: 40.h, left: 36.w),
                               child: Text15PtBlue(
-                                text: 'Event Registeration',
+                                text: 'Post Visibility',
                               ),
                             ),
-                            SizedBox(height: 10.h),
+                            SizedBox(height: 15.h),
                             ListView(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
@@ -273,23 +275,29 @@ class _AddFeedConstState extends State<AddFeedConst> {
                                         onTap: () {
                                           valueOfList.value = e;
                                         },
-                                        child: Obx(() => ToggleContainer(
-                                            color: valueOfList.value == e
-                                                ? AddFeedApi1()
-                                                    .selectedItemcolor
-                                                    .value
-                                                : AddFeedApi1()
-                                                    .transparentColor
-                                                    .value,
-                                            isSelected: valueOfList.value == e
-                                                ? true
-                                                : false,
-                                            text: e))),
+                                        child: Padding(
+                                          padding: EdgeInsets.only(top: 10.h),
+                                          child: Obx(() => ToggleContainer(
+                                              color: valueOfList.value == e
+                                                  ? AddFeedApi1()
+                                                      .selectedItemcolor
+                                                      .value
+                                                  : AddFeedApi1()
+                                                      .transparentColor
+                                                      .value,
+                                              isSelected: valueOfList.value == e
+                                                  ? true
+                                                  : false,
+                                              text: e)),
+                                        )),
                                   )
                                   .toList(),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(left: 36.w, right: 36.w),
+                              padding: EdgeInsets.only(
+                                  left: 36.w,
+                                  right: 36.w,
+                                  top: Platform.isIOS ? 20.h : 60.h),
                               child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -359,17 +367,23 @@ class _AddFeedConstState extends State<AddFeedConst> {
                   )
                 : MyButton(
                     onpressed: () async {
-                      await AddFeedApi().addFeed('location', 34.7, 37.4,
-                          textEditingController.text, viewStatus, file);
-
-                      addFeedApi.selectedItem.value = '';
-                      addFeedApi.selectedItem.value = '';
-                      addFeedApi.color1.value = const Color(0xffF2F9FF);
-                      addFeedApi.color2.value = const Color(0xffF2F9FF);
-                      addFeedApi.color3.value = const Color(0xffF2F9FF);
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) =>
-                              BottomNavigation(currentIndex: 0)));
+                      await AddFeedApi()
+                          .addFeed('location', 34.7, 37.4,
+                              textEditingController.text, viewStatus, file)
+                          .then((value) async {
+                        addFeedApi.selectedItem.value = '';
+                        addFeedApi.selectedItem.value = '';
+                        addFeedApi.color1.value = const Color(0xffF2F9FF);
+                        addFeedApi.color2.value = const Color(0xffF2F9FF);
+                        addFeedApi.color3.value = const Color(0xffF2F9FF);
+                      });
+                      await instance.getDetails();
+                      await Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  BottomNavigation(currentIndex: 0)),
+                          (route) => false);
                     },
                     buttonText: 'Post'))
           ]),

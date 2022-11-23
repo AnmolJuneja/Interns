@@ -9,6 +9,7 @@ import 'package:reelpro/view_models/team_and_profile_request/other_user_profile.
 import 'package:reelpro/views/bottom_navigation_screens/bottom_navigation.dart';
 import 'package:reelpro/views/family_and_profile_screens/edit_profile.dart';
 import 'package:reelpro/views/catch_and_feed_screens/feed_details.dart';
+import 'package:reelpro/views/family_and_profile_screens/followers_following.dart';
 import 'package:reelpro/views/family_and_profile_screens/profile_settings.dart';
 import '../catch_and_feed_screens/user_catch_list.dart';
 
@@ -60,10 +61,8 @@ class _UserProfileUIState extends State<UserProfileUI> {
                     onTap: () {
                       Get.to(() => const ProfileSettingsUI());
                     },
-                    child: const Icon(
-                      Icons.settings_outlined,
-                      color: Colors.black,
-                    ),
+                    child: const Icon(Icons.settings_outlined,
+                        color: Colors.black),
                   ),
                 )
               ],
@@ -123,7 +122,8 @@ class _UserProfileUIState extends State<UserProfileUI> {
                                         onTap: () {
                                           Get.to(() => EditProfile1(
                                                 desc: ff.viewProfile!.data!
-                                                        .description ?? 'Add Description',
+                                                        .description ??
+                                                    'Add Description',
                                               ));
                                         },
                                         child: Container(
@@ -156,8 +156,8 @@ class _UserProfileUIState extends State<UserProfileUI> {
                             Padding(
                               padding: EdgeInsets.only(top: 20.h, left: 5.w),
                               child: Text14ptDesc(
-                                  text:
-                                      ff.viewProfile!.data!.description ?? 'Add Description'),
+                                  text: ff.viewProfile!.data!.description ??
+                                      'Add Description'),
                             ),
                             Padding(
                               padding: EdgeInsets.only(
@@ -167,12 +167,20 @@ class _UserProfileUIState extends State<UserProfileUI> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text20PtBold(text: ' 0'),
-                                    Text20PtBold(
-                                        text:
-                                            '${ff.viewProfile!.data!.followers}'),
-                                    Text20PtBold(
-                                        text:
-                                            '${ff.viewProfile!.data!.following}')
+                                    GestureDetector(
+                                      onTap: () {},
+                                      child: Text20PtBold(
+                                          text:
+                                              '${ff.viewProfile!.data!.followers}'),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.to(() => const FollowingUI());
+                                      },
+                                      child: Text20PtBold(
+                                          text:
+                                              '${ff.viewProfile!.data!.following}'),
+                                    )
                                   ]),
                             ),
                             Padding(

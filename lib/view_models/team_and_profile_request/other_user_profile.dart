@@ -84,6 +84,7 @@ class OtherUserProfileApi {
             'Authorization': 'Bearer $authToken'
           }));
       print('Response data: ${response.data}');
+
       return response;
     } on dio.DioError catch (err) {
       print(err.message);

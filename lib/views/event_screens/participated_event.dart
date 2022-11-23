@@ -165,7 +165,7 @@ class _ParticipatedEventUIState extends State<ParticipatedEventUI> {
         // SizedBox(height: 20.h),
       ]),
       bottomSheet: Container(
-          padding: EdgeInsets.only(left: 36.w, bottom: 25.h),
+          padding: EdgeInsets.only(left: 36.w, bottom: 33.h),
           child: MyButton(
               onpressed: () {
                 Navigator.of(context).pushAndRemoveUntil(

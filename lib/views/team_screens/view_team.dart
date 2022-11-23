@@ -47,29 +47,29 @@ class ViewTeam extends StatelessWidget {
                                       },
                                       child:
                                           Text16PtBlack(text: 'About Group')),
-                                  SizedBox(height: 44.h),
+                                  SizedBox(height: 54.h),
                                   GestureDetector(
                                       onTap: () {
                                         Get.to(() => const PendingRequestUI());
                                       },
                                       child: Text16PtBlack(
                                           text: 'Pending Requests')),
-                                  SizedBox(height: 44.h),
+                                  SizedBox(height: 54.h),
                                   Text16PtBlack(text: 'Share Group'),
-                                  SizedBox(height: 44.h),
+                                  SizedBox(height: 54.h),
                                   GestureDetector(
                                       onTap: () {
                                         Get.to(() => const AddFeedConst());
                                       },
                                       child: Text16PtBlack(text: 'Add Feed')),
-                                  SizedBox(height: 44.h),
+                                  SizedBox(height: 54.h),
                                   GestureDetector(
                                       onTap: () {
                                         Get.to(() => const AddCatchLogUI());
                                       },
                                       child:
                                           Text16PtBlack(text: 'Log a Catch')),
-                                  SizedBox(height: 44.h),
+                                  SizedBox(height: 54.h),
                                   GestureDetector(
                                       onTap: () {
                                         Get.to(() => const ReportGroupUI());
@@ -132,7 +132,8 @@ class ViewTeam extends StatelessWidget {
                 shareImage: 'assets/images/Group 207.png',
               ),
             ),
-          )
+          ),
+          SizedBox(height: 35.h)
         ]));
   }
 }

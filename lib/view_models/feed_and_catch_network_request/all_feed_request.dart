@@ -79,12 +79,16 @@ class AddFeedApi {
     return Future.value();
   }
 
-  Future<FeedListResponse> getDetails() async {
-    var resp1 = await getFeedList().then((value) {
-      var res = FeedListResponse.fromJson(value.data);
-      return res;
+  var list1 = <Datum>[].obs;
+  var isLoading3 = false.obs;
+  getDetails() async {
+    isLoading3.value = true;
+    await getFeedList().then((value) {
+      var resp = FeedListResponse.fromJson(value.data);
+      list1.clear();
+      list1.addAll(resp.data!.data!);
+      isLoading3.value = false;
     });
-    return resp1;
   }
 
   Future<dio.Response> getFeedCommentList(int id) async {
@@ -283,8 +287,19 @@ class AddFeedApi {
     return Future.value();
   }
 
+  var list = <FeedLike>[].obs;
+  getLikeListFinal(int feedId) async {
+    isLoading.value = true;
+    await getLikeList(feedId).then((value) {
+      var resp = FeedLikeList.fromJson(value.data);
+      list.clear();
+      list.addAll(resp.data);
+    });
+    isLoading.value = false;
+  }
+
   FeedLikeList? feedLikeList;
-  Future<FeedLikeList> getLikeListFinal(int feedId) async {
+  Future<FeedLikeList> getLikeListFinal1(int feedId) async {
     isLoading.value = true;
     var resp = await getLikeList(feedId);
     feedLikeList = FeedLikeList.fromJson(resp.data);

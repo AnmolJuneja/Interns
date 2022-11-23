@@ -66,10 +66,9 @@ class _CreateTeamViewState extends State<CreateTeamView> {
         backgroundColor: const Color(0xffF2F9FF),
         body: Container(
             color: const Color(0xffF2F9FF),
-            padding: EdgeInsets.only(left: 36.w, right: 36.w),
+            padding: EdgeInsets.only(left: 36.w, right: 36.w, top: 26.h),
             child: SingleChildScrollView(
                 child: Column(children: [
-              SizedBox(height: 44.h),
               GestureDetector(
                   onTap: () async {
                     XFile? xFile =

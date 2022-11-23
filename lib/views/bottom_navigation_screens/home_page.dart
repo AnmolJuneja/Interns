@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -47,7 +48,8 @@ class _HomePageState extends State<HomePage> {
         body: Stack(children: [
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Container(
-                padding: EdgeInsets.only(left: 36.w, top: 21.h),
+                padding: EdgeInsets.only(
+                    left: 36.w, top: Platform.isAndroid ? 10.h : 20.h),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

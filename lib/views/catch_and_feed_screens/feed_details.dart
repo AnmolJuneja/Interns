@@ -49,6 +49,7 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
   void initState() {
     getDetails();
     likeFeed.getCommentListFinal(widget.feedId);
+    likeFeed.getLikeListFinal(widget.feedId);
     super.initState();
   }
 
@@ -262,33 +263,22 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
                         Padding(
                           padding: EdgeInsets.only(top: 16.h, left: 38.w),
                           child: SizedBox(
-                            height: 24.h,
-                            child: FutureBuilder<FeedLikeList>(
-                                future: likeFeed.getLikeListFinal(
-                                    feedDetails!.data!.data!.first.id!),
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    var oc = feedDetails!
-                                        .data!.data!.first.totalLikes;
-                                    var oc1 = oc! - 3;
-                                    return feedDetails!
-                                                .data!.data!.first.totalLikes!
-                                                .toInt() >=
-                                            1
-                                        ? Row(children: [
-                                            Stack(
-                                                children: List.generate(
-                                                    snapshot.data!.data
-                                                                .length ==
-                                                            1
-                                                        ? 1
-                                                        : snapshot.data!.data
-                                                                    .length ==
-                                                                2
-                                                            ? 2
-                                                            : 3, (index) {
-                                              element =
-                                                  snapshot.data!.data[index];
+                              height: 24.h,
+                              child: feedDetails!.data!.data!.first.totalLikes!
+                                          .toInt() >=
+                                      1
+                                  ? Row(children: [
+                                      Obx(() => likeFeed.list.isEmpty
+                                          ? SizedBox()
+                                          : Stack(
+                                              children: List.generate(
+                                                  likeFeed.list.length == 1
+                                                      ? 1
+                                                      : likeFeed.list.length ==
+                                                              2
+                                                          ? 2
+                                                          : 3, (index) {
+                                              element = likeFeed.list[index];
                                               return element.user!.profilePic ==
                                                       null
                                                   ? Container(
@@ -324,56 +314,52 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
                                                                   element.user!
                                                                       .profilePic!))),
                                                     );
-                                            })),
-                                            SizedBox(width: 5.w),
-                                            Row(
-                                                children: List.generate(
-                                                    snapshot.data!.data.length,
-                                                    (index) {
-                                              var el =
-                                                  snapshot.data!.data[index];
+                                            }))),
+                                      SizedBox(width: 5.w),
+                                      Row(
+                                          children: List.generate(
+                                              likeFeed.list.length, (index) {
+                                        var el = likeFeed.list[index];
 
-                                              return index <= 2
-                                                  ? Padding(
-                                                      padding: EdgeInsets.only(
-                                                          left: 5.w),
-                                                      child: Text14PtGrey(
-                                                          text:
-                                                              '${el.user!.firstname},'),
-                                                    )
-                                                  : const SizedBox();
-                                            })),
-                                            SizedBox(width: 8.w),
-                                            snapshot.data!.data.length > 3
-                                                ? Text14PtGrey(
-                                                    text: 'And $oc1 others')
-                                                : const SizedBox()
-                                          ])
-                                        : const SizedBox();
-                                  } else {
-                                    return const SizedBox();
-                                  }
-                                }),
-                          ),
+                                        return index <= 2
+                                            ? Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 5.w),
+                                                child: Text14PtGrey(
+                                                    text:
+                                                        '${el.user!.firstname},'),
+                                              )
+                                            : const SizedBox();
+                                      })),
+                                      SizedBox(width: 8.w),
+                                      likeFeed.list.length > 3
+                                          ? Text14PtGrey(text: 'And 5 others')
+                                          : const SizedBox()
+                                    ])
+                                  : const SizedBox()),
                         ),
                         Padding(
                             padding: EdgeInsets.only(
                                 top: 16.h, left: 36.w, right: 36.w),
                             child: Row(children: [
                               LikeIcon(
-                                  onTap: () {
+                                  onTap: () async {
                                     instance.isLiked.value = true;
-                                    likeFeed.likeFeed(feedDetails!
+                                    await likeFeed.likeFeed(feedDetails!
                                         .data!.data!.first.id!
                                         .toInt());
                                     instance.likeCount.value++;
+                                    await likeFeed
+                                        .getLikeListFinal(widget.feedId);
                                   },
-                                  onTap1: () {
+                                  onTap1: () async {
                                     instance.isLiked.value = false;
-                                    likeFeed.likeFeed(feedDetails!
+                                    await likeFeed.likeFeed(feedDetails!
                                         .data!.data!.first.id!
                                         .toInt());
                                     instance.likeCount--;
+                                    await likeFeed
+                                        .getLikeListFinal(widget.feedId);
                                   },
                                   isliked: instance.isLiked.value),
                               SizedBox(width: 8.w),

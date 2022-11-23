@@ -141,7 +141,7 @@ Widget buildList(EventList index) {
               top: 191.h, left: 326.w, child: const Icon(Icons.star_outline)),
           Positioned(
               left: 263.w,
-              top: 10.h,
+              top: 6.h,
               child: Image.asset(
                 'assets/images/tag.png',
                 color: const Color(0xff719AC3),

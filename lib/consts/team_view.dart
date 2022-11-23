@@ -36,7 +36,7 @@ class UpperView extends StatelessWidget {
             ],
           ),
           Positioned(
-              top: 233.h,
+              top: 228.h,
               right: 36.w,
               left: 292.w,
               child: Container(
@@ -154,8 +154,8 @@ class TeamViewColumn extends StatelessWidget {
                               color: const Color(0xff485058), width: 1),
                           borderRadius: BorderRadius.circular(5)),
                       child: ElevatedButton(
-                          style:
-                              ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white),
                           onPressed: onpressed,
                           child: Center(
                               child: Text(
@@ -204,9 +204,18 @@ class TeamViewColumn extends StatelessWidget {
           ),
           SizedBox(height: 20.h),
           Container(
-              color: Colors.white,
               height: 439.h,
               width: 356.w,
+              decoration: const BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                      // ignore: use_full_hex_values_for_flutter_colors
+                      color: Color.fromRGBO(113, 154, 195, 0.16),
+                      blurRadius: 0,
+                      offset: Offset(0, 4))
+                ],
+                color: Colors.white,
+              ),
               child: Stack(
                 children: [
                   Column(children: [
@@ -267,6 +276,7 @@ class TeamViewColumn extends StatelessWidget {
                       height: 179.h,
                       width: 356.w,
                       decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
                           image: DecorationImage(
                               fit: BoxFit.fill, image: AssetImage(image1))),
                     )
@@ -310,7 +320,8 @@ class TeamViewColumn extends StatelessWidget {
                         ],
                       ))
                 ],
-              ))
+              )),
+          SizedBox(height: 10.h)
         ],
       ),
     );

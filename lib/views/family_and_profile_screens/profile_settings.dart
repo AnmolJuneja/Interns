@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/consts/button.dart';
@@ -134,7 +136,7 @@ class _ProfileSettingsUIState extends State<ProfileSettingsUI> {
                                 text: 'Event Registeration',
                               ),
                             ),
-                            SizedBox(height: 10.h),
+                            SizedBox(height: 20.h),
                             ListView(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
@@ -164,7 +166,9 @@ class _ProfileSettingsUIState extends State<ProfileSettingsUI> {
                             ),
                             Padding(
                               padding: EdgeInsets.only(
-                                  left: 36.w, right: 36.w, top: 5.h),
+                                  left: 36.w,
+                                  right: 36.w,
+                                  top: Platform.isIOS ? 25.h : 55.h),
                               child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -198,7 +202,7 @@ class _ProfileSettingsUIState extends State<ProfileSettingsUI> {
                     subTitle: value1.value,
                     onTap: () {
                       Get.bottomSheet(Container(
-                        padding: EdgeInsets.only(top: 48.h),
+                        padding: EdgeInsets.only(top: 40.h),
                         height: 428.h,
                         decoration: const BoxDecoration(
                             borderRadius:
@@ -238,8 +242,10 @@ class _ProfileSettingsUIState extends State<ProfileSettingsUI> {
                                     .toList(),
                               ),
                               Padding(
-                                padding:
-                                    EdgeInsets.only(left: 36.w, right: 36.w),
+                                padding: EdgeInsets.only(
+                                    left: 36.w,
+                                    right: 36.w,
+                                    top: Platform.isIOS ? 20.h : 60.h),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,

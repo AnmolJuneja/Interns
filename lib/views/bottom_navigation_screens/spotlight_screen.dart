@@ -266,10 +266,9 @@ class _SpotlightScreenState extends State<SpotlightScreen> {
                           ]))),
                   Obx(() => instance.getUserLength.length == 0
                       ? ListView.builder(
-                          itemCount: ep.followersList!.data!.length,
+                          itemCount: ep.list.length,
                           itemBuilder: (context, index) {
-                            return followingList(
-                                ep.followersList!.data![index]);
+                            return followingList(ep.list[index]);
                           })
                       : ListView.builder(
                           itemCount: instance.getUserLength.length,

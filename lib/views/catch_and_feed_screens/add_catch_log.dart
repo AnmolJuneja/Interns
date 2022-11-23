@@ -77,7 +77,7 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Flexible(
           child: Container(
-            height: 680.h,
+            height: 640.h,
             padding: EdgeInsets.only(
               left: 36.w,
               right: 36.w,
@@ -86,7 +86,7 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 34.h),
+                  SizedBox(height: 26.h),
                   Text15PtBlue(text: 'Click Pictures or Videos'),
                   SizedBox(height: 14.h),
                   GestureDetector(
@@ -124,10 +124,10 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                         Container(
                             child: file.isEmpty
                                 ? SvgPicture.asset('assets/images/add.svg',
-                                    height: 132.h, width: 132.w)
+                                    height: 94.h, width: 94.w)
                                 : Container(
-                                    height: 132.h,
-                                    width: 132.w,
+                                    height: 94.h,
+                                    width: 94.w,
                                     decoration: BoxDecoration(
                                         image: DecorationImage(
                                             fit: BoxFit.cover,
@@ -139,10 +139,10 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                         SizedBox(width: 10.w),
                         file.length <= 1
                             ? SvgPicture.asset('assets/images/add.svg',
-                                height: 132.h, width: 132.w)
+                                height: 94.h, width: 94.w)
                             : Container(
-                                height: 132.h,
-                                width: 132.w,
+                                height: 94.h,
+                                width: 94.w,
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
                                         fit: BoxFit.cover,
@@ -282,6 +282,7 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                                               top: 48.h, left: 36.w),
                                           child: Text15PtBlue(
                                               text: 'Connect with Challenge')),
+                                      SizedBox(height: 15.h),
                                       ListView(
                                         shrinkWrap: true,
                                         physics:
@@ -293,7 +294,7 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                                                   },
                                                   child: Padding(
                                                       padding: EdgeInsets.only(
-                                                          top: 10.h),
+                                                          top: 4.h),
                                                       child: Obx(() => ToggleContainer(
                                                           color: value1.value ==
                                                                   e
@@ -311,7 +312,7 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                                                 ))
                                             .toList(),
                                       ),
-                                      SizedBox(height: 15.h),
+                                      SizedBox(height: 10.h),
                                       Padding(
                                           padding: EdgeInsets.only(
                                               left: 36.w, right: 36.w),
@@ -403,14 +404,15 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                       hintText: 'make a note',
                       textInputType: TextInputType.text,
                       prefix: null,
-                      onchanged: (value) {})
+                      onchanged: (value) {}),
+                  SizedBox(height: 10.h)
                 ],
               ),
             ),
           ),
         ),
         Padding(
-            padding: EdgeInsets.only(top: 40.h, left: 36.w, right: 36.w),
+            padding: EdgeInsets.only(top: 55.h, left: 36.w, right: 36.w),
             child: MyButton(
                 onpressed: () {
                   addCatchlogApi

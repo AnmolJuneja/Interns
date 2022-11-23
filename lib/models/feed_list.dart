@@ -1,15 +1,3 @@
-// To parse this JSON data, do
-//
-//     final feedListResponse = feedListResponseFromJson(jsonString);
-
-import 'dart:convert';
-
-FeedListResponse feedListResponseFromJson(String str) =>
-    FeedListResponse.fromJson(json.decode(str));
-
-String feedListResponseToJson(FeedListResponse data) =>
-    json.encode(data.toJson());
-
 class FeedListResponse {
   FeedListResponse({
     this.success,

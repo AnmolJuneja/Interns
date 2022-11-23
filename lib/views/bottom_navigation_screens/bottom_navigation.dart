@@ -36,20 +36,17 @@ class _BottomNavigationState extends State<BottomNavigation> {
         color: const Color(0xffF2F9FF),
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          buildBottomBar('assets/images/tracker.svg', 0),
-          buildBottomBar('assets/images/sp.svg', 1),
-          buildBottomBar('assets/images/home.svg', 2),
-          buildBottomBar('assets/images/location.svg', 3),
-          buildBottomBar('assets/images/message.svg', 4)
+          buildBottomBar('assets/images/tracker.svg', 0, 25.w),
+          buildBottomBar('assets/images/wave2.svg', 1, 33.w),
+          buildBottomBar('assets/images/home.svg', 2, 25.w),
+          buildBottomBar('assets/images/location.svg', 3, 23.w),
+          buildBottomBar('assets/images/message.svg', 4, 25.w)
         ]),
       ),
     );
   }
 
-  Widget buildBottomBar(
-    String image,
-    int index,
-  ) {
+  Widget buildBottomBar(String image, int index, var size) {
     return GestureDetector(
         onTap: () {
           setState(() {
@@ -59,6 +56,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         child: Padding(
             padding: EdgeInsets.only(left: 27.w, right: 27.w, bottom: 20.h),
             child: SvgPicture.asset(image,
+                width: size,
                 color: index == widget.currentIndex
                     ? const Color(0xff2B67A3)
                     : Colors.grey)));

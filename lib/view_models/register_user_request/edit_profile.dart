@@ -98,12 +98,16 @@ class Editprofile {
   }
 
   FollowersList? followersList;
+  var list = <Follower>[].obs;
   var isLoading = false.obs;
-  Future<FollowersList> getFollowersListFinal() async {
+  getFollowersListFinal() async {
     isLoading.value = true;
-    var resp = await getFollowersList();
-    followersList = FollowersList.fromJson(resp.data);
+    await getFollowersList().then((value) {
+      var resp = FollowersList.fromJson(value.data);
+      list.clear();
+      list.addAll(resp.data!);
+    });
+
     isLoading.value = false;
-    return followersList!;
   }
 }

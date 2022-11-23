@@ -7,8 +7,6 @@ import 'package:reelpro/consts/text.dart';
 import 'package:reelpro/consts/text_field.dart';
 import 'package:reelpro/controllers/registeration_controllers.dart';
 import 'package:reelpro/controllers/fetch_lat_lng.dart';
-// import 'package:reelpro/view_models/register_user_request/registeration_step_two.dart';
-// import 'package:reelpro/view_models/team_and_profile_request/team_list.dart';
 
 class AddFamilyMemberUI extends StatefulWidget {
   const AddFamilyMemberUI({
@@ -33,22 +31,12 @@ class _AddFamilyMemberUIState extends State<AddFamilyMemberUI> {
   final double lng = 74.027962;
   final visibility = 'Public'.obs;
   final fetchAdress = Get.put(FetchLatLng());
-  @override
-  void initState() {
-    nameController.text = 'Robert';
-    lastnameController.text = 'Smith';
-    emailController.text = 'Robert_smith21';
-    password1Controller.text = '***********';
-    passwordController.text = '***********';
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
             elevation: 0,
-            // toolbarHeight: 70.h,
             backgroundColor: const Color(0xffF2F9FF),
             centerTitle: true,
             title: Text21PtBlack(text: 'Add Member'),
@@ -66,14 +54,13 @@ class _AddFamilyMemberUIState extends State<AddFamilyMemberUI> {
         backgroundColor: const Color(0xffF2F9FF),
         body: Container(
             color: const Color(0xffF2F9FF),
-            padding: EdgeInsets.only(left: 36.w, right: 36.w),
+            padding: EdgeInsets.only(left: 36.w, right: 36.w, top: 26.h),
             child: SingleChildScrollView(
                 child: Column(children: [
-              SizedBox(height: 44.h),
               GestureDetector(
                   onTap: () async {
-                    XFile? xFile =
-                        await ImagePicker().pickImage(source: ImageSource.gallery);
+                    XFile? xFile = await ImagePicker()
+                        .pickImage(source: ImageSource.gallery);
                     if (xFile != null) {
                       setState(() {
                         file = File(xFile.path);

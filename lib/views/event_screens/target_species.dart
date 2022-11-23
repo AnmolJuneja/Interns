@@ -10,7 +10,6 @@ class TargetSpeciesUI extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xffF2F9FF),
       appBar: AppBar(
-        // toolbarHeight: 70.h,
         centerTitle: true,
         title: Text21PtBlack(text: 'Species'),
         elevation: 0,
@@ -24,7 +23,7 @@ class TargetSpeciesUI extends StatelessWidget {
                 child: const Icon(Icons.arrow_back_ios, color: Colors.black))),
       ),
       body: Padding(
-        padding: EdgeInsets.only(top: 44.h, left: 36.w, right: 36.w),
+        padding: EdgeInsets.only(top: 22.h, left: 36.w, right: 36.w),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const Divider(thickness: 1),
           SizedBox(height: 15.h),

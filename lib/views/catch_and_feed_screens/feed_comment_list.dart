@@ -16,7 +16,8 @@ Widget buildCommentList(BuildContext context, FeedCList feedCList) {
         )
       : Container(
           padding: EdgeInsets.only(top: 19.h),
-          child: Stack(children: [
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Row(children: [
               feedCList.commentUserInfo!.profilePic != null
                   ? ProfilePicContainerComment(
@@ -34,46 +35,45 @@ Widget buildCommentList(BuildContext context, FeedCList feedCList) {
                     width: 275.w, child: Text(feedCList.comment.toString()))
               ])
             ]),
-            Positioned(
-                bottom: 35.h,
-                left: 320.w,
-                child: GestureDetector(
-                    onTap: () {
-                      Get.bottomSheet(
-                        Container(
-                          padding: EdgeInsets.only(
-                              top: 30.h, left: 36.w, right: 36.w),
-                          height: 250.h,
-                          decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(25)),
-                              color: Color(0xffF2F9FF)),
-                          child: Column(children: [
-                            instanceDeleteComment.userId == feedCList.userId
-                                ? const Divider(thickness: 1)
-                                : const SizedBox(),
-                            SizedBox(height: 10.h),
-                            instanceDeleteComment.userId == feedCList.userId
-                                ? GestureDetector(
-                                    onTap: () async {
-                                      instanceDeleteComment
-                                          .deleteFeedComment(feedCList.id!);
-
-                                      Navigator.pop(context);
-                                    },
-                                    child:
-                                        Text16PtBlack(text: 'Delete comment'))
-                                : const SizedBox(),
-                            SizedBox(height: 10.h),
-                            const Divider(thickness: 1),
-                            SizedBox(height: 10.h),
-                            Text16PtBlack(text: 'Report Comment'),
-                            SizedBox(height: 10.h),
-                            const Divider(thickness: 1)
-                          ]),
-                        ),
-                      );
-                    },
+            GestureDetector(
+                onTap: () {
+                  Get.bottomSheet(
+                    Container(
+                      padding:
+                          EdgeInsets.only(top: 30.h, left: 36.w, right: 36.w),
+                      height: 250.h,
+                      decoration: const BoxDecoration(
+                          borderRadius:
+                              BorderRadius.vertical(top: Radius.circular(25)),
+                          color: Color(0xffF2F9FF)),
+                      child: Column(children: [
+                        instanceDeleteComment.userId == feedCList.userId
+                            ? const Divider(thickness: 1)
+                            : const SizedBox(),
+                        SizedBox(height: 10.h),
+                        instanceDeleteComment.userId == feedCList.userId
+                            ? GestureDetector(
+                                onTap: () async {
+                                  Navigator.pop(context);
+                                  await instanceDeleteComment
+                                      .deleteFeedComment(feedCList.id!);
+                                  await instanceDeleteComment
+                                      .getCommentListFinal(feedCList.feedId!);
+                                },
+                                child: Text16PtBlack(text: 'Delete comment'))
+                            : const SizedBox(),
+                        SizedBox(height: 10.h),
+                        const Divider(thickness: 1),
+                        SizedBox(height: 10.h),
+                        Text16PtBlack(text: 'Report Comment'),
+                        SizedBox(height: 10.h),
+                        const Divider(thickness: 1)
+                      ]),
+                    ),
+                  );
+                },
+                child: Padding(
+                    padding: EdgeInsets.only(bottom: 15.h),
                     child: const Icon(Icons.more_horiz, color: Colors.black)))
           ])));
 }
