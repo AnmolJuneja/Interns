@@ -43,22 +43,71 @@ class _ToggleContainerState extends State<ToggleContainer> {
         ));
   }
 }
-class ToggleContainerPublicPrivate extends StatefulWidget {
+
+class ToggleContainer1 extends StatefulWidget {
   Color color;
   bool? isSelected;
-  
-  ToggleContainerPublicPrivate(
+  String text;
+  ToggleContainer1(
       {Key? key,
       required this.color,
       required this.isSelected,
-      })
+      required this.text})
       : super(key: key);
 
   @override
-  State<ToggleContainerPublicPrivate> createState() => _ToggleContainerPublicPrivateState();
+  State<ToggleContainer1> createState() => _ToggleContainer1State();
 }
 
-class _ToggleContainerPublicPrivateState extends State<ToggleContainerPublicPrivate> {
+class _ToggleContainer1State extends State<ToggleContainer1> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        color: widget.color,
+        padding: EdgeInsets.only(left: 36.w, top: 8.h, right: 36.w),
+        height: 62.h,
+        width: double.infinity,
+        child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+          Image.asset('assets/images/Image.png', height: 55.h, width: 55.w),
+          SizedBox(width: 20.w),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text16PtBlack(text: widget.text),
+              SizedBox(width: 195.w),
+              Padding(
+                padding: EdgeInsets.only(bottom: 20.h),
+                child: SizedBox(
+                    height: 10.h,
+                    width: 16.w,
+                    child: widget.isSelected!
+                        ? const Icon(Icons.check, color: Color(0xff2B67A3))
+                        : null),
+              )
+            ],
+          ),
+        ]));
+  }
+}
+
+class ToggleContainerPublicPrivate extends StatefulWidget {
+  Color color;
+  bool? isSelected;
+
+  ToggleContainerPublicPrivate({
+    Key? key,
+    required this.color,
+    required this.isSelected,
+  }) : super(key: key);
+
+  @override
+  State<ToggleContainerPublicPrivate> createState() =>
+      _ToggleContainerPublicPrivateState();
+}
+
+class _ToggleContainerPublicPrivateState
+    extends State<ToggleContainerPublicPrivate> {
   @override
   Widget build(BuildContext context) {
     return Container(

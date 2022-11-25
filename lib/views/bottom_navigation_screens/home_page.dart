@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Container(
                 padding: EdgeInsets.only(
-                    left: 36.w, top: Platform.isAndroid ? 10.h : 20.h),
+                    left: 36.w, top: Platform.isAndroid ? 10.h : 15.h),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

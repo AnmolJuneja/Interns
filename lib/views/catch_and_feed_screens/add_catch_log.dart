@@ -203,7 +203,7 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                                                         top: 14.h),
                                                     child: Obx(() => Column(
                                                           children: [
-                                                            ToggleContainer(
+                                                            ToggleContainer1(
                                                                 color: value.value ==
                                                                         e
                                                                     ? AddFeedApi1()

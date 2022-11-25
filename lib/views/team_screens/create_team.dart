@@ -7,12 +7,14 @@ import 'package:reelpro/consts/button.dart';
 import 'package:reelpro/consts/text.dart';
 import 'package:reelpro/consts/text_field.dart';
 import 'package:reelpro/consts/text_fieldc.dart';
+import 'package:reelpro/consts/toggle_container.dart';
 import 'package:reelpro/controllers/registeration_controllers.dart';
 import 'package:reelpro/models/shared_preferences.dart';
 import 'package:reelpro/view_models/team_and_profile_request/create_team.dart';
 import 'package:reelpro/controllers/fetch_lat_lng.dart';
 import 'package:reelpro/views/team_screens/manage_team_screen.dart';
 import 'package:reelpro/views/team_screens/team_list.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CreateTeamView extends StatefulWidget {
   const CreateTeamView({
@@ -28,6 +30,7 @@ class _CreateTeamViewState extends State<CreateTeamView> {
   TextEditingController groupNameController = TextEditingController();
   TextEditingController locationController = TextEditingController();
   TextEditingController visibilityController = TextEditingController();
+  TextEditingController searchController = TextEditingController();
   final createTeam = Get.put(CreateTeamApi());
   final teamApi = Get.put(CreateTeamApi());
   final instanceRegisterationStepTwo = Get.put(RegistrationStepTwo2());
@@ -36,6 +39,8 @@ class _CreateTeamViewState extends State<CreateTeamView> {
   final double lat = 30.403648;
   final double lng = 74.027962;
   final visibility = 'Public'.obs;
+
+  var isSelected = false.obs;
   var color = false.obs;
   final fetchAdress = Get.put(FetchLatLng());
   @override
@@ -125,13 +130,105 @@ class _CreateTeamViewState extends State<CreateTeamView> {
               // ignore: use_full_hex_values_for_flutter_colors
 
               SizedBox(height: 8.h),
-              TextF(
-                  readOnly: false,
-                  textEditingController: locationController,
-                  hintText: 'Select location',
-                  textInputType: TextInputType.text,
-                  onchanged: (value) {},
-                  prefix: null),
+              GestureDetector(
+                onTap: () {
+                  Get.bottomSheet(
+                      Container(
+                        padding: EdgeInsets.only(top: 40.h),
+                        height: 800.h,
+                        width: double.infinity,
+                        decoration: const BoxDecoration(
+                            borderRadius:
+                                BorderRadius.vertical(top: Radius.circular(25)),
+                            color: Color(0xffF2F9FF)),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding:
+                                    EdgeInsets.only(left: 36.w, right: 36.w),
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text15PtBlue(text: 'Tag Location'),
+                                      SizedBox(height: 30.h),
+                                      TextFSearch(
+                                          textEditingController:
+                                              searchController,
+                                          hintText: 'Search',
+                                          textInputType: TextInputType.text,
+                                          prefix: null,
+                                          onchanged: (value) {}),
+                                    ]),
+                              ),
+                              SizedBox(height: 30.h),
+                              Obx(() => GestureDetector(
+                                    onTap: () {
+                                      isSelected.value = true;
+                                    },
+                                    child: ToggleContainer(
+                                        color: isSelected.value
+                                            ? const Color(0xffd6e9ff)
+                                            : const Color(0xffF2F9FF),
+                                        isSelected: isSelected.value,
+                                        text: fetchAdress.address.value),
+                                  )),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    top: 460.h, left: 36.w, right: 36.w),
+                                child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Button56(
+                                          onpressed: () {
+                                            Navigator.pop(context);
+                                            isSelected.value = false;
+                                          },
+                                          buttonText: 'Cancel',
+                                          textColor: Colors.black,
+                                          width: 1,
+                                          widthColor: Colors.black,
+                                          color: const Color(0xffF2F9FF)),
+                                      Button56Blue(
+                                          onpressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          buttonText: 'Done',
+                                          textColor: const Color(0xffF2F9FF),
+                                          color: const Color(0xff2B67A3))
+                                    ]),
+                              )
+                            ]),
+                      ),
+                      isScrollControlled: true);
+                },
+                child: Container(
+                    padding: EdgeInsets.only(
+                        top: 17.h, bottom: 14.h, left: 20.w, right: 20.w),
+                    height: 52.h,
+                    width: 356.w,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: const [
+                          BoxShadow(
+                              color: Color.fromRGBO(113, 154, 195, 0.16),
+                              blurRadius: 0,
+                              offset: Offset(0, 4))
+                        ],
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Obx(() => isSelected.value
+                            ? Text16PtBlack(
+                                text: fetchAdress.address.toString())
+                            : Text15PtGrey(text: 'Select Location')),
+                        SvgPicture.asset('assets/images/open-location.svg')
+                      ],
+                    )),
+              ),
               SizedBox(height: 8.h),
               Obx(() => GestureDetector(
                   onTap: () {
@@ -298,20 +395,23 @@ class _CreateTeamViewState extends State<CreateTeamView> {
                           style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xff2B67A3)),
                           onPressed: () async {
+                            await createTeam
+                                .createTeam(
+                                    groupNameController.text,
+                                    'location',
+                                    file!,
+                                    lat,
+                                    lng,
+                                    1,
+                                    descriptionController.text)
+                                .then((value) {
+                              Get.to(const TeamViewView());
+                            });
                             await SaveTeamCount().saveTeamCount(CreateTeamApi()
                                 .getTeam1
                                 .value
                                 .length
                                 .toString());
-                            await createTeam.createTeam(
-                                groupNameController.text,
-                                locationController.text,
-                                file!,
-                                lat,
-                                lng,
-                                1,
-                                descriptionController.text);
-                            Get.to(const TeamViewView());
                           },
                           child: Text(
                             'Save',

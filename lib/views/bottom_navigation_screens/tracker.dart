@@ -108,10 +108,14 @@ class _CatchlogListUIState extends State<CatchlogListUI> {
                             controller: pageController1,
                             itemCount: instance.list1.length,
                             itemBuilder: (context, index) {
-                              return buildFeed(
-                                context,
-                                instance.list1[index],
-                              );
+                              return buildFeed(context, instance.list1[index],
+                                  () async {
+                                Datum? x = await Get.to(() => FeedDetailsUI(
+                                    feedId: instance.list1[index].id!));
+                                if (x != null) {
+                                  instance.list1[index] = x;
+                                }
+                              });
                             })
                         : Center(child: Text16PtBlack(text: 'No Feed Data')))),
             Padding(
@@ -281,7 +285,7 @@ Widget buildList(CatchlogList catchlogList) {
   );
 }
 
-Widget buildFeed(BuildContext context, Datum datum) {
+Widget buildFeed(BuildContext context, Datum datum, void Function() ontap) {
   final afa = Get.put(AddFeedApi());
   PageController pageController = PageController();
   final likeFeed = Get.put(AddFeedApi());
@@ -299,15 +303,17 @@ Widget buildFeed(BuildContext context, Datum datum) {
   var oc1 = oc! - 3;
   FeedLike element;
   return GestureDetector(
-      onTap: () async {
-        await Get.to(() => FeedDetailsUI(feedId: datum.id!));
-      },
+      onTap: ontap,
       child: datum.getFeedImages!.isEmpty
           ? Center(child: Text16PtBlack(text: 'No Feed Data'))
           : Container(
-              height: 439.h,
-              width: 356.w,
               decoration: BoxDecoration(
+                boxShadow: const [
+                  BoxShadow(
+                      color: Color.fromRGBO(113, 154, 195, 0.16),
+                      blurRadius: 0,
+                      offset: Offset(0, 4))
+                ],
                 borderRadius: BorderRadius.circular(5),
                 color: Colors.white,
               ),

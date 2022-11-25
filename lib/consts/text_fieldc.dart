@@ -102,6 +102,7 @@ class TextFEmail extends StatelessWidget {
   void Function(String?)? onSaved;
   String? Function(String?)? validator;
   String? suffixText;
+  Widget? suffix;
   TextFEmail(
       {Key? key,
       required this.textEditingController,
@@ -112,6 +113,7 @@ class TextFEmail extends StatelessWidget {
       required this.onSaved,
       required this.validator,
       required this.suffixText,
+      required this.suffix,
       required this.onchanged})
       : super(key: key);
 
@@ -140,6 +142,7 @@ class TextFEmail extends StatelessWidget {
           onSaved: onSaved,
           keyboardType: textInputType,
           decoration: InputDecoration(
+              suffix: suffix,
               isCollapsed: true,
               border: InputBorder.none,
               contentPadding:

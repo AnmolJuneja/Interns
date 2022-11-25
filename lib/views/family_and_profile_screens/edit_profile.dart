@@ -176,6 +176,7 @@ class _EditProfile1State extends State<EditProfile1> {
                 return validateEmail.validateEmailFunction(value!);
               },
               suffixText: 'Verify',
+              suffix: null,
             ),
             SizedBox(height: 8.h),
             TextF10(

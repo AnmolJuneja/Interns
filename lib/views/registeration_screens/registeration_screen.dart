@@ -94,45 +94,51 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                         color: Color(0xff485058)),
                     SizedBox(height: 40.h),
                     TextFEmail(
-                        textEditingController: textEditingController1,
-                        hintText: 'Firstname',
-                        textInputType: TextInputType.name,
-                        prefix: null,
-                        onSaved: (value) {},
-                        onchanged: (value) {},
-                        keyValue: null,
-                        suffixText: null,
-                        validator: (value) {
-                          return null;
-                        }),
+                      textEditingController: textEditingController1,
+                      hintText: 'Firstname',
+                      textInputType: TextInputType.name,
+                      prefix: null,
+                      onSaved: (value) {},
+                      onchanged: (value) {},
+                      keyValue: null,
+                      suffixText: null,
+                      validator: (value) {
+                        return null;
+                      },
+                      suffix: null,
+                    ),
                     SizedBox(height: 8.h),
                     TextFEmail(
-                        onSaved: (value) {},
-                        textEditingController: textEditingController2,
-                        hintText: 'Last name',
-                        textInputType: TextInputType.name,
-                        prefix: null,
-                        onchanged: (value) {},
-                        keyValue: null,
-                        suffixText: null,
-                        validator: (value) {
-                          return null;
-                        }),
+                      onSaved: (value) {},
+                      textEditingController: textEditingController2,
+                      hintText: 'Last name',
+                      textInputType: TextInputType.name,
+                      prefix: null,
+                      onchanged: (value) {},
+                      keyValue: null,
+                      suffixText: null,
+                      validator: (value) {
+                        return null;
+                      },
+                      suffix: null,
+                    ),
                     SizedBox(height: 8.h),
                     TextFEmail(
-                        textEditingController: validateEmail.emailController,
-                        onchanged: (value) {},
-                        hintText: 'Email',
-                        textInputType: TextInputType.emailAddress,
-                        prefix: null,
-                        keyValue: validateEmail.formKey,
-                        onSaved: (value) {
-                          validateEmail.email = value!;
-                        },
-                        validator: (value) {
-                          return validateEmail.validateEmailFunction(value!);
-                        },
-                        suffixText: null),
+                      textEditingController: validateEmail.emailController,
+                      onchanged: (value) {},
+                      hintText: 'Email',
+                      textInputType: TextInputType.emailAddress,
+                      prefix: null,
+                      keyValue: validateEmail.formKey,
+                      onSaved: (value) {
+                        validateEmail.email = value!;
+                      },
+                      validator: (value) {
+                        return validateEmail.validateEmailFunction(value!);
+                      },
+                      suffixText: null,
+                      suffix: null,
+                    ),
                     SizedBox(height: 8.h),
                     GestureDetector(
                       onTap: () {

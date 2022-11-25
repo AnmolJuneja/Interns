@@ -12,6 +12,7 @@ import 'package:reelpro/controllers/fetch_lat_lng.dart';
 // import 'package:reelpro/view_models/register_user_request/registeration.dart';
 import 'package:reelpro/views/registeration_screens/registeration_step_two.dart';
 import 'package:get/get.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 // ignore: must_be_immutable
 class UserAddressScreen extends StatefulWidget {
@@ -87,6 +88,9 @@ class _UserAddressScreenState extends State<UserAddressScreen> {
                         return null;
                       },
                       suffixText: null,
+                      suffix: SvgPicture.asset(
+                        'assets/images/open-location.svg',
+                      ),
                     ),
                     SizedBox(height: 8.h),
                     TextFEmail(
@@ -101,33 +105,38 @@ class _UserAddressScreenState extends State<UserAddressScreen> {
                         return null;
                       },
                       suffixText: null,
+                      suffix: null,
                     ),
                     SizedBox(height: 8.h),
                     TextFEmail(
-                        textEditingController: stateController,
-                        hintText: 'State',
-                        textInputType: TextInputType.name,
-                        prefix: null,
-                        onSaved: (value) {},
-                        onchanged: (value) {},
-                        keyValue: null,
-                        suffixText: null,
-                        validator: (value) {
-                          return null;
-                        }),
+                      textEditingController: stateController,
+                      hintText: 'State',
+                      textInputType: TextInputType.name,
+                      prefix: null,
+                      onSaved: (value) {},
+                      onchanged: (value) {},
+                      keyValue: null,
+                      suffixText: null,
+                      validator: (value) {
+                        return null;
+                      },
+                      suffix: null,
+                    ),
                     SizedBox(height: 8.h),
                     TextFEmail(
-                        textEditingController: countryController,
-                        hintText: 'Country',
-                        textInputType: TextInputType.name,
-                        prefix: null,
-                        onSaved: (value) {},
-                        onchanged: (value) {},
-                        keyValue: null,
-                        suffixText: null,
-                        validator: (value) {
-                          return null;
-                        }),
+                      textEditingController: countryController,
+                      hintText: 'Country',
+                      textInputType: TextInputType.name,
+                      prefix: null,
+                      onSaved: (value) {},
+                      onchanged: (value) {},
+                      keyValue: null,
+                      suffixText: null,
+                      validator: (value) {
+                        return null;
+                      },
+                      suffix: null,
+                    ),
                     SizedBox(height: 8.h),
                     SizedBox(height: 211.h),
                     MyButton(

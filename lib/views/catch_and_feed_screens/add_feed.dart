@@ -86,7 +86,8 @@ class _AddFeedConstState extends State<AddFeedConst> {
                 hintText: 'Whats on your mind',
                 textInputType: TextInputType.multiline,
                 onchanged: (value) {
-                  valueOfList.value != ''
+                  valueOfList.value != '' &&
+                          textEditingController.text.isNotEmpty
                       ? btn.value = false
                       : btn.value = true;
                 }),
@@ -377,6 +378,7 @@ class _AddFeedConstState extends State<AddFeedConst> {
                                         onpressed: () {
                                           Navigator.pop(context);
                                           valueOfList.value = '';
+                                          btn.value = true;
                                         },
                                         buttonText: 'Cancel',
                                         textColor: const Color(0xff485058),

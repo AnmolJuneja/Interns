@@ -155,7 +155,8 @@ class GalleryUI extends StatelessWidget {
             ],
           ),
           Padding(
-              padding: EdgeInsets.only(top: 24.h, left: 36.w, right: 36.w),
+              padding: EdgeInsets.only(
+                  top: 24.h, left: 36.w, right: 36.w, bottom: 30.h),
               child: GridView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: 10,

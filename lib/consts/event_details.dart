@@ -353,7 +353,8 @@ class EventDetailsRow extends StatelessWidget {
             SizedBox(height: 20.h),
             const Divider(thickness: 1),
             SizedBox(height: 35.h),
-            const SponserContainer()
+            const SponserContainer(),
+            SizedBox(height: 15.h)
           ],
         ));
   }

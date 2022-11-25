@@ -17,15 +17,15 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../models/feed_list.dart';
 import 'feed_list.dart';
 
-class FeedDetailsUI extends StatefulWidget {
+class FeedDetails1UI extends StatefulWidget {
   final int feedId;
-  const FeedDetailsUI({Key? key, required this.feedId}) : super(key: key);
+  const FeedDetails1UI({Key? key, required this.feedId}) : super(key: key);
 
   @override
-  State<FeedDetailsUI> createState() => _FeedDetailsUIState();
+  State<FeedDetails1UI> createState() => _FeedDetails1UIState();
 }
 
-class _FeedDetailsUIState extends State<FeedDetailsUI> {
+class _FeedDetails1UIState extends State<FeedDetails1UI> {
   PageController pageController1 = PageController(viewportFraction: 0.2);
   FeedDetails? feedDetails;
   var isLoading = false.obs;
@@ -71,12 +71,7 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
               padding: EdgeInsets.only(left: 36.w),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              BottomNavigation(currentIndex: 0)),
-                      (route) => false);
+                  Navigator.pop(context);
                 },
                 child: const Icon(
                   Icons.arrow_back_ios,
