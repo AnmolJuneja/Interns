@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reelpro/controllers/fetch_lat_lng.dart';
@@ -54,7 +56,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
           });
         },
         child: Padding(
-            padding: EdgeInsets.only(left: 27.w, right: 27.w, bottom: 20.h),
+            padding: EdgeInsets.only(
+                left: 27.w, right: 27.w, bottom: Platform.isIOS ? 20.h : 0.h),
             child: SvgPicture.asset(image,
                 width: size,
                 color: index == widget.currentIndex

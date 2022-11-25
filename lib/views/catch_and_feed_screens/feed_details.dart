@@ -14,6 +14,9 @@ import 'package:reelpro/views/bottom_navigation_screens/bottom_navigation.dart';
 import 'package:reelpro/views/catch_and_feed_screens/feed_comment_list.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../models/feed_list.dart';
+import 'feed_list.dart';
+
 class FeedDetailsUI extends StatefulWidget {
   final int feedId;
   const FeedDetailsUI({Key? key, required this.feedId}) : super(key: key);
@@ -26,6 +29,7 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
   PageController pageController1 = PageController(viewportFraction: 0.2);
   FeedDetails? feedDetails;
   var isLoading = false.obs;
+  final likeFeed = Get.put(AddFeedApi());
   Future<void> getDetails() async {
     isLoading.value = true;
     var res = await AddFeedApi().getFeedDetails(widget.feedId);
@@ -38,7 +42,7 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
 
   FeedCList? feedCList;
   final instance = Get.put(AddFeedApi1());
-  final likeFeed = Get.put(AddFeedApi());
+  final likeFeed1 = Get.put(AddFeedApi());
   TextEditingController textEditingController = TextEditingController();
   final ScrollController scrollController = ScrollController();
   PageController pageController = PageController();
@@ -67,12 +71,7 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
               padding: EdgeInsets.only(left: 36.w),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              BottomNavigation(currentIndex: 0)),
-                      (route) => false);
+                  Navigator.pop(context);
                 },
                 child: const Icon(
                   Icons.arrow_back_ios,

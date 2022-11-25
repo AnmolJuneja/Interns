@@ -30,9 +30,6 @@ class _CatchlogListUIState extends State<CatchlogListUI> {
   PageController pageController1 = PageController(viewportFraction: 0.88);
   final instance1 = Get.put(AddFeedApi1());
   final instance = Get.put(AddFeedApi());
-  var isLiked = false.obs;
-  var likeCount = 0.obs;
-  var commentCount = 0.obs;
   var userId;
   @override
   void initState() {
@@ -58,7 +55,7 @@ class _CatchlogListUIState extends State<CatchlogListUI> {
         child: SingleChildScrollView(
           child: Column(children: [
             Padding(
-              padding: EdgeInsets.only(left: 36.w, right: 36.w, top: 24.h),
+              padding: EdgeInsets.only(left: 36.w, right: 36.w, top: 20.h),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -302,12 +299,8 @@ Widget buildFeed(BuildContext context, Datum datum) {
   var oc1 = oc! - 3;
   FeedLike element;
   return GestureDetector(
-      onTap: () {
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (context) => FeedDetailsUI(feedId: datum.id!)),
-            (route) => false);
+      onTap: () async {
+        await Get.to(() => FeedDetailsUI(feedId: datum.id!));
       },
       child: datum.getFeedImages!.isEmpty
           ? Center(child: Text16PtBlack(text: 'No Feed Data'))

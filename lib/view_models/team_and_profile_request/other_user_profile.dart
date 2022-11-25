@@ -44,11 +44,13 @@ class OtherUserProfileApi {
 
   var isLoading = false.obs;
   ViewProfile? viewProfile;
+  var follow = 0.obs;
   Future<ViewProfile> myProfileFinal() async {
     isLoading.value = true;
     var resp = await myProfile();
     viewProfile = ViewProfile.fromJson(resp.data);
     isLoading.value = false;
+    follow.value = viewProfile!.data!.following!;
     return viewProfile!;
   }
 

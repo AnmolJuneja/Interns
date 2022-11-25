@@ -187,14 +187,7 @@ class _OtherUserProfileUIState extends State<OtherUserProfileUI> {
                     ),
                     SizedBox(height: 30.h),
                     buttonVar.value
-                        ? MyButton(
-                            onpressed: () {
-                              instance1
-                                  .unfollowUser(viewProfile!.data!.id!.toInt());
-                              userFollowers.value--;
-                              buttonVar.value = false;
-                            },
-                            buttonText: 'Following')
+                        ? MyButton(onpressed: () {}, buttonText: 'Following')
                         : MyButton(
                             onpressed: () {
                               buttonVar.value = true;

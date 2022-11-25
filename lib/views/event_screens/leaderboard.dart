@@ -34,13 +34,14 @@ class LeaderBoardUI extends StatelessWidget {
                       const Icon(Icons.arrow_back_ios, color: Colors.black)))),
       body: Stack(children: [
         Positioned(
-            top: Platform.isIOS ? 48.h : 55.h,
-            left: 35.w,
-            right: Platform.isIOS ? 220.w : 230.w,
-            child: Image.asset('assets/images/Reddrum-Girl.png')),
+            top: Platform.isIOS ? 30.h : 25.h,
+            right: Platform.isIOS ? 220.w : 219.w,
+            child: Image.asset(
+              'assets/images/Reddrum-Girl.png',
+            )),
         Positioned(
-            top: Platform.isIOS ? 183.h : 190.h,
-            left: 85.w,
+            top: Platform.isIOS ? 181.h : 192.h,
+            left: 77.w,
             child: Column(children: [
               Text16PtBlack(text: 'Anthony'),
               Text14PtGrey(text: '19')
@@ -53,16 +54,15 @@ class LeaderBoardUI extends StatelessWidget {
               Text14PtGrey(text: '22')
             ])),
         Positioned(
-            top: Platform.isIOS ? 183.h : 190.h,
-            right: 85.w,
+            top: Platform.isIOS ? 181.h : 192.h,
+            right: 77.w,
             child: Column(children: [
               Text16PtBlack(text: 'Anthony'),
               Text14PtGrey(text: '16')
             ])),
         Positioned(
-            top: Platform.isIOS ? 48.h : 55.h,
-            right: 35.w,
-            left: Platform.isIOS ? 220.w : 230.w,
+            top: Platform.isIOS ? 30.h : 25.h,
+            left: Platform.isIOS ? 220.w : 219.w,
             child: Image.asset('assets/images/brad.png')),
         Positioned(
             top: 13.h,
@@ -70,7 +70,7 @@ class LeaderBoardUI extends StatelessWidget {
             right: 118.w,
             child: Image.asset('assets/images/maxresdefault1.png')),
         Positioned(
-            top: 6.h,
+            top: 5.h,
             left: 195.w,
             child: Center(
                 child: Image.asset(
@@ -85,7 +85,7 @@ class LeaderBoardUI extends StatelessWidget {
               thickness: 1,
             )),
         Positioned(
-            top: 280.h,
+            top: 290.h,
             left: 36.w,
             right: 36.w,
             bottom: 0.h,

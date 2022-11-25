@@ -264,8 +264,8 @@ class UserDetails {
   String? shirtSize;
   String? isVeteran;
   String? club;
-  String? createdAt;
-  String? updatedAt;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
   UserDetails(
       {this.id,
@@ -296,10 +296,10 @@ class UserDetails {
     if (json["club"] is String) {
       club = json["club"];
     }
-    if (json["created_at"] is String) {
+    if (json["created_at"] is DateTime) {
       createdAt = json["created_at"];
     }
-    if (json["updated_at"] is String) {
+    if (json["updated_at"] is DateTime) {
       updatedAt = json["updated_at"];
     }
   }

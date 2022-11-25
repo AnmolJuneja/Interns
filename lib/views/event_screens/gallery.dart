@@ -13,7 +13,6 @@ class GalleryUI extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xffF2F9FF),
         elevation: 0,
-        // toolbarHeight: 70.h,
         centerTitle: true,
         title: Text21PtBlack(text: 'Gallery'),
         leading: Padding(
@@ -31,7 +30,7 @@ class GalleryUI extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(children: [
           Padding(
-            padding: EdgeInsets.only(top: 30.h, left: 36.w, right: 36.w),
+            padding: EdgeInsets.only(top: 20.h, left: 36.w, right: 36.w),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Container(
@@ -67,89 +66,98 @@ class GalleryUI extends StatelessWidget {
               Text16PtBlack(text: 'Members')
             ]),
           ),
-          Container(
-            height: 80.h,
-            padding: EdgeInsets.only(top: 16.h, left: 36.w),
-            child: PageView.builder(
-                itemCount: 2,
-                itemBuilder: (context, index) {
-                  return Row(children: [
-                    Container(
-                      height: 64.h,
-                      width: 64.w,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: const Color(0xff2B67A3)),
-                      child: const Center(
-                        child: Text(
-                          'All',
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.w400),
-                        ),
-                      ),
+          Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 36.w, top: 15.h),
+                child: Container(
+                  height: 64.h,
+                  width: 64.w,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: const Color(0xff2B67A3)),
+                  child: const Center(
+                    child: Text(
+                      'All',
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.w400),
                     ),
-                    SizedBox(width: 5.w),
-                    Container(
-                      height: 64.h,
-                      width: 60.w,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: const DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage(
-                                  'assets/images/for designer.png'))),
-                    ),
-                    SizedBox(width: 5.w),
-                    Container(
-                      height: 64.h,
-                      width: 60.w,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: const DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage(
-                                  'assets/images/for designer.png'))),
-                    ),
-                    SizedBox(width: 5.w),
-                    Container(
-                      height: 64.h,
-                      width: 60.w,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: const DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage(
-                                  'assets/images/for designer.png'))),
-                    ),
-                    SizedBox(width: 5.w),
-                    Container(
-                      height: 64.h,
-                      width: 60.w,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: const DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage(
-                                  'assets/images/for designer.png'))),
-                    ),
-                    SizedBox(width: 5.w),
-                    Container(
-                      height: 64.h,
-                      width: 60.w,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: const DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage(
-                                  'assets/images/for designer.png'))),
-                    )
-                  ]);
-                }),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  height: 80.h,
+                  padding: EdgeInsets.only(top: 16.h, left: 3.w),
+                  child: PageView.builder(
+                      itemCount: 2,
+                      itemBuilder: (context, index) {
+                        return Row(children: [
+                          SizedBox(width: 5.w),
+                          Container(
+                            height: 64.h,
+                            width: 60.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                image: const DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                        'assets/images/for designer.png'))),
+                          ),
+                          SizedBox(width: 5.w),
+                          Container(
+                            height: 64.h,
+                            width: 60.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                image: const DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                        'assets/images/for designer.png'))),
+                          ),
+                          SizedBox(width: 5.w),
+                          Container(
+                            height: 64.h,
+                            width: 60.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                image: const DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                        'assets/images/for designer.png'))),
+                          ),
+                          SizedBox(width: 5.w),
+                          Container(
+                            height: 64.h,
+                            width: 60.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                image: const DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                        'assets/images/for designer.png'))),
+                          ),
+                          SizedBox(width: 5.w),
+                          Container(
+                            height: 64.h,
+                            width: 60.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                image: const DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                        'assets/images/for designer.png'))),
+                          )
+                        ]);
+                      }),
+                ),
+              ),
+            ],
           ),
           Padding(
               padding: EdgeInsets.only(top: 24.h, left: 36.w, right: 36.w),
               child: GridView.builder(
-                  physics: const AlwaysScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: 10,
                   shrinkWrap: true,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -158,13 +166,14 @@ class GalleryUI extends StatelessWidget {
                       crossAxisCount: 2),
                   itemBuilder: (context, index) {
                     return Image.asset('assets/images/for.png');
-                  }))
+                  })),
+          SizedBox(height: 55.h),
         ]),
       ),
       bottomSheet: Container(
         padding:
-            EdgeInsets.only(top: 15.h, left: 36.w, right: 36.w, bottom: 15.h),
-        height: 90.h,
+            EdgeInsets.only(top: 20.h, left: 36.w, right: 36.w, bottom: 45.h),
+        height: 120.h,
         width: double.infinity,
         color: const Color(0xffF2F9FF),
         child: MyButton(onpressed: () {}, buttonText: 'Add Tournament Photo'),

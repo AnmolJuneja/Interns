@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // / ignore: depend_on_referenced_packages
@@ -9,7 +11,9 @@ import 'package:reelpro/consts/small_text.dart';
 import 'package:reelpro/consts/text.dart';
 import 'package:reelpro/consts/text_field.dart';
 import 'package:reelpro/consts/text_fieldc.dart';
+import 'package:reelpro/consts/toggle_container.dart';
 import 'package:reelpro/consts/upper_design.dart';
+import 'package:reelpro/controllers/feed_and_catch_controllers.dart';
 import 'package:reelpro/controllers/registeration_controllers.dart';
 import 'package:reelpro/models/registeration.dart';
 import 'package:reelpro/models/registration_step_two.dart';
@@ -52,7 +56,7 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
   var date;
   final double lng = 74.027962;
   List<String> items = <String>['Male', 'Female'];
-  String? _chosenValue;
+  var gender = 'Gender'.obs;
   var firstName;
   var lastName;
   var sld = ''.obs;
@@ -169,57 +173,98 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                             child: Center(
                                 child: Obx(() => sld.value == ''
                                     ? Text15PtGrey(text: 'Date Of Birth')
-                                    : Text16PtBlack(text: sld.value)))),
+                                    : Text(sld.value)))),
                       ),
                     ),
                     SizedBox(height: 8.h),
-                    Container(
-                      padding: EdgeInsets.only(left: 20.w),
-                      height: 52.h,
-                      width: 356.w,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(
-                              color: const Color.fromRGBO(113, 154, 195, 0.16)),
-                          boxShadow: const [
-                            BoxShadow(
-                                // ignore: use_full_hex_values_for_flutter_colors
-                                color: Color.fromRGBO(113, 154, 195, 0.16),
-                                blurRadius: 0,
-                                offset: Offset(0, 4))
-                          ],
-                          borderRadius: BorderRadius.circular(5)),
-                      child: DropdownButton<String>(
-                        iconSize: 0.0,
-                        value: _chosenValue,
-                        items: <String>['Male', 'Female', 'Transgender']
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                        hint: Text(
-                          'Gender',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline2!
-                              .copyWith(
-                                  fontSize: 15.sp,
-                                  color: const Color(0xff48505899)
-                                  // greyFontColoR.withAlpha(99),
+                    GestureDetector(
+                      onTap: () {
+                        Get.bottomSheet(Container(
+                            padding: EdgeInsets.only(top: 30.h),
+                            decoration: const BoxDecoration(
+                                borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(25)),
+                                color: Color(0xffF2F9FF)),
+                            height: 350.h,
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ListView(
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    children: glist
+                                        .map(
+                                          (e) => GestureDetector(
+                                              onTap: () {
+                                                gender.value = e;
+                                              },
+                                              child: Obx(() => ToggleContainer(
+                                                  color: gender.value == e
+                                                      ? AddFeedApi1()
+                                                          .selectedItemcolor1
+                                                          .value
+                                                      : AddFeedApi1()
+                                                          .transparentColor1
+                                                          .value,
+                                                  isSelected: gender.value == e
+                                                      ? true
+                                                      : false,
+                                                  text: e))),
+                                        )
+                                        .toList(),
                                   ),
-                        ),
-                        icon: const Icon(Icons.keyboard_arrow_down,
-                            color: Color(0xff48505899)
-                            // color: greyFontColoR.withAlpha(99),
-                            ),
-                        underline: Container(),
-                        onChanged: (String? value) {
-                          setState(() {
-                            _chosenValue = value;
-                          });
-                        },
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: Platform.isAndroid ? 50.h : 0.h,
+                                        left: 36.w,
+                                        right: 36.w),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Button56(
+                                            onpressed: () {
+                                              Navigator.pop(context);
+                                              gender.value = 'Gender';
+                                            },
+                                            buttonText: 'Cancel',
+                                            textColor: Colors.black,
+                                            width: 1,
+                                            widthColor: Colors.black,
+                                            color: const Color(0xffF2F9FF)),
+                                        Button56Blue(
+                                            onpressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            buttonText: 'Done',
+                                            textColor: const Color(0xffF2F9FF),
+                                            color: const Color(0xff2B67A3))
+                                      ],
+                                    ),
+                                  )
+                                ])));
+                      },
+                      child: Container(
+                        padding: EdgeInsets.only(left: 20.w, top: 15.h),
+                        height: 52.h,
+                        width: 356.w,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(
+                                color:
+                                    const Color.fromRGBO(113, 154, 195, 0.16)),
+                            boxShadow: const [
+                              BoxShadow(
+                                  // ignore: use_full_hex_values_for_flutter_colors
+                                  color: Color.fromRGBO(113, 154, 195, 0.16),
+                                  blurRadius: 0,
+                                  offset: Offset(0, 4))
+                            ],
+                            borderRadius: BorderRadius.circular(5)),
+                        child: Obx(() => gender.value == 'Gender'
+                            ? Text14PtGrey(text: 'Gender')
+                            : Text(gender.value)),
                       ),
                     ),
                     SizedBox(height: 156.h),
@@ -229,7 +274,7 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
                               .registerUser(
                                   sld.value,
                                   validateEmail.emailController.text,
-                                  _chosenValue.toString(),
+                                  gender.value,
                                   textEditingController1.text,
                                   textEditingController2.text,
                                   lat,
@@ -269,4 +314,6 @@ class _RegisterationScreenState extends State<RegisterationScreen> {
       ),
     );
   }
+
+  final List<String> glist = ['Male', 'Female', 'Transgender'];
 }

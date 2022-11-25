@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:reelpro/consts/button.dart';
 import 'package:reelpro/consts/text.dart';
@@ -256,7 +258,7 @@ class SponserContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 280.h,
+        height: Platform.isIOS ? 295.h : 305.h,
         width: double.infinity,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10), color: Colors.white),

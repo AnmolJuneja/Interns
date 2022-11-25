@@ -47,6 +47,7 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
   final fetchAdress = Get.put(FetchLatLng());
   var value1 = 'Connect with Challenge'.obs;
   var value = 'Select Fishtype'.obs;
+  var isSelected = false.obs;
   @override
   Widget build(BuildContext context) {
     double lat = 30.403648;
@@ -312,10 +313,12 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                                                 ))
                                             .toList(),
                                       ),
-                                      SizedBox(height: 10.h),
                                       Padding(
                                           padding: EdgeInsets.only(
-                                              left: 36.w, right: 36.w),
+                                              left: 36.w,
+                                              right: 36.w,
+                                              top:
+                                                  Platform.isIOS ? 10.h : 60.h),
                                           child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
@@ -358,13 +361,106 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                   SizedBox(height: 18.h),
                   Text15PtBlue(text: 'Select Location'),
                   SizedBox(height: 14.h),
-                  TextF(
-                      readOnly: false,
-                      textEditingController: locationController,
-                      hintText: 'Select location',
-                      textInputType: TextInputType.text,
-                      prefix: null,
-                      onchanged: (value) {}),
+                  GestureDetector(
+                    onTap: () {
+                      Get.bottomSheet(
+                          Container(
+                            padding: EdgeInsets.only(top: 40.h),
+                            height: 800.h,
+                            width: double.infinity,
+                            decoration: const BoxDecoration(
+                                borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(25)),
+                                color: Color(0xffF2F9FF)),
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 36.w, right: 36.w),
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text15PtBlue(text: 'Tag Location'),
+                                          SizedBox(height: 30.h),
+                                          TextFSearch(
+                                              textEditingController:
+                                                  searchController,
+                                              hintText: 'Search',
+                                              textInputType: TextInputType.text,
+                                              prefix: null,
+                                              onchanged: (value) {}),
+                                        ]),
+                                  ),
+                                  SizedBox(height: 30.h),
+                                  Obx(() => GestureDetector(
+                                        onTap: () {
+                                          isSelected.value = true;
+                                        },
+                                        child: ToggleContainer(
+                                            color: isSelected.value
+                                                ? const Color(0xffd6e9ff)
+                                                : const Color(0xffF2F9FF),
+                                            isSelected: isSelected.value,
+                                            text: fetchAdress.address.value),
+                                      )),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 460.h, left: 36.w, right: 36.w),
+                                    child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Button56(
+                                              onpressed: () {
+                                                Navigator.pop(context);
+                                                isSelected.value = false;
+                                              },
+                                              buttonText: 'Cancel',
+                                              textColor: Colors.black,
+                                              width: 1,
+                                              widthColor: Colors.black,
+                                              color: const Color(0xffF2F9FF)),
+                                          Button56Blue(
+                                              onpressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              buttonText: 'Done',
+                                              textColor:
+                                                  const Color(0xffF2F9FF),
+                                              color: const Color(0xff2B67A3))
+                                        ]),
+                                  )
+                                ]),
+                          ),
+                          isScrollControlled: true);
+                    },
+                    child: Container(
+                        padding: EdgeInsets.only(
+                            top: 17.h, bottom: 14.h, left: 20.w, right: 20.w),
+                        height: 52.h,
+                        width: 356.w,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Color.fromRGBO(113, 154, 195, 0.16),
+                                  blurRadius: 0,
+                                  offset: Offset(0, 4))
+                            ],
+                            borderRadius: BorderRadius.circular(5)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Obx(() => isSelected.value
+                                ? Text16PtBlack(
+                                    text: fetchAdress.address.toString())
+                                : Text15PtGrey(text: 'Select Location')),
+                            SvgPicture.asset('assets/images/open-location.svg')
+                          ],
+                        )),
+                  ),
                   SizedBox(height: 18.h),
                   Text15PtBlue(text: 'Enter Weight (g)'),
                   SizedBox(height: 14.h),

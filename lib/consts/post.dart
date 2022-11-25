@@ -101,7 +101,7 @@ class Post extends StatelessWidget {
                                 SizedBox(width: 7.w),
                                 Text14Pt(text: text2)
                               ],
-                            )
+                            ),
                           ],
                         ),
                       ],
@@ -173,7 +173,7 @@ class Post extends StatelessWidget {
                         height: 40.h,
                         width: 40.w)
                   ],
-                ))
+                )),
           ],
         ));
   }

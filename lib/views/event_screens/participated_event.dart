@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:reelpro/consts/button.dart';
 import 'package:reelpro/consts/container.dart';
@@ -165,7 +167,8 @@ class _ParticipatedEventUIState extends State<ParticipatedEventUI> {
         // SizedBox(height: 20.h),
       ]),
       bottomSheet: Container(
-          padding: EdgeInsets.only(left: 36.w, bottom: 33.h),
+          height: 110.h,
+          padding: EdgeInsets.only(left: 36.w, bottom: 55.h),
           child: MyButton(
               onpressed: () {
                 Navigator.of(context).pushAndRemoveUntil(

@@ -69,11 +69,12 @@ class EventDetailsConst extends StatelessWidget {
                 Text16HMedium(text: text17),
                 SizedBox(width: 111.w),
                 Container(
+                  width: 100.w,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
                       color: const Color(0xff719AC3)),
                   child: Center(child: Text16HMedium(text: text18)),
-                ),
+                )
               ],
             )),
       ],
@@ -261,7 +262,7 @@ class EventDetailsRow extends StatelessWidget {
             Text14ptSilver(text: text11),
             SizedBox(height: 10.h),
             SizedBox(
-                height: 78.h,
+                // height: 78.h,
                 width: 356.w,
                 child: Text14ptDesc(
                   text: text12,

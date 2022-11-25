@@ -26,16 +26,16 @@ class AboutGroupUI extends StatelessWidget {
                 child: const Icon(Icons.arrow_back_ios, color: Colors.black))),
       ),
       body: Padding(
-        padding: EdgeInsets.only(top: 46.h, left: 36.w, right: 36.w),
+        padding: EdgeInsets.only(top: 30.h, left: 36.w, right: 36.w),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text14PtGrey(text: 'Group Description'),
           SizedBox(height: 10.h),
           Text14Pt58(
               text:
                   'The Wake Forest Parks, Recreation & Cultural Resources (PRCR) Department will host a Virtual Bass Fishing Tournament for ages 13 and older and a Virtual Youth Fishing Tournament for ages 12.'),
-          SizedBox(height: 30.h),
+          SizedBox(height: 20.h),
           const Divider(thickness: 1),
-          SizedBox(height: 30.h),
+          SizedBox(height: 20.h),
           Text14PtGrey(text: 'Group Owner'),
           SizedBox(height: 12.h),
           Row(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -44,9 +44,9 @@ class AboutGroupUI extends StatelessWidget {
             SizedBox(width: 12.w),
             Center(child: Text16PtBlack(text: 'Anthony Wilson')),
           ]),
-          SizedBox(height: 30.h),
+          SizedBox(height: 20.h),
           const Divider(thickness: 1),
-          SizedBox(height: 30.h),
+          SizedBox(height: 20.h),
           Text14PtGrey(text: 'Group Region'),
           SizedBox(height: 12.h),
           Row(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -62,9 +62,9 @@ class AboutGroupUI extends StatelessWidget {
             SizedBox(width: 12.w),
             Text16PtBlack(text: 'Perth Australia')
           ]),
-          SizedBox(height: 30.h),
+          SizedBox(height: 20.h),
           const Divider(thickness: 1),
-          SizedBox(height: 35.h),
+          SizedBox(height: 30.h),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
               const Icon(Icons.people_outline),
@@ -78,7 +78,7 @@ class AboutGroupUI extends StatelessWidget {
               size: 15,
             )
           ]),
-          SizedBox(height: 35.h),
+          SizedBox(height: 25.h),
           const Divider(thickness: 1)
         ]),
       ),

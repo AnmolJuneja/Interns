@@ -64,6 +64,7 @@ class _FollowingUIState extends State<FollowingUI> {
 Widget followingList1(Follower follower) {
   final otp = Get.put(OtherUserProfileApi());
   final ep = Get.put(Editprofile());
+  final ff = Get.put(OtherUserProfileApi());
   return GestureDetector(
       onTap: () {
         Get.to(() => OtherUserProfileUI(userId: follower.id!.toInt()));
@@ -90,7 +91,7 @@ Widget followingList1(Follower follower) {
               child: Button56(
                   onpressed: () async {
                     await otp.unfollowUser(follower.id!);
-
+                    ff.follow.value--;
                     await ep.getFollowersListFinal();
                   },
                   buttonText: 'Unfollow',

@@ -117,7 +117,7 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Upcoming events',
+                    Text('Upcoming Events',
                         style: TextStyle(
                             fontFamily: 'Helvetica',
                             fontSize: 21.sp,
@@ -128,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             return Container(
-                              padding: EdgeInsets.only(top: 80.h, left: 120.w),
+                              padding: EdgeInsets.only(top: 100.h, left: 120.w),
                               child: const Text('No Upcoming Events'),
                             );
                           } else {

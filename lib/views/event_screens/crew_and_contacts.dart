@@ -43,14 +43,14 @@ class _CrewAndContactsUIState extends State<CrewAndContactsUI> {
                 child: const Icon(Icons.arrow_back_ios, color: Colors.black))),
       ),
       body: Padding(
-          padding: EdgeInsets.only(left: 36.w, right: 36.w, top: 34.h),
+          padding: EdgeInsets.only(left: 36.w, right: 36.w, top: 30.h),
           child: SingleChildScrollView(
             child: Column(
               children: [
                 const SponserContainer(),
                 SizedBox(height: 32.h),
                 Padding(
-                  padding: EdgeInsets.only(right: 15.w),
+                  padding: EdgeInsets.only(right: 25.w),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -66,7 +66,7 @@ class _CrewAndContactsUIState extends State<CrewAndContactsUI> {
                 ),
                 SizedBox(height: 7.h),
                 Padding(
-                  padding: EdgeInsets.only(right: 15.w),
+                  padding: EdgeInsets.only(right: 25.w),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -79,20 +79,28 @@ class _CrewAndContactsUIState extends State<CrewAndContactsUI> {
                 SizedBox(height: 30.h),
                 const Divider(thickness: 1),
                 SizedBox(height: 30.h),
-                Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  Text14Pt(text: 'Director:'),
-                  SizedBox(width: 20.w),
-                  const Text('Anthony Blomberg'),
-                ]),
+                Padding(
+                  padding: EdgeInsets.only(right: 142.w),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text14Pt(text: 'Director:'),
+                        const Text('Anthony Blomberg'),
+                      ]),
+                ),
                 SizedBox(height: 15.h),
-                Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  Text14Pt(text: 'Phone:'),
-                  SizedBox(width: 20.w),
-                  const Text('   908 111 1111'),
-                ]),
+                Padding(
+                  padding: EdgeInsets.only(right: 184.w),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text14Pt(text: 'Phone:'),
+                        const Text('   908 111 1111'),
+                      ]),
+                ),
                 SizedBox(height: 15.h),
-                Container(
-                  margin: EdgeInsets.only(right: 120.w),
+                Padding(
+                  padding: EdgeInsets.only(right: 106.w),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -101,17 +109,16 @@ class _CrewAndContactsUIState extends State<CrewAndContactsUI> {
                       ]),
                 ),
                 SizedBox(height: 15.h),
-                Container(
-                  margin: EdgeInsets.only(right: 100.w),
+                Padding(
+                  padding: EdgeInsets.only(right: 87.w),
                   child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text14Pt(text: 'Website:'),
-                        SizedBox(width: 20.w),
                         const Text('www.tournament2022.com'),
                       ]),
                 ),
-                SizedBox(height: 80.h),
+                SizedBox(height: 90.h),
                 MyButton(
                     onpressed: () {
                       Get.bottomSheet(

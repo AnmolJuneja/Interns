@@ -259,6 +259,7 @@ class AddFeedApi {
 
   MyFeedList? myFeedList;
   var isLoading = false.obs;
+  var count = false.obs;
   Future<MyFeedList> getMyFeedListFinal() async {
     isLoading.value = true;
     var resp = await getMyFeedList();

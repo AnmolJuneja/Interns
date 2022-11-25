@@ -25,7 +25,7 @@ class InviteMembersUI extends StatelessWidget {
                       const Icon(Icons.arrow_back_ios, color: Colors.black)))),
       backgroundColor: const Color(0xffF2F9FF),
       body: Padding(
-        padding: EdgeInsets.only(left: 36.w, right: 36.w, top: 44.h),
+        padding: EdgeInsets.only(left: 36.w, right: 36.w, top: 30.h),
         child: Column(children: [
           SizedBox(
             height: 700.h,

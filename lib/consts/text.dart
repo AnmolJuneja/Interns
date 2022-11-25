@@ -146,6 +146,7 @@ class Text16Pt extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(text,
+        overflow: TextOverflow.ellipsis,
         style: TextStyle(
             fontFamily: 'Helvetica',
             fontWeight: FontWeight.w500,
@@ -217,6 +218,14 @@ class Text16HMedium extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
+          shadows: <Shadow>[
+            Shadow(
+              offset: Offset(1.0, 1.0),
+              blurRadius: 3.0,
+              color: Color.fromARGB(255, 0, 0, 0),
+            )
+          ],
+          overflow: TextOverflow.ellipsis,
           fontFamily: 'Helvetica',
           fontSize: 14.sp,
           fontWeight: FontWeight.w500,
@@ -291,6 +300,22 @@ class Text16PtBlack extends StatelessWidget {
             fontSize: 16.sp,
             // ignore: use_full_hex_values_for_flutter_colors
             color: const Color(0xff191A1C)));
+  }
+}
+
+class Text12PtGrey extends StatelessWidget {
+  String text;
+  Text12PtGrey({Key? key, required this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(text,
+        style: TextStyle(
+            fontFamily: 'Helvetica',
+            fontWeight: FontWeight.w400,
+            fontSize: 12.sp,
+            // ignore: use_full_hex_values_for_flutter_colors
+            color: const Color(0xff8B959E)));
   }
 }
 
@@ -461,8 +486,8 @@ class Text20PtBlack extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(text,
-    maxLines: 1,
-    overflow: TextOverflow.ellipsis,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
         style: TextStyle(
             fontFamily: 'Helvetica',
             fontWeight: FontWeight.w500,

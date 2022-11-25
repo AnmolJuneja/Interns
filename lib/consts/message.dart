@@ -20,9 +20,9 @@ class MessageConst extends StatelessWidget {
               foregroundColor: const Color(0xff2B67A3),
             ),
             Container(
-              height: 30.h,
+              height: 70.h,
               width: 1.w,
-              color: Colors.grey,
+              color: const Color.fromARGB(255, 206, 206, 206),
             ),
             SlidableAction(
               onPressed: ((context) {}),
@@ -31,10 +31,9 @@ class MessageConst extends StatelessWidget {
               foregroundColor: const Color(0xff2B67A3),
             ),
             Container(
-              height: 30.h,
-              width: 1.w,
-              color: Colors.grey,
-            ),
+                height: 70.h,
+                width: 1.w,
+                color: const Color.fromARGB(255, 206, 206, 206)),
             SlidableAction(
               onPressed: ((context) {}),
               backgroundColor: const Color(0xffF2F9FF),
@@ -74,9 +73,9 @@ class MessageConst extends StatelessWidget {
                 foregroundColor: const Color(0xff2B67A3),
               ),
               Container(
-                height: 30.h,
+                height: 70.h,
                 width: 1.w,
-                color: Colors.grey,
+                color: const Color.fromARGB(255, 206, 206, 206),
               ),
               SlidableAction(
                 onPressed: ((context) {}),
@@ -85,9 +84,9 @@ class MessageConst extends StatelessWidget {
                 foregroundColor: const Color(0xff2B67A3),
               ),
               Container(
-                height: 30.h,
+                height: 70.h,
                 width: 1.w,
-                color: Colors.grey,
+                color: const Color.fromARGB(255, 206, 206, 206),
               ),
               SlidableAction(
                 onPressed: ((context) {}),
@@ -127,9 +126,9 @@ class MessageConst extends StatelessWidget {
                 foregroundColor: const Color(0xff2B67A3),
               ),
               Container(
-                height: 30.h,
+                height: 70.h,
                 width: 1.w,
-                color: Colors.grey,
+                color: const Color.fromARGB(255, 206, 206, 206),
               ),
               SlidableAction(
                 onPressed: ((context) {}),
@@ -138,9 +137,9 @@ class MessageConst extends StatelessWidget {
                 foregroundColor: const Color(0xff2B67A3),
               ),
               Container(
-                height: 30.h,
+                height: 70.h,
                 width: 1.w,
-                color: Colors.grey,
+                color: const Color.fromARGB(255, 206, 206, 206),
               ),
               SlidableAction(
                 onPressed: ((context) {}),
@@ -180,9 +179,9 @@ class MessageConst extends StatelessWidget {
                 foregroundColor: const Color(0xff2B67A3),
               ),
               Container(
-                height: 30.h,
+                height: 70.h,
                 width: 1.w,
-                color: Colors.grey,
+                color: const Color.fromARGB(255, 206, 206, 206),
               ),
               SlidableAction(
                 onPressed: ((context) {}),
@@ -191,9 +190,9 @@ class MessageConst extends StatelessWidget {
                 foregroundColor: const Color(0xff2B67A3),
               ),
               Container(
-                height: 30.h,
+                height: 70.h,
                 width: 1.w,
-                color: Colors.grey,
+                color: const Color.fromARGB(255, 206, 206, 206),
               ),
               SlidableAction(
                 onPressed: ((context) {}),

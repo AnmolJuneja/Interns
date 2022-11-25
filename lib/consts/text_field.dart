@@ -30,12 +30,12 @@ class TextF extends StatelessWidget {
       width: 356.w,
       decoration: BoxDecoration(boxShadow: const [
         BoxShadow(
-            // ignore: use_full_hex_values_for_flutter_colors
             color: Color.fromRGBO(113, 154, 195, 0.16),
             blurRadius: 0,
             offset: Offset(0, 4))
       ], borderRadius: BorderRadius.circular(5)),
       child: TextField(
+        maxLines: null,
         readOnly: readOnly!,
         controller: textEditingController,
         onChanged: onchanged,
@@ -158,7 +158,8 @@ class BigTextField extends StatelessWidget {
             borderRadius: BorderRadius.circular(5),
             color: Colors.white),
         child: TextField(
-          maxLines: null,
+          maxLines: 5,
+          maxLength: 250,
           controller: textEditingController,
           onChanged: onchanged,
           keyboardType: textInputType,

@@ -21,7 +21,6 @@ class _ReportGroupUIState extends State<ReportGroupUI> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // toolbarHeight: 70.h,
         elevation: 0,
         backgroundColor: const Color(0xffF2F9FF),
         title: Text21PtBlack(text: 'Report Group'),
@@ -36,7 +35,7 @@ class _ReportGroupUIState extends State<ReportGroupUI> {
       ),
       backgroundColor: const Color(0xffF2F9FF),
       body: Padding(
-        padding: EdgeInsets.only(left: 36.w, right: 36.w, top: 43.h),
+        padding: EdgeInsets.only(left: 36.w, right: 36.w, top: 30.h),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text14PtBlue(text: 'Reason'),
           SizedBox(height: 9.h),
@@ -55,7 +54,7 @@ class _ReportGroupUIState extends State<ReportGroupUI> {
               hintText: 'Tell us more',
               textInputType: TextInputType.text,
               onchanged: (value) {}),
-          SizedBox(height: 413.h),
+          SizedBox(height: 427.h),
           MyButton(onpressed: () {}, buttonText: 'Submit')
         ]),
       ),

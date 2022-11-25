@@ -108,7 +108,7 @@ class _EventDetailsUIState extends State<EventDetailsUI> {
                       Container(
                           height: 60.h,
                           padding: EdgeInsets.only(
-                              left: 36.w, bottom: 10.h, right: 36.w),
+                              left: 36.w, bottom: 8.h, right: 36.w),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -189,8 +189,8 @@ class _EventDetailsUIState extends State<EventDetailsUI> {
                                                           left: 36.w,
                                                           right: 36.w,
                                                           top: Platform.isIOS
-                                                              ? 22.h
-                                                              : 60.h),
+                                                              ? 20.h
+                                                              : 45.h),
                                                       child: Row(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment

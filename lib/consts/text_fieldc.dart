@@ -229,6 +229,7 @@ class TextFSpotlight extends StatelessWidget {
   TextInputType textInputType;
   Widget? prefix;
   Function()? onTap;
+  Widget? suffixIcon;
   void Function(String)? onchanged;
 
   TextFSpotlight(
@@ -238,6 +239,7 @@ class TextFSpotlight extends StatelessWidget {
       required this.textInputType,
       required this.prefix,
       required this.onTap,
+      required this.suffixIcon,
       required this.onchanged})
       : super(key: key);
 
@@ -268,8 +270,7 @@ class TextFSpotlight extends StatelessWidget {
               enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5),
                   borderSide: BorderSide.none),
-              suffixIcon:
-                  GestureDetector(onTap: onTap, child: const Icon(Icons.close))
+              suffixIcon: suffixIcon
               // ignore: use_full_hex_values_for_flutter_colors
               )),
     );

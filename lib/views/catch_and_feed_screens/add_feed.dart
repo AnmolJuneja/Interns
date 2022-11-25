@@ -45,6 +45,7 @@ class _AddFeedConstState extends State<AddFeedConst> {
   var width = 375.obs;
   var viewStatus = 0;
   var btn = true.obs;
+  var isSelected = false.obs;
   List<File> file = [];
   final instance = Get.put(AddFeedApi());
 
@@ -235,11 +236,81 @@ class _AddFeedConstState extends State<AddFeedConst> {
               GestureDetector(
                   onTap: () {
                     FocusScope.of(context).unfocus();
-                    location.value = false;
+                    Get.bottomSheet(
+                        Container(
+                          padding: EdgeInsets.only(top: 40.h),
+                          height: 800.h,
+                          width: double.infinity,
+                          decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(25)),
+                              color: Color(0xffF2F9FF)),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding:
+                                      EdgeInsets.only(left: 36.w, right: 36.w),
+                                  child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text15PtBlue(text: 'Tag Location'),
+                                        SizedBox(height: 30.h),
+                                        TextFSearch(
+                                            textEditingController:
+                                                textEditingControllerSearch,
+                                            hintText: 'Search',
+                                            textInputType: TextInputType.text,
+                                            prefix: null,
+                                            onchanged: (value) {}),
+                                      ]),
+                                ),
+                                SizedBox(height: 30.h),
+                                Obx(() => GestureDetector(
+                                      onTap: () {
+                                        isSelected.value = true;
+                                      },
+                                      child: ToggleContainer(
+                                          color: isSelected.value
+                                              ? const Color(0xffd6e9ff)
+                                              : const Color(0xffF2F9FF),
+                                          isSelected: isSelected.value,
+                                          text: fetchAdress.address.value),
+                                    )),
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      top: 460.h, left: 36.w, right: 36.w),
+                                  child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Button56(
+                                            onpressed: () {
+                                              Navigator.pop(context);
+                                              isSelected.value = false;
+                                            },
+                                            buttonText: 'Cancel',
+                                            textColor: Colors.black,
+                                            width: 1,
+                                            widthColor: Colors.black,
+                                            color: const Color(0xffF2F9FF)),
+                                        Button56Blue(
+                                            onpressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            buttonText: 'Done',
+                                            textColor: const Color(0xffF2F9FF),
+                                            color: const Color(0xff2B67A3))
+                                      ]),
+                                )
+                              ]),
+                        ),
+                        isScrollControlled: true);
                   },
-                  child: Obx(() => location.value
-                      ? Text16AddFeed(text: 'location')
-                      : Text16PtBlack(text: fetchAdress.address.value))),
+                  child: Obx(() => isSelected.value
+                      ? Text16PtBlack(text: fetchAdress.address.value)
+                      : Text16AddFeed(text: 'Location'))),
             ]),
             SizedBox(height: 41.h),
             Row(mainAxisAlignment: MainAxisAlignment.start, children: [

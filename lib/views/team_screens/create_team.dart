@@ -56,7 +56,7 @@ class _CreateTeamViewState extends State<CreateTeamView> {
                 padding: EdgeInsets.only(left: 36.w),
                 child: GestureDetector(
                   onTap: () {
-                    Get.to(() => const MangeTeams());
+                    Navigator.pop(context);
                   },
                   child: const Icon(
                     Icons.arrow_back_ios,

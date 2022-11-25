@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -12,8 +13,11 @@ import 'package:reelpro/consts/small_container.dart';
 import 'package:reelpro/consts/small_text.dart';
 import 'package:get/get.dart';
 import 'package:reelpro/consts/step_two.dart';
+import 'package:reelpro/consts/text.dart';
 import 'package:reelpro/consts/text_field.dart';
+import 'package:reelpro/consts/toggle_container.dart';
 import 'package:reelpro/consts/upper_design.dart';
+import 'package:reelpro/controllers/feed_and_catch_controllers.dart';
 import 'package:reelpro/controllers/registeration_controllers.dart';
 import 'package:reelpro/models/edit_profile.dart';
 import 'package:reelpro/models/registration_step_two.dart';
@@ -38,17 +42,7 @@ class _Registeration2State extends State<Registeration2> {
   var registerationTwo1 = Get.put(OtpViewModel());
   TextEditingController shirtSizeController = TextEditingController();
   TextEditingController clubController = TextEditingController();
-  @override
-  void initState() {
-    if (registerationTwo.vetran.isNotEmpty) {
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-              builder: (context) => BottomNavigation(currentIndex: 2)),
-          (route) => false);
-    }
-    super.initState();
-  }
+  var shirt = ''.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -147,55 +141,94 @@ class _Registeration2State extends State<Registeration2> {
                     SizedBox(height: 26.h),
                     LabelText(text: 'Shirt Size'),
                     SizedBox(height: 13.h),
-                    Container(
-                      padding: EdgeInsets.only(left: 20.w),
-                      height: 52.h,
-                      width: 356.w,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                                // ignore: use_full_hex_values_for_flutter_colors
-                                color: Color.fromRGBO(113, 154, 195, 0.16),
-                                blurRadius: 0,
-                                offset: Offset(0, 4))
-                          ],
-                          border: Border.all(
-                              width: 1,
-                              color: const Color.fromRGBO(113, 154, 195, 0.16)),
-                          borderRadius: BorderRadius.circular(5)),
-                      child: DropdownButton<String>(
-                        iconSize: 0.0,
-                        value: _chosenValue,
-                        items: <String>['S', 'M', 'L', 'XL', 'XXL', 'XXXL']
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                        hint: Text(
-                          'Select',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline2!
-                              .copyWith(
-                                  fontSize: 15.sp,
-                                  color: const Color(0xff48505899)
-                                  // greyFontColoR.withAlpha(99),
+                    GestureDetector(
+                      onTap: () {
+                        Get.bottomSheet(Container(
+                            padding: EdgeInsets.only(top: 30.h),
+                            decoration: const BoxDecoration(
+                                borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(25)),
+                                color: Color(0xffF2F9FF)),
+                            height: 580.h,
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ListView(
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    children: slist
+                                        .map(
+                                          (e) => GestureDetector(
+                                              onTap: () {
+                                                shirt.value = e;
+                                              },
+                                              child: Obx(() => ToggleContainer(
+                                                  color: shirt.value == e
+                                                      ? AddFeedApi1()
+                                                          .selectedItemcolor1
+                                                          .value
+                                                      : AddFeedApi1()
+                                                          .transparentColor1
+                                                          .value,
+                                                  isSelected: shirt.value == e
+                                                      ? true
+                                                      : false,
+                                                  text: e))),
+                                        )
+                                        .toList(),
                                   ),
-                        ),
-                        icon: const Icon(Icons.keyboard_arrow_down,
-                            // ignore: use_full_hex_values_for_flutter_colors
-                            color: Color(0xff48505899)
-                            // color: greyFontColoR.withAlpha(99),
-                            ),
-                        underline: Container(),
-                        onChanged: (String? value) {
-                          setState(() {
-                            _chosenValue = value;
-                          });
-                        },
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: Platform.isAndroid ? 45.h : 0.h,
+                                        left: 36.w,
+                                        right: 36.w),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Button56(
+                                            onpressed: () {
+                                              Navigator.pop(context);
+                                              shirt.value = '';
+                                            },
+                                            buttonText: 'Cancel',
+                                            textColor: Colors.black,
+                                            width: 1,
+                                            widthColor: Colors.black,
+                                            color: const Color(0xffF2F9FF)),
+                                        Button56Blue(
+                                            onpressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            buttonText: 'Done',
+                                            textColor: const Color(0xffF2F9FF),
+                                            color: const Color(0xff2B67A3))
+                                      ],
+                                    ),
+                                  )
+                                ])));
+                      },
+                      child: Container(
+                        padding: EdgeInsets.only(left: 20.w, top: 15.h),
+                        height: 52.h,
+                        width: 356.w,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(
+                                color:
+                                    const Color.fromRGBO(113, 154, 195, 0.16)),
+                            boxShadow: const [
+                              BoxShadow(
+                                  // ignore: use_full_hex_values_for_flutter_colors
+                                  color: Color.fromRGBO(113, 154, 195, 0.16),
+                                  blurRadius: 0,
+                                  offset: Offset(0, 4))
+                            ],
+                            borderRadius: BorderRadius.circular(5)),
+                        child: Obx(() => shirt.value == ''
+                            ? Text14PtGrey(text: 'Select')
+                            : Text(shirt.value)),
                       ),
                     ),
                     SizedBox(height: 13.h),
@@ -257,7 +290,7 @@ class _Registeration2State extends State<Registeration2> {
                           await registerationTwo1
                               .registersteptwo(
                                   registerationTwo.fishingType,
-                                  _chosenValue.toString(),
+                                  shirt.value,
                                   registerationTwo.vetran,
                                   clubController.text)
                               .then((value) {});
@@ -275,4 +308,6 @@ class _Registeration2State extends State<Registeration2> {
       ),
     );
   }
+
+  final List<String> slist = ['S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
 }
