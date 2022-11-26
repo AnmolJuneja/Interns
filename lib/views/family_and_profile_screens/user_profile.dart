@@ -167,12 +167,12 @@ class _UserProfileUIState extends State<UserProfileUI> {
                               ),
                               Padding(
                                 padding: EdgeInsets.only(
-                                    left: 37.w, right: 37.w, top: 22.h),
+                                    left: 36.w, right: 37.w, top: 22.h),
                                 child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text20PtBold(text: ' 0'),
+                                      Text20PtBold(text: '0'),
                                       GestureDetector(
                                         onTap: () {},
                                         child: Text20PtBold(
@@ -289,7 +289,7 @@ class _UserProfileUIState extends State<UserProfileUI> {
                                   ]),
                             ),
                           ]),
-                        )
+                        ),
                       ]),
                     )
                   ]))));

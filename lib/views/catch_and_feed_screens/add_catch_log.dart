@@ -225,7 +225,9 @@ class _AddCatchLogUIState extends State<AddCatchLogUI> {
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(
-                                          top: 30.h, left: 36.w, right: 36.w),
+                                          top: Platform.isIOS ? 30.h : 80.h,
+                                          left: 36.w,
+                                          right: 36.w),
                                       child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,

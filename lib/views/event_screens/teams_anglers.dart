@@ -30,7 +30,7 @@ class TeamsAnglersUI extends StatelessWidget {
             ),
             body: Stack(children: [
               Positioned(
-                  top: Platform.isAndroid ? 155.2.h : 70.h,
+                  top: Platform.isAndroid ? 79.2.h : 70.h,
                   child:
                       Container(height: 2.h, width: 500.w, color: Colors.grey)),
               Padding(
