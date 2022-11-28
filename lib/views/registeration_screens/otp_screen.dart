@@ -149,7 +149,6 @@ class _OtpScreenState extends State<OtpScreen> {
                   },
                   buttonText: 'Continue')),
           Positioned(
-              // bottom: 779.h,
               right: 36.w,
               top: 80.h,
               child: Image(

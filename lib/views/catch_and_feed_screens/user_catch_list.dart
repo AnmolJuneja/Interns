@@ -17,42 +17,40 @@ class UserCatchListUI extends StatefulWidget {
 
 class _UserCatchListUIState extends State<UserCatchListUI> {
   final uu = Get.put(AddCatchlogApi());
+  @override
+  void initState() {
+    uu.specificUserCatchFinal(0, 2);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color(0xffF2F9FF),
-        body: Padding(
-          padding: EdgeInsets.only(left: 36.w, right: 36.w, top: 20.h),
-          child: FutureBuilder<UserCatchListResponse>(
-              future: uu.specificUserCatchFinal(widget.useId, 2),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return uu.userCatchListResponse!.data!.isNotEmpty
-                      ? GridView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  mainAxisSpacing: 16.h,
-                                  crossAxisSpacing: 16.w),
-                          itemCount: uu.userCatchListResponse!.data!.length,
-                          itemBuilder: (context, index) {
-                            return buildCatchList(
-                                uu.userCatchListResponse!.data![index]);
-                          })
-                      : Padding(
-                          padding: EdgeInsets.only(top: 100.h, left: 130.w),
-                          child: Text16PtBlack(text: 'No Catch Data'));
-                } else {
-                  return const Center(child: CircularProgressIndicator());
-                }
-              }),
-        ));
+        body: Obx(() => uu.isLoadingc.value
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : Padding(
+                padding: EdgeInsets.only(left: 36.w, right: 36.w, top: 20.h),
+                child: uu.catchList.isNotEmpty
+                    ? GridView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 16.h,
+                            crossAxisSpacing: 16.w),
+                        itemCount: uu.catchList.length,
+                        itemBuilder: (context, index) {
+                          return buildCatchList(uu.catchList[index]);
+                        })
+                    : Padding(
+                        padding: EdgeInsets.only(top: 100.h, left: 130.w),
+                        child: Text16PtBlack(text: 'No Catch Data')))));
   }
 }
 
-Widget buildCatchList(Data data) {
+Widget buildCatchList(CatchData data) {
   return GestureDetector(
     onTap: () {
       Get.to(() => CatchDetailsUI(catchId: data.id!.toInt()));

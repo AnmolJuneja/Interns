@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:reelpro/models/catch_details.dart';
+import 'package:reelpro/models/catch_like_list.dart';
 import 'package:reelpro/models/catchlog_list_response.dart';
+import 'package:reelpro/models/comment_list.dart';
 import 'package:reelpro/models/fish_species_list.dart';
 import 'dart:io';
 
@@ -10,6 +12,7 @@ import 'package:reelpro/models/user_catch_list_response.dart';
 import 'package:reelpro/models/view_catchlog.dart';
 
 class AddCatchlogApi {
+  var userId;
   Future<dio.Response> addCatch(
       int fishType,
       int challenge,
@@ -132,6 +135,7 @@ class AddCatchlogApi {
   }
 
   Future<dio.Response> getCommentList(int catchId) async {
+    userId = await SaveUserId().getId();
     String authToken = await SharedPreferences1().getToken();
     try {
       dio.Response response;
@@ -240,13 +244,16 @@ class AddCatchlogApi {
     return Future.value();
   }
 
+  var isLoadingc = false.obs;
   var getCatchlogList1 = <ViewCatchlogList>[].obs;
   getfinalCatchlog() async {
+    isLoadingc.value = true;
     await viewCatchlogList(2).then((value) {
       var resp = ViewCatchlogResponse.fromJson(value.data);
       getCatchlogList1.clear();
       getCatchlogList1.addAll(resp.data);
     });
+    isLoadingc.value = false;
   }
 
   Future<dio.Response> addComment(int catchlogId, String comment) async {
@@ -267,6 +274,15 @@ class AddCatchlogApi {
       print(err.response);
     }
     return Future.value();
+  }
+
+  var commentList = <CommentList>[].obs;
+  getCommentListFinal(int catchId) async {
+    await getCommentList(catchId).then((value) {
+      var resp = CommentListRespone.fromJson(value.data);
+      commentList.clear();
+      commentList.addAll(resp.data);
+    });
   }
 
   Future<dio.Response> specificUserCatch(int userId, int catchType) async {
@@ -293,13 +309,90 @@ class AddCatchlogApi {
   }
 
   var sLoading = false.obs;
-  UserCatchListResponse? userCatchListResponse;
-  Future<UserCatchListResponse> specificUserCatchFinal(
-      int userId, int catchType) async {
+  var catchList = <CatchData>[].obs;
+  specificUserCatchFinal(int userId, int catchType) async {
     sLoading.value = true;
-    var resp = await specificUserCatch(userId, catchType);
-    userCatchListResponse = UserCatchListResponse.fromJson(resp.data);
+    await specificUserCatch(userId, catchType).then((value) {
+      var resp = UserCatchListResponse.fromJson(value.data);
+      catchList.clear();
+      catchList.addAll(resp.data);
+    });
     sLoading.value = false;
-    return userCatchListResponse!;
+  }
+
+  Future<dio.Response> deleteCatchComment(int commentId) async {
+    String authToken = await SharedPreferences1().getToken();
+    try {
+      dio.Response response;
+      response = await dio.Dio().get(
+          'https://reelpro.yatilabs.com/api/v1/catchlog/delete-comment/$commentId',
+          options: dio.Options(headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer $authToken'
+          }));
+      print('Response data ${response.data}');
+      return response;
+    } on dio.DioError catch (err) {
+      print(err.message);
+      print(err.response);
+    }
+    return Future.value();
+  }
+
+  Future<dio.Response> deleteCatchLog(int catchId) async {
+    String authToken = await SharedPreferences1().getToken();
+    try {
+      dio.Response response;
+      response = await dio.Dio().get(
+          'https://reelpro.yatilabs.com/api/v1/catchlog/deletecatchlog/$catchId',
+          options: dio.Options(headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer $authToken'
+          }));
+      print('Response data ${response.data}');
+      return response;
+    } on dio.DioError catch (err) {
+      print(err.message);
+      print(err.response);
+    }
+    return Future.value();
+  }
+
+  Future<dio.Response> catchLikeList(int catchId) async {
+    String authToken = await SharedPreferences1().getToken();
+    try {
+      dio.Response response;
+      response = await dio.Dio().get(
+          'https://reelpro.yatilabs.com/api/v1/catchlog/likelist/$catchId',
+          options: dio.Options(headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer $authToken'
+          }));
+      print('Response data ${response.data}');
+      return response;
+    } on dio.DioError catch (err) {
+      print(err.message);
+      print(err.response);
+    }
+    return Future.value();
+  }
+
+  var likeList = <DataCLike>[].obs;
+  var isLoadingCLike = false.obs;
+  catchLikeListFinal(int catchId) async {
+    isLoadingCLike.value = true;
+    await catchLikeList(catchId).then((value) {
+      var resp = CatchLikeList.fromJson(value.data);
+      likeList.clear();
+      likeList.addAll(resp.data);
+    });
+    isLoadingCLike.value = false;
+  }
+
+  CatchLikeList? catchLikeList1;
+  Future<CatchLikeList> catchLikeListFinal1(int catchId) async {
+    var resp = await catchLikeList(catchId);
+    catchLikeList1 = CatchLikeList.fromJson(resp.data);
+    return catchLikeList1!;
   }
 }

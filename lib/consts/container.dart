@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:reelpro/consts/button.dart';
 import 'package:reelpro/consts/text.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class BottomSheetContainer extends StatelessWidget {
   Text15PtGrey widgetText;
@@ -84,7 +85,11 @@ class Container100_88 extends StatelessWidget {
       child: Center(
         child: Column(
           children: [
-            Image(image: AssetImage(image), height: 44.h, width: 44.w),
+            SvgPicture.asset(
+              image,
+              height: 44.h,
+              width: 44.w,
+            ),
             SizedBox(height: 8.h),
             Text16PtBlue(text: text)
           ],
@@ -111,7 +116,6 @@ class Container100_88w extends StatelessWidget {
         borderRadius: BorderRadius.circular(5),
         boxShadow: const [
           BoxShadow(
-              // ignore: use_full_hex_values_for_flutter_colors
               color: Color.fromRGBO(113, 154, 195, 0.16),
               blurRadius: 0,
               offset: Offset(0, 4))
@@ -120,7 +124,7 @@ class Container100_88w extends StatelessWidget {
       child: Center(
         child: Column(
           children: [
-            Image(image: AssetImage(image), height: 44.h, width: 44.w),
+            SvgPicture.asset(image, height: 44.h, width: 44.w),
             SizedBox(height: 8.h),
             Text16PtBlue(text: text)
           ],

@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:reelpro/controllers/registeration_controllers.dart';
 import 'package:reelpro/models/followers_list.dart';
 import 'package:reelpro/models/shared_preferences.dart';
-// import 'package:reelpro/view_models/register_user_request/registeration_step_two.dart';
 
 class Editprofile {
   final instance = Get.put(RegistrationStepTwo2());
@@ -106,6 +105,39 @@ class Editprofile {
       var resp = FollowersList.fromJson(value.data);
       list.clear();
       list.addAll(resp.data!);
+    });
+
+    isLoading.value = false;
+  }
+
+  Future<dio.Response> getFollowersList1() async {
+    String authToken = await SharedPreferences1().getToken();
+    try {
+      dio.Response response;
+      response = await dio.Dio().get(
+          'https://reelpro.yatilabs.com/api/follower-list',
+          options: dio.Options(headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer $authToken'
+          }));
+      print('Response data: ${response.data}');
+      return response;
+    } on dio.DioError catch (err) {
+      print(err.response);
+      print(err.message);
+    }
+    return Future.value();
+  }
+
+  FollowersList? followersList1;
+  var list1 = <Follower>[].obs;
+  var isLoading1 = false.obs;
+  getFollowersListFinal1() async {
+    isLoading.value = true;
+    await getFollowersList1().then((value) {
+      var resp = FollowersList.fromJson(value.data);
+      list1.clear();
+      list1.addAll(resp.data!);
     });
 
     isLoading.value = false;

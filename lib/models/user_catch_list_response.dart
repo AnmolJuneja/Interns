@@ -1,9 +1,9 @@
 class UserCatchListResponse {
   bool? success;
   String? message;
-  List<Data>? data;
+  List<CatchData> data = [];
 
-  UserCatchListResponse({this.success, this.message, this.data});
+  UserCatchListResponse({this.success, this.message, required this.data});
 
   UserCatchListResponse.fromJson(Map<String, dynamic> json) {
     if (json["success"] is bool) {
@@ -13,9 +13,9 @@ class UserCatchListResponse {
       message = json["message"];
     }
     if (json["data"] is List) {
-      data = json["data"] == null
+      data = (json["data"] == null
           ? null
-          : (json["data"] as List).map((e) => Data.fromJson(e)).toList();
+          : (json["data"] as List).map((e) => CatchData.fromJson(e)).toList())!;
     }
   }
 
@@ -28,7 +28,7 @@ class UserCatchListResponse {
   }
 }
 
-class Data {
+class CatchData {
   int? id;
   String? location;
   double? lng;
@@ -52,7 +52,7 @@ class Data {
   int? totalComments;
   int? totalLikes;
 
-  Data(
+  CatchData(
       {this.id,
       this.location,
       this.lng,
@@ -76,7 +76,7 @@ class Data {
       this.totalComments,
       this.totalLikes});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  CatchData.fromJson(Map<String, dynamic> json) {
     if (json["id"] is int) {
       id = json["id"];
     }

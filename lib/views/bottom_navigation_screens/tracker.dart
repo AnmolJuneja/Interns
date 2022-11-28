@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:reelpro/consts/container.dart';
 import 'package:reelpro/consts/text.dart';
 import 'package:reelpro/controllers/feed_and_catch_controllers.dart';
+import 'package:reelpro/models/catch_like_list.dart';
 import 'package:reelpro/models/catchlog_list_response.dart';
 import 'package:reelpro/models/feed_like_list.dart';
 import 'package:reelpro/models/feed_list.dart';
@@ -15,6 +16,7 @@ import 'package:reelpro/views/bottom_navigation_screens/bottom_navigation.dart';
 import 'package:reelpro/views/catch_and_feed_screens/catch_details.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:reelpro/views/catch_and_feed_screens/feed_details.dart';
+import 'package:reelpro/views/catch_and_feed_screens/feed_like_list.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:intl/intl.dart';
 
@@ -70,15 +72,14 @@ class _CatchlogListUIState extends State<CatchlogListUI> {
                                           BottomNavigation(currentIndex: 3)));
                             },
                             child: Container100_88(
-                                image: 'assets/images/Group 202.png',
+                                image: 'assets/images/events1.svg',
                                 text: 'Events'),
                           ),
                           Container100_88(
-                              image: 'assets/images/Group 203.png',
+                              image: 'assets/images/events2.svg',
                               text: 'Caught'),
                           Container100_88w(
-                              image: 'assets/images/Group 204.png',
-                              text: 'Top weight')
+                              image: 'assets/images/ev.svg', text: 'Top weight')
                         ]),
                     SizedBox(height: 40.h),
                     Row(
@@ -150,7 +151,8 @@ class _CatchlogListUIState extends State<CatchlogListUI> {
                             controller: pageController,
                             itemCount: instance1.catchlogList.length,
                             itemBuilder: (context, index) {
-                              return buildList(instance1.catchlogList[index]);
+                              return buildList(
+                                  instance1.catchlogList[index], context);
                             })))),
             SizedBox(height: 15.h)
           ]),
@@ -160,7 +162,7 @@ class _CatchlogListUIState extends State<CatchlogListUI> {
   }
 }
 
-Widget buildList(CatchlogList catchlogList) {
+Widget buildList(CatchlogList catchlogList, BuildContext context) {
   final likeCatchlogApi = Get.put(AddCatchlogApi());
   var isLiked = false.obs;
   var likeCount = 0.obs;
@@ -168,7 +170,10 @@ Widget buildList(CatchlogList catchlogList) {
   isLiked.value = catchlogList.isLiked!;
   likeCount.value = catchlogList.totalLikes!;
   commentCount.value = catchlogList.totalComments!;
+  var oc = catchlogList.totalLikes;
+  var oc1 = oc! - 3;
   PageController pageController = PageController();
+  var element;
   return GestureDetector(
     onTap: () {
       Get.to(CatchDetailsUI(catchId: catchlogList.id!.toInt()));
@@ -279,7 +284,115 @@ Widget buildList(CatchlogList catchlogList) {
               // Spacer()
             ]),
             Positioned(
-                top: 28.h, left: 318.w, child: const Icon(Icons.more_horiz)),
+                top: 28.h,
+                left: 318.w,
+                child: GestureDetector(
+                    onTap: () {
+                      Get.bottomSheet(Container(
+                        padding:
+                            EdgeInsets.only(top: 30.h, left: 36.w, right: 36.w),
+                        height: 250.h,
+                        decoration: const BoxDecoration(
+                            borderRadius:
+                                BorderRadius.vertical(top: Radius.circular(25)),
+                            color: Color(0xffF2F9FF)),
+                        child: Column(children: [
+                          catchlogList.userId == likeCatchlogApi.userId
+                              ? const Divider(thickness: 1)
+                              : const SizedBox(),
+                          SizedBox(height: 10.h),
+                          catchlogList.userId == likeCatchlogApi.userId
+                              ? GestureDetector(
+                                  onTap: () async {
+                                    Navigator.pop(context);
+                                    await likeCatchlogApi
+                                        .deleteCatchLog(catchlogList.id!);
+                                    await likeCatchlogApi
+                                        .specificUserCatchFinal(0, 2);
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text16PtBlack(text: 'Delete CatchLog'))
+                              : const SizedBox(),
+                          SizedBox(height: 10.h),
+                          const Divider(thickness: 1),
+                          SizedBox(height: 10.h),
+                          Text16PtBlack(text: 'Report CatchLog'),
+                          SizedBox(height: 10.h),
+                          const Divider(thickness: 1)
+                        ]),
+                      ));
+                    },
+                    child: const Icon(Icons.more_horiz))),
+            Positioned(
+              top: 340.h,
+              left: 18.w,
+              child: FutureBuilder<CatchLikeList>(
+                  future: likeCatchlogApi.catchLikeListFinal1(catchlogList.id!),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return catchlogList.totalLikes!.toInt() >= 1
+                          ? Row(children: [
+                              Stack(
+                                  children: List.generate(
+                                      snapshot.data!.data.length == 1
+                                          ? 1
+                                          : snapshot.data!.data.length == 2
+                                              ? 2
+                                              : 3, (index) {
+                                element = snapshot.data!.data[index];
+                                return element.user!.profilePic == null
+                                    ? Container(
+                                        padding: EdgeInsets.only(left: 20.w),
+                                        height: 24.h,
+                                        width: 24.w,
+                                        decoration: const BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(
+                                                image: AssetImage(
+                                                    'assets/images/profile.png'))),
+                                      )
+                                    : Container(
+                                        margin: EdgeInsets.only(
+                                            left: index == 0
+                                                ? 0
+                                                : index == 1
+                                                    ? 15
+                                                    : 30),
+                                        height: 24.h,
+                                        width: 24.w,
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.white, width: 1),
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(
+                                                image: NetworkImage(element
+                                                    .user!.profilePic!))),
+                                      );
+                              })),
+                              SizedBox(width: 5.w),
+                              Row(
+                                  children: List.generate(
+                                      snapshot.data!.data.length, (index) {
+                                var el = snapshot.data!.data[index];
+                                return index <= 2
+                                    ? Padding(
+                                        padding: EdgeInsets.only(left: 5.w),
+                                        child: Text14PtGrey(
+                                            text: '${el.user!.firstname},'),
+                                      )
+                                    : const SizedBox();
+                              })),
+                              SizedBox(width: 8.w),
+                              snapshot.data!.data.length > 3
+                                  ? Text14PtGrey(text: 'And $oc1 others')
+                                  : const SizedBox()
+                            ])
+                          : const SizedBox();
+                    } else {
+                      return const SizedBox();
+                    }
+                  }),
+            ),
           ],
         )),
   );
@@ -392,22 +505,26 @@ Widget buildFeed(BuildContext context, Datum datum, void Function() ontap) {
                     child: Row(
                       children: [
                         Obx(() => LikeIcon(
-                            onTap: () {
-                              likeFeed.likeFeed(datum.id!.toInt());
+                            onTap: () async {
+                              await likeFeed.likeFeed(datum.id!.toInt());
                               isLiked.value = true;
                               likeCount.value++;
-                              likeFeed.getLikeListFinal1(datum.id!);
+                              await likeFeed.getLikeListFinal1(datum.id!);
                             },
-                            onTap1: () {
+                            onTap1: () async {
                               likeCount.value--;
                               isLiked.value = false;
-                              likeFeed.likeFeed(datum.id!.toInt());
-                              likeFeed.getLikeListFinal1(datum.id!);
+                              await likeFeed.likeFeed(datum.id!.toInt());
+                              await likeFeed.getLikeListFinal1(datum.id!);
                             },
                             isliked: isLiked.value)),
                         SizedBox(width: 8.w),
-                        Obx(() =>
-                            Text14PtBlue(text: likeCount.value.toString())),
+                        Obx(() => GestureDetector(
+                            onTap: () {
+                              Get.to(() => FeedLikeListUI(feedId: datum.id!));
+                            },
+                            child: Text14PtBlue(
+                                text: likeCount.value.toString()))),
                         SizedBox(width: 44.w),
                         const CommentIcon(),
                         SizedBox(width: 8.w),

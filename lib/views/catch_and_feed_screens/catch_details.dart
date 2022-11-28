@@ -21,11 +21,13 @@ class CatchDetailsUI extends StatefulWidget {
 
 class _CatchDetailsUIState extends State<CatchDetailsUI> {
   final add1 = Get.put(AddFeedApi1());
+  final acl = Get.put(AddCatchlogApi());
   CatchDetailsModel? catchDetails;
   var isLoading = false.obs;
+  var element;
   Future<void> getDetails() async {
     isLoading.value = true;
-    var res = await AddCatchlogApi().getCatchDetails(widget.catchId);
+    var res = await acl.getCatchDetails(widget.catchId);
     catchDetails = CatchDetailsModel.fromJson(res.data);
     add1.isLiked1.value = catchDetails!.data!.isLiked!;
     add1.likeCount1.value = catchDetails!.data!.totalLikes!;
@@ -33,22 +35,13 @@ class _CatchDetailsUIState extends State<CatchDetailsUI> {
     isLoading.value = false;
   }
 
-  var commentList = <CommentList>[].obs;
-  getCommentListFinal() async {
-    AddCatchlogApi()
-      ..getCommentList(widget.catchId).then((value) {
-        var resp = CommentListRespone.fromJson(value.data);
-        commentList.clear();
-        commentList.addAll(resp.data);
-      });
-  }
-
   TextEditingController textEditingController = TextEditingController();
   final ScrollController scrollController = ScrollController();
   @override
   void initState() {
     getDetails();
-    getCommentListFinal();
+    acl.getCommentListFinal(widget.catchId);
+    acl.catchLikeListFinal(widget.catchId);
     super.initState();
   }
 
@@ -132,7 +125,66 @@ class _CatchDetailsUIState extends State<CatchDetailsUI> {
                                         Padding(
                                             padding:
                                                 EdgeInsets.only(bottom: 25.h),
-                                            child: const Icon(Icons.more_horiz))
+                                            child: GestureDetector(
+                                                onTap: () {
+                                                  Get.bottomSheet(Container(
+                                                    padding: EdgeInsets.only(
+                                                        top: 30.h,
+                                                        left: 36.w,
+                                                        right: 36.w),
+                                                    height: 250.h,
+                                                    decoration: const BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius.vertical(
+                                                                top: Radius
+                                                                    .circular(
+                                                                        25)),
+                                                        color:
+                                                            Color(0xffF2F9FF)),
+                                                    child: Column(children: [
+                                                      catchDetails!.data!
+                                                                  .userId ==
+                                                              acl.userId
+                                                          ? const Divider(
+                                                              thickness: 1)
+                                                          : const SizedBox(),
+                                                      SizedBox(height: 10.h),
+                                                      catchDetails!.data!
+                                                                  .userId ==
+                                                              acl.userId
+                                                          ? GestureDetector(
+                                                              onTap: () async {
+                                                                Navigator.pop(
+                                                                    context);
+                                                                await acl
+                                                                    .deleteCatchLog(
+                                                                        widget
+                                                                            .catchId);
+                                                                await acl
+                                                                    .specificUserCatchFinal(
+                                                                        0, 2);
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              child: Text16PtBlack(
+                                                                  text:
+                                                                      'Delete CatchLog'))
+                                                          : const SizedBox(),
+                                                      SizedBox(height: 10.h),
+                                                      const Divider(
+                                                          thickness: 1),
+                                                      SizedBox(height: 10.h),
+                                                      Text16PtBlack(
+                                                          text:
+                                                              'Report CatchLog'),
+                                                      SizedBox(height: 10.h),
+                                                      const Divider(
+                                                          thickness: 1)
+                                                    ]),
+                                                  ));
+                                                },
+                                                child: const Icon(
+                                                    Icons.more_horiz)))
                                       ]),
                                   SizedBox(height: 24.h),
                                   SizedBox(
@@ -148,21 +200,101 @@ class _CatchDetailsUIState extends State<CatchDetailsUI> {
                             child: Image.network(catchDetails!.data!.pic!,
                                 fit: BoxFit.cover)),
                         Padding(
+                          padding: EdgeInsets.only(top: 16.h, left: 38.w),
+                          child: SizedBox(
+                              height: 24.h,
+                              child: catchDetails!.data!.totalLikes!.toInt() >=
+                                      1
+                                  ? Row(children: [
+                                      Obx(() => acl.likeList.isEmpty
+                                          ? SizedBox()
+                                          : Stack(
+                                              children: List.generate(
+                                                  acl.likeList.length == 1
+                                                      ? 1
+                                                      : acl.likeList.length == 2
+                                                          ? 2
+                                                          : 3, (index) {
+                                              element = acl.likeList[index];
+                                              return element.user!.profilePic ==
+                                                      null
+                                                  ? Container(
+                                                      padding: EdgeInsets.only(
+                                                          left: 20.w),
+                                                      height: 24.h,
+                                                      width: 24.w,
+                                                      decoration: const BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          image: DecorationImage(
+                                                              image: AssetImage(
+                                                                  'assets/images/profile.png'))),
+                                                    )
+                                                  : Container(
+                                                      margin: EdgeInsets.only(
+                                                          left: index == 0
+                                                              ? 0
+                                                              : index == 1
+                                                                  ? 15
+                                                                  : 30),
+                                                      height: 24.h,
+                                                      width: 24.w,
+                                                      decoration: BoxDecoration(
+                                                          border: Border.all(
+                                                              color:
+                                                                  Colors.white,
+                                                              width: 1),
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          image: DecorationImage(
+                                                              image: NetworkImage(
+                                                                  element.user!
+                                                                      .profilePic!))),
+                                                    );
+                                            }))),
+                                      SizedBox(width: 5.w),
+                                      Row(
+                                          children: List.generate(
+                                              acl.likeList.length, (index) {
+                                        var el = acl.likeList[index];
+
+                                        return index <= 2
+                                            ? Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 5.w),
+                                                child: Text14PtGrey(
+                                                    text:
+                                                        '${el.user!.firstname},'),
+                                              )
+                                            : const SizedBox();
+                                      })),
+                                      SizedBox(width: 8.w),
+                                      acl.likeList.length > 3
+                                          ? Text14PtGrey(text: 'And 5 others')
+                                          : const SizedBox()
+                                    ])
+                                  : const SizedBox()),
+                        ),
+                        Padding(
                             padding: EdgeInsets.only(
                                 top: 20.h, left: 36.w, right: 36.w),
                             child: Row(children: [
                               LikeIcon(
-                                  onTap: () {
+                                  onTap: () async {
                                     add1.isLiked1.value = true;
-                                    AddCatchlogApi()
+                                    await AddCatchlogApi()
                                         .likeCatchlog(widget.catchId);
-                                    add1.likeCount1.value++;
+                                    await add1.likeCount1.value++;
+                                    await acl
+                                        .catchLikeListFinal(widget.catchId);
                                   },
-                                  onTap1: () {
+                                  onTap1: () async {
                                     add1.isLiked1.value = false;
-                                    AddCatchlogApi()
+                                    await AddCatchlogApi()
                                         .likeCatchlog(widget.catchId);
-                                    add1.likeCount1.value--;
+                                    await add1.likeCount1.value--;
+                                    await acl
+                                        .catchLikeListFinal(widget.catchId);
                                   },
                                   isliked: add1.isLiked1.value),
                               SizedBox(width: 8.w),
@@ -189,7 +321,7 @@ class _CatchDetailsUIState extends State<CatchDetailsUI> {
                                   Text21PtBlack(text: 'Comments'),
                                   SizedBox(height: 8.h),
                                   Container(
-                                    child: commentList.isEmpty
+                                    child: acl.commentList.isEmpty
                                         ? Center(
                                             child: Padding(
                                             padding: EdgeInsets.only(top: 60.h),
@@ -201,10 +333,10 @@ class _CatchDetailsUIState extends State<CatchDetailsUI> {
                                             shrinkWrap: true,
                                             physics:
                                                 const NeverScrollableScrollPhysics(),
-                                            itemCount: commentList.length,
+                                            itemCount: acl.commentList.length,
                                             itemBuilder: (context, index) {
-                                              return buildCatchComment(
-                                                  context, commentList[index]);
+                                              return buildCatchComment(context,
+                                                  acl.commentList[index]);
                                             })),
                                   )
                                 ]))
@@ -226,7 +358,7 @@ class _CatchDetailsUIState extends State<CatchDetailsUI> {
                     ontap: () async {
                       await AddCatchlogApi().addComment(
                           widget.catchId, textEditingController.text);
-                      await getCommentListFinal();
+                      await acl.getCommentListFinal(widget.catchId);
                       textEditingController.clear();
                       AddFeedApi1().commentCount1.value++;
                       scrollController.animateTo(
@@ -239,9 +371,10 @@ class _CatchDetailsUIState extends State<CatchDetailsUI> {
 }
 
 Widget buildCatchComment(BuildContext context, CommentList commentList) {
+  final aca = Get.put(AddCatchlogApi());
   return Container(
       padding: EdgeInsets.only(top: 19.h),
-      child: Stack(children: [
+      child: Row(children: [
         Row(children: [
           commentList.commentUserInfo!.profilePic != null
               ? ProfilePicContainerComment(
@@ -257,9 +390,8 @@ Widget buildCatchComment(BuildContext context, CommentList commentList) {
             SizedBox(width: 275.w, child: Text(commentList.comment.toString()))
           ])
         ]),
-        Positioned(
-            bottom: 35.h,
-            left: 320.w,
+        Padding(
+            padding: EdgeInsets.only(bottom: 15.h),
             child: GestureDetector(
                 onTap: () {
                   Get.bottomSheet(
@@ -272,13 +404,18 @@ Widget buildCatchComment(BuildContext context, CommentList commentList) {
                               BorderRadius.vertical(top: Radius.circular(25)),
                           color: Color(0xffF2F9FF)),
                       child: Column(children: [
-                        commentList.userId == commentList.userId
+                        commentList.userId == aca.userId
                             ? const Divider(thickness: 1)
                             : const SizedBox(),
                         SizedBox(height: 10.h),
-                        commentList.userId == commentList.userId
+                        commentList.userId == aca.userId
                             ? GestureDetector(
-                                onTap: () async {},
+                                onTap: () async {
+                                  Navigator.pop(context);
+                                  await aca.deleteCatchComment(commentList.id!);
+                                  await aca.getCommentListFinal(
+                                      commentList.catchlogId!);
+                                },
                                 child: Text16PtBlack(text: 'Delete comment'))
                             : const SizedBox(),
                         SizedBox(height: 10.h),

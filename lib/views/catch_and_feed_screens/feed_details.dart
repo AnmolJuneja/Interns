@@ -12,8 +12,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:reelpro/views/bottom_navigation_screens/bottom_navigation.dart';
 import 'package:reelpro/views/catch_and_feed_screens/feed_comment_list.dart';
+import 'package:reelpro/views/catch_and_feed_screens/feed_like_list.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../../models/feed_list.dart';
 import 'feed_list.dart';
 
@@ -184,15 +184,23 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
                                                                     .first
                                                                     .userId
                                                             ? GestureDetector(
-                                                                onTap: () {
-                                                                  likeFeed.deleteFeed(
+                                                                onTap:
+                                                                    () async {
+                                                                  await likeFeed.deleteFeed(
                                                                       feedDetails!
                                                                           .data!
                                                                           .data!
                                                                           .first
                                                                           .id!);
-                                                                  Navigator.pop(
-                                                                      context);
+                                                                  // ignore: use_build_context_synchronously
+                                                                  Navigator.pushAndRemoveUntil(
+                                                                      context,
+                                                                      MaterialPageRoute(
+                                                                          builder: (context) => BottomNavigation(
+                                                                              currentIndex:
+                                                                                  0)),
+                                                                      (route) =>
+                                                                          false);
                                                                 },
                                                                 child: Text16PtBlack(
                                                                     text:
@@ -367,8 +375,14 @@ class _FeedDetailsUIState extends State<FeedDetailsUI> {
                                   },
                                   isliked: instance.isLiked.value),
                               SizedBox(width: 8.w),
-                              Text14PtBlue(
-                                  text: instance.likeCount.value.toString()),
+                              GestureDetector(
+                                onTap: () {
+                                  Get.to(() =>
+                                      FeedLikeListUI(feedId: widget.feedId));
+                                },
+                                child: Text14PtBlue(
+                                    text: instance.likeCount.value.toString()),
+                              ),
                               SizedBox(width: 44.w),
                               const CommentIcon(),
                               SizedBox(width: 8.w),

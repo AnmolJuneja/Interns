@@ -7,7 +7,7 @@ import 'package:reelpro/models/my_feed_list.dart';
 import 'package:reelpro/view_models/feed_and_catch_network_request/all_feed_request.dart';
 import 'package:reelpro/view_models/team_and_profile_request/other_user_profile.dart';
 import 'package:reelpro/views/bottom_navigation_screens/bottom_navigation.dart';
-import 'package:reelpro/views/catch_and_feed_screens/details_xerox.dart';
+import 'package:reelpro/views/catch_and_feed_screens/feed_details_xerox.dart';
 import 'package:reelpro/views/family_and_profile_screens/edit_profile.dart';
 import 'package:reelpro/views/catch_and_feed_screens/feed_details.dart';
 import 'package:reelpro/views/family_and_profile_screens/followers_following.dart';
@@ -174,7 +174,9 @@ class _UserProfileUIState extends State<UserProfileUI> {
                                     children: [
                                       Text20PtBold(text: '0'),
                                       GestureDetector(
-                                        onTap: () {},
+                                        onTap: () {
+                                          Get.to(() => const FollowerUI());
+                                        },
                                         child: Text20PtBold(
                                             text:
                                                 '${ff.viewProfile!.data!.followers}'),
